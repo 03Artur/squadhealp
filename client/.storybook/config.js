@@ -1,10 +1,9 @@
 import { configure, addParameters } from '@storybook/react';
 const req = require.context('../src', true, /\.stories.js$/);
-
+import '../src/index.css';
 addParameters({
     backgrounds: [
-        { name: 'twitter', value: '#00aced', default: true },
-        { name: 'facebook', value: '#3b5998' },
+        { name: 'default', value: '#222222', default: true },
     ],
 });
 
