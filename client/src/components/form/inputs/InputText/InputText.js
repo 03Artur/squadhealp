@@ -4,10 +4,19 @@ import PropTypes from 'prop-types';
 
 export default function InputText(props) {
 
-    
+    const getStyles = () => {
+
+        const combinedStyles = [
+            styles.defaultState,
+        ];
+
+        return combinedStyles.join(' ');
+
+    };
+
 
     return (
-        <input required={props.required} pattern={props.pattern} type={props.isPassword?'text':"password"}></input>
+        <input className={getStyles()} required={props.required} pattern={props.pattern} type={props.isPassword?"password":'text'}></input>
     );
 }
 
@@ -20,5 +29,9 @@ InputText.propTypes = {
 };
 
 InputText.defaultProps = {
-
+    isPassword: false,
+    placeholder: '',
+    onchange: null,
+    required: false,
+    pattern: null,
 };

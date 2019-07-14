@@ -4,3 +4,4 @@ export const ROLE = {
     CREATIVE: 2,
 
 };
+export const AUTHORIZATION_BAERER = 'Bearer ';
