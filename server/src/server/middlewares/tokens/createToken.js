@@ -1,0 +1,10 @@
+import jwt from 'jsonwebtoken';
+import {TOKEN_PRIVATE_KEY} from '../../utils/constants'
+
+
+export default function createToken(payload, expires_in) {
+
+        return jwt.sign(payload, TOKEN_PRIVATE_KEY, {expiresIn: expires_in})
+
+
+}

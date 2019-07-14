@@ -4,4 +4,7 @@ export const ROLE = {
     CREATIVE: 2,
 
 };
-export const AUTHORIZATION_BAERER = 'Bearer ';
+export const AUTHORIZATION_BEARER = 'Bearer ';
+export const TOKEN_PRIVATE_KEY = 'Welcome to the jungle';
+export const ACCESSTOKEN_EXPIRESIN = 60 * 60;
+export const REFRESH_EXPIRESIN = 60 * 60 * 24 * 30;

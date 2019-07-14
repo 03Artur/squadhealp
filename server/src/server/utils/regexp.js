@@ -1,8 +1,8 @@
 
-import {ROLE,AUTHORIZATION_BAERER} from "./constants";
+import {ROLE,AUTHORIZATION_BEARER} from "./constants";
 
 const rolePattern = `^[${ROLE.ADMIN}-${ROLE.CREATIVE}]$`;
-const tokenBaererPattern = `^${AUTHORIZATION_BAERER}`;
+const tokenBaererPattern = `^${AUTHORIZATION_BEARER}`;
 
 export const REGEXP = {
     PASSWORD: /(?!.*?\s)(?=.*?[A-Z])(?=.*?[a-z])(?=.*[0-9])(?=^\w{8,}$)/,
