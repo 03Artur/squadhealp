@@ -9,7 +9,9 @@ export const createUser = async (req, res, next) => {
 
         const newUser = await user.save();
 
-        res.send(newUser.get());
+        res.send({
+
+        });
     } catch (e) {
         next(e);
     }
@@ -17,7 +19,9 @@ export const createUser = async (req, res, next) => {
 
 export const getUserById = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = await User.findByPk(req.params.id, {
+            attributes: { exclude: ['password'] }
+        });
 
         if (!user) {
             next(new NotFoundError);

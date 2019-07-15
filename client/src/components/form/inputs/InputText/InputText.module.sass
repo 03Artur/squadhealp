@@ -1,19 +1,19 @@
 @import "../../../../commonStyles"
 
-.defaultState
+input
   box-sizing: border-box
   width: 100%
   font-size: 16px
   padding: 21px 23px
   display: inline-block
   border: 2px solid white
-  border-radius: 25px
+  border-radius: 4px
   color: $appGrey
   height: auto
 
-.invalid
-  border-color: #b72522
+  &:focus:invalid
+    border-color: #b72522
 
-.valid
-  border-color: green
+  &:focus:valid
+    border-color: green
 

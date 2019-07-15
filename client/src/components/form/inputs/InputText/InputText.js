@@ -4,19 +4,35 @@ import PropTypes from 'prop-types';
 
 export default function InputText(props) {
 
-    const getStyles = () => {
+/*
+    const [isValid, setIsValid] = useState(null);
+*/
 
-        const combinedStyles = [
-            styles.defaultState,
-        ];
+    /*    const getStyles = () => {
 
-        return combinedStyles.join(' ');
+            const combinedStyles = [
+                styles.defaultState,           ];
+    /*
+            if (isValid) {
+                combinedStyles.push(styles.valid);
+            } else if (isValid === false) {
+                combinedStyles.push(styles.invalid);
+            }
+    */
 
+/*        return combinedStyles.join(' ');
     };
-
+    const onChangeValidation = (e) => {
+        setIsValid(props.pattern.test(e.target.value));
+    };*/
 
     return (
-        <input className={getStyles()} required={props.required} pattern={props.pattern} type={props.isPassword?"password":'text'}></input>
+        <input
+            placeholder={props.placeholder}
+            required={props.required}
+            pattern={props.pattern}
+            type={props.isPassword ? "password" : 'text'}
+        />
     );
 }
 
@@ -25,7 +41,8 @@ InputText.propTypes = {
     placeholder: PropTypes.string,
     onchange: PropTypes.func,
     required: PropTypes.bool,
-    pattern: PropTypes.instanceOf(RegExp),
+    pattern: PropTypes.string,
+
 };
 
 InputText.defaultProps = {
