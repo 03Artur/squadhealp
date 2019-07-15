@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import {REGEXP} from "../../utils/regexp";
 import {TOKEN_PRIVATE_KEY} from "../../utils/constants";
-import {UnauthorizedError} from '../../errors'
+import {AuthenticationTimeoutError} from '../../errors'
 
 export default (req, res, next) => {
 
@@ -11,12 +11,12 @@ export default (req, res, next) => {
         jwt.verify(token, TOKEN_PRIVATE_KEY,
             (err, decoded) => {
                 if (err) {
-                    throw new UnauthorizedError();
+                    throw new AuthenticationTimeoutError();
                 } else {
                     req.tokenData = decoded;
+                    next();
                 }
             });
-        next("route");
 
     } catch (e) {
         next(e);
