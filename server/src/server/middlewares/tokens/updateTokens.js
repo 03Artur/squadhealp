@@ -9,16 +9,20 @@ export default (req, res, next) => {
 
     try {
         const token = req.body.refreshToken.replace(REGEXP.AUTHORIZATION_BEARER, '');
-
         jwt.verify(token, TOKEN_PRIVATE_KEY, (err, decoded) => {
             if (err) {
                 throw new ForbiddenError();
             } else {
-                req.tokenData = decoded;
+
+                const tokenPair = {
+                    access: '',
+                    refresh:'',
+                };
+                res.send(tokenPair);
             }
         });
 
-        next();
+
 
     } catch (e) {
         next(e);

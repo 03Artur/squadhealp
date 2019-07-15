@@ -1,6 +1,6 @@
 import {User} from '../models';
 import createToken from '../middlewares/tokens/createToken'
-import {ACCESSTOKEN_EXPIRESIN, REFRESH_EXPIRESIN} from "../utils/constants";
+import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../utils/constants";
 import {NotFoundError, BadRequestError} from '../errors'
 
 export const createUser = async (req, res, next) => {
@@ -80,8 +80,8 @@ export const signUpUser = async (req, res, next) => {
             role: newUser.role,
             email: newUser.email
         };
-        const accessToken = createToken(payload, ACCESSTOKEN_EXPIRESIN);
-        const refreshToken = createToken(payload, REFRESH_EXPIRESIN);
+        const accessToken = createToken(payload, ACCESS_TOKEN_EXPIRES_IN);
+        const refreshToken = createToken(payload, REFRESH_TOKEN_EXPIRES_IN);
         newUser.save();
         res.send({
             tokenPair: {
