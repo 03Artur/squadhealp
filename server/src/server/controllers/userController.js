@@ -61,9 +61,17 @@ export const deleteUserById = async (req, res, next) => {
 export const loginUser = async (req, res, next) => {
     try {
 
-        /*
-                const user =
-        */
+        const user = await User.build(req.body)
+        const newUser = await user.save();
+        newUser.password = undefined;
+
+        res.send({
+            user: user,
+            tokenPair: {
+                accessToken:,
+                refreshToken:,
+            }
+        })
 
     } catch (e) {
         next(e);

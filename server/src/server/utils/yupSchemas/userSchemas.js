@@ -1,13 +1,13 @@
-import yup from 'yup';
-import {REGEXP} from '../../../utils/regexp'
+const yup = require('yup')
+import {REGEXP} from '../regexp'
 
-const nameRule = yup.string().min(1).max(50);
+const nameRule = yup.string().matches(REGEXP.NAME);
 const emailRule = yup.string().email();
 const passwordRule = yup.string().matches(REGEXP.PASSWORD);
 const roleRule = yup.number().min(0).max(2);
 
 
-const userSchema = yup.object({
+export const createUserSchema = yup.object({
     firstName: nameRule.required(),
     lastName: nameRule.required(),
     email: emailRule.required(),
@@ -15,5 +15,12 @@ const userSchema = yup.object({
     role: roleRule.required(),
 });
 
+export const updateUserSchema = yup.object({
+    firstName: nameRule,
+    lastName: nameRule,
+    email: emailRule,
+    password: passwordRule,
+    role: roleRule,
+});
 
-export default userSchema
+
