@@ -2,14 +2,14 @@ import React from 'react';
 import DocumentTitle from 'react-document-title';
 
 
-function Home(props) {
+function Login(props) {
 
     return (
-        <DocumentTitle title="Home">
-            <h1>Home Page</h1>
+        <DocumentTitle title="Login">
+            <h1>Login Page</h1>
         </DocumentTitle>
     );
 
 }
 
-export default Home;
+export default Login;
