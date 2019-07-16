@@ -3,17 +3,21 @@ import {NotFoundError} from './../../errors';
 
 export default async function (req, res, next) {
     try {
-        const user = await User.findOne({
+        console.log('find user by email');
+        req.user = await User.findOne({
             where: {
-                email: req.user.email
+                email: req.body.email
             },
+            attributes: {
+                exclude: ["createdAt", "updatedAt"]
+            }
         });
-        if (!user) {
-            next(new NotFoundError());
+        if (req.user) {
+            next();
+        } else {
+            next(new NotFoundError("User not found."))
         }
-        else{
-            req.user = user;
-        }
+
     } catch (e) {
         next(e)
     }

@@ -1,4 +1,4 @@
-import {User} from '../models';
+import {User, RefreshToken} from '../models';
 import createToken from '../middlewares/tokens/createToken'
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../utils/constants";
 import {NotFoundError, BadRequestError} from '../errors';
@@ -58,53 +58,5 @@ export const deleteUserById = async (req, res, next) => {
     }
 };
 
-export const loginUser = async (req, res, next) => {
-    try {
-
-        const user = await User.build(req.body)
-        const newUser = await user.save();
-        newUser.password = undefined;
-
-        res.send({
-            user: user,
-            tokenPair: {
-                accessToken:,
-                refreshToken:,
-            }
-        })
-
-    } catch (e) {
-        next(e);
-    }
-};
-
-
-/*export const signUpUser = async (req, res, next) => {
-    try {
-
-        const newUser = await User.build(req.body);
-        if (!newUser) {
-            next(new BadRequestError())
-        }
-        const payload = {
-            id: newUser.id,
-            role: newUser.role,
-            email: newUser.email
-        };
-        const accessToken = createToken(payload, ACCESS_TOKEN_EXPIRES_IN);
-        const refreshToken = createToken(payload, REFRESH_TOKEN_EXPIRES_IN);
-        newUser.save();
-        res.send({
-            tokenPair: {
-                access: accessToken,
-                refresh: refreshToken,
-            },
-            user: newUser,
-        })
-    } catch (e) {
-        next(e);
-    }
-
-};*/
 
 

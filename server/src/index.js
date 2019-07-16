@@ -14,10 +14,10 @@ app.use(express.json());
 
 //Authorization
 app.use(authorizationRouter);
-
+app.use(userRouter);
 //Token required
 app.use(checkAccessToken);
-app.use(userRouter);
+
 
 //Error Handler
 app.use(errorHandler);

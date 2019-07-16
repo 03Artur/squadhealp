@@ -4,10 +4,14 @@ import {BadRequestError} from './../../errors'
 export default async (req, res, next) => {
     console.log('Compare passwords');
     try {
-        await bcrypt.compare(req.body.password, req.user.password);
-        next();
+
+        if (await bcrypt.compare(req.body.password, req.user.password)) {
+            next();
+        } else {
+            next(new BadRequestError('The passwords do not match.'))
+        }
     } catch (e) {
-        next(new BadRequestError(e.message));
+        next(e);
     }
 
 }

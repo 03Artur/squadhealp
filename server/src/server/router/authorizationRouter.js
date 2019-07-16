@@ -1,15 +1,17 @@
 import express from 'express';
-import {createUser, deleteUserById, getUserById, updateUserById, loginUser} from '../controllers/userController'
-import hashPassword from './../middlewares/passwords/hashPassword';
-import comparePassword from '../middlewares/passwords/comparePassword';
-import {createUserValidation, updateUserValidation} from '../middlewares/dataValidation/userValidation'
+
 import findUserByEmail from '../middlewares/user/findUserByEmail';
-import {updateRefreshToken} from './../controllers/refreshTokenController'
+import comparePassword from '../middlewares/passwords/comparePassword';
+import hashPassword from './../middlewares/passwords/hashPassword';
+import {createUserValidation} from '../middlewares/dataValidation/userValidation'
 import checkRefreshToken from './../middlewares/tokens/checkRefreshToken'
+import {loginUser,signUpUser, updateRefreshToken} from './../controllers/authorizationController';
+import checkRefreshTokensLimit from '../middlewares/tokens/checkRefreshTokensLimit'
+import setUserActive from './../middlewares/user/setUserActive';
 
 const router = express.Router();
 
-router.get('/login', findUserByEmail, comparePassword, loginUser,);
-router.post('/signup', createUserValidation, hashPassword, ,);
+router.get('/login', findUserByEmail, comparePassword,checkRefreshTokensLimit,setUserActive, loginUser);
+router.post('/signup', createUserValidation, hashPassword, signUpUser);
 router.get('/refresh',checkRefreshToken, updateRefreshToken);
 module.exports = router;

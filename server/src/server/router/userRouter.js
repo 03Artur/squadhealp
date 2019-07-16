@@ -6,10 +6,10 @@ import checkAccessToken from '../middlewares/tokens/checkAccessToken'
 const router = express.Router();
 
 
-router.post('/user',checkAccessToken, createUserValidation, hashPassword, createUser);
-router.get('/user/:id',checkAccessToken, getUserById);
-router.put('/user/:id',checkAccessToken, updateUserValidation, hashPassword, updateUserById);
-router.delete('/user/:id',checkAccessToken, deleteUserById);
+router.post('/user', createUserValidation, hashPassword, createUser);
+router.get('/user/:id', getUserById);
+router.put('/user/:id', updateUserValidation, hashPassword, updateUserById);
+router.delete('/user/:id', deleteUserById);
 router.get('/login', hashPassword, loginUser);
 
 module.exports = router;

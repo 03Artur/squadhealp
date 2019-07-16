@@ -6,6 +6,7 @@ import {User} from '../../models'
 
 export default (req, res, next) => {
     try {
+        console.log('checkAccessToken')
         if(!req.headers.Authorization)
         {
             throw new AuthenticationTimeoutError();
