@@ -3,6 +3,7 @@ import {User} from '../../models';
 async function setUserActive(req, res, next) {
 
     try {
+        console.log("setUserActive");
 
         req.user = await req.user.update({
             isActive: true,

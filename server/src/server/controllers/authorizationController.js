@@ -6,14 +6,15 @@ import {DEVICES_COUNT} from './../utils/constants'
 
 export const loginUser = async (req, res, next) => {
     try {
+        console.log("loginUser");
         const user = req.user;
 
         const refreshToken = await RefreshToken.create({
             tokenString: "",
             userId: user.id,
         });
-        const updatedRefreshToken = refreshToken.update({
-            tokenString: wt.sign({
+        const updatedRefreshToken = await refreshToken.update({
+            tokenString: jwt.sign({
                 id: refreshToken.id,
 
             }, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})

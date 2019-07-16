@@ -10,6 +10,5 @@ router.post('/user', createUserValidation, hashPassword, createUser);
 router.get('/user/:id', getUserById);
 router.put('/user/:id', updateUserValidation, hashPassword, updateUserById);
 router.delete('/user/:id', deleteUserById);
-router.get('/login', hashPassword, loginUser);
 
 module.exports = router;
