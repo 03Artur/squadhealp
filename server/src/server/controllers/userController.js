@@ -1,17 +1,15 @@
 import {User} from '../models';
 import createToken from '../middlewares/tokens/createToken'
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../utils/constants";
-import {NotFoundError, BadRequestError} from '../errors'
+import {NotFoundError, BadRequestError} from '../errors';
 
 export const createUser = async (req, res, next) => {
     try {
         const user = await User.build(req.body);
 
         const newUser = await user.save();
-
-        res.send({
-
-        });
+        newUser.password = undefined;
+        res.send(newUser);
     } catch (e) {
         next(e);
     }
@@ -20,7 +18,7 @@ export const createUser = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
     try {
         const user = await User.findByPk(req.params.id, {
-            attributes: { exclude: ['password'] }
+            attributes: {exclude: ['password']}
         });
 
         if (!user) {
@@ -37,7 +35,8 @@ export const updateUserById = async (req, res, next) => {
         const result = await User.update(req.body, {
             where: {
                 id: req.params.id,
-            }
+            },
+
         });
         res.send(result);
     } catch (e) {
@@ -52,8 +51,7 @@ export const deleteUserById = async (req, res, next) => {
                 id: parseInt(req.params.id)
             }
         });
-        res.send([result])
-        ;
+        res.send([result]);
 
     } catch (e) {
         next(e);
@@ -61,14 +59,19 @@ export const deleteUserById = async (req, res, next) => {
 };
 
 export const loginUser = async (req, res, next) => {
+    try {
 
+        /*
+                const user =
+        */
+
+    } catch (e) {
+        next(e);
+    }
 };
 
-export const logoutUser = async (req, res, next) => {
 
-};
-
-export const signUpUser = async (req, res, next) => {
+/*export const signUpUser = async (req, res, next) => {
     try {
 
         const newUser = await User.build(req.body);
@@ -94,6 +97,6 @@ export const signUpUser = async (req, res, next) => {
         next(e);
     }
 
-};
+};*/
 
 

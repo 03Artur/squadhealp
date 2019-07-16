@@ -1,8 +1,8 @@
 
 import express from 'express';
-import {} from './'
+import {} from '../controllers/refreshTokenController'
 const router = express.Router();
 
-router.get('/user/token', );
+router.post('/user/refresh', );
 
 module.exports = router;

@@ -4,14 +4,12 @@ import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN,} from "../utils/const
 import {NotFoundError, BadRequestError} from '../errors'
 
 
-export const updateToken = (req, res, next) => {
+export const updateRefreshTokenById = (req, res, next) => {
 
     try {
 
         const newAccessToken = createToken({
-            id:,
-            role,
-            email,
+
         }, ACCESS_TOKEN_EXPIRES_IN);
         const newRefreshToken = createToken({
             tokenId
@@ -22,3 +20,13 @@ export const updateToken = (req, res, next) => {
     }
 };
 
+export const createRefreshToken = (req,res,next) => {
+
+    try{
+
+    }catch (e) {
+        next(e);
+    }
+
+
+};
