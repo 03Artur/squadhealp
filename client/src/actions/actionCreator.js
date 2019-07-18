@@ -13,3 +13,7 @@ export const updateSingleGoodsAction = id => ({
   type: ACTION.SINGLE_GOODS_ACTION,
   id,
 });
+
+export const getLoginUserAction = data =>({
+
+})

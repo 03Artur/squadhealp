@@ -3,8 +3,11 @@ import {createUserSchema, updateUserSchema} from '../../utils/yupSchemas/userSch
 
 export async function createUserValidation(req, res, next) {
     try {
-        await createUserSchema.isValid(req.body);
-        next()
+        if (await createUserSchema.isValid(req.body)) {
+            next();
+        } else {
+            next(new BadRequestError());
+        }
 
     } catch (e) {
         next(new BadRequestError());
@@ -13,10 +16,14 @@ export async function createUserValidation(req, res, next) {
 
 export async function updateUserValidation(req, res, next) {
     try {
-        await updateUserSchema.isValid(req.body);
-        next()
+        if (await updateUserSchema.isValid(req.body)) {
+            next();
+        } else {
+            next(new BadRequestError());
+        }
 
     } catch (e) {
         next(new BadRequestError());
     }
 }
+

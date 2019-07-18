@@ -17,5 +17,7 @@ router.get('/login', findUserByEmail,
     setUserActive,
     loginUser);
 router.post('/signup', createUserValidation, hashPassword, signUpUser);
-router.get('/refresh',checkRefreshToken, updateRefreshToken);
+router.post('/refresh',checkRefreshToken, updateRefreshToken);
 module.exports = router;
+
+

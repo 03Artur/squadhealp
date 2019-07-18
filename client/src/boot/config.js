@@ -3,6 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 import combinedReducers from '../reducers';
 import rootSaga from '../sagas/rootSaga';
 
+
+// create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore() {

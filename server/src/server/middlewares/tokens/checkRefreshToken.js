@@ -7,14 +7,15 @@ import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from './../../utils/c
 
 export default (req, res, next) => {
     try {
-
+        console.log("Refresh.token: ",req.body);
         jwt.verify(req.body.refreshToken, TOKEN_PRIVATE_KEY, (err, decoded) => {
             if (err) {
                 next(new UnauthorizedError());
             } else {
-                req.id = decoded.id;
-                next();
+                console.log(decoded);
+                req.tokenId = decoded.tokenId;
 
+                next();
             }
         })
 
