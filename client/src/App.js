@@ -1,9 +1,9 @@
 import React, {Suspense, lazy} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import paths from './constants/paths';
+import Login from './pages/Login/Login';
 
 const Home = lazy(() => import('./pages/Home/Home'));
-const Login = lazy(() => import('./pages/Login/Login'));
 const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
 
 const App = (props) => (

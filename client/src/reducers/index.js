@@ -1,8 +1,14 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
+import {reducer as formReducer} from 'redux-form';
 import goodsReducers from './goodsReducers';
+import authorizationReducer from './authorizationReducer';
+
+
 
 const appReducer = combineReducers({
-  goodsReducers,
+    goodsReducers,
+    authentication: authorizationReducer,
+    form: formReducer,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

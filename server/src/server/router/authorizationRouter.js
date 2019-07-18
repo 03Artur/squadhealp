@@ -11,7 +11,7 @@ import setUserActive from './../middlewares/user/setUserActive';
 
 const router = express.Router();
 
-router.get('/login', findUserByEmail,
+router.post('/login', findUserByEmail,
     comparePassword,
     checkRefreshTokensLimit,
     setUserActive,

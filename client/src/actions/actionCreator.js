@@ -16,4 +16,4 @@ export const updateSingleGoodsAction = id => ({
 
 export const getLoginUserAction = data =>({
 
-})
+});

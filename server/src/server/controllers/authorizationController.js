@@ -93,8 +93,10 @@ export const updateRefreshToken = async (req, res, next) => {
         const user = await User.findByPk(refreshToken.userId);
 
         res.send({
-            accessToken: createAccessToken(user),
-            refreshToken: refreshToken.tokenString,
+            tokenPair: {
+                accessToken: createAccessToken(user),
+                refreshToken: refreshToken.tokenString,
+            },
         })
     } catch (e) {
         next(e);
