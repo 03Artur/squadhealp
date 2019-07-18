@@ -10,9 +10,9 @@ const App = (props) => (
     <Router>
         <Suspense fallback = {<div>Loading...</div>}>
             <Switch>
-                <Route exact path={paths.HOME} component={Home}/>
+                {/*<Route exact path={paths.HOME} component={Home}/>*/}
                 <Route path={paths.LOGIN} component={Login}/>
-                <Route path={paths.SIGN_UP} component={SignUp}/>
+                {/*<Route path={paths.SIGN_UP} component={SignUp}/>*/}
 
             </Switch>
         </Suspense>
