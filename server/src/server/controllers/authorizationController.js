@@ -29,6 +29,7 @@ export const loginUser = async (req, res, next) => {
                     id: user.id,
                     role: user.role,
                     email: user.email,
+                    isBanned: user.isBanned,
                 }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN}),
                 refreshToken: updatedRefreshToken.tokenString,
             }
