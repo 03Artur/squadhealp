@@ -4,7 +4,7 @@ import {REGEXP} from '../regexp'
 const nameRule = yup.string().matches(REGEXP.NAME);
 const emailRule = yup.string().email();
 const passwordRule = yup.string().matches(REGEXP.PASSWORD);
-const roleRule = yup.number().min(0).max(2);
+const roleRule = yup.number().min(0).max(7);
 
 
 export const createUserSchema = yup.object({

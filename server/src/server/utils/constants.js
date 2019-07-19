@@ -1,8 +1,8 @@
 export const ROLE = {
-    ADMIN: 0,
+    GUEST: 0,
     BUYER: 1,
     CREATIVE: 2,
-
+    ADMIN: 7,
 };
 export const DEVICES_COUNT = 3;
 export const SALT_ROUND = 10;

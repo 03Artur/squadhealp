@@ -3,6 +3,7 @@ import {createUserSchema, updateUserSchema} from '../../utils/yupSchemas/userSch
 
 export async function createUserValidation(req, res, next) {
     try {
+        console.log("createUserValidation")
         if (await createUserSchema.isValid(req.body)) {
             next();
         } else {

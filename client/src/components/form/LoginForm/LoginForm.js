@@ -5,14 +5,12 @@ import PropTypes from 'prop-types';
 let LoginForm = (props) => {
     const {handleSubmit} = props;
     return (
-        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="firstName">First Name</label>
                 <Field name="firstName" component="input" type="text" />
+                <div onClick={handleSubmit}>Button</div>
             </div>
 
-            <button type="submit">Submit</button>
-        </form>
     );
 
 };

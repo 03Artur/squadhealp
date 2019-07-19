@@ -38,7 +38,7 @@ module.exports = {
                 defaultValue: 0,
                 validate: {
                     allowNull: false,
-                    max: 2,
+                    max: 7,
                     min: 0,
                 }
             },

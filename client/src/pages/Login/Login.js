@@ -6,7 +6,7 @@ import LoginForm from './../../components/form/LoginForm/LoginForm'
 const Login = (props) => {
 
     const submit = values => {
-        console.log(values);
+        console.log(">>>>>>>>>>>>>>>",values);
     };
 
     return (

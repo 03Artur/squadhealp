@@ -18,11 +18,11 @@ app.use('/images', express.static('/server/public/images'));
 
 //Authorization
 app.use(authorizationRouter);
-app.use(userRouter);
 
 
 //Access Token required
 app.use(checkAccessToken);
+app.use(userRouter);
 
 
 //Error Handler

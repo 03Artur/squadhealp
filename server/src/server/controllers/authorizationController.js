@@ -80,7 +80,7 @@ export const updateRefreshToken = async (req, res, next) => {
 
     try {
 
-        const refreshToken = await RefreshToken.findByPk(req.tokenId/*,{transaction}*/);
+        const refreshToken = await RefreshToken.findByPk(req.refreshTokenPayload.tokenId/*,{transaction}*/);
         if (!refreshToken) {
             next(new UnauthorizedError());
             return;
@@ -103,11 +103,12 @@ export const updateRefreshToken = async (req, res, next) => {
     }
 };
 
-function createAccessToken({id, role, email, rest}) {
+function createAccessToken({id, role, email,isBanned, rest}) {
     return jwt.sign({
         id,
         role,
         email,
+        isBanned,
     }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN});
 }
 

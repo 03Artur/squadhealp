@@ -4,7 +4,6 @@ import {DEVICES_COUNT} from "../../utils/constants";
 async function checkRefreshTokensLimit(req, res, next) {
 
     try {
-        console.log("checkRefreshTokensLimit");
         const refreshTokenCount = await RefreshToken.count({
             where: {
                 userId: req.user.id,
