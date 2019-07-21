@@ -1,5 +1,7 @@
-@import "../../commonStyles";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
 @import '../../../node_modules/bootstrap/scss/mixins';
+@import "../../commonStyles";
 
 .page {
   background-color: $authorizationPageBackgroundColor;
@@ -17,5 +19,25 @@
   width: 100%;*/
 
   @include make-container();
+
+  @include media-breakpoint-down(xs) {
+    @include make-container-max-widths();
+  }
+}
+.formRow{
+  @include make-row();
+  justify-content: center;
 }
 
+.title {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.titleField {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

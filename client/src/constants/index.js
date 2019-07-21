@@ -8,3 +8,10 @@ export const AUTHORIZATION_MODE = {
     LOGIN_MODE: 'LOGIN_MODE',
     SIGN_UP_MODE: 'SIGN_UP_MODE',
 };
+
+export const ROLE = {
+    GUEST: 0,
+    BUYER: 1,
+    CREATIVE: 2,
+    ADMIN: 7,
+};

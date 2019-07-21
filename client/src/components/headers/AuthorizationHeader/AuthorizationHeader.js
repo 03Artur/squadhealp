@@ -1,11 +1,24 @@
+
+/*
+* REACT
+* */
 import React from 'react';
-import Logo from '../../Logo/Logo';
 import PropTypes from 'prop-types';
-import styles from './AuthorizationHeader.module.scss'
+/*
+* COMPONENTS
+* */
+import Logo from '../../Logo/Logo';
 import LinkButton from "./LinkButtun/LinkButton";
+/*
+* UTILS
+* */
 import {AUTHORIZATION_MODE} from "../../../constants";
 import PATH from "../../../constants/paths";
-import LoginForm from "../../form/LoginForm/LoginForm";
+/*
+* STYLES
+* */
+import styles from './AuthorizationHeader.module.scss';
+
 
 
 export default function AuthorizationHeader({mode, ...props}) {
@@ -32,7 +45,6 @@ export default function AuthorizationHeader({mode, ...props}) {
 
     const settings = getSetting();
 
-
     return (
         <header className={styles.header}>
             <Logo isColor={false}/>
@@ -46,4 +58,3 @@ AuthorizationHeader.propTypes = {
     mode: PropTypes.oneOf(Object.values(AUTHORIZATION_MODE)),
 };
 
-AuthorizationHeader.defaultProps = {};

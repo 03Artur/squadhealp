@@ -1,0 +1,48 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import '../../../../node_modules/bootstrap/scss/mixins';
+
+
+
+/*
+sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+*/
+
+.fieldContainer{
+  padding: 0 14px;
+}
+
+.formContainer{
+  @include make-col(4);
+
+  @include media-breakpoint-down(lg) {
+    @include make-col(6);
+  }
+  @include media-breakpoint-down(md) {
+    @include make-col(10);
+  }
+  @include media-breakpoint-down(sm) {
+    @include make-col(11);
+  }
+
+}
+
+.fieldRow{
+  @include make-row();
+}
+
+.col{
+  @include make-col(12);
+}
+
+.fieldCol{
+  @include make-col(6);
+
+  @include media-breakpoint-down (xs){
+    @include make-col(12);
+  }
+
+}

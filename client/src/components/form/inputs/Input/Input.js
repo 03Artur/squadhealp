@@ -2,31 +2,34 @@ import styles from './Input.module.sass';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Input({input,type, meta: {touched, error, warning}, ...props}) {
+export default function Input({input, type, meta: {touched,visited, error, warning}, ...props}) {
 
 
     const inputClassNames = [styles.input, styles.inputField];
-    if(touched&&error){
+    const errorClassNames = [styles.error, styles.errorField];
+
+
+    if (touched && error) {
         inputClassNames.push(styles.invalid);
+    }else if(visited && ! error){
+        inputClassNames.push(styles.valid)
     }
-
-    const errorClassNamesString = [styles.error, styles.errorField].join(' ');
-
-
 
 
     const renderError = () => {
         if (touched && error) {
-
             return (
-                <div className={errorClassNamesString}>{error}</div>
+                <div className={joinedErrorClassNames}>{error}</div>
             );
         }
     };
-    const inputClassNamesString = inputClassNames.join(' ');
+    const joinedInputClassNames = inputClassNames.join(' ');
+    const joinedErrorClassNames = errorClassNames.join(' ');
+
+
     return (
         <div className={styles.container}>
-            <input {...input} className={inputClassNamesString}
+            <input {...input} className={joinedInputClassNames}
                    placeholder={props.placeholder}
                    required={props.required}
                    pattern={props.pattern}
