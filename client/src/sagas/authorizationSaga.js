@@ -2,7 +2,7 @@ import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser} from '../api/rest/authorizationController';
 
-export function* loginUserSaga(user) {
+export function* loginUserSaga({data: user}) {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield loginUser(user);
@@ -12,7 +12,8 @@ export function* loginUserSaga(user) {
     }
 }
 
-export function* signUpUserSaga(user) {
+export function* signUpUserSaga({data: user}) {
+    console.log("signUpUserSaga");
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield signUpUser(user);

@@ -9,7 +9,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
 
-
+    console.log("authorizationReducer");
     switch (action.type) {
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
             return {

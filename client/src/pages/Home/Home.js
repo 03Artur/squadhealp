@@ -5,9 +5,10 @@ import DocumentTitle from 'react-document-title';
 function Home(props) {
 
     return (
-        <DocumentTitle title="Home">
+        <div>
+            <DocumentTitle title="Home"/>
             <h1>Home Page</h1>
-        </DocumentTitle>
+        </div>
     );
 
 }
