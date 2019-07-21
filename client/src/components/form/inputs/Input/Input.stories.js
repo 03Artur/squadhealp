@@ -4,11 +4,11 @@ import {action} from '@storybook/addon-actions';
 import withStoryBookContainer from '../../../HOCs/withStorybookContainer/withStorybookContainer'
 
 
-import InputText from './InputText';
+import Input from './Input';
 
-const Elem = withStoryBookContainer(<InputText pattern="^[0-9]$"  placeholder="Placeholder"/>);
+const Elem = withStoryBookContainer(<Input pattern="^[0-9]$" placeholder="Placeholder"/>);
 
-storiesOf("InputText", module)
+storiesOf("Input", module)
     .add('default', () => (
         <Elem/>
 

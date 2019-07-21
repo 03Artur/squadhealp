@@ -8,7 +8,7 @@ import {action} from '@storybook/addon-actions';
 import Header from './Header';
 
 
-storiesOf("InputText", module)
+storiesOf("Input", module)
     .add('default', () => (
             <InputText/>
     ), {

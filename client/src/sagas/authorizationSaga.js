@@ -3,6 +3,8 @@ import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser} from '../api/rest/authorizationController';
 
 export function* loginUserSaga({data: user}) {
+    console.log("loginUserSaga");
+
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield loginUser(user);

@@ -1,36 +1,39 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import PropTypes from 'prop-types';
+import {Field, reduxForm} from 'redux-form';
+import SubmitButton from '../buttons/SubmitButton/SubmitButton';
+import Input from '../inputs/Input/Input'
 
-let LoginForm = (props) => {
+const email = value =>
+     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+        ? 'Invalid email address'
+        : undefined;
+
+
+const LoginForm = props => {
     const {handleSubmit} = props;
+
+
+
     return (
+        <div>
             <div>
-                <label htmlFor="firstName">First Name</label>
-                <Field name="firstName" component="input" type="text" />
-                <div onClick={handleSubmit}>Button</div>
+                <label htmlFor="email">Email</label>
+                <Field placeholder="email" name="email" type='email' component={Input} validate={email} testProps={"testPropHere"} />
             </div>
-
-    );
-
-};
-
-LoginForm.propTypes ={
-    handleSubmit: PropTypes.func,
-
-};
-LoginForm.defaultProps ={
-    handleSubmit:function () {
-    },
-
+            <div>
+                <label htmlFor="password">Password</label>
+                <Field placeholder='password' name="password" isPassword={true} component={Input} type="password"/>
+            </div>
+            <SubmitButton onClick={handleSubmit}>LOGIN</SubmitButton>
+        </div>
+    )
 };
 
 
 
 
-const createReduxForm = reduxForm({form: 'login'});
+export default reduxForm({
+    // a unique name for the form
+    form: 'login'
+})( LoginForm);
 
-LoginForm = createReduxForm(LoginForm);
-
-
-export default LoginForm;

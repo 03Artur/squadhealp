@@ -1,18 +1,33 @@
+/*
+* CSS IMPORT
+*
+* */
+
+/*
+* BASE IMPORT
+* */
 import React, {Suspense, lazy} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import paths from './constants/paths';
 
-const Login  = lazy(() => import('./pages/Login/Login'));
-const Home = lazy(() => import('./pages/Home/Home'));
-const SignUp = lazy(() => import('./pages/SignUp/SignUp'));
+/*
+* CONSTANTS IMPORT
+* */
+import paths from './constants/paths';
+import {AUTHORIZATION_MODE} from './constants';
+/*
+* COMPONENTS IMPORT
+* */
+const AuthorizationPage = lazy(() => import("./pages/AuthorizationPage/AuthorizationPage"));
+const Home = lazy(() => import('./pages/HomePage/Home'));
+
 
 const App = (props) => (
     <Router>
-        <Suspense fallback = {<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-                <Route exact path={paths.HOME} component={Home}/>
-                <Route path={paths.LOGIN} component={Login}/>
-                <Route path={paths.SIGN_UP} component={SignUp}/>
+                <Route exact path={paths.HOME} render={()=> <Home/>}/>
+                <Route path={paths.LOGIN} render={() => <AuthorizationPage mode={AUTHORIZATION_MODE.LOGIN_MODE}/>}/>
+                <Route path={paths.SIGN_UP} render={() => <AuthorizationPage mode={AUTHORIZATION_MODE.SIGN_UP_MODE}/>}/>
             </Switch>
         </Suspense>
     </Router>

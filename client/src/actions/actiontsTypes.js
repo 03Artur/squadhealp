@@ -8,6 +8,13 @@ export default {
     SINGLE_GOODS_RESPONSE: 'SINGLE_GOODS_RESPONSE',
     UPDATE_SINGLE_GOODS_ACTION: 'UPDATE_SINGLE_GOODS_ACTION',
 
+
+    /*
+    *
+    * Authorization page mode
+    * */
+    CHANGE_AUTHORIZATION_MODE_ACTION: 'CHANGE_AUTHORIZATION_MODE_ACTION',
+
     /*
     * login and sign_up get the same state (user,tokenPair)
     * */
@@ -23,5 +30,7 @@ export default {
     REFRESH_TOKEN_PAIR_REQUEST: "REFRESH_TOKEN_PAIR_REQUEST",
     REFRESH_TOKEN_PAIR_RESPONSE: "REFRESH_TOKEN_PAIR_REQUEST",
     REFRESH_TOKEN_PAIR_ERROR: "REFRESH_TOKEN_PAIR_REQUEST",
+
+
 
 };

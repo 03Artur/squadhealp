@@ -8,3 +8,12 @@ export const singUpActionCreator = (data) => {
         data,
     }
 };
+
+export const loginActionCreator = (data) => {
+    console.log('loginActionCreator');
+    return {
+        type: ACTION_TYPES.USER_LOGIN_ACTION,
+        data,
+    }
+};
+

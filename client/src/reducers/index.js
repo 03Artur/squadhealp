@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import goodsReducers from './goodsReducers';
-import authorizationReducer from './authorizationReducer';
+import authorizationReducer from './authorizationReducers';
 
 
 

@@ -10,7 +10,7 @@ function SignUp(props) {
     const submit = values => {
         // print the form values to the console
         console.log(values)
-        props.signupAction(values)
+        props.signUpAction(values)
     };
 
     const logIt = () => {
@@ -45,7 +45,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
 
-    signupAction: (data) => dispatch(singUpActionCreator(data))
+    signUpAction: (data) => dispatch(singUpActionCreator(data))
 
 });
 

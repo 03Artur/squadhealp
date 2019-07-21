@@ -4,7 +4,7 @@ import styles from './SubmitButton.module.scss';
 
 const SubmitButton = props => {
 
-    const classNames = [styles.container, props.className].join(' ');
+    const classNames = [styles.myContainer, props.className].join(' ');
 
     return (
         <div onClick={props.onClick} className={classNames}>{

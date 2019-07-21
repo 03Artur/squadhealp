@@ -32,6 +32,7 @@ export default function (state = initialState, action) {
                 error: action.error,
             }
         }
+
         default: {
             return state;
         }
