@@ -1,9 +1,8 @@
 import {BadRequestError} from './../../errors';
 import {createUserSchema, updateUserSchema} from '../../utils/yupSchemas/userSchemas';
 
-export async function createUserValidation(req, res, next) {
+export async function validationCreateUser(req, res, next) {
     try {
-        console.log("createUserValidation")
         if (await createUserSchema.isValid(req.body)) {
             next();
         } else {
@@ -15,14 +14,13 @@ export async function createUserValidation(req, res, next) {
     }
 }
 
-export async function updateUserValidation(req, res, next) {
+export async function validationUpdateUser(req, res, next) {
     try {
         if (await updateUserSchema.isValid(req.body)) {
             next();
         } else {
             next(new BadRequestError());
         }
-
     } catch (e) {
         next(new BadRequestError());
     }

@@ -1,40 +1,44 @@
-import {User, RefreshToken} from '../models';
-import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../utils/constants";
+// PACKAGES
 import jwt from 'jsonwebtoken';
+
+//DATA BASE THINGS
+import {User, RefreshToken} from '../models';
+import db from '../models';
+
+//UTILS
+import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../utils/constants";
 import {BadRequestError, UnauthorizedError} from '../errors'
-import sequelize from 'sequelize';
+
+
+//Sequelize instance
+const sequelize = db.sequelize;
+
 
 export const loginUser = async (req, res, next) => {
     try {
-        console.log("loginUser");
-
         const user = req.user;
 
-        const refreshToken = await RefreshToken.create({
+        let transaction = await sequelize.transaction();
+
+        let refreshToken = await RefreshToken.create({
             tokenString: "",
             userId: user.id,
+        }, {
+            transaction
         });
-        const updatedRefreshToken = await refreshToken.update({
-            tokenString: jwt.sign({
-                tokenId: refreshToken.id,
-
-            }, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
+        refreshToken = await refreshToken.update({
+            tokenString: createRefreshToken(refreshToken.id),
+        }, {
+            transaction
         });
-
-
+        await transaction.commit();
         res.send({
             user,
             tokenPair: {
-                accessToken: jwt.sign({
-                    id: user.id,
-                    role: user.role,
-                    email: user.email,
-                    isBanned: user.isBanned,
-                }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN}),
-                refreshToken: updatedRefreshToken.tokenString,
+                accessToken: createAccessToken(user),
+                refreshToken: refreshToken.tokenString,
             }
         })
-
     } catch (e) {
         next(e);
     }
@@ -44,30 +48,35 @@ export const loginUser = async (req, res, next) => {
 export const signUpUser = async (req, res, next) => {
     try {
 
-        const user = await User.create(req.body);
-        if (!user) {
-            next(new BadRequestError())
-        }
+        let transaction = await sequelize.transaction();
 
-        const refreshToken = await RefreshToken.create({
+        const user = await User.create(req.body, {
+            transaction
+        });
+
+        if (!user) {
+            next(new BadRequestError());
+            return;
+        }
+        let refreshToken = await RefreshToken.create({
             tokenString: "",
             userId: user.id,
+        }, {
+            transaction,
         });
-        const updatedRefreshToken = await refreshToken.update({
-            tokenString: jwt.sign({
-                tokenId: refreshToken.id,
 
-            }, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
+        refreshToken = await refreshToken.update({
+            tokenString: createRefreshToken(refreshToken.id),
+        }, {
+            transaction,
         });
+
+        await transaction.commit();
 
         res.send({
             tokenPair: {
-                accessToken: jwt.sign({
-                    id: user.id,
-                    role: user.role,
-                    email: user.email,
-                }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN}),
-                refreshToken: updatedRefreshToken.tokenString,
+                accessToken: createAccessToken(user),
+                refreshToken: refreshToken.tokenString,
             },
             user: user,
         })
@@ -81,19 +90,34 @@ export const updateRefreshToken = async (req, res, next) => {
 
     try {
 
-        const refreshToken = await RefreshToken.findByPk(req.refreshTokenPayload.tokenId/*,{transaction}*/);
+        let transaction = await sequelize.transaction();
+
+        let refreshToken = await RefreshToken.findOne({
+            where: {
+                tokenString: req.body.refreshToken,
+            },
+            transaction,
+        });
+
+
         if (!refreshToken) {
             next(new UnauthorizedError());
             return;
         }
 
-        await refreshToken.update({
+        refreshToken = await refreshToken.update({
             tokenString: createRefreshToken(res.tokenId)
+        },{
+            transaction,
+        });
+        const user = await User.findByPk(refreshToken.userId,{
+            transaction,
         });
 
-        const user = await User.findByPk(refreshToken.userId);
+        await transaction.commit();
 
         res.send({
+            user,
             tokenPair: {
                 accessToken: createAccessToken(user),
                 refreshToken: refreshToken.tokenString,
@@ -104,7 +128,7 @@ export const updateRefreshToken = async (req, res, next) => {
     }
 };
 
-function createAccessToken({id, role, email,isBanned, rest}) {
+function createAccessToken({id, role, email, isBanned, rest}) {
     return jwt.sign({
         id,
         role,
