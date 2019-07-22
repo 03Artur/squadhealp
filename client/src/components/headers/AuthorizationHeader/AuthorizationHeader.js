@@ -47,8 +47,10 @@ export default function AuthorizationHeader({mode, ...props}) {
 
     return (
         <header className={styles.header}>
+            <div className={styles.headerRow}>
             <Logo isColor={false}/>
             <LinkButton to={settings.linkTo} toTitle={settings.linkTitle}/>
+            </div>
         </header>
     );
 

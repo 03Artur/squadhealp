@@ -1,6 +1,18 @@
 @import "../../../commonStyles";
-.header{
-  @include flex-container(space-between, center);
-  max-width: 1200px;
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import '../../../../node_modules/bootstrap/scss/mixins';
+
+.header {
+  max-width: 970px;
   width: 100%;
+  margin-top: 26px;
+  padding: 0 45px;
+  font-family: $fontFamilyNotoSansSC;
+}
+
+.headerRow{
+  @include make-row();
+  justify-content: space-between;
+  margin: 0;
 }

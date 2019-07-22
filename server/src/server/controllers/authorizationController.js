@@ -9,10 +9,8 @@ import db from '../models';
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../utils/constants";
 import {BadRequestError, UnauthorizedError} from '../errors'
 
-
 //Sequelize instance
 const sequelize = db.sequelize;
-
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -21,21 +19,19 @@ export const loginUser = async (req, res, next) => {
         let transaction = await sequelize.transaction();
 
         let refreshToken = await RefreshToken.create({
-            tokenString: "",
+            tokenString: signToken(user, true),
             userId: user.id,
         }, {
             transaction
         });
-        refreshToken = await refreshToken.update({
-            tokenString: createRefreshToken(refreshToken.id),
-        }, {
-            transaction
-        });
+
+
         await transaction.commit();
+
         res.send({
             user,
             tokenPair: {
-                accessToken: createAccessToken(user),
+                accessToken: signToken(user),
                 refreshToken: refreshToken.tokenString,
             }
         })
@@ -47,35 +43,34 @@ export const loginUser = async (req, res, next) => {
 
 export const signUpUser = async (req, res, next) => {
     try {
+        console.log('signUp');
 
         let transaction = await sequelize.transaction();
 
         const user = await User.create(req.body, {
-            transaction
+            transaction,
         });
+        console.log('1');
 
         if (!user) {
             next(new BadRequestError());
             return;
         }
         let refreshToken = await RefreshToken.create({
-            tokenString: "",
             userId: user.id,
+            tokenString: signToken(user, true),
         }, {
             transaction,
         });
+        console.log('2');
 
-        refreshToken = await refreshToken.update({
-            tokenString: createRefreshToken(refreshToken.id),
-        }, {
-            transaction,
-        });
 
         await transaction.commit();
+        console.log('2');
 
         res.send({
             tokenPair: {
-                accessToken: createAccessToken(user),
+                accessToken: signToken(user),
                 refreshToken: refreshToken.tokenString,
             },
             user: user,
@@ -99,27 +94,31 @@ export const updateRefreshToken = async (req, res, next) => {
             transaction,
         });
 
-
         if (!refreshToken) {
             next(new UnauthorizedError());
             return;
         }
 
+
+        const user = await User.findByPk(refreshToken.userId, {
+            transaction,
+            attributes: {
+                exclude: ['password', 'createdAt', 'updatedAt'],
+            },
+        });
         refreshToken = await refreshToken.update({
-            tokenString: createRefreshToken(res.tokenId)
-        },{
+            tokenString: signToken(user, true),
+        }, {
             transaction,
         });
-        const user = await User.findByPk(refreshToken.userId,{
-            transaction,
-        });
+
 
         await transaction.commit();
 
         res.send({
             user,
             tokenPair: {
-                accessToken: createAccessToken(user),
+                accessToken: signToken(user),
                 refreshToken: refreshToken.tokenString,
             },
         })
@@ -127,6 +126,16 @@ export const updateRefreshToken = async (req, res, next) => {
         next(e);
     }
 };
+
+
+function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
+    return isRefreshToken ?
+        jwt.sign({id, role, email, isBanned,}, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN})
+        :
+        jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
+}
+
+/*
 
 function createAccessToken({id, role, email, isBanned, rest}) {
     return jwt.sign({
@@ -137,7 +146,6 @@ function createAccessToken({id, role, email, isBanned, rest}) {
     }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN});
 }
 
-function createRefreshToken(_refreshTokenId) {
-    return jwt.sign({tokenId: _refreshTokenId}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
-
-}
+function createRefreshToken({email, rest}) {
+    return jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
+}*/

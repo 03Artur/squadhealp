@@ -24,7 +24,7 @@ import styles from './AuthorizationPage.module.scss';
 * */
 import {AUTHORIZATION_MODE} from '../../constants'
 
-const AuthorizationPage = ({mode,loginAction,signUpAction, ...props}) => {
+const AuthorizationPage = ({mode, loginAction, signUpAction, ...props}) => {
     /*
     * Mode dependent values
     * */
@@ -32,6 +32,7 @@ const AuthorizationPage = ({mode,loginAction,signUpAction, ...props}) => {
     let title = null;
     let documentTitle = null;
     let onSubmit = null;
+
     /*
     * Combining multiple styles classes
     * */
@@ -55,18 +56,19 @@ const AuthorizationPage = ({mode,loginAction,signUpAction, ...props}) => {
         }
             break;
         default:
-            FormComponent = (props)=><form onSubmit={props.onSubmit}/>
+            FormComponent = (props) => <form onSubmit={props.onSubmit}/>
             documentTitle = 'Authorization';
-            onSubmit = ()=>{};
+            onSubmit = () => {
+            };
             title = "Authorization";
             break
     }
 
     const logProps = () => {
         console.log(props);
-       if(props.user){
-          props.history.push('/');
-       }
+        if (props.user) {
+            props.history.push('/');
+        }
     }
 
     return (
@@ -76,7 +78,7 @@ const AuthorizationPage = ({mode,loginAction,signUpAction, ...props}) => {
                 <AuthorizationHeader mode={mode}/>
                 <h1 className={titleClasses}>{title}</h1>
                 <div className={styles.formRow}>
-                <FormComponent onSubmit={onSubmit}/>
+                    <FormComponent  onSubmit={onSubmit}/>
                 </div>
             </div>
             {

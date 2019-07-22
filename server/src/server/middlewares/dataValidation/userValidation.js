@@ -2,6 +2,7 @@ import {BadRequestError} from './../../errors';
 import {createUserSchema, updateUserSchema} from '../../utils/yupSchemas/userSchemas';
 
 export async function validationCreateUser(req, res, next) {
+    console.log('validationCreateUser');
     try {
         if (await createUserSchema.isValid(req.body)) {
             next();

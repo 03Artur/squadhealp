@@ -1,4 +1,5 @@
 @import "../../../../commonStyles";
+
 .container{
   @include flex-container(center,center);
   background-color: #28d2d0;
@@ -11,6 +12,7 @@
   border-radius: 4px;
   cursor: pointer;
   max-width: 1200px;
+  text-transform: uppercase;
 
   &:focus{
     outline: -webkit-focus-ring-color auto 1px;

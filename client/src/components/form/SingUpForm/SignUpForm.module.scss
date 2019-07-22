@@ -3,46 +3,80 @@
 @import '../../../../node_modules/bootstrap/scss/mixins';
 
 
-
 /*
-sm: 540px,
+$grid-columns:      12;
+$grid-gutter-width: 30px;
+
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 576px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+);
+
+$container-max-widths: (
+  sm: 540px,
   md: 720px,
   lg: 960px,
   xl: 1140px
+);
 */
 
-.fieldContainer{
+.fieldContainer {
   padding: 0 14px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.formContainer{
-  @include make-col(4);
+.formContainer {
+  max-width: 555px;
+  @include make-container();
 
-  @include media-breakpoint-down(lg) {
-    @include make-col(6);
-  }
-  @include media-breakpoint-down(md) {
-    @include make-col(10);
-  }
-  @include media-breakpoint-down(sm) {
+ /* @include make-col(1);
+
+  @include media-breakpoint-down(xs) {
     @include make-col(11);
   }
 
+  @include media-breakpoint-down(sm) {
+    @include make-col(8);
+  }
+
+  @include media-breakpoint-down(md) {
+    @include make-col(6);
+  }
+
+  @include media-breakpoint-down(lg) {
+    @include make-col(7);
+  }
+
+  @include media-breakpoint-down(xl) {
+    @include make-col(5);
+    max-width: 555px;
+
+  }*/
+
 }
 
-.fieldRow{
+.fieldRow {
   @include make-row();
 }
 
-.col{
-  @include make-col(12);
+.col {
+  @include make-col-ready();
 }
 
-.fieldCol{
-  @include make-col(6);
+.fieldCol {
 
-  @include media-breakpoint-down (xs){
-    @include make-col(12);
+  @include make-col(12);
+  @include media-breakpoint-up(md) {
+    @include make-col(6);
   }
 
 }

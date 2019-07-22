@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import {SALT_ROUND} from '../../utils/constants'
 
 export default async (req, res, next) => {
+    console.log('hashPass');
 
     try {
         if (req.body.password) {
