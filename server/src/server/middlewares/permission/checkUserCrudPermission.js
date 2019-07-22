@@ -12,36 +12,30 @@ function checkPermission(isActToSelf, actorRole, objRole, rule) {
 
 export default async function (req, res, next) {
     try {
-        if (!req.accessTokenPayload) {
-            res.send([1, new ForbiddenError()]);
-            return;
-        }
+
         let objRole = null;
         if (req.method === 'POST') {
             objRole = req.body.role;
         } else {
 
-            const obj = await User.findByPk(req.params.id);
+            const obj = await User.findByPk(parseInt(req.params.id));
             if (!obj) {
-                res.send([2, new NotFoundError()]);
+                next(new NotFoundError("User not found"));
                 return;
             }
             objRole = obj.role;
         }
 
         const {role: actorRole, id} = req.accessTokenPayload;
-        console.log("=============================");
-        console.log(req.accessTokenPayload);
-        console.log("=============================");
         const isActToSelf = id === parseInt(req.params.id);
         if (checkPermission(isActToSelf, actorRole, objRole, ROLE_CRUD_USER_PERMISSIONS.get(req.method))) {
-            res.send("All Right!")
+            next();
         } else {
-            res.send([3, new ForbiddenError()]);
+            next(new ForbiddenError())
         }
 
     } catch (e) {
-        res.send([4, new ForbiddenError()]);
+        res.send(new ForbiddenError());
     }
 
 }

@@ -3,27 +3,26 @@ import {REGEXP} from "../../utils/regexp";
 import {TOKEN_PRIVATE_KEY} from "../../utils/constants";
 import {AuthenticationTimeoutError,  UnauthorizedError} from '../../errors';
 
-export default (req, res, next) => {
+import util from 'util'
+
+const verifyToken = util.promisify(jwt.verify);
+
+export default async (req, res, next) => {
     try {
-        console.log('checkAccessToken')
-        /*if (!req.headers.Authorization) {
+
+        console.log('checkAccessToken');
+        if (!req.headers.authorization) {
             next(new UnauthorizedError());
             return;
-        }*/
+        }
+
         const token = req.headers.authorization.replace(REGEXP.AUTHORIZATION_BEARER, '');
 
-        jwt.verify(token, TOKEN_PRIVATE_KEY,  (err, decoded) => {
-            if (err) {
-                next(new AuthenticationTimeoutError());
+        req.accessTokenPayload = await verifyToken(token, TOKEN_PRIVATE_KEY);
+       next();
 
-            } else {
-                req.accessTokenPayload = decoded;
-                next();
-
-            }
-        });
     } catch (e) {
-        next(e);
+        next(new AuthenticationTimeoutError());
     }
 };
 

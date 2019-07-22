@@ -17,7 +17,8 @@ export const createUser = async (req, res, next) => {
 
 export const getUserById = async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.params.id, {
+        parseInt(req.params.id);
+        const user = await User.findByPk(parseInt(req.params.id), {
             attributes: {exclude: ['password']}
         });
 
