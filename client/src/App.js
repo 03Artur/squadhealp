@@ -6,8 +6,8 @@
 * BASE IMPORT
 * */
 import React, {Suspense, lazy} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
+import {Router, Route, Switch} from 'react-router-dom';
+import history from './history';
 /*
 * CONSTANTS IMPORT
 * */
@@ -20,7 +20,7 @@ const Home = lazy(() => import('./pages/HomePage/Home'));
 
 
 const App = (props) => (
-    <BrowserRouter>
+    <Router history ={history}>
         <Suspense fallback={<div>Loading...</div>}>
             <Switch>
                 <Route exact path={paths.HOME} render={()=> <Home/>}/>
@@ -29,7 +29,8 @@ const App = (props) => (
 
             </Switch>
         </Suspense>
-    </BrowserRouter>
+    </Router>
 );
+
 
 export default App;
