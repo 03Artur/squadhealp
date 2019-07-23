@@ -1,6 +1,4 @@
 import ACTION_TYPES from './../actions/actiontsTypes';
-import PATH from '../constants/paths';
-import history from './../history';
 
 
 const initialState = {
@@ -8,28 +6,6 @@ const initialState = {
     isFetching: false,
     error: null,
 };
-
-const authorizationPageState = {
-    isLoginMode: history.location.pathname === PATH.LOGIN
-};
-
-
-export function authorizationModeReducer(state = authorizationPageState, action) {
-    switch (action.type) {
-        case ACTION_TYPES.CHANGE_AUTHORIZATION_MODE_ACTION: {
-
-            return {
-                ...state,
-                isLoginMode: action.isLoginMode,
-            };
-        }
-
-        default: {
-            return state;
-        }
-    }
-}
-
 
 export default function (state = initialState, action) {
 

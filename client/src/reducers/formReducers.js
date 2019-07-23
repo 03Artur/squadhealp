@@ -2,7 +2,7 @@ import {ROLE} from "../constants";
 
 
 const initialState = {
-  role: ROLE.BUYER
+  role: ROLE.BUYER,
 };
 
 

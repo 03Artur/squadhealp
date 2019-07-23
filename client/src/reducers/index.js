@@ -7,7 +7,6 @@ import {signUpFormReducer} from './formReducers'
 const appReducer = combineReducers({
     authorizationReducer,
     signUpFormReducer,
-    authorizationModeReducer,
     form: formReducer,
 });
 

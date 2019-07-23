@@ -13,8 +13,7 @@ import {loginActionCreator, singUpActionCreator, modeActionCreator} from "../../
 * */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
-import LoginForm from '../../components/Form/LoginForm';
-import SignUpForm from '../../components/Form/SignUpForm';
+import AuthorizationForm from '../../components/Form/AuthorizationForm';
 /*
 * STYLES
 * */
@@ -34,18 +33,16 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
     let title = null;
     let documentTitle = null;
     let handleSubmit = null;
-    let AuthorizationForm = null
-    if (isLoginMode) {
+
+    if (props.isLoginMode) {
         documentTitle = 'Login';
         title = 'login to your account';
         handleSubmit = loginAction;
-        AuthorizationForm = LoginForm;
     } else {
 
         documentTitle = 'Sign up';
         title = "create an account";
         handleSubmit = signUpAction;
-        AuthorizationForm = SignUpForm;
     }
 
     const logProps = () => {
@@ -54,22 +51,17 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
         }
     };
 
-
     const titleClasses = [styles.title, styles.titleField].join(' ');
     return (
         <div className={styles.page}>
             <DocumentTitle title={documentTitle}/>
             <div className={styles.myContainer}>
 
-                <AuthorizationHeader isLoginMode={isLoginMode}/>
+                <AuthorizationHeader/>
 
                 <h1 className={titleClasses}>{title}</h1>
                 <div className={styles.formRow}>
-
-
-                    <AuthorizationForm isLoginMode={isLoginMode} onSubmit={handleSubmit}/>
-
-
+                    <AuthorizationForm onSubmit={handleSubmit}/>
                 </div>
             </div>
             {
@@ -78,18 +70,20 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
         </div>
     );
 
-};
+}
 
 const mapDispatchToProps = (dispatch) => ({
     loginAction: (data) => dispatch(loginActionCreator(data)),
     signUpAction: (data) => dispatch(singUpActionCreator(data)),
+    changeMode: (isLoginMode) => dispatch(modeActionCreator(isLoginMode))
 
 });
 
 const mapStateToProps = state => {
-    const {user, error, isFetching} = state.authorizationReducer;
-    return {user, error, isFetching};
+    const {isLoginMode} = state.authorizationModeReducer;
+    return {isLoginMode};
 };
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);
+
+

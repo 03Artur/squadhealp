@@ -15,7 +15,7 @@ import styles from './AuthorizationForm.module.scss'
 
 
 let AuthorizationForm = (props) => {
-    const { handleSubmit } = props;
+    const {handleSubmit} = props;
     const renderField = (name, type, validate, component, placeholder) => {
         return (
 
@@ -82,15 +82,12 @@ let AuthorizationForm = (props) => {
             </React.Fragment>)
     };
 
-    let renderFields = null;
     let submitButtonText = null;
 
     if (props.isLoginMode) {
 
-        renderFields = renderLoginFields;
         submitButtonText = 'login';
     } else {
-        renderFields = renderSignUpFields;
         submitButtonText = 'create account';
     }
 
@@ -98,7 +95,7 @@ let AuthorizationForm = (props) => {
     return (
         <div className={styles.formContainer}>
             {
-                renderFields()
+                props.isLoginMode?renderLoginFields():renderSignUpFields()
             }
             <div className={styles.fieldRow}>
                 <div className={styles.col}>
@@ -113,14 +110,10 @@ let AuthorizationForm = (props) => {
 
 
 const mapStateToProps = state => {
-    const {isLoginMode} = state.authorizationModeReducer;
     return {
-        isLoginMode,
         initialValues: state.signUpFormReducer
     }
 };
-
-
 
 
 AuthorizationForm = connect(mapStateToProps)(AuthorizationForm);

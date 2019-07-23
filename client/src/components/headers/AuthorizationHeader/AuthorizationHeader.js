@@ -24,9 +24,9 @@ import styles from './AuthorizationHeader.module.scss';
 import PATH from './../../../constants/paths'
 
 
-function AuthorizationHeader({mode, ...props}) {
+function AuthorizationHeader(props) {
 
-    const getSetting = () => (
+    const settings =(
         props.isLoginMode ? {
                 to: PATH.SIGN_UP,
                 linkTitle: 'Sign Up',
@@ -36,11 +36,6 @@ function AuthorizationHeader({mode, ...props}) {
                 to: PATH.LOGIN,
                 linkTitle: 'Login',
             });
-
-
-    const settings = getSetting();
-
-
 
     return (
         <header className={styles.header}>
@@ -53,11 +48,8 @@ function AuthorizationHeader({mode, ...props}) {
 
 }
 
-const mapStateToProps = state => {
-    const {isLoginMode} = state.authorizationModeReducer;
-    return {isLoginMode};
-};
 
 
-export default connect(mapStateToProps)(AuthorizationHeader)
+
+export default AuthorizationHeader
 

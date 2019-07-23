@@ -10,7 +10,6 @@ import styles from './InputRadio.module.scss';
 
 
 export default function InputRadio({input, type, meta, ...props}) {
-
     return (
         <div className={styles.container}>
             <label className={styles.title} htmlFor={props.id}>

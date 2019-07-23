@@ -28,8 +28,8 @@ const App = (props) => (
         <Suspense fallback={<div>Loading...</div>}>
             <Switch>
                 <Route exact path={paths.HOME} render={(props)=> <Home {...props}/>}/>
-                <Route path={paths.LOGIN} render={(props) => <AuthorizationPage {...props}/>}/>
-                <Route path={paths.SIGN_UP} render={(props) => <AuthorizationPage {...props}/>}/>
+                <Route path={paths.LOGIN} render={(props) => <AuthorizationPage isLoginMode={true} {...props}/>}/>
+                <Route path={paths.SIGN_UP} render={(props) => <AuthorizationPage isLoginMode = {false} {...props}/>}/>
 
             </Switch>
         </Suspense>
