@@ -7,9 +7,26 @@ const initialState = {
 };
 
 
+export function authorizationModeReducer(state = {isLoginMode: true}, action) {
+
+    switch (action.type) {
+        case ACTION_TYPES.CHANGE_AUTHORIZATION_MODE_ACTION: {
+
+            return {
+                ...state,
+                isLoginMode: action.isLoginMode,
+            };
+        }
+
+        default: {
+            return state;
+        }
+    }
+}
+
+
 export default function (state = initialState, action) {
 
-    console.log("authorizationReducer");
     switch (action.type) {
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
             return {

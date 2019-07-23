@@ -3,7 +3,6 @@ import {ROLE_CRUD_USER_PERMISSIONS} from '../../utils/permissin_CRUD/userCrud';
 import {User} from './../../models';
 
 function checkPermission(isActToSelf, actorRole, objRole, rule) {
-    console.log({isActToSelf, actorRole, objRole, rule});
     return isActToSelf ?
         rule.self.includes(actorRole) :
         rule.other.get(actorRole).includes(objRole);

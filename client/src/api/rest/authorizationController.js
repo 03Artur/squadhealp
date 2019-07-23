@@ -4,7 +4,7 @@ import {LOCAL_STORAGE_KEYS} from "../../constants";
 
 
 export const loginUser = (data) => axios.post(loginURL, data).then(setTokensToLocalStorage);
-export const signUpUser = (data) => {console.log('axios: signUpUser: ',data); return axios.post(signUpURL, data).then(setTokensToLocalStorage)};
+export const signUpUser = (data) =>  axios.post(signUpURL, data).then(setTokensToLocalStorage);
 export const refreshTokens = (data) => axios.post(refreshTokensUrl, data).then(setTokensToLocalStorage);
 
 

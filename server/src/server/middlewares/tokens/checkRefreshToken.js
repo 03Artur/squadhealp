@@ -7,7 +7,6 @@ const verifyToken = util.promisify(jwt.verify);
 
 export default async (req, res, next) => {
     try {
-        console.log("checkRefreshToken");
         req.refreshTokenPayload = await verifyToken(req.body.refreshToken, TOKEN_PRIVATE_KEY);
         next();
     } catch (e) {

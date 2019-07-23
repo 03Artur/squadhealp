@@ -1,33 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './LinkButton.module.scss'
 
 
-export default function LinkButton({to,toTitle, ...rest}) {
+export default function LinkButton(props) {
 
 
 
     return (
-        <Link className = {styles.aReset} to={to}>
-            <div className={styles.container}>
+            <div  onClick={props.onClick} className={styles.container}>
                 {
-                    toTitle
+                    props.text
                 }
             </div>
-        </Link>
     )
 };
 
 
 LinkButton.propTypes = {
-    to: PropTypes.string,
-    toTitle: PropTypes.string,
+    text: PropTypes.string,
 };
 
 LinkButton.defaultProps = {
-    to: true,
-    toTitle: 'Here'
+    text: 'Here'
 };
 
 

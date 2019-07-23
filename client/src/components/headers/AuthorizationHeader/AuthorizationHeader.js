@@ -1,62 +1,62 @@
-
 /*
 * REACT
 * */
 import React from 'react';
-import PropTypes from 'prop-types';
+/*
+* REDUX & FRIENDS
+* */
+import {connect} from 'react-redux'
+import {modeActionCreator} from '../../../actions/authorizationActionCreators';
+
 /*
 * COMPONENTS
 * */
 import Logo from '../../Logo/Logo';
 import LinkButton from "./LinkButtun/LinkButton";
-/*
-* UTILS
-* */
-import {AUTHORIZATION_MODE} from "../../../constants";
-import PATH from "../../../constants/paths";
+
 /*
 * STYLES
 * */
 import styles from './AuthorizationHeader.module.scss';
 
 
+function AuthorizationHeader({mode, ...props}) {
 
-export default function AuthorizationHeader({mode, ...props}) {
+    const getSetting = () => (
+        props.isLoginMode ? {
+                linkTitle: 'Sign Up',
+            }
+            :
+            {
+                linkTitle: 'Login',
+            });
 
-    const getSetting = () => {
-        switch (mode) {
-            case AUTHORIZATION_MODE.SIGN_UP_MODE:
-                return {
-                    linkTo: PATH.LOGIN,
-                    linkTitle: 'Login',
-                };
-            case AUTHORIZATION_MODE.LOGIN_MODE:
-                return {
-                    linkTo: PATH.SIGN_UP,
-                    linkTitle: 'Signup',
-                };
-            default:
-                return {
-                    linkTo: PATH.HOME,
-                    linkTitle: 'Home',
-                }
-        }
-    };
 
     const settings = getSetting();
+
+    const changeMode = () => {
+        let newValue = !props.isLoginMode;
+        props.changeModeAction(newValue);
+    };
 
     return (
         <header className={styles.header}>
             <div className={styles.headerRow}>
-            <Logo isColor={false}/>
-            <LinkButton to={settings.linkTo} toTitle={settings.linkTitle}/>
+                <Logo isColor={false}/>
+                <LinkButton onClick={changeMode} text={settings.linkTitle}/>
             </div>
         </header>
     );
 
 }
 
-AuthorizationHeader.propTypes = {
-    mode: PropTypes.oneOf(Object.values(AUTHORIZATION_MODE)),
+const mapStateToProps = state => {
+    const {isLoginMode} = state.authorizationModeReducer;
+    return {isLoginMode};
 };
+const mapDispatchToProps = (dispatch) => ({
+    changeModeAction: isLoginMode => dispatch(modeActionCreator(isLoginMode))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationHeader)
 

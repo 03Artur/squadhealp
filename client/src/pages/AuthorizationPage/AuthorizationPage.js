@@ -2,104 +2,86 @@
 * REACT
 * */
 import React from 'react';
-import PropTypes from 'prop-types';
 /*
 * REACT, REACT-REDUX
 * */
 import {connect} from 'react-redux';
-import {loginActionCreator, singUpActionCreator} from '../../actions/authorizationActionCreators';
 /*
 * COMPONENTS
 * */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
-import LoginForm from './../../components/form/LoginForm/LoginForm';
-import SingUpForm from './../../components/form/SingUpForm/SignUpForm';
+import AuthorizationForm from '../../components/Form/AuthorizationForm';
 /*
 * STYLES
 * */
 import styles from './AuthorizationPage.module.scss';
-/*
-* UTILS
-* */
-import {AUTHORIZATION_MODE} from '../../constants'
+import {loginActionCreator, singUpActionCreator} from "../../actions/authorizationActionCreators";
+
 
 const AuthorizationPage = ({mode, loginAction, signUpAction, ...props}) => {
-    /*
-    * Mode dependent values
-    * */
-    let FormComponent = null;
-    let title = null;
-    let documentTitle = null;
-    let onSubmit = null;
-
-    /*
-    * Combining multiple styles classes
-    * */
-    const titleClasses = [styles.title, styles.titleField].join(' ');
-    /*
-    * set values
-    * */
-    switch (mode) {
-        case AUTHORIZATION_MODE.LOGIN_MODE: {
-            FormComponent = LoginForm;
+        /*
+        * Mode dependent values
+        * */
+        let title = null;
+        let documentTitle = null;
+        let handleSubmit =null;
+        /*
+        * Combining multiple styles classes
+        * */
+        const titleClasses = [styles.title, styles.titleField].join(' ');
+        /*
+        * set values
+        * */
+        if (props.isLoginMode) {
             documentTitle = 'Login';
-            onSubmit = loginAction;
             title = 'login to your account';
-        }
-            break;
-        case AUTHORIZATION_MODE.SIGN_UP_MODE: {
-            FormComponent = SingUpForm;
+            handleSubmit = loginAction;
+        } else {
+
             documentTitle = 'Sign up';
-            onSubmit = signUpAction;
             title = "create an account";
+            handleSubmit = signUpAction;
         }
-            break;
-        default:
-            FormComponent = (props) => <form onSubmit={props.onSubmit}/>
-            documentTitle = 'Authorization';
-            onSubmit = () => {
-            };
-            title = "Authorization";
-            break
-    }
 
-    const logProps = () => {
-        console.log(props);
-        if (props.user) {
-            props.history.push('/');
-        }
-    };
-
-    return (
-        <div className={styles.page}>
-            <DocumentTitle title={documentTitle}/>
-            <div className={styles.myContainer}>
-                <AuthorizationHeader mode={mode}/>
-                <h1 className={titleClasses}>{title}</h1>
-                <div className={styles.formRow}>
-                    <FormComponent  onSubmit={onSubmit}/>
-                </div>
-            </div>
-            {
-                logProps()
+        const logProps = () => {
+            if (props.user) {
+                props.history.push('/');
             }
-        </div>
-    );
-};
+        };
+        const changeMode = () => {
+            props.changeModeAction(false)
+        };
 
-AuthorizationPage.propTypes = {
-    mode: PropTypes.oneOf(Object.values(AUTHORIZATION_MODE)),
-};
+        return (
+            <div className={styles.page}>
+                <DocumentTitle title={documentTitle}/>
+                <div className={styles.myContainer}>
+                    <AuthorizationHeader changeMode={changeMode} isLoginMode={props.isLoginMode}/>
+                    <h1 className={titleClasses}>{title}</h1>
+                    <div className={styles.formRow}>
 
-const mapStateToProps = state => {
-    const {user, isFetching, error} = state.authorizationReducer;
-    return {user, isFetching, error};
-};
+                        <AuthorizationForm onSubmit={handleSubmit}/>
+
+                    </div>
+                </div>
+                {
+                    logProps()
+                }
+            </div>
+        );
+    }
+;
 
 const mapDispatchToProps = (dispatch) => ({
     loginAction: (data) => dispatch(loginActionCreator(data)),
     signUpAction: (data) => dispatch(singUpActionCreator(data)),
+
 });
+
+const mapStateToProps = state => {
+    const {isLoginMode} = state.authorizationModeReducer;
+    return {isLoginMode};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);

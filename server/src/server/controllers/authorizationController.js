@@ -43,7 +43,6 @@ export const loginUser = async (req, res, next) => {
 
 export const signUpUser = async (req, res, next) => {
     try {
-        console.log('signUp');
 
         let transaction = await sequelize.transaction();
 
