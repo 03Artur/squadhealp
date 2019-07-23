@@ -18,16 +18,22 @@ import LinkButton from "./LinkButtun/LinkButton";
 * STYLES
 * */
 import styles from './AuthorizationHeader.module.scss';
+/*
+* UTILS
+* */
+import PATH from './../../../constants/paths'
 
 
 function AuthorizationHeader({mode, ...props}) {
 
     const getSetting = () => (
         props.isLoginMode ? {
+                to: PATH.SIGN_UP,
                 linkTitle: 'Sign Up',
             }
             :
             {
+                to: PATH.LOGIN,
                 linkTitle: 'Login',
             });
 
@@ -43,7 +49,7 @@ function AuthorizationHeader({mode, ...props}) {
         <header className={styles.header}>
             <div className={styles.headerRow}>
                 <Logo isColor={false}/>
-                <LinkButton onClick={changeMode} text={settings.linkTitle}/>
+                <LinkButton to={settings.to} text={settings.linkTitle}/>
             </div>
         </header>
     );
