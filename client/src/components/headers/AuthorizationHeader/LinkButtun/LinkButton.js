@@ -7,10 +7,9 @@ import PATH from '../../../../constants/paths'
 export default function LinkButton(props) {
 
 
-
     return (
-        <Link to ={props.to}>
-            <div  onClick={props.onClick} className={styles.container}>
+        <Link className={styles.aReset} to={props.to}>
+            <div className={styles.container}>
                 {
                     props.text
                 }

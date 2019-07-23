@@ -40,10 +40,7 @@ function AuthorizationHeader({mode, ...props}) {
 
     const settings = getSetting();
 
-    const changeMode = () => {
-        let newValue = !props.isLoginMode;
-        props.changeModeAction(newValue);
-    };
+
 
     return (
         <header className={styles.header}>
@@ -60,9 +57,7 @@ const mapStateToProps = state => {
     const {isLoginMode} = state.authorizationModeReducer;
     return {isLoginMode};
 };
-const mapDispatchToProps = (dispatch) => ({
-    changeModeAction: isLoginMode => dispatch(modeActionCreator(isLoginMode))
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationHeader)
+
+export default connect(mapStateToProps)(AuthorizationHeader)
 
