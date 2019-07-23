@@ -36,6 +36,7 @@ $container-max-widths: (
 
 .formContainer {
   max-width: 555px;
+  width: 100%;
   @include make-container();
 
  /* @include make-col(1);
@@ -71,6 +72,9 @@ $container-max-widths: (
 .col {
   @include make-col-ready();
 }
+
+
+
 
 .fieldCol {
 

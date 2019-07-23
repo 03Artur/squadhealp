@@ -69,7 +69,7 @@ const AuthorizationPage = ({mode, loginAction, signUpAction, ...props}) => {
         if (props.user) {
             props.history.push('/');
         }
-    }
+    };
 
     return (
         <div className={styles.page}>

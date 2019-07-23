@@ -10,8 +10,8 @@ export const AUTHORIZATION_MODE = {
 };
 
 export const ROLE = {
-    GUEST: 0,
-    BUYER: 1,
-    CREATIVE: 2,
-    ADMIN: 7,
+    GUEST: '0',
+    BUYER: '1',
+    CREATIVE: '2',
+    ADMIN: '7',
 };

@@ -1,13 +1,12 @@
 import {combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import goodsReducers from './goodsReducers';
 import authorizationReducer from './authorizationReducers';
-
+import {signUpFormReducer} from './formReducers'
 
 
 const appReducer = combineReducers({
-    goodsReducers,
     authorizationReducer,
+    signUpFormReducer,
     form: formReducer,
 });
 

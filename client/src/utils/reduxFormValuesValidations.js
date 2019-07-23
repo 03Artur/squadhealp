@@ -16,3 +16,7 @@ export const emptyValidation = value => (
 export const passwordValidation = value => (
     REGEXP.PASSWORD.test(value)?undefined: 'Your password must be at least 8 characters, and include at least one lowercase letter, one uppercase letter, and a number.'
 );
+
+export const confirmPasswordValidation = (value, allValues) => {
+    return allValues.password&&value === allValues.password?undefined: "Password does not match";
+};
