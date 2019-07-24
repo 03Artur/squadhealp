@@ -15,6 +15,23 @@ export const createUser = async (req, res, next) => {
     }
 };
 
+export const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.findAll({
+            attributes: {exclude: ['password']},
+        });
+        if (!users) {
+            next(new NotFoundError("Users not found"));
+            return
+        }
+        res.send(users);
+
+
+    } catch (e) {
+
+    }
+}
+
 export const getUserById = async (req, res, next) => {
     try {
         parseInt(req.params.id);

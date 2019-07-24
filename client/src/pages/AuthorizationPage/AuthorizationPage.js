@@ -65,11 +65,7 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
 
                 <h1 className={titleClasses}>{title}</h1>
                 <div className={styles.formRow}>
-
-
                     <AuthorizationForm isLoginMode={isLoginMode} onSubmit={handleSubmit}/>
-
-
                 </div>
             </div>
             {

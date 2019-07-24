@@ -9,6 +9,8 @@ export const AUTHORIZATION_MODE = {
     SIGN_UP_MODE: 'SIGN_UP_MODE',
 };
 
+export const ACCESS_TOKEN_BEARER = 'Bearer ';
+
 export const ROLE = {
     GUEST: '0',
     BUYER: '1',

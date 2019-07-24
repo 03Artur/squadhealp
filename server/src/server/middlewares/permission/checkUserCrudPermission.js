@@ -1,11 +1,27 @@
 import {ForbiddenError, NotFoundError} from '../../errors';
 import {ROLE_CRUD_USER_PERMISSIONS} from '../../utils/permissin_CRUD/userCrud';
 import {User} from './../../models';
+import {ROLE} from "../../utils/constants";
 
 function checkPermission(isActToSelf, actorRole, objRole, rule) {
     return isActToSelf ?
         rule.self.includes(actorRole) :
         rule.other.get(actorRole).includes(objRole);
+
+}
+
+export function isItAdmin(req, res, next) {
+
+    try {
+        const {role} = req.accessTokenPayload;
+        if (role === ROLE.ADMIN) {
+            next();
+        } else {
+            next(new ForbiddenError());
+        }
+    } catch (e) {
+        next(new ForbiddenError());
+    }
 
 }
 
@@ -16,7 +32,6 @@ export default async function (req, res, next) {
         if (req.method === 'POST') {
             objRole = req.body.role;
         } else {
-
             const obj = await User.findByPk(parseInt(req.params.id));
             if (!obj) {
                 next(new NotFoundError("User not found"));
@@ -27,6 +42,7 @@ export default async function (req, res, next) {
 
         const {role: actorRole, id} = req.accessTokenPayload;
         const isActToSelf = id === parseInt(req.params.id);
+
         if (checkPermission(isActToSelf, actorRole, objRole, ROLE_CRUD_USER_PERMISSIONS.get(req.method))) {
             next();
         } else {
@@ -34,7 +50,7 @@ export default async function (req, res, next) {
         }
 
     } catch (e) {
-        res.send(new ForbiddenError());
+        next(new ForbiddenError());
     }
 
 }

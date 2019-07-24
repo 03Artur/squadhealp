@@ -14,14 +14,16 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', router);
 
+//static image files
 app.use('/images', express.static('/server/public/images'));
 
 //Authorization
 app.use(authorizationRouter);
 
-
 //Access Token required
+
 app.use(checkAccessToken);
+
 
 app.use(userRouter);
 

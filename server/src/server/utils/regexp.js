@@ -1,7 +1,7 @@
 
 import {ROLE,AUTHORIZATION_BEARER} from "./constants";
 
-const rolePattern = `^[${ROLE.GUEST}-${ROLE.ADMIN}]$`;
+const rolePattern = `^[${ROLE.CREATIVE}-${ROLE.BUYER}]$`;
 const tokenBearerPattern = `^${AUTHORIZATION_BEARER}`;
 
 export const REGEXP = {
