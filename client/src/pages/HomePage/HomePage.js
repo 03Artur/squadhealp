@@ -2,7 +2,7 @@ import React from 'react';
 import DocumentTitle from 'react-document-title';
 
 
-function Home(props) {
+function HomePage(props) {
     console.log(props);
     return (
         <div>
@@ -13,4 +13,4 @@ function Home(props) {
 
 }
 
-export default Home;
+export default HomePage;

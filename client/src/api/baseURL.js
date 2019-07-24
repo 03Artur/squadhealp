@@ -9,4 +9,5 @@ export const userUrl = `${baseURL}/user`;
 export const usersUrl = `${baseURL}/users`;
 
 export const imagesURL = `${baseURL}/images`;
+export const userPicturesURL = `${imagesURL}/userPictures`;
 

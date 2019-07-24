@@ -2,15 +2,15 @@ import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {getUsers} from '../api/rest/userController';
 
-export function* getUsersSaga({count,offset}) {
+export function* getUsersSaga() {
 
-    yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
+    yield put({type: ACTION_TYPE.GET_USERS_REQUEST});
     try {
-        const {data} = yield loginUser(user);
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
+        const {data} = yield getUsers();
+        yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data});
     } catch (e) {
         console.log(e.response);
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e.response});
+        yield put({type: ACTION_TYPE.GET_USERS_ERROR, error: e.response});
     }
 }
 

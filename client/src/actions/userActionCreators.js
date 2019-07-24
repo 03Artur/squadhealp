@@ -1,8 +1,8 @@
 import ACTION_TYPES from './actiontsTypes';
 
-export const getAllUsersActionCreator = () => {
+export const getUsersActionCreator = () => {
     return {
-        type: ACTION_TYPES.GET_ALL_USERS_ACTION,
+        type: ACTION_TYPES.GET_USERS_ACTION,
     }
 };
 
@@ -24,5 +24,12 @@ export const getUserActionCreator = (userId) => {
     return {
         type: ACTION_TYPES.GET_USER_ACTION,
         userId,
+    }
+};
+
+export const getUsersLimitChangeActionCreator = (limit) => {
+    return {
+        type: ACTION_TYPES.GET_USERS_LIMIT_CHANGE,
+        limit,
     }
 };

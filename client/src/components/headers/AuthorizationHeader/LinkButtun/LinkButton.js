@@ -26,7 +26,7 @@ LinkButton.propTypes = {
 
 LinkButton.defaultProps = {
     to: PATH.HOME,
-    text: 'Home'
+    text: 'HomePage'
 };
 
 

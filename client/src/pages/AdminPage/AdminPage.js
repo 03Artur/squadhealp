@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {getAllUsersActionCreator} from '../../actions/userActionCreators';
+import {getUsersActionCreator, getUsersLimitChangeActionCreator} from '../../actions/userActionCreators';
 
 class AdminPage extends React.Component {
     constructor(props) {
@@ -9,7 +9,7 @@ class AdminPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getAllUsers();
+        this.props.getUsers();
     }
 
     render() {
@@ -22,14 +22,13 @@ class AdminPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispaths) => ({
-    getAllUsers: () => dispaths(getAllUsersActionCreator()),
-
-
+    getUsers: () => dispaths(getUsersActionCreator()),
+    changeLimit: (limit) => dispaths(getUsersLimitChangeActionCreator(limit)),
 });
 
 const mapStateToProps = store => {
-    const {users, error, isFetching} = store.authorizationReducer;
-    return {users, error, isFetching};
+    const {users, error, isFetching, } = store.userReducer;
+    return {users, error, isFetching,};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminPage);

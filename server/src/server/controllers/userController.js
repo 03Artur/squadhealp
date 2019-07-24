@@ -17,8 +17,11 @@ export const createUser = async (req, res, next) => {
 
 export const getAllUsers = async (req, res, next) => {
     try {
+        const {limit, offset} = req.query;
         const users = await User.findAll({
             attributes: {exclude: ['password']},
+            limit,
+            offset,
         });
         if (!users) {
             next(new NotFoundError("Users not found"));
@@ -30,7 +33,7 @@ export const getAllUsers = async (req, res, next) => {
     } catch (e) {
 
     }
-}
+};
 
 export const getUserById = async (req, res, next) => {
     try {

@@ -15,8 +15,9 @@ import paths from './constants/paths';
 /*
 * COMPONENTS IMPORT
 * */
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const AuthorizationPage = lazy(() => import("./pages/AuthorizationPage/AuthorizationPage"));
-const Home = lazy(() => import('./pages/HomePage/Home'));
+const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
 
 
 
@@ -27,10 +28,10 @@ const App = (props) => (
     <Router history ={history}>
         <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-                <Route exact path={paths.HOME} render={(props)=> <Home {...props}/>}/>
+                <Route exact path={paths.HOME} render={(props)=> <HomePage {...props}/>}/>
                 <Route path={paths.LOGIN} render={(props) => <AuthorizationPage isLoginMode={true} {...props}/>}/>
                 <Route path={paths.SIGN_UP} render={(props) => <AuthorizationPage isLoginMode = {false} {...props}/>}/>
-
+                <Route path={paths.ADMIN} render={(props) => <AdminPage {...props}/>}/>
             </Switch>
         </Suspense>
     </Router>
