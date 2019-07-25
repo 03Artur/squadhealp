@@ -16,105 +16,7 @@ import * as VALIDATION from '../../utils/reduxFormValuesValidations'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
 
-class Test extends React.Component {
-
-    renderField = (name, type, validate, component, placeholder, value = '') => {
-        return (
-            <div className={styles.fieldContainer}>
-                <Field name={name} component={component} placeholder={placeholder} type={type}
-                       validate={validate} value={value}/>
-            </div>
-        )
-    };
-
-    onSubmit = (values) => {
-        switch (mode) {
-            case AUTHORIZATION_MODE.LOGIN_MODE:
-                loginAction(values);
-                break;
-            case AUTHORIZATION_MODE.SIGN_UP_MODE:
-                signUpAction(values);
-                break;
-        }
-
-    };
-
-    renderSignUp = () => {
-        return <React.Fragment>
-            <div className={styles.fieldRow}>
-                <div className={styles.fieldCol}>{
-                    this.renderField('firstName', 'text', VALIDATION.nameValidation, Input, 'First name')
-                }</div>
-                <div className={styles.fieldCol}>{
-                    this.renderField('lastName', 'text', VALIDATION.nameValidation, Input, 'Last name')
-                }</div>
-            </div>
-            <div className={styles.fieldRow}>{
-                this.renderField('email', 'email', VALIDATION.emailValidation, Input, 'Email Address')
-            }</div>
-            <div className={styles.fieldRow}>
-                <div className={styles.fieldCol}>                    {
-                    this.renderField('password', 'password', VALIDATION.passwordValidation, Input, 'Password')
-                }</div>
-                <div className={styles.fieldCol}>       {
-                    this.renderField('passwordConfirmation', 'password', VALIDATION.confirmPasswordValidation, Input, 'Password Confirmation')
-                }</div>
-            </div>
-            <div className={styles.fieldRow}>
-                <Field id='radioBuyer' name='role' component={InputRadio} type='radio' value={ROLE.BUYER}
-                       title="Join As a Buyer"/>
-            </div>
-            <div className={styles.fieldRow}>
-                <Field id='radioCreative' name='role' component={InputRadio} type='radio' value={ROLE.CREATIVE}
-                       title="Join As a Creative"/>
-            </div>
-        </React.Fragment>
-    };
-
-    renderLogin = () => {
-        return <React.Fragment>
-            <div className={styles.fieldRow}>
-                <div className={styles.col}>{
-                    this.renderField('email', 'email', VALIDATION.emailValidation, Input, 'Email Address')
-                }</div>
-                <div className={styles.col}>{
-                    this.renderField('password', 'password', VALIDATION.passwordValidation, Input, 'Password')
-                }</div>
-            </div>
-
-        </React.Fragment>
-
-    };
-    renderFields = () => {
-        switch (this.props.mode) {
-            case AUTHORIZATION_MODE.LOGIN_MODE:
-                return this.renderLogin();
-            case AUTHORIZATION_MODE.SIGN_UP_MODE:
-                return this.renderSignUp();
-        }
-    };
-
-    render() {
-        return (
-            <div className={styles.formContainer}>
-                {
-                    this.renderFields()
-                }
-                <div className={styles.fieldRow}>
-                    <div className={styles.col}>
-                        <div className={styles.fieldContainer}>
-                            <SubmitButton onClick={this.props.handleSubmit(values =>this.onSubmit(values))}>{
-                                props.submitButtonText
-                            }</SubmitButton>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-let AuthorizationForm = ({handleSubmit, mode, loginAction, signUpAction, ...props}) => {
+function AuthorizationForm(props) {
 
     const renderField = (name, type, validate, component, placeholder, value = '') => {
         return (
@@ -126,16 +28,16 @@ let AuthorizationForm = ({handleSubmit, mode, loginAction, signUpAction, ...prop
     };
 
     const onSubmit = (values) => {
-        switch (mode) {
+        switch (props.mode) {
             case AUTHORIZATION_MODE.LOGIN_MODE:
-                loginAction(values);
+                props.loginAction(values);
                 break;
             case AUTHORIZATION_MODE.SIGN_UP_MODE:
-                signUpAction(values);
+                props.signUpAction(values);
                 break;
         }
-
     };
+
 
     const renderSignUp = () => {
         return <React.Fragment>
@@ -184,13 +86,14 @@ let AuthorizationForm = ({handleSubmit, mode, loginAction, signUpAction, ...prop
 
     };
     const renderFields = () => {
-        switch (mode) {
+        switch (props.mode) {
             case AUTHORIZATION_MODE.LOGIN_MODE:
                 return renderLogin();
             case AUTHORIZATION_MODE.SIGN_UP_MODE:
                 return renderSignUp();
         }
     };
+
 
     return (
         <div className={styles.formContainer}>
@@ -200,7 +103,7 @@ let AuthorizationForm = ({handleSubmit, mode, loginAction, signUpAction, ...prop
             <div className={styles.fieldRow}>
                 <div className={styles.col}>
                     <div className={styles.fieldContainer}>
-                        <SubmitButton onClick={handleSubmit(values => onSubmit(values))}>{
+                        <SubmitButton onClick={props.handleSubmit(values => onSubmit(values))}>{
                             props.submitButtonText
                         }</SubmitButton>
                     </div>
@@ -208,11 +111,13 @@ let AuthorizationForm = ({handleSubmit, mode, loginAction, signUpAction, ...prop
             </div>
         </div>
     )
-};
+
+}
+
 
 const mapStateToProps = state => {
     const {user, error, isFetching} = state.authorizationReducer;
-    const {mode, form} = state.authorizationModeReducer
+    const {mode, form} = state.authorizationModeReducer;
     return {user, error, isFetching, mode, ...form};
 };
 const mapDispatchToProps = (dispatch) => ({
@@ -222,14 +127,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-AuthorizationForm = connect(mapStateToProps, mapDispatchToProps)(AuthorizationForm);
 
-AuthorizationForm = reduxForm({
-    // a unique name for the form
-    form: 'AuthorizationForm',
-    initialValues: {role: ROLE.BUYER}
-})(AuthorizationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+        // a unique name for the form
+        form: 'AuthorizationForm',
+        enableReinitialize: true,
+    })(AuthorizationForm
+    ));
 
-export default AuthorizationForm
 
 

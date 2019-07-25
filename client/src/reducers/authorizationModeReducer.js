@@ -10,6 +10,7 @@ const initialState = {
     },
     form: {
         submitButtonText: "Login",
+        initialValues: null,
     },
     linkButton: {
         text: 'Sign Up',

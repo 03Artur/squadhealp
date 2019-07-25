@@ -24,7 +24,7 @@ import styles from './AuthorizationPage.module.scss';
 /*
 * UTILS
 * */
-import {AUTHORIZATION_MODE, PATH} from '../../constants';
+import {AUTHORIZATION_MODE, PATH, ROLE} from '../../constants';
 
 class AuthorizationPage extends React.Component {
 
@@ -43,6 +43,10 @@ class AuthorizationPage extends React.Component {
                 },
                 form: {
                     submitButtonText: "create account",
+                    initialValues: {
+                        role: ROLE.BUYER,
+                    },
+
                 },
                 linkButton: {
                     text: 'Login',
@@ -58,6 +62,11 @@ class AuthorizationPage extends React.Component {
                 },
                 form: {
                     submitButtonText: "Login",
+                    initialValues: {
+                        email: '',
+                        password: '',
+                    },
+
                 },
                 linkButton: {
                     text: 'Sign Up',
