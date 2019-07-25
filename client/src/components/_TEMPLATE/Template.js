@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 * Components
 * */
 
+
 /*
 * Styles
 * */
@@ -27,6 +28,7 @@ const Template = (props) => {
         </Fragment>
     )
 };
+
 Template.propTypes = {
 
 };
@@ -35,10 +37,12 @@ Template.defaultPros = {
 
 };
 
+/*
+* React redux
+* */
 const mapStateToProps = store => ({
 
 });
-
 const mapDispatchToProps = dispatch => ({
 
 });

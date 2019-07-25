@@ -28,10 +28,8 @@ export const getAllUsers = async (req, res, next) => {
             return
         }
         res.send(users);
-
-
     } catch (e) {
-
+        next(e)
     }
 };
 

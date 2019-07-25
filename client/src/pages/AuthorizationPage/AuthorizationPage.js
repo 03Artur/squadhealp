@@ -15,6 +15,8 @@ import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
 import LoginForm from '../../components/Form/LoginForm';
 import SignUpForm from '../../components/Form/SignUpForm';
+import Spinner from '../../components/Spinner/Spinner';
+
 /*
 * STYLES
 * */
@@ -53,16 +55,20 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
             props.history.push('/');
         }
     };
-
+    const renderSpinner = () => {
+        if(props.isFetching){
+            return (
+                <Spinner/>
+            )
+        }
+    };
 
     const titleClasses = [styles.title, styles.titleField].join(' ');
     return (
         <div className={styles.page}>
             <DocumentTitle title={documentTitle}/>
             <div className={styles.myContainer}>
-
                 <AuthorizationHeader isLoginMode={isLoginMode}/>
-
                 <h1 className={titleClasses}>{title}</h1>
                 <div className={styles.formRow}>
                     <AuthorizationForm isLoginMode={isLoginMode} onSubmit={handleSubmit}/>
