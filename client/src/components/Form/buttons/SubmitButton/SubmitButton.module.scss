@@ -13,6 +13,8 @@
   cursor: pointer;
   max-width: 1200px;
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 
   &:focus{
     outline: -webkit-focus-ring-color auto 1px;

@@ -27,17 +27,14 @@ function AuthorizationForm(props) {
         )
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = () => {
         switch (props.mode) {
             case AUTHORIZATION_MODE.LOGIN_MODE:
-                props.loginAction(values);
-                break;
+                return props.loginAction;
             case AUTHORIZATION_MODE.SIGN_UP_MODE:
-                props.signUpAction(values);
-                break;
+                return props.signUpAction;
         }
     };
-
 
     const renderSignUp = () => {
         return <React.Fragment>
@@ -94,24 +91,33 @@ function AuthorizationForm(props) {
         }
     };
 
+    const renderButtonContent = () => {
+        if (props.isFetching) {
+            return (
+                <div className={styles.spinnerContainer}>
+                    <Spinner/>
+                </div>
+            )
+        } else {
+            return props.submitButtonText
+        }
+    };
 
     return (
-        <div className={styles.formContainer}>
-            {
-                renderFields()
-            }
+        <div className={styles.formContainer}>{
+            renderFields()
+        }
             <div className={styles.fieldRow}>
                 <div className={styles.col}>
                     <div className={styles.fieldContainer}>
                         <SubmitButton onClick={props.handleSubmit(values => onSubmit(values))}>{
-                            props.submitButtonText
+                            renderButtonContent()
                         }</SubmitButton>
                     </div>
                 </div>
             </div>
         </div>
     )
-
 }
 
 

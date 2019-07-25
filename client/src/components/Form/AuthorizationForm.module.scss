@@ -1,6 +1,7 @@
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/variables";
 @import '../../../node_modules/bootstrap/scss/mixins';
+@import '../../commonStyles';
 
 
 /*
@@ -77,10 +78,20 @@ $container-max-widths: (
 
 
 .fieldCol {
-
   @include make-col(12);
   @include media-breakpoint-up(md) {
     @include make-col(6);
   }
+}
+.fieldCol:not {
 
+}
+
+.spinnerContainer{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  @include flex-container(center,center);
 }

@@ -16,11 +16,17 @@ export const loginActionCreator = (data) => {
     }
 };
 
-export const changeModeActionCreator = (data) => {
+export const changeModeToLoginActionCreator = () => {
 
     return {
-        type: ACTION_TYPES.CHANGE_AUTHORIZATION_MODE_ACTION,
-         data,
+        type: ACTION_TYPES.AUTHORIZATION_LOGIN_MODE_ACTION,
+    }
+};
+
+export const changeModeToSignUpActionCreator = () => {
+
+    return {
+        type: ACTION_TYPES.AUTHORIZATION_SIGN_UP_MODE_ACTION,
     }
 };
 
