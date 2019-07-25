@@ -110,7 +110,7 @@ function AuthorizationForm(props) {
             <div className={styles.fieldRow}>
                 <div className={styles.col}>
                     <div className={styles.fieldContainer}>
-                        <SubmitButton onClick={props.handleSubmit(values => onSubmit(values))}>{
+                        <SubmitButton isEnable={!props.isFetching} onClick={props.handleSubmit(onSubmit())}>{
                             renderButtonContent()
                         }</SubmitButton>
                     </div>
@@ -120,27 +120,21 @@ function AuthorizationForm(props) {
     )
 }
 
-
 const mapStateToProps = state => {
     const {user, error, isFetching} = state.authorizationReducer;
     const {mode, form} = state.authorizationModeReducer;
     return {user, error, isFetching, mode, ...form};
 };
 const mapDispatchToProps = (dispatch) => ({
-
     loginAction: (data) => dispatch(loginActionCreator(data)),
     signUpAction: (data) => dispatch(signUpActionCreator(data)),
-
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
         // a unique name for the form
         form: 'AuthorizationForm',
         enableReinitialize: true,
-    })(AuthorizationForm
-    ));
-
+    })(AuthorizationForm));
 
 

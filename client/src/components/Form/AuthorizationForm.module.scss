@@ -29,41 +29,18 @@ $container-max-widths: (
 );
 */
 
-.fieldContainer {
-  padding: 0 14px;
-  box-sizing: border-box;
-  width: 100%;
-}
+
 
 .formContainer {
   max-width: 555px;
   width: 100%;
   @include make-container();
+}
 
- /* @include make-col(1);
-
-  @include media-breakpoint-down(xs) {
-    @include make-col(11);
-  }
-
-  @include media-breakpoint-down(sm) {
-    @include make-col(8);
-  }
-
-  @include media-breakpoint-down(md) {
-    @include make-col(6);
-  }
-
-  @include media-breakpoint-down(lg) {
-    @include make-col(7);
-  }
-
-  @include media-breakpoint-down(xl) {
-    @include make-col(5);
-    max-width: 555px;
-
-  }*/
-
+.fieldContainer {
+  padding: 0 14px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .fieldRow {
@@ -73,19 +50,14 @@ $container-max-widths: (
 .col {
   @include make-col(12);
 }
-
-
-
-
 .fieldCol {
   @include make-col(12);
   @include media-breakpoint-up(md) {
     @include make-col(6);
   }
 }
-.fieldCol:not {
 
-}
+
 
 .spinnerContainer{
   position: absolute;
