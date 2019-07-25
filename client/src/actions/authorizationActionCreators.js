@@ -1,7 +1,8 @@
 import ACTION_TYPES from './actiontsTypes';
+import {AUTHORIZATION_MODE} from "../constants";
 
 
-export const singUpActionCreator = (data) => {
+export const signUpActionCreator = (data) => {
     return {
         type: ACTION_TYPES.USER_SIGN_UP_ACTION,
         data,
@@ -15,11 +16,11 @@ export const loginActionCreator = (data) => {
     }
 };
 
-export const modeActionCreator = (isLoginMode) => {
+export const changeModeActionCreator = (data) => {
 
     return {
         type: ACTION_TYPES.CHANGE_AUTHORIZATION_MODE_ACTION,
-        isLoginMode: isLoginMode,
+         data,
     }
 };
 

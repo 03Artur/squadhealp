@@ -1,4 +1,4 @@
-export const LOCAL_STORAGE_KEYS ={
+export const LOCAL_STORAGE_KEYS = {
     ACCESS_TOKEN_KEY: 'ACCESS_TOKEN_KEY',
     REFRESH_TOKEN_KEY: 'REFRESH_TOKEN_KEY',
 
@@ -10,6 +10,14 @@ export const AUTHORIZATION_MODE = {
 };
 
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
+
+export const PATH = {
+    HOME: '/',
+    LOGIN: '/login',
+    SIGN_UP: '/signup',
+    AUTHORIZATION: '/authorization',
+    ADMIN: '/admin',
+};
 
 export const ROLE = {
     GUEST: '0',

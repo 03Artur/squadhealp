@@ -2,96 +2,108 @@
 * REACT
 * */
 import React from 'react';
+
 /*
 * REACT, REACT-REDUX
 * */
 import {connect} from 'react-redux';
-import {loginActionCreator, singUpActionCreator, modeActionCreator} from "../../actions/authorizationActionCreators";
+import {changeModeActionCreator} from "../../actions/authorizationActionCreators";
 
 /*
 * COMPONENTS
 * */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
-import LoginForm from '../../components/Form/LoginForm';
-import SignUpForm from '../../components/Form/SignUpForm';
-import Spinner from '../../components/Spinner/Spinner';
+import AuthorizationForm from '../../components/Form/AuthorizationForm';
 
 /*
 * STYLES
 * */
 import styles from './AuthorizationPage.module.scss';
+
 /*
 * UTILS
 * */
-import PATHS from '../../constants/paths'
+import {AUTHORIZATION_MODE, PATH} from '../../constants';
 
-let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => {
-    if ((props.location.pathname === PATHS.LOGIN && !isLoginMode) || (props.location.pathname === PATHS.SIGN_UP && isLoginMode)) {
-        console.log("AuthorizationPage");
-        props.changeMode(props.location.pathname === PATHS.LOGIN);
+class AuthorizationPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.changeAuthorizationModeByLocation();
     }
 
+    changeAuthorizationModeByLocation = () => {
+        if (this.props.location.pathname === PATH.SIGN_UP && this.props.mode !== AUTHORIZATION_MODE.SIGN_UP_MODE) {
+            this.props.changeModeAction({
+                mode: AUTHORIZATION_MODE.SIGN_UP_MODE,
+                page: {
+                    pageTitle: 'Create an account',
+                    documentTitle: 'Sign Up',
+                },
+                form: {
+                    submitButtonText: "create account",
+                },
+                linkButton: {
+                    text: 'Login',
+                    to: PATH.LOGIN
+                }
+            })
+        } else if (this.props.location.pathname === PATH.LOGIN && this.props.mode !== AUTHORIZATION_MODE.LOGIN_MODE) {
+            this.props.changeModeAction({
+                mode: AUTHORIZATION_MODE.LOGIN_MODE,
+                page: {
+                    pageTitle: 'Login to your account',
+                    documentTitle: 'Login',
+                },
+                form: {
+                    submitButtonText: "Login",
+                },
+                linkButton: {
+                    text: 'Sign Up',
+                    to: PATH.SIGN_UP
+                },
+            })
+        }
+    };
 
-    let title = null;
-    let documentTitle = null;
-    let handleSubmit = null;
-    let AuthorizationForm = null
-    if (isLoginMode) {
-        documentTitle = 'Login';
-        title = 'login to your account';
-        handleSubmit = loginAction;
-        AuthorizationForm = LoginForm;
-    } else {
-
-        documentTitle = 'Sign up';
-        title = "create an account";
-        handleSubmit = signUpAction;
-        AuthorizationForm = SignUpForm;
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.changeAuthorizationModeByLocation()
     }
 
-    const logProps = () => {
-        if (props.user) {
-            props.history.push('/');
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextProps.user) {
+            nextProps.history.push(PATH.HOME);
+            return false;
         }
-    };
-    const renderSpinner = () => {
-        if(props.isFetching){
-            return (
-                <Spinner/>
-            )
-        }
-    };
+        return true;
+    }
 
-    const titleClasses = [styles.title, styles.titleField].join(' ');
-    return (
-        <div className={styles.page}>
-            <DocumentTitle title={documentTitle}/>
-            <div className={styles.myContainer}>
-                <AuthorizationHeader isLoginMode={isLoginMode}/>
-                <h1 className={titleClasses}>{title}</h1>
-                <div className={styles.formRow}>
-                    <AuthorizationForm isLoginMode={isLoginMode} onSubmit={handleSubmit}/>
+    render() {
+        this.titleClasses = [styles.title, styles.titleField].join(' ');
+        return (
+            <div className={styles.page}>
+                <DocumentTitle title={this.props.documentTitle}/>
+                <div className={styles.myContainer}>
+                    <AuthorizationHeader/>
+                    <h1 className={this.titleClasses}>{this.props.pageTitle}</h1>
+                    <div className={styles.formRow}>
+                        <AuthorizationForm/>
+                    </div>
                 </div>
             </div>
-            {
-                logProps()
-            }
-        </div>
-    );
+        );
+    }
+}
 
+const mapStateToProps = store => {
+    const {user, error, isFetching} = store.authorizationReducer;
+    const {page, mode} = store.authorizationModeReducer;
+    return {user, error, isFetching, mode, ...page};
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    loginAction: (data) => dispatch(loginActionCreator(data)),
-    signUpAction: (data) => dispatch(singUpActionCreator(data)),
-
+    changeModeAction: (data) => dispatch(changeModeActionCreator(data)),
 });
-
-const mapStateToProps = state => {
-    const {user, error, isFetching} = state.authorizationReducer;
-    return {user, error, isFetching};
-};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);

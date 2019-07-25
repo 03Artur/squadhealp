@@ -1,12 +1,14 @@
 import {combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import authorizationReducer from './authorizationReducers';
+import authorizationReducer from './authorizationReducer';
+import authorizationModeReducer from './authorizationModeReducer';
 import {signUpFormReducer} from './formReducers'
 import userReducer from './userReducers'
 
 
 const appReducer = combineReducers({
     authorizationReducer,
+    authorizationModeReducer,
     signUpFormReducer,
     userReducer,
     form: formReducer,

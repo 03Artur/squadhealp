@@ -10,7 +10,7 @@ class AdminPage extends React.Component {
     }
 
     setQueryString = () => {
-        this.props.location.search = queryString.stringify(props.query);
+        this.props.location.search = queryString.stringify(this.props.query);
     };
     componentDidMount() {
 
@@ -27,9 +27,9 @@ class AdminPage extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispaths) => ({
-    getUsers: () => dispaths(getUsersActionCreator()),
-    changeLimit: (limit) => dispaths(getUsersLimitChangeActionCreator(limit)),
+const mapDispatchToProps = (dispatch) => ({
+    getUsers: () => dispatch(getUsersActionCreator()),
+    changeLimit: (limit) => dispatch(getUsersLimitChangeActionCreator(limit)),
 });
 
 const mapStateToProps = store => {

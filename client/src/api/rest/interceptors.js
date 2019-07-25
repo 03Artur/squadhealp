@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {refreshTokens} from './authorizationController'
 import history from '../../history';
-import PATH from './../../constants/paths';
-import {LOCAL_STORAGE_KEYS} from "../../constants";
+
+import {LOCAL_STORAGE_KEYS, PATH} from "../../constants";
 
 axios.interceptors.request.use(config => {
     const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);

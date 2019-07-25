@@ -6,7 +6,7 @@ import React from 'react';
 * REACT, REACT-REDUX
 * */
 import {connect} from 'react-redux';
-import {loginActionCreator, singUpActionCreator, modeActionCreator} from "../../actions/authorizationActionCreators";
+import {loginActionCreator, signUpActionCreator, modeActionCreator} from "../../actions/authorizationActionCreators";
 
 /*
 * COMPONENTS
@@ -21,12 +21,12 @@ import styles from './AuthorizationPage.module.scss';
 /*
 * UTILS
 * */
-import PATHS from '../../constants/paths'
+import {PATH} from '../../constants'
 
 let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => {
-    if ((props.location.pathname === PATHS.LOGIN && !isLoginMode) || (props.location.pathname === PATHS.SIGN_UP && isLoginMode)) {
+    if ((props.location.pathname === PATH.LOGIN && !isLoginMode) || (props.location.pathname === PATH.SIGN_UP && isLoginMode)) {
         console.log("AuthorizationPage");
-        props.changeMode(props.location.pathname === PATHS.LOGIN);
+        props.changeAuthorizationModeByLocation(props.location.pathname === PATH.LOGIN);
     }
 
 
@@ -74,7 +74,7 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
 
 const mapDispatchToProps = (dispatch) => ({
     loginAction: (data) => dispatch(loginActionCreator(data)),
-    signUpAction: (data) => dispatch(singUpActionCreator(data)),
+    signUpAction: (data) => dispatch(signUpActionCreator(data)),
     changeMode: (isLoginMode) => dispatch(modeActionCreator(isLoginMode))
 
 });

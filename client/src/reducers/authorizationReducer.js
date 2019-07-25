@@ -3,7 +3,7 @@ import ACTION_TYPES from './../actions/actiontsTypes';
 
 const initialState = {
     user: null,
-    isFetching: false,
+    isFetching: true,
     error: null,
 };
 
