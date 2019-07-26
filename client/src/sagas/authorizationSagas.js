@@ -9,8 +9,12 @@ export function* loginUserSaga({data: user}) {
         const {data} = yield loginUser(user);
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
     } catch (e) {
-        console.log(e.response);
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e.response});
+        yield put({
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            }
+        });
     }
 }
 
@@ -20,6 +24,11 @@ export function* signUpUserSaga({data: user}) {
         const {data} = yield signUpUser(user);
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
     } catch (e) {
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e});
+        yield put({
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            }
+        });
     }
 }

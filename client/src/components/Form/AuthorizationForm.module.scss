@@ -4,6 +4,7 @@
 @import '../../commonStyles';
 
 
+
 /*
 $grid-columns:      12;
 $grid-gutter-width: 30px;
@@ -30,7 +31,6 @@ $container-max-widths: (
 */
 
 
-
 .formContainer {
   max-width: 555px;
   width: 100%;
@@ -50,6 +50,7 @@ $container-max-widths: (
 .col {
   @include make-col(12);
 }
+
 .fieldCol {
   @include make-col(12);
   @include media-breakpoint-up(md) {
@@ -58,12 +59,11 @@ $container-max-widths: (
 }
 
 
-
-.spinnerContainer{
+.spinnerContainer {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
-  @include flex-container(center,center);
+  @include flex-container(center, center);
 }

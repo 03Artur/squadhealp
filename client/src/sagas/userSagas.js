@@ -9,8 +9,12 @@ export function* getUsersSaga() {
         const {data} = yield getUsers();
         yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data});
     } catch (e) {
-        console.log(e.response);
-        yield put({type: ACTION_TYPE.GET_USERS_ERROR, error: e.response});
+        yield put({
+            type: ACTION_TYPE.GET_USERS_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            }
+        });
     }
 }
 

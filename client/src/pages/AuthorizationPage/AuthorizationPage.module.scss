@@ -9,11 +9,28 @@
   width: 100%;
   @include flex-container(center);
 
-  .sinnerContainer{
+  .errorContainer {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    @include flex-container(center, center);
+    flex-direction: column;
+
+
+
+    & * {
+      z-index: 9999;
+    }
+  }
+
+  .sinnerContainer {
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,8 +43,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
- /* max-width: 1200px;
-  width: 100%;*/
+  /* max-width: 1200px;
+   width: 100%;*/
   box-sizing: border-box;
   padding: 20px 0;
 
@@ -38,7 +55,8 @@
     @include make-container-max-widths();
   }
 }
-.formRow{
+
+.formRow {
   @include make-row();
   justify-content: center;
 }

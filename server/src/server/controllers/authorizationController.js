@@ -1,7 +1,7 @@
 // PACKAGES
 import jwt from 'jsonwebtoken';
 
-//DATA BASE THINGS
+//DATA BASE
 import {User, RefreshToken} from '../models';
 import db from '../models';
 
@@ -15,19 +15,14 @@ const sequelize = db.sequelize;
 export const loginUser = async (req, res, next) => {
     try {
         const user = req.user;
-
         let transaction = await sequelize.transaction();
-
         let refreshToken = await RefreshToken.create({
             tokenString: signToken(user, true),
             userId: user.id,
         }, {
             transaction
         });
-
-
         await transaction.commit();
-
         res.send({
             user,
             tokenPair: {
@@ -40,17 +35,12 @@ export const loginUser = async (req, res, next) => {
     }
 };
 
-
 export const signUpUser = async (req, res, next) => {
     try {
-
         let transaction = await sequelize.transaction();
-
         const user = await User.create(req.body, {
             transaction,
         });
-        console.log('1');
-
         if (!user) {
             next(new BadRequestError());
             return;
@@ -61,12 +51,7 @@ export const signUpUser = async (req, res, next) => {
         }, {
             transaction,
         });
-        console.log('2');
-
-
         await transaction.commit();
-        console.log('2');
-
         res.send({
             tokenPair: {
                 accessToken: signToken(user),
@@ -81,24 +66,18 @@ export const signUpUser = async (req, res, next) => {
 };
 
 export const updateRefreshToken = async (req, res, next) => {
-
     try {
-
         let transaction = await sequelize.transaction();
-
         let refreshToken = await RefreshToken.findOne({
             where: {
                 tokenString: req.body.refreshToken,
             },
             transaction,
         });
-
         if (!refreshToken) {
             next(new UnauthorizedError());
             return;
         }
-
-
         const user = await User.findByPk(refreshToken.userId, {
             transaction,
             attributes: {
@@ -110,10 +89,7 @@ export const updateRefreshToken = async (req, res, next) => {
         }, {
             transaction,
         });
-
-
         await transaction.commit();
-
         res.send({
             user,
             tokenPair: {
@@ -126,7 +102,6 @@ export const updateRefreshToken = async (req, res, next) => {
     }
 };
 
-
 function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
     return isRefreshToken ?
         jwt.sign({id, role, email, isBanned,}, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN})
@@ -134,17 +109,3 @@ function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
         jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
 }
 
-/*
-
-function createAccessToken({id, role, email, isBanned, rest}) {
-    return jwt.sign({
-        id,
-        role,
-        email,
-        isBanned,
-    }, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN});
-}
-
-function createRefreshToken({email, rest}) {
-    return jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
-}*/

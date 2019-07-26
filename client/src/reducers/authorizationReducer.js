@@ -5,11 +5,13 @@ const initialState = {
     user: null,
     isFetching: false,
     error: null,
+    isShowError: false,
 };
 
 export default function (state = initialState, action) {
 
     switch (action.type) {
+
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
             return {
                 ...state,
@@ -29,6 +31,13 @@ export default function (state = initialState, action) {
                 ...state,
                 isFetching: false,
                 error: action.error,
+                isShowError: true,
+            }
+        }
+        case ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION:{
+            return {
+                ...state,
+                isShowError: false,
             }
         }
 

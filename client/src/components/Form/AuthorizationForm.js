@@ -4,20 +4,20 @@ import React from 'react';
 import Input from './inputs/Input/Input';
 import InputRadio from './inputs/InputRadio/InputRadio';
 import SubmitButton from './buttons/SubmitButton/SubmitButton';
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../Spinner/Spinner';
 //REDUX & FRIENDS
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-import {loginActionCreator, signUpActionCreator, modeActionCreator} from "../../actions/authorizationActionCreators";
+import {loginActionCreator, signUpActionCreator} from "../../actions/authorizationActionCreators";
 
 //UTILS
 import {AUTHORIZATION_MODE, ROLE} from '../../constants/index';
 import * as VALIDATION from '../../utils/reduxFormValuesValidations'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
+import Error from "../notification/Error/Error";
 
 function AuthorizationForm(props) {
-
     const renderField = (name, type, validate, component, placeholder, value = '') => {
         return (
             <div className={styles.fieldContainer}>
@@ -69,7 +69,7 @@ function AuthorizationForm(props) {
     };
 
     const renderLogin = () => {
-        return <React.Fragment>
+        return (
             <div className={styles.fieldRow}>
                 <div className={styles.col}>{
                     renderField('email', 'email', VALIDATION.emailValidation, Input, 'Email Address')
@@ -78,10 +78,9 @@ function AuthorizationForm(props) {
                     renderField('password', 'password', VALIDATION.passwordValidation, Input, 'Password')
                 }</div>
             </div>
-
-        </React.Fragment>
-
+        )
     };
+
     const renderFields = () => {
         switch (props.mode) {
             case AUTHORIZATION_MODE.LOGIN_MODE:
@@ -90,6 +89,8 @@ function AuthorizationForm(props) {
                 return renderSignUp();
         }
     };
+
+
 
     const renderButtonContent = () => {
         if (props.isFetching) {
@@ -104,9 +105,10 @@ function AuthorizationForm(props) {
     };
 
     return (
-        <div className={styles.formContainer}>{
-            renderFields()
-        }
+        <div className={styles.formContainer}>
+            {
+                renderFields()
+            }
             <div className={styles.fieldRow}>
                 <div className={styles.col}>
                     <div className={styles.fieldContainer}>
@@ -121,9 +123,9 @@ function AuthorizationForm(props) {
 }
 
 const mapStateToProps = state => {
-    const {user, error, isFetching} = state.authorizationReducer;
+    const {isFetching} = state.authorizationReducer;
     const {mode, form} = state.authorizationModeReducer;
-    return {user, error, isFetching, mode, ...form};
+    return {isFetching, mode, ...form};
 };
 const mapDispatchToProps = (dispatch) => ({
     loginAction: (data) => dispatch(loginActionCreator(data)),
