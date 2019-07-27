@@ -3,22 +3,33 @@
   position: absolute;
   top: calc( 100%);
   left: 0;
-  min-width: 100%;
+  min-width: 200px;
+  width: 100%;
+  max-width: 320px;
   background: white;
   text-align: left;
   box-sizing: border-box;
   padding: 5px;
   border: 1px solid #eee;
-width: auto;
 
 }
 .menuItem{
+  display: block;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*
   @include flex-container(flex-start,center);
+  */
   padding: 0 15px;
+  box-sizing: border-box;
+
   &:hover{
     background-color:#f5f5f5 ;
     color: #262626;
   }
-  min-height: 30px;
+  height: 30px;
+  span{
+    vertical-align: middle;
+  }
 }

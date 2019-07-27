@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {Component, } from 'react';
+import React, {Component,} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -16,18 +16,28 @@ import DropDownMenu from './DropDownMenu/DropDownMenu'
 import UserIcon from "./UserIcon/UserIcon";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 /*
 * Styles
 * */
-import styles from './UserItem.module.scss';
+import styles from './Nav.scss';
 
-class UserItem extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isMenuOpen: false,
             chevron: faChevronDown,
-            menuItems: [{text: 'View Dashboard',onClick: ()=>{}},{text: 'My Account',onClick: ()=>{}},{text: 'Logout',onClick: ()=>{}},]
+            menuItems: [{
+                text: 'View Dashboard View Dashboard View Dashboard View Dashboard', onClick: () => {
+                }
+            }, {
+                text: 'My Account', onClick: () => {
+                }
+            }, {
+                text: 'Logout', onClick: () => {
+                }
+            },]
         };
         this.toggleContainer = React.createRef();
     }
@@ -58,31 +68,38 @@ class UserItem extends Component {
             )
         }
     };
-     getChevronClassName = () => {
-         const classNames =[styles.chevron];
-         if(!this.state.isMenuOpen){
-             classNames.push(styles.bottom);
-         }
-         return classNames.join(' ')
-     }
+    getChevronClassName = () => {
+        const classNames = [styles.chevron];
+        if (!this.state.isMenuOpen) {
+            classNames.push(styles.bottom);
+        }
+        return classNames.join(' ')
+    };
 
     render() {
         return (
 
-            <li onClick={this.onClickHandle} ref={this.toggleContainer} className={styles.container}>
-                <UserIcon className={styles.userIcon}/>
-                <span>{`Hi, ${this.props.user.firstName} `}<span className={this.getChevronClassName()}/> </span>
+            <div onClick={this.onClickHandle} className={styles.container}>
+                <div className={styles.item} ref={this.toggleContainer}>
+                    <UserIcon className={styles.userIcon}/>
+                    <span className={styles.greeting}>{`Hi, ${this.props.user.firstName} `}<FontAwesomeIcon
+                        icon={this.state.chevron}/> </span>
+
+                </div>
+                <div className={styles.item}>
+                    <FontAwesomeIcon icon={faEnvelope}/>
+                </div>
                 {
                     this.renderMenu()
                 }
-            </li>
+            </div>
         );
     }
 }
 
-UserItem.propTypes = {};
+Nav.propTypes = {};
 
-UserItem.defaultPros = {};
+Nav.defaultPros = {};
 
 /*
 * React redux
@@ -93,4 +110,4 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserItem)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

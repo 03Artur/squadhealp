@@ -1,20 +1,38 @@
 @import '../../../../commonStyles';
 
-.container{
+.container {
   height: $mainHeaderHeight;
-  @include flex-container(center,center);
+  @include flex-container(center, center);
   border-left: $mainHeaderBorder;
   box-sizing: border-box;
-  padding: 0 15px;
   position: relative;
 
-  color:$mainHeaderColor;
+  color: $mainHeaderColor;
   font-weight: normal;
   font-size: 13.5px;
-}
-.userIcon{
+
+  .item {
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline;
+    padding: 0 15px;
+    border-right: $mainHeaderBorder;
+
+    .greeting {
+      margin-left: 3px;
+    }
+
+    * {
+      vertical-align: middle;
+    }
+  }
 
 }
+
+.userIcon {
+
+}
+
 .chevron::before {
   margin-top: 2px;
   border-style: solid;

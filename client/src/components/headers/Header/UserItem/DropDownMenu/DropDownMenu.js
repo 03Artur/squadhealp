@@ -22,7 +22,7 @@ import styles from './DropDownMenu.module.scss';
 const DropDownMenu = (props) => {
 
     const renderItems = () => {
-        return props.items.map(item => (<li className={styles.menuItem} onClick={item.onClick}>{item.text}</li>))
+        return props.items.map(item => (<li className={styles.menuItem} onClick={item.onClick}> <span>{item.text}</span></li>))
     };
 
     return (

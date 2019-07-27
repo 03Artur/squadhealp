@@ -14,7 +14,7 @@ import {connect} from 'react-redux';
 * */
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPhone} from '@fortawesome/free-solid-svg-icons';
-import UserItem from "./UserItem/UserItem";
+import UserItem from "./UserItem/Nav";
 /*
 * Styles
 * */
@@ -37,7 +37,7 @@ const Header = (props) => {
                             <a href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER}</a>
                         </div>
                     </div>
-                    <div className={styles.col}>
+                    <div className={[styles.col,styles.userItemContainer].join(' ')}>
                         <UserItem/>
                     </div>
                 </div>
