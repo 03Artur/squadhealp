@@ -2,10 +2,7 @@ import ACTION_TYPES from './../actions/actiontsTypes';
 
 
 const initialState = {
-    user: {
-        firstName: "Test",
-        lastName: 'MacTest',
-    },
+    user:null,
     isFetching: false,
     error: null,
     isShowError: false,

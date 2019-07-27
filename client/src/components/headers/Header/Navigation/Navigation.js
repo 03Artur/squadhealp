@@ -3,7 +3,7 @@
 * */
 import React, {Component,} from 'react';
 import PropTypes from 'prop-types';
-
+import {Link} from "react-router-dom";
 /*
 * Redux & friends
 * */
@@ -13,16 +13,18 @@ import {connect} from 'react-redux';
 * Components
 * */
 import DropDownMenu from './DropDownMenu/DropDownMenu'
-import UserIcon from "./UserIcon/UserIcon";
+import UserIcon from "./UserItem/UserIcon/UserIcon";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 /*
 * Styles
 * */
-import styles from './Nav.scss';
+import styles from './Navigation.module.scss';
+import {PATH} from "../../../../constants";
 
-class Nav extends Component {
+class Navigation extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -56,11 +58,13 @@ class Nav extends Component {
             chevron: currentState.isMenuOpen ? faChevronDown : faChevronUp
         }))
     };
+
     onClickOutsideHandler = e => {
         if (this.state.isMenuOpen && !this.toggleContainer.current.contains(e.target)) {
             this.setState({isMenuOpen: false, chevron: faChevronDown});
         }
     };
+
     renderMenu = () => {
         if (this.state.isMenuOpen) {
             return (
@@ -68,38 +72,52 @@ class Nav extends Component {
             )
         }
     };
-    getChevronClassName = () => {
-        const classNames = [styles.chevron];
-        if (!this.state.isMenuOpen) {
-            classNames.push(styles.bottom);
+    renderNavItems = () => {
+        if (this.props.user) {
+            return (
+                <React.Fragment>
+                    <div className={styles.item} ref={this.toggleContainer}>
+                        <UserIcon/>
+                        <span className={styles.greeting}>
+                        {`Hi, ${this.props.user.firstName} `}<FontAwesomeIcon
+                            icon={this.state.chevron}/>
+                    </span>
+                    </div>
+                    {
+                        this.renderMenu()
+                    }
+                    <div className={styles.item}>
+                        <FontAwesomeIcon icon={faEnvelope}/>
+                    </div>
+
+                </React.Fragment>
+            )
+        } else {
+            return (
+                <React.Fragment>
+                    <div className={styles.item}><Link to={PATH.LOGIN}>Login</Link></div>
+                    <div className={styles.item}><Link to={PATH.SIGN_UP}>Sign up</Link></div>
+                </React.Fragment>
+
+            )
         }
-        return classNames.join(' ')
     };
+
 
     render() {
         return (
-
-            <div onClick={this.onClickHandle} className={styles.container}>
-                <div className={styles.item} ref={this.toggleContainer}>
-                    <UserIcon className={styles.userIcon}/>
-                    <span className={styles.greeting}>{`Hi, ${this.props.user.firstName} `}<FontAwesomeIcon
-                        icon={this.state.chevron}/> </span>
-
-                </div>
-                <div className={styles.item}>
-                    <FontAwesomeIcon icon={faEnvelope}/>
-                </div>
+            <div className={styles.container} onClick={this.onClickHandle}>
                 {
-                    this.renderMenu()
+                    this.renderNavItems()
                 }
             </div>
         );
     }
 }
 
-Nav.propTypes = {};
+Navigation.propTypes = {};
 
-Nav.defaultPros = {};
+Navigation.defaultPros = {};
 
 /*
 * React redux
@@ -108,6 +126,5 @@ const mapStateToProps = store => {
     const {user} = store.authorizationReducer;
     return {user};
 };
-const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default connect(mapStateToProps)(Navigation)
