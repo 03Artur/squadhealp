@@ -3,6 +3,7 @@ export const LOCAL_STORAGE_KEYS = {
     REFRESH_TOKEN_KEY: 'REFRESH_TOKEN_KEY',
 
 };
+export const PHONE_NUMBER = '(877)\u00A0355-3585';
 
 export const AUTHORIZATION_MODE = {
     LOGIN_MODE: 'LOGIN_MODE',

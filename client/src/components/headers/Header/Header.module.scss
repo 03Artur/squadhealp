@@ -1,1 +1,50 @@
+@import '../../../commonStyles';
+
+.header {
+  border-bottom: $mainHeaderBorder;
+  margin-bottom: 13px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  flex-grow: 1;
+  @include flex-container(center, center);
+}
+
+.contactDetails {
+
+  padding: 0 15px;
+  border-left: $mainHeaderBorder;
+  border-right: $mainHeaderBorder;
+  height: $mainHeaderHeight;
+  @include flex-container(center, center);
+
+  .icon {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    width: 11px;
+    margin-right: 10px;
+  }
+}
+
+.col {
+  @include flex-container(center, center);
+  height: $mainHeaderHeight;
+  box-sizing: border-box;
+  padding: 0 15px;
+  flex-grow: 1;
+
+}
+
+
 

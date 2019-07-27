@@ -2,7 +2,10 @@ import ACTION_TYPES from './../actions/actiontsTypes';
 
 
 const initialState = {
-    user: null,
+    user: {
+        firstName: "Test",
+        lastName: 'MacTest',
+    },
     isFetching: false,
     error: null,
     isShowError: false,
@@ -34,7 +37,7 @@ export default function (state = initialState, action) {
                 isShowError: true,
             }
         }
-        case ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION:{
+        case ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION: {
             return {
                 ...state,
                 isShowError: false,

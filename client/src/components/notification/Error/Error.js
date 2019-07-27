@@ -4,7 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+/*
+* COMPONENTS
+* */
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCoffee, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 

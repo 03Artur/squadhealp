@@ -1,0 +1,36 @@
+@import '../../../../commonStyles';
+
+.container{
+  height: $mainHeaderHeight;
+  @include flex-container(center,center);
+  border-left: $mainHeaderBorder;
+  box-sizing: border-box;
+  padding: 0 15px;
+  position: relative;
+
+  color:$mainHeaderColor;
+  font-weight: normal;
+  font-size: 13.5px;
+}
+.userIcon{
+
+}
+.chevron::before {
+  margin-top: 2px;
+  border-style: solid;
+  border-width: 0.10em 0.10em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.45em;
+}
+
+.chevron.bottom:before {
+  top: 0;
+  transform: rotate(135deg);
+}
