@@ -18,6 +18,7 @@ export const PATH = {
     SIGN_UP: '/signup',
     AUTHORIZATION: '/authorization',
     ADMIN: '/admin',
+    USERS: '/users'
 };
 
 export const ROLE = {

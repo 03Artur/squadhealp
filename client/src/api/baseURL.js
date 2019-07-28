@@ -9,7 +9,7 @@ export const userUrl = `${baseURL}/user`;
 export const usersUrl = `${baseURL}/users`;
 
 export const imagesURL = `${baseURL}/images`;
-export const userPicturesURL = `${imagesURL}/userPictures`;
+export const userPicturesURL = `${imagesURL}/user/userPicture`;
 
 export const defaultUserIcon = `${imagesURL}/icons/user.svg`;
 export const defaultUserIconMin = `${imagesURL}/icons/anonumous-min.png`;

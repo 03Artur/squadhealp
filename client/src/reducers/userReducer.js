@@ -1,5 +1,3 @@
-/* like mutation */
-import ACTION from '../actions/actiontsTypes';
 import ACTION_TYPES from '../actions/actiontsTypes';
 
 const initialState = {
@@ -19,6 +17,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: true,
+                error: null,
             }
         }
         case ACTION_TYPES.GET_USERS_RESPONSE: {
@@ -41,6 +40,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 query: {
+                    ...state.query,
                     offset: action.limit
                 }
             }
@@ -48,8 +48,6 @@ export default (state = initialState, action) => {
         default: {
             return state;
         }
-
-
     }
 
 

@@ -7,11 +7,12 @@ import PropTypes from 'prop-types';
 * Redux & friends
 * */
 import {connect} from 'react-redux';
+import {updateUserActionCreator} from '../../../actions/userActionCreators';
 
 /*
 * Components
 * */
-import Picture from './Picture/Picture'
+import Picture from './Picture/Picture';
 /*
 * Styles
 * */
@@ -19,14 +20,17 @@ import styles from './UserItem.module.scss';
 
 const UserItem = ({user, ...props}) => {
 
+    const classNamesCombineString = [styles.container, props.className].join(' ');
 
     return (
         <Fragment>
-            <div className={styles.container}>
+            <div className={classNamesCombineString}>
                <Picture src={user.profilePicture}/>
-                <div>
-
+                <div className={styles.fullName}>{
+                 `${user.firstName} ${user.lastName}`
+                }
                 </div>
+
             </div>
         </Fragment>
     )
@@ -43,12 +47,15 @@ UserItem.propTypes = {
         isBanned: PropTypes.bool.isRequired,
         isActive: PropTypes.bool,
 
-    })
+    }),
+    className: PropTypes.string,
 };
 
 
 const mapStateToProps = store => ({});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    updateUserAction: (id,data) => dispatch(updateUserActionCreator(id, data))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserItem)

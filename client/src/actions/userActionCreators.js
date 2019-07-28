@@ -6,26 +6,28 @@ export const getUsersActionCreator = () => {
     }
 };
 
-export const updateUserActionCreator = (user) => {
+export const getUserActionCreator = (id) => {
+    return {
+        type: ACTION_TYPES.GET_USER_ACTION,
+        id,
+    }
+};
+
+export const updateUserActionCreator = (id, user) => {
     return {
         type: ACTION_TYPES.UPDATE_USER_ACTION,
         user,
+        id,
     }
 };
 
-export const deleteUserActionCreator = (user) => {
+export const deleteUserActionCreator = (id) => {
     return {
         type: ACTION_TYPES.DELETE_USER_ACTION,
-        user,
+        id,
     }
 };
 
-export const getUserActionCreator = (userId) => {
-    return {
-        type: ACTION_TYPES.GET_USER_ACTION,
-        userId,
-    }
-};
 
 export const getUsersLimitChangeActionCreator = (limit) => {
     return {
