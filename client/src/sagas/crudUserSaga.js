@@ -10,6 +10,7 @@ export function* getUsersSaga() {
     try {
         const {data} = yield userController.getUsers();
         console.log(data);
+
         yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data.rows,count:data.count});
     } catch (e) {
         yield put({

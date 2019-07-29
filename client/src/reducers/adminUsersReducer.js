@@ -9,7 +9,7 @@ const initialState = {
     isFetching: false,
     error: null,
     query: {
-        limit: 10,
+        limit: 20,
         offset: 0,
 
     },
@@ -82,6 +82,8 @@ export default (state = initialState, action) => {
             }
         }
         default: {
+            history.push({search: queryString.stringify(state.query)});
+
             return state;
         }
     }

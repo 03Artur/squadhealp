@@ -13,6 +13,7 @@ import history from './history';
 * CONSTANTS IMPORT
 * */
 import {PATH} from './constants';
+import Test from "./pages/TestPage/TestPage";
 /*
 * COMPONENTS IMPORT
 * */
@@ -30,6 +31,7 @@ const App = (props) => (
                 <Route path={PATH.LOGIN} render={(props) => <AuthorizationPage {...props}/>}/>
                 <Route path={PATH.SIGN_UP} render={(props) => <AuthorizationPage {...props}/>}/>
                 <Route path={PATH.ADMIN} render={(props) => <AdminPage {...props}/>}/>
+                <Route path={'/test'} render={(props) => <Test {...props}/>}/>
             </Switch>
         </Suspense>
     </Router>
