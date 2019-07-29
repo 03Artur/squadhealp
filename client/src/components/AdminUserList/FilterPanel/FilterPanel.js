@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 /*
 * tyles
 * */
-import styles from './Template.module.scss';
+import styles from './FilterPanel.scss';
 
 /*
 * UTILS
@@ -25,7 +25,7 @@ import styles from './Template.module.scss';
 
 
 
-const Template = (props) => {
+const FilterPanel = (props) => {
 
 
     return (
@@ -35,11 +35,11 @@ const Template = (props) => {
     )
 };
 
-Template.propTypes = {
+FilterPanel.propTypes = {
 
 };
 
-Template.defaultPros = {
+FilterPanel.defaultPros = {
 
 };
 
@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Template)
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)

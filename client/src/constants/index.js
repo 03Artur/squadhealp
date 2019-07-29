@@ -20,10 +20,16 @@ export const PATH = {
     ADMIN: '/admin',
     USERS: '/users'
 };
-
 export const ROLE = {
     GUEST: '0',
     BUYER: '1',
     CREATIVE: '2',
     ADMIN: '7',
 };
+export const ROLE_STRING = new Map([
+    [ROLE.ADMIN, 'admin'],
+    [ROLE.CREATIVE, 'creative'],
+    [ROLE.BUYER, 'buyer'],
+
+]);
+

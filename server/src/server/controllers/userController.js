@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import {User, RefreshToken} from '../models';
 import createToken from '../middlewares/tokens/createToken'
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../utils/constants";
@@ -15,21 +16,25 @@ export const createUser = async (req, res, next) => {
     }
 };
 
-export const getAllUsers = async (req, res, next) => {
+export const findAndCountAllUsers = async (req, res, next) => {
     try {
-        const {limit, offset} = req.query;
-        const users = await User.findAll({
+        console.log("QUERY: ", req.query);
+        const query = req.query;
+        const result = await User.findAndCountAll({
+            order: [['id', 'ASC']],
             attributes: {exclude: ['password']},
-            limit,
-            offset,
+            limit: query.limit,
+            offset: query.offset,
+
+
         });
-        if (!users) {
+        if (!result) {
             next(new NotFoundError("Users not found"));
             return
         }
-        res.send(users);
+        res.send(result);
     } catch (e) {
-        next(e)
+        next(new BadRequestError())
     }
 };
 
@@ -51,12 +56,14 @@ export const getUserById = async (req, res, next) => {
 
 export const updateUserById = async (req, res, next) => {
     try {
-        const result = await User.update(req.body, {
-            where: {
-                id: req.params.id,
-            },
-
+        const user = await User.findByPk(parseInt(req.params.id), {
+            attributes: {exclude: ['password']}
         });
+
+        if (!user) {
+            next(new NotFoundError);
+        }
+        const result = await user.update(req.body);
         res.send(result);
     } catch (e) {
         next(e);

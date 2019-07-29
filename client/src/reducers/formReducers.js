@@ -6,7 +6,7 @@ const initialState = {
 };
 
 
-export const signUpFormReducer = (state = initialState, action)=>{
+export const authorizationFormReducer = (state = initialState, action)=>{
 
     return state;
 

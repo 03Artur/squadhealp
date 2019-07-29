@@ -9,18 +9,18 @@ export function* getUsersSaga() {
     yield put({type: ACTION_TYPE.GET_USERS_REQUEST});
     try {
         const {data} = yield userController.getUsers();
-        yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data});
+        console.log(data);
+        yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data.rows,count:data.count});
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.GET_USERS_ERROR, error: {
-                status: e.response.status,
-                message: e.response.data,
-            }
+            type: ACTION_TYPE.GET_USERS_ERROR, error:  e.response,
+
+
         });
     }
 }
 
-export function* createUserSaga(user) {
+export function* createUserSaga({user}) {
     yield put({type: ACTION_TYPE.CREATE_USER_REQUEST});
     try {
         const {data} = yield userController.createUser(user);
@@ -51,10 +51,14 @@ export function* getUserSaga(id) {
 }
 
 
-export function* updateUserSaga(id, user) {
+export function* updateUserSaga({id, user}) {
     yield put({type: ACTION_TYPE.UPDATE_USER_REQUEST});
     try {
+        console.log(id,user);
+
         const {data} = yield userController.updateUserById(id, user);
+        console.log(data);
+
         yield put({type: ACTION_TYPE.UPDATE_USER_RESPONSE, user: data});
     } catch (e) {
         yield put({
@@ -66,7 +70,7 @@ export function* updateUserSaga(id, user) {
     }
 }
 
-export function* deleteUserSaga(id) {
+export function* deleteUserSaga({id}) {
     yield put({type: ACTION_TYPE.DELETE_USER_REQUEST});
     try {
         const {data} = yield userController.deleteUserById(id);

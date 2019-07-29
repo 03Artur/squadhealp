@@ -5,7 +5,12 @@ export const getUsersActionCreator = () => {
         type: ACTION_TYPES.GET_USERS_ACTION,
     }
 };
-
+export const setQueryStringActionCreator = (query) => {
+    return {
+        type: ACTION_TYPES.SET_USERS_QUERY_STRING_ACTION,
+        query,
+    }
+};
 export const getUserActionCreator = (id) => {
     return {
         type: ACTION_TYPES.GET_USER_ACTION,

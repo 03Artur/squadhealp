@@ -17,22 +17,36 @@ import Picture from './Picture/Picture';
 * Styles
 * */
 import styles from './UserItem.module.scss';
+import {ROLE_STRING} from "../../../constants";
 
 const UserItem = ({user, ...props}) => {
-
-    const classNamesCombineString = [styles.container, props.className].join(' ');
-
+    const classNames = [styles.container, props.className];
+    if (user.isBanned) {
+        classNames.push(styles.banned);
+    }
+    const classNamesCombineString = classNames.join(' ');
+    const banClick = () => {
+        props.updateUserAction(user.id, {isBanned: !user.isBanned})
+    };
     return (
-        <Fragment>
-            <div className={classNamesCombineString}>
-               <Picture src={user.profilePicture}/>
+        <div className={classNamesCombineString}>
+            <Picture src={user.profilePicture}/>
+            <div className={styles.infoContainer}>
                 <div className={styles.fullName}>{
-                 `${user.firstName} ${user.lastName}`
+                    `${user.firstName} ${user.lastName}`
                 }
                 </div>
-
+                <div>{
+                    user.email
+                }</div>
+                <div>{
+                    ROLE_STRING.get(`${user.role}`)
+                }</div>
+                <div onClick={banClick} className={styles.banButton}>{
+                    user.isBanned?'to unban':'to ban'
+                }</div>
             </div>
-        </Fragment>
+        </div>
     )
 };
 UserItem.propTypes = {
@@ -55,7 +69,7 @@ UserItem.propTypes = {
 const mapStateToProps = store => ({});
 
 const mapDispatchToProps = dispatch => ({
-    updateUserAction: (id,data) => dispatch(updateUserActionCreator(id, data))
+    updateUserAction: (id, data) => dispatch(updateUserActionCreator(id, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserItem)

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 * Redux & friends
 * */
 import {connect} from 'react-redux';
-import {getUsersActionCreator} from '../../actions/userActionCreators';
+import {getUsersActionCreator, setQueryStringActionCreator} from '../../actions/userActionCreators';
 
 /*
 * Styles
@@ -17,19 +17,52 @@ import styles from './AdminUserList.module.scss';
 
 /*UTILS*/
 import queryString from 'query-string';
+/*
+* COMPONENTS
+* */
 import UserItem from "./UserItem/UserItem";
+import Spinner from "../Spinner/Spinner";
 
 
 class AdminUserList extends Component {
+    constructor(props) {
+        super(props);
 
-    componentDidMount() {
-        this.props.location.search = queryString.stringify(this.props.query);
-        this.props.getUsersAction()
+        if (this.props.location.search) {
+            this.props.setQueryStringAction(queryString.parse(props.location.search))
+        }
+
     }
 
+    loadUsers = () => {
+        this.props.getUsersAction();
+    };
+
+    componentDidMount() {
+        console.log(this.props.query);
+        this.loadUsers();
+        window.addEventListener('scroll', this.onScroll, false)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
+
+    onScroll = (e) => {
+        if ((this.props.count > this.props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
+            this.loadUsers();
+        }
+
+
+    };
+    renderSpinner = () => {
+        if (this.props.isFetching) {
+            return <Spinner/>
+        }
+    };
 
     renderUserItems = () => {
-        return this.props.users.map(user => (<UserItem className={styles.userItem} key={user.id} user={user}/>));
+        return this.props.users.map(user => (<UserItem key={user.id} user={user}/>));
     };
 
     render() {
@@ -38,10 +71,14 @@ class AdminUserList extends Component {
                 {
                     this.renderUserItems()
                 }
+                {
+                    this.renderSpinner()
+                }
             </div>
         )
     }
 }
+
 AdminUserList.propTypes = {};
 AdminUserList.defaultProps = {
     users: [],
@@ -49,13 +86,14 @@ AdminUserList.defaultProps = {
 
 const mapStateToProps = store => {
 
-    const data = store.userReducer;
+    const data = store.adminUsersReducer;
 
     return data;
 };
 
 const mapDispatchToProps = dispatch => ({
-    getUsersAction: () => dispatch(getUsersActionCreator())
+    getUsersAction: () => dispatch(getUsersActionCreator()),
+    setQueryStringAction: (query) => dispatch(setQueryStringActionCreator(query))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminUserList)
