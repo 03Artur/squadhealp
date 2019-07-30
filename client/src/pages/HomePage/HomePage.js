@@ -8,7 +8,6 @@ import DocumentTitle from 'react-document-title';
 import Header from "../../components/headers/Header/Header";
 
 function HomePage(props) {
-    console.log(props);
     return (
         <React.Fragment>
             <DocumentTitle title="Home"/>

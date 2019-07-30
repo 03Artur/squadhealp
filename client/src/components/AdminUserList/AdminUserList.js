@@ -1,7 +1,7 @@
 /*
 * React 
 * */
-import React, {Component, Fragment} from 'react';
+import React, {userState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -24,76 +24,86 @@ import UserItem from "./UserItem/UserItem";
 import Spinner from "../Spinner/Spinner";
 
 
-class AdminUserList extends Component {
-    constructor(props) {
-        super(props);
+function AdminUserList(props) {
 
-        if (this.props.location.search) {
-            this.props.setQueryStringAction(queryString.parse(props.location.search))
+    useEffect(() => {
+        if (props.location.search) {
+            props.setQueryStringAction(queryString.parse(props.location.search))
         }
+    }, []);
 
-    }
+    useEffect(() => {
+        props.history.push({search: queryString.stringify(props.query)});
+    }, [props.query]);
 
-    loadUsers = () => {
-        this.props.getUsersAction();
+    useEffect(() => {
+        if (props.users.length === 0) {
+            loadUsers();
+        }
+    }, [props.users]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll, false);
+        return () => {
+            window.removeEventListener('scroll', onScroll, false);
+        }
+    });
+
+    const loadUsers = () => {
+        props.getUsersAction();
     };
 
-    componentDidMount() {
-        console.log(this.props.query);
-        this.loadUsers();
-        window.addEventListener('scroll', this.onScroll, false)
-    }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.onScroll, false);
-    }
-
-    onScroll = (e) => {
-        if ((this.props.count > this.props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
-            this.loadUsers();
+    const onScroll = (e) => {
+        if ((props.count > props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
+            loadUsers();
         }
 
 
     };
-    renderSpinner = () => {
-        if (this.props.isFetching) {
+    const renderSpinner = () => {
+        if (props.isFetching) {
             return <Spinner/>
         }
     };
 
-    renderUserItems = () => {
-        return this.props.users.map(user => (<UserItem key={user.id} user={user}/>));
+    const renderUserItems = () => {
+        return props.users.map(user => (<UserItem key={user.id} user={user}/>));
     };
 
-    render() {
-        return (
-            <div className={styles.container}>
-                {
-                    this.renderUserItems()
-                }
-                {
-                    this.renderSpinner()
-                }
-            </div>
-        )
-    }
+
+    return (
+        <div className={styles.container}>
+            {
+                renderUserItems()
+            }
+            {
+                renderSpinner()
+            }
+        </div>
+    )
+
 }
 
 AdminUserList.propTypes = {};
+
 AdminUserList.defaultProps = {
+
     users: [],
+
 };
 
 const mapStateToProps = store => {
 
-    const data = store.adminUsersReducer;
+    return store.adminUsersReducer;
 
-    return data;
 };
 
 const mapDispatchToProps = dispatch => ({
+
     getUsersAction: () => dispatch(getUsersActionCreator()),
-    setQueryStringAction: (query) => dispatch(setQueryStringActionCreator(query))
+    setQueryStringAction: (query) => dispatch(setQueryStringActionCreator(query)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminUserList)

@@ -16,6 +16,16 @@ export const loginActionCreator = (data) => {
     }
 };
 
+export const getAuthorizedUserActionCreator = () => {
+    console.group("getAuthorizedUserActionCreator");
+    const action = {
+        type: ACTION_TYPES.GET_AUTHORIZED_USER,
+    };
+    console.log(action);
+    console.groupEnd();
+    return action;
+};
+
 export const changeModeToLoginActionCreator = () => {
 
     return {
@@ -30,7 +40,7 @@ export const changeModeToSignUpActionCreator = () => {
     }
 };
 
-export  const coverErrorActionCreator = () => {
+export const coverErrorActionCreator = () => {
     return {
         type: ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION,
     }

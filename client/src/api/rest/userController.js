@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './';
 import {usersUrl, userUrl} from "../baseURL";
 //users controller
 export const getUsers = () =>{console.log('Get all users!, ',usersUrl+window.location.search); return axios.get(usersUrl+window.location.search)};

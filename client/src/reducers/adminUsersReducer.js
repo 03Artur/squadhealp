@@ -9,14 +9,14 @@ const initialState = {
     isFetching: false,
     error: null,
     query: {
-        limit: 20,
+        limit: 10,
         offset: 0,
 
     },
 };
 
 export default (state = initialState, action) => {
-
+    console.log("Admin users reducer");
     switch (action.type) {
         case ACTION_TYPES.GET_USERS_REQUEST: {
             return {
@@ -39,7 +39,9 @@ export default (state = initialState, action) => {
                     offset: newUsers.length,
                 }
             };
+
             history.push({search: queryString.stringify(newState.query)})
+
             return newState;
         }
         case ACTION_TYPES.GET_USERS_ERROR: {
@@ -81,8 +83,11 @@ export default (state = initialState, action) => {
                 users: newUsers,
             }
         }
+
+
+
         default: {
-            history.push({search: queryString.stringify(state.query)});
+            /*history.push({search: queryString.stringify(state.query)});*/
 
             return state;
         }

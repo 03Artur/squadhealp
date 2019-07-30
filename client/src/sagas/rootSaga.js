@@ -1,6 +1,6 @@
 import {takeLatest} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
-import {loginUserSaga, signUpUserSaga} from './authorizationSagas';
+import {loginUserSaga, signUpUserSaga,getAuthorizedUserSaga} from './authorizationSagas';
 import * as userSagas from './crudUserSaga';
 
 function* rootSaga() {
@@ -9,6 +9,7 @@ function* rootSaga() {
     * */
     yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, loginUserSaga);
     yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, signUpUserSaga);
+    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, getAuthorizedUserSaga);
     /*
     * CRUD USERS SAGAS MIDDLEWARE
     * */

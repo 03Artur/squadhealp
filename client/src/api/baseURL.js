@@ -4,6 +4,7 @@ export const restURL = `${baseURL}`;
 export const adminUrl = `${baseURL}/admin`;
 export const loginURL = `${baseURL}/login`;
 export const signUpURL = `${baseURL}/signup`;
+export const authorizeUrl = `${baseURL}/authorize`;
 export const refreshTokensUrl = `${baseURL}/refresh`;
 export const userUrl = `${baseURL}/user`;
 export const usersUrl = `${baseURL}/users`;

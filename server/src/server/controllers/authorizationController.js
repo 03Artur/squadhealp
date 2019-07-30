@@ -7,7 +7,7 @@ import db from '../models';
 
 //UTILS
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../utils/constants";
-import {BadRequestError, UnauthorizedError} from '../errors'
+import {BadRequestError, UnauthorizedError, NotFoundError} from '../errors'
 
 //Sequelize instance
 const sequelize = db.sequelize;
@@ -64,6 +64,23 @@ export const signUpUser = async (req, res, next) => {
     }
 
 };
+export const getUserByAccessTokenPayload = async (req, res, next) => {
+    try {
+
+        let user = await User.findByPk(req.accessTokenPayload.id, {
+            attributes: {
+                exclude: ['password', 'createdAt', 'updatedAt'],
+            },
+        });
+        if (!user) {
+            next(new NotFoundError())
+
+        }
+        res.send(user);
+    } catch (e) {
+        next(new NotFoundError())
+    }
+};
 
 export const updateRefreshToken = async (req, res, next) => {
     try {
@@ -103,7 +120,7 @@ export const updateRefreshToken = async (req, res, next) => {
 };
 
 function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
-    return isRefreshToken ?
+    return !isRefreshToken ?
         jwt.sign({id, role, email, isBanned,}, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN})
         :
         jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});

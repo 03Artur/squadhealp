@@ -61,6 +61,8 @@ export default function (state = initialState, action) {
                     to: PATH.LOGIN
                 }
             };
+
+
         default:
             return state;
     }

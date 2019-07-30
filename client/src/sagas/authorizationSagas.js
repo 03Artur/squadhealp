@@ -1,6 +1,6 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
-import {signUpUser, loginUser} from '../api/rest/authorizationController';
+import {signUpUser, loginUser, getAuthorizedUser} from '../api/rest/authorizationController';
 
 export function* loginUserSaga({data: user}) {
 
@@ -32,3 +32,26 @@ export function* signUpUserSaga({data: user}) {
         });
     }
 }
+
+
+export function* getAuthorizedUserSaga() {
+    console.group('getAuthorizedUserSaga');
+    yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
+    try {
+        const {data} = yield getAuthorizedUser();
+        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
+        console.groupEnd();
+    } catch (e) {
+        yield put({
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            }
+        });
+        console.groupEnd();
+
+    }
+}
+
+
+

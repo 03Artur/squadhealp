@@ -21,7 +21,7 @@ const AdminPage = props => {
         </div>
     )
 
-}
+};
 
 
 export default AdminPage;

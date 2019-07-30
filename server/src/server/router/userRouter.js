@@ -6,11 +6,11 @@ import checkUserCrudPermission, {isItAdmin} from '../middlewares/permission/chec
 
 const router = express.Router();
 
-router.get('/users', /*isItAdmin,*/ findAndCountAllUsers);
+router.get('/users', isItAdmin, findAndCountAllUsers);
 
-router.post('/user', /*checkUserCrudPermission, validationCreateUser, hashPassword,*/ createUser);
-router.get('/user/:id', /*checkUserCrudPermission,*/ getUserById);
-router.put('/user/:id', /*checkUserCrudPermission, validationUpdateUser, hashPassword, */updateUserById);
-router.delete('/user/:id', /*checkUserCrudPermission,*/ deleteUserById);
+router.post('/user', checkUserCrudPermission, validationCreateUser, hashPassword, createUser);
+router.get('/user/:id', checkUserCrudPermission, getUserById);
+router.put('/user/:id', checkUserCrudPermission, validationUpdateUser, hashPassword, updateUserById);
+router.delete('/user/:id', checkUserCrudPermission, deleteUserById);
 
 module.exports = router;

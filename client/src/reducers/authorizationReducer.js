@@ -2,7 +2,7 @@ import ACTION_TYPES from './../actions/actiontsTypes';
 
 
 const initialState = {
-    user:null,
+    user: null,
     isFetching: false,
     error: null,
     isShowError: false,
@@ -40,7 +40,8 @@ export default function (state = initialState, action) {
                 isShowError: false,
             }
         }
-
+        case ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION:
+            return initialState;
         default: {
             return state;
         }

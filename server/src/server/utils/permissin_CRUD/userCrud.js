@@ -6,7 +6,7 @@ export const ROLE_CRUD_USER_PERMISSIONS = new Map([
         {
             self: [],
             other: new Map([
-                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN]],
+                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ]],
                 [ROLE.CREATIVE, []],
                 [ROLE.BUYER, []],
             ])
@@ -18,7 +18,7 @@ export const ROLE_CRUD_USER_PERMISSIONS = new Map([
         {
             self: Object.values(ROLE),
             other: new Map([
-                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN]],
+                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ]],
                 [ROLE.CREATIVE, []],
                 [ROLE.BUYER, []],
             ])
@@ -29,7 +29,7 @@ export const ROLE_CRUD_USER_PERMISSIONS = new Map([
         {
             self: [ROLE.BUYER, ROLE.CREATIVE],
             other: new Map([
-                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN]],
+                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER,]],
                 [ROLE.CREATIVE, []],
                 [ROLE.BUYER, []],
             ]),
@@ -41,7 +41,7 @@ export const ROLE_CRUD_USER_PERMISSIONS = new Map([
         {
             self: [ROLE.BUYER, ROLE.CREATIVE],
             other: new Map([
-                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN]],
+                [ROLE.ADMIN, [ROLE.CREATIVE, ROLE.BUYER,]],
                 [ROLE.CREATIVE, []],
                 [ROLE.BUYER, []],
             ]),

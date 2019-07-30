@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './';
 import { restURL } from '../baseURL';
 
 export const getGoods = () => axios.get(`${restURL}/goods`);
