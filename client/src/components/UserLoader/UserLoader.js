@@ -29,7 +29,7 @@ const UserLoader = (props) => {
             props.getAuthorizedUser()
         }
         console.groupEnd();
-    });
+    },[props.user]);
 
     return (
         props.children

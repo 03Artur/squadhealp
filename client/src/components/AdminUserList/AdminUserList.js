@@ -43,9 +43,9 @@ function AdminUserList(props) {
     }, [props.users]);
 
     useEffect(() => {
-        window.addEventListener('scroll', onScroll, false);
+        window.addEventListener('scroll', onScroll);
         return () => {
-            window.removeEventListener('scroll', onScroll, false);
+            window.removeEventListener('scroll', onScroll);
         }
     });
 

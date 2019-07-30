@@ -9,7 +9,7 @@ const initialState = {
     isFetching: false,
     error: null,
     query: {
-        limit: 10,
+        limit: 5,
         offset: 0,
 
     },

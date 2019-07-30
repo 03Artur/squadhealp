@@ -35,13 +35,14 @@ export function* signUpUserSaga({data: user}) {
 
 
 export function* getAuthorizedUserSaga() {
-    console.group('getAuthorizedUserSaga');
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield getAuthorizedUser();
+        console.group('getAuthorizedUserSaga');
         console.log(data);
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
         console.groupEnd();
+
+        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
     } catch (e) {
         yield put({
             type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {

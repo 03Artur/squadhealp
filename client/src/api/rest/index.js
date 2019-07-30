@@ -36,17 +36,12 @@ instance.interceptors.response.use(
         switch (status) {
             case 419: {
 
-                refreshTokens().then(_ => {
-                    console.group("After or before refresh tokens");
-                    console.groupEnd();
-                    return instance.request(err.config);
-                }).catch(e=>{
-                    return Promise.reject(e)
-                });
+                await refreshTokens();
 
+                return Promise.resolve( instance(err.config));
 
             }
-                break;
+
             case 401: {
                 removeTokens();
                 history.push(PATH.LOGIN);
