@@ -13,7 +13,7 @@ import styles from './Picture.module.scss';
 /*
 *Utils
 * */
-import {defaultUserIcon, imagesURL, userPicturesURL} from '../../../../api/baseURL'
+import {defaultUserIcon, userPicturesURL} from '../../../../api/baseURL'
 
 const Picture = (props) => {
 

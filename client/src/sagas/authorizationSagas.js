@@ -39,7 +39,8 @@ export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield getAuthorizedUser();
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
+        console.log(data);
+        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
         console.groupEnd();
     } catch (e) {
         yield put({

@@ -15,7 +15,9 @@ import {AUTHORIZATION_MODE, ROLE} from '../../constants/index';
 import * as VALIDATION from '../../utils/reduxFormValuesValidations'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
+/*
 import Error from "../notification/Error/Error";
+*/
 
 function AuthorizationForm(props) {
     const renderField = (name, type, validate, component, placeholder, value = '') => {
@@ -33,6 +35,8 @@ function AuthorizationForm(props) {
                 return props.loginAction;
             case AUTHORIZATION_MODE.SIGN_UP_MODE:
                 return props.signUpAction;
+            default:
+                break;
         }
     };
 
@@ -87,6 +91,8 @@ function AuthorizationForm(props) {
                 return renderLogin();
             case AUTHORIZATION_MODE.SIGN_UP_MODE:
                 return renderSignUp();
+            default:
+                break;
         }
     };
 

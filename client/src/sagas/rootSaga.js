@@ -1,6 +1,6 @@
-import {takeLatest} from 'redux-saga/effects';
+import {takeLatest, takeEvery} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
-import {loginUserSaga, signUpUserSaga,getAuthorizedUserSaga} from './authorizationSagas';
+import {loginUserSaga, signUpUserSaga, getAuthorizedUserSaga} from './authorizationSagas';
 import * as userSagas from './crudUserSaga';
 
 function* rootSaga() {
@@ -19,8 +19,8 @@ function* rootSaga() {
     * */
     yield takeLatest(ACTION_TYPES.CREATE_USER_ACTION, userSagas.createUserSaga);
     yield takeLatest(ACTION_TYPES.GET_USER_ACTION, userSagas.getUserSaga);
-    yield takeLatest(ACTION_TYPES.UPDATE_USER_ACTION, userSagas.updateUserSaga);
-    yield takeLatest(ACTION_TYPES.DELETE_USER_ACTION, userSagas.deleteUserSaga);
+    yield takeEvery(ACTION_TYPES.UPDATE_USER_ACTION, userSagas.updateUserSaga);
+    yield takeEvery(ACTION_TYPES.DELETE_USER_ACTION, userSagas.deleteUserSaga);
 }
 
 export default rootSaga;

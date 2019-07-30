@@ -17,10 +17,15 @@ export const loginUser = async (req, res, next) => {
         const user = req.user;
         let transaction = await sequelize.transaction();
         let refreshToken = await RefreshToken.create({
-            tokenString: signToken(user, true),
             userId: user.id,
+            tokenString: "null",
         }, {
-            transaction
+            transaction,
+        });
+        refreshToken = await refreshToken.update({
+            tokenString: jwt.sign({id: refreshToken.id}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
+        }, {
+            transaction,
         });
         await transaction.commit();
         res.send({
@@ -47,7 +52,12 @@ export const signUpUser = async (req, res, next) => {
         }
         let refreshToken = await RefreshToken.create({
             userId: user.id,
-            tokenString: signToken(user, true),
+            tokenString: "null",
+        }, {
+            transaction,
+        });
+        refreshToken = await refreshToken.update({
+            tokenString: jwt.sign({id: refreshToken.id}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
         }, {
             transaction,
         });
@@ -85,14 +95,9 @@ export const getUserByAccessTokenPayload = async (req, res, next) => {
 export const updateRefreshToken = async (req, res, next) => {
     try {
         let transaction = await sequelize.transaction();
-        let refreshToken = await RefreshToken.findOne({
-            where: {
-                tokenString: req.body.refreshToken,
-            },
-            transaction,
-        });
+        let refreshToken = await RefreshToken.findByPk(req.refreshTokenPayload.id);
         if (!refreshToken) {
-            next(new UnauthorizedError());
+            next(new BadRequestError());
             return;
         }
         const user = await User.findByPk(refreshToken.userId, {
@@ -102,13 +107,12 @@ export const updateRefreshToken = async (req, res, next) => {
             },
         });
         refreshToken = await refreshToken.update({
-            tokenString: signToken(user, true),
+            tokenString: jwt.sign({id: refreshToken.id}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
         }, {
             transaction,
         });
         await transaction.commit();
         res.send({
-            user,
             tokenPair: {
                 accessToken: signToken(user),
                 refreshToken: refreshToken.tokenString,

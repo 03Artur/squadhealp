@@ -12,12 +12,14 @@ import history from './history';
 /*
 * CONSTANTS IMPORT
 * */
-import {PATH, ROLE} from "./constants"
+import {PATH} from "./constants"
 import Test from "./pages/TestPage/TestPage";
 /*
 * COMPONENTS IMPORT
 * */
+/*
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+*/
 import UserLoader from "./components/UserLoader/UserLoader";
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));

@@ -9,8 +9,8 @@ export const refreshTokensUrl = `/refresh`;
 export const userUrl = `/user`;
 export const usersUrl = `/users`;
 
-export const imagesURL = `/images`;
-export const userPicturesURL = `/user/userPicture`;
+export const imagesURL = `${baseURL}/images`;
+export const userPicturesURL = `${imagesURL}/user/userPicture`;
 
 export const defaultUserIcon = `/icons/user.svg`;
 export const defaultUserIconMin = `${imagesURL}/icons/anonumous-min.png`;

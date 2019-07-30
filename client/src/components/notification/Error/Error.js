@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 * COMPONENTS
 * */
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCoffee, faTimesCircle} from '@fortawesome/free-regular-svg-icons';
+import { faTimesCircle} from '@fortawesome/free-regular-svg-icons';
 
 /*
 * Styles
@@ -20,7 +20,7 @@ const Error = ({message, ...props}) => {
     const classNamesCombineString = [styles.container, props.className].join(' ');
     return (
 
-        <div className={styles.container}><span>{
+        <div className={classNamesCombineString}><span>{
             message
         }</span>
         <FontAwesomeIcon onClick={props.onClick} className={styles.closeIcon} icon = {faTimesCircle}/>
