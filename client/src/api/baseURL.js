@@ -12,5 +12,5 @@ export const usersUrl = `/users`;
 export const imagesURL = `${baseURL}/images`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
 
-export const defaultUserIcon = `/icons/user.svg`;
+export const defaultUserIcon = `${imagesURL}/icons/user.svg`;
 export const defaultUserIconMin = `${imagesURL}/icons/anonumous-min.png`;
