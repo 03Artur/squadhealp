@@ -5,8 +5,13 @@ import history from '../../history';
 import {removeTokens} from '../../utils/localStorage'
 
 import {LOCAL_STORAGE_KEYS, PATH} from "../../constants";
+import {baseURL} from "../baseURL";
 
-axios.interceptors.request.use(config => {
+const instance = axios.create({
+    baseURL: baseURL,
+});
+
+instance.interceptors.request.use(config => {
     console.group("axios interceptor REQ");
     const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);
     console.log("access Token: ", accessToken);
@@ -21,7 +26,7 @@ axios.interceptors.request.use(config => {
     return Promise.reject(err);
 });
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
     response => {
         console.log('axios response interceptor good');
 
@@ -52,4 +57,4 @@ axios.interceptors.response.use(
         return Promise.reject(err)
     });
 
-export default axios;
+export default instance;
