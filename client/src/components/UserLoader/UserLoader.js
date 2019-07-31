@@ -23,12 +23,10 @@ import {LOCAL_STORAGE_KEYS} from "../../constants";
 const UserLoader = (props) => {
 
     useEffect(() => {
-        console.group('UserLoader useEffect: ');
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             console.log("нет пользователя и есть токен доступа в локальном хранилище");
             props.getAuthorizedUser()
         }
-        console.groupEnd();
     },[props.user]);
 
     return (

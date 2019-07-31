@@ -25,7 +25,6 @@ import {PATH} from '../../constants'
 
 let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => {
     if ((props.location.pathname === PATH.LOGIN && !isLoginMode) || (props.location.pathname === PATH.SIGN_UP && isLoginMode)) {
-        console.log("AuthorizationPage");
         props.changeAuthorizationModeByLocation(props.location.pathname === PATH.LOGIN);
     }
 

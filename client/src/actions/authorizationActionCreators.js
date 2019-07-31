@@ -21,12 +21,9 @@ export const logoutActionCreator = () => {
     }
 };
 export const getAuthorizedUserActionCreator = () => {
-    console.group("getAuthorizedUserActionCreator");
     const action = {
         type: ACTION_TYPES.GET_AUTHORIZED_USER,
     };
-    console.log(action);
-    console.groupEnd();
     return action;
 };
 

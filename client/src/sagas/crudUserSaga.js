@@ -4,12 +4,11 @@ import * as userController from '../api/rest/userController';
 
 
 
-export function* getUsersSaga() {
+export function* getUsersSaga({queryString}) {
 
     yield put({type: ACTION_TYPE.GET_USERS_REQUEST});
     try {
-        const {data} = yield userController.getUsers();
-        console.log(data);
+        const {data} = yield userController.getUsers(queryString);
 
         yield put({type: ACTION_TYPE.GET_USERS_RESPONSE, users: data.rows,count:data.count});
     } catch (e) {
@@ -55,10 +54,8 @@ export function* getUserSaga(id) {
 export function* updateUserSaga({id, user}) {
     yield put({type: ACTION_TYPE.UPDATE_USER_REQUEST});
     try {
-        console.log(id,user);
 
         const {data} = yield userController.updateUserById(id, user);
-        console.log(data);
 
         yield put({type: ACTION_TYPE.UPDATE_USER_RESPONSE, user: data});
     } catch (e) {

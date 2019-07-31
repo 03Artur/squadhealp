@@ -25,23 +25,6 @@ import Spinner from "../Spinner/Spinner";
 
 
 function AdminUserList(props) {
-
-    useEffect(() => {
-        if (props.location.search) {
-            props.setQueryStringAction(queryString.parse(props.location.search))
-        }
-    }, []);
-
-    useEffect(() => {
-        props.history.push({search: queryString.stringify(props.query)});
-    }, [props.query]);
-
-    useEffect(() => {
-        if (props.users.length === 0) {
-            loadUsers();
-        }
-    }, [props.users]);
-
     useEffect(() => {
         window.addEventListener('scroll', onScroll);
         return () => {
@@ -49,16 +32,22 @@ function AdminUserList(props) {
         }
     });
 
-    const loadUsers = () => {
-        props.getUsersAction();
-    };
+
+    useEffect(() => {
+        props.getUsersAction(props.history.location.search);
+    }, [props.location.search]);
+
+    useEffect(() => {
+        props.history.push({search: queryString.stringify(props.query)});
+    }, [props.query]);
 
 
     const onScroll = (e) => {
-        if ((props.count > props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
-            loadUsers();
-        }
 
+        if ((props.count > props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
+            props.setQueryStringAction();
+
+        }
 
     };
     const renderSpinner = () => {
@@ -101,8 +90,12 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => ({
 
-    getUsersAction: () => dispatch(getUsersActionCreator()),
-    setQueryStringAction: (query) => dispatch(setQueryStringActionCreator(query)),
+    getUsersAction: (queryString) => {
+        return dispatch(getUsersActionCreator(queryString))
+    },
+    setQueryStringAction: () => {
+        return dispatch(setQueryStringActionCreator())
+    },
 
 });
 

@@ -1,14 +1,15 @@
 import ACTION_TYPES from './actiontsTypes';
 
-export const getUsersActionCreator = () => {
+export const getUsersActionCreator = (queryString) => {
     return {
         type: ACTION_TYPES.GET_USERS_ACTION,
+        queryString,
     }
 };
-export const setQueryStringActionCreator = (query) => {
+export const setQueryStringActionCreator = () => {
     return {
         type: ACTION_TYPES.SET_USERS_QUERY_STRING_ACTION,
-        query,
+
     }
 };
 export const getUserActionCreator = (id) => {

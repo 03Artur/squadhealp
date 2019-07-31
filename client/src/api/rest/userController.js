@@ -1,7 +1,7 @@
 import axios from './';
 import {usersUrl, userUrl} from "../baseURL";
 //users controller
-export const getUsers = () =>{console.log('Get all users!, ',usersUrl+window.location.search); return axios.get(usersUrl+window.location.search)};
+export const getUsers = (queryString) =>{ return axios.get(usersUrl+queryString)};
 
 //single user controller
 export const createUser = (data) => axios.post(userUrl, data);

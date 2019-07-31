@@ -13,7 +13,6 @@ let count = 0;
 instance.interceptors.request.use(config => {
     console.log(++count);
     const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);
-    console.log(accessToken);
     if (config.headers.Authorization !== accessToken) {
         config.headers.Authorization = accessToken
     }
@@ -35,20 +34,14 @@ instance.interceptors.response.use(
 
         switch (status) {
             case 419: {
-
                 await refreshTokens();
-
                 return Promise.resolve( instance(err.config));
-
             }
-
             case 401: {
                 removeTokens();
                 history.push(PATH.LOGIN);
                 return Promise.reject(err)
-
             }
-
 
             default :
                 return Promise.reject(err);

@@ -18,7 +18,6 @@ export const createUser = async (req, res, next) => {
 
 export const findAndCountAllUsers = async (req, res, next) => {
     try {
-        console.log("QUERY: ", req.query);
 
 
         const query = req.query;
@@ -27,7 +26,6 @@ export const findAndCountAllUsers = async (req, res, next) => {
             attributes: {exclude: ['password']},
             limit: query.limit,
             offset: query.offset,
-            where: query.where?JSON.parse(query.where):undefined,
 
         });
         if (!result) {

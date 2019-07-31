@@ -10,7 +10,6 @@ const verifyToken = util.promisify(jwt.verify);
 export default async (req, res, next) => {
     try {
 
-        console.log('checkAccessToken');
         if (!req.headers.authorization) {
             next(new UnauthorizedError());
             return;

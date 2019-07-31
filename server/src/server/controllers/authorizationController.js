@@ -86,7 +86,6 @@ export const getUserByAccessTokenPayload = async (req, res, next) => {
             next(new NotFoundError())
 
         }
-        console.log(user)
         res.send(user);
     } catch (e) {
         next(new NotFoundError())
