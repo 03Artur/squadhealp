@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import config from './config';
+import config from './';
 import App from '../App';
 
 class Store extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            store: config(),
+            store: config,
         };
     }
 

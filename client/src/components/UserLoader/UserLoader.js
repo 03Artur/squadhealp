@@ -26,13 +26,14 @@ import styles from './UserLoader.module.scss';
 
 const UserLoader = (props) => {
 
+
     useEffect(() => {
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             props.getAuthorizedUser();
-            console.log("нет пользователя и есть токен доступа в локальном хранилище");
-
         }
-    },[]);
+    }, []);
+
+
 
 
     const renderSpinner = () => (
@@ -42,7 +43,7 @@ const UserLoader = (props) => {
     );
 
     const render = () => {
-        if (props.isFetching || !props.user ) {
+        if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             return renderSpinner();
         } else {
             return props.children;

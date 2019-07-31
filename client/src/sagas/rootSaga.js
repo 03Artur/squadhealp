@@ -9,7 +9,7 @@ function* rootSaga() {
     * */
     yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, loginUserSaga);
     yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, signUpUserSaga);
-    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, getAuthorizedUserSaga);
+    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, getAuthorizedUserSaga,);
     /*
     * CRUD USERS SAGAS MIDDLEWARE
     * */

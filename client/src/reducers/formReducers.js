@@ -1,8 +1,8 @@
-import {FORM_ROLE_VALUES} from "../constants";
+import {ROLE} from "../constants";
 
 
 const initialState = {
-  role: FORM_ROLE_VALUES.BUYER,
+  role: ROLE.BUYER,
 };
 
 

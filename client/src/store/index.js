@@ -7,12 +7,14 @@ import rootSaga from '../sagas/rootSaga';
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore() {
+
     const middleware = [
         sagaMiddleware,
     ];
 
     const store = createStore(combinedReducers, compose(applyMiddleware(...middleware)));
     sagaMiddleware.run(rootSaga, store.dispatch);
-    return store;
-}
+    export default store;
+
+
+

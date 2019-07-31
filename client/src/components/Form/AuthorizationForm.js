@@ -11,7 +11,7 @@ import {Field, reduxForm} from 'redux-form';
 import {loginActionCreator, signUpActionCreator} from "../../actions/authorizationActionCreators";
 
 //UTILS
-import {AUTHORIZATION_MODE, FORM_ROLE_VALUES} from '../../constants/index';
+import {AUTHORIZATION_MODE, ROLE} from '../../constants/index';
 import * as VALIDATION from '../../utils/reduxFormValuesValidations'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
@@ -62,11 +62,11 @@ function AuthorizationForm(props) {
                 }</div>
             </div>
             <div className={styles.fieldRow}>
-                <Field id='radioBuyer' name='role' component={InputRadio} type='radio' value={FORM_ROLE_VALUES.BUYER}
+                <Field id='radioBuyer' name='role' component={InputRadio} type='radio' value={ROLE.BUYER}
                        title="Join As a Buyer"/>
             </div>
             <div className={styles.fieldRow}>
-                <Field id='radioCreative' name='role' component={InputRadio} type='radio' value={FORM_ROLE_VALUES.CREATIVE}
+                <Field id='radioCreative' name='role' component={InputRadio} type='radio' value={ROLE.CREATIVE}
                        title="Join As a Creative"/>
             </div>
         </React.Fragment>

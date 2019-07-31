@@ -11,11 +11,11 @@ export default function (state = initialState, action) {
     switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
-
             return {
                 ...state,
                 isFetching: true,
                 error: null,
+
             }
         }
         case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
@@ -24,6 +24,7 @@ export default function (state = initialState, action) {
                 isFetching: false,
                 user: action.user,
                 error: null,
+
             }
         }
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {

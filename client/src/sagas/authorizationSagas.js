@@ -38,8 +38,8 @@ export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield getAuthorizedUser();
-
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
+
     } catch (e) {
         yield put({
             type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
@@ -49,6 +49,10 @@ export function* getAuthorizedUserSaga() {
         });
 
     }
+}
+export function* userLoaderRequestSaga() {
+    yield put
+
 }
 
 

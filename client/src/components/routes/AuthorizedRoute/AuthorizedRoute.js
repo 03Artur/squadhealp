@@ -13,7 +13,7 @@ import {connect} from 'react-redux';
 /*
 * UTILS
 * */
-import {PATH, FORM_ROLE_VALUES} from '../../../constants'
+import {PATH, ROLE} from '../../../constants'
 
 
 const AuthorizedRoute = ({redirectTo, user, ...props}) => {

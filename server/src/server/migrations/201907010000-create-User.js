@@ -1,4 +1,9 @@
 'use strict';
+const ROLE= {
+    BUYER: "BUYER",
+        CREATIVE: "CREATIVE",
+        ADMIN: "ADMIN",
+};
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('Users', {
@@ -33,13 +38,12 @@ module.exports = {
                 allowNull: true,
             },
             role: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: 0,
+                defaultValue: ROLE.BUYER,
                 validate: {
                     allowNull: false,
-                    max: 7,
-                    min: 0,
+                    isIn: [Object.values(ROLE)],
                 }
             },
             isActive: {

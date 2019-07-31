@@ -28,17 +28,16 @@ import styles from './AuthorizationPage.module.scss';
 /*
 * UTILS
 * */
-import {AUTHORIZATION_MODE, PATH, FORM_ROLE_VALUES} from '../../constants';
+import {AUTHORIZATION_MODE, PATH, ROLE} from '../../constants';
 
 const AuthorizationPage = (props) => {
 
 
-
-   /* useEffect(() => {
+    useEffect(() => {
         if (props.user) {
             props.history.push(PATH.HOME);
         }
-    }, [props.user]);*/
+    }, [props.user]);
 
     useEffect(() => {
         changeAuthorizationModeByLocation()
@@ -66,9 +65,7 @@ const AuthorizationPage = (props) => {
                 </div>
             )
         }
-
     };
-
 
     const titleClasses = [styles.title, styles.titleField].join(' ');
     return (

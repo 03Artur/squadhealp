@@ -1,10 +1,12 @@
+import {ROLE} from "../constants";
+
 const yup = require('yup');
 import {REGEXP} from '../regexp';
 
 const nameRule = yup.string().matches(REGEXP.NAME);
 const emailRule = yup.string().email();
 const passwordRule = yup.string().matches(REGEXP.PASSWORD);
-const roleRule = yup.number().min(0);
+const roleRule = yup.string().oneOf(Object.values(ROLE));
 
 
 export const createUserSchema = yup.object({

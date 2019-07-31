@@ -1,3 +1,5 @@
+import {ROLE} from "../utils/constants";
+
 const moment = require('moment');
 
 module.exports = (sequelize, DataTypes) => {
@@ -42,12 +44,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         role: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 0,
             validate: {
-                min: 0,
-                max: 7,
+                isIn: [Object.values(ROLE)],
             },
         },
         isActive: {
