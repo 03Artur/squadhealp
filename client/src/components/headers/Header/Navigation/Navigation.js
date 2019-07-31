@@ -66,7 +66,7 @@ Navigation.defaultPros = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {user} = store.authorizationReducer;
+    const {user} = store.authorization;
     return {user};
 };
 

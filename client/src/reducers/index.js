@@ -7,10 +7,10 @@ import adminUsersReducer from './adminUsersReducer'
 
 
 const appReducer = combineReducers({
-    authorizationReducer,
-    authorizationModeReducer,
-    authorizationFormReducer,
-    adminUsersReducer,
+    authorization: authorizationReducer,
+    authorizationMode: authorizationModeReducer,
+    authorizationForm: authorizationFormReducer,
+    adminUsers: adminUsersReducer,
     form: formReducer,
 });
 

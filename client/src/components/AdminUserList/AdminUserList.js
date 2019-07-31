@@ -84,7 +84,7 @@ AdminUserList.defaultProps = {
 
 const mapStateToProps = store => {
 
-    return store.adminUsersReducer;
+    return store.adminUsers;
 
 };
 

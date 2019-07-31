@@ -68,6 +68,7 @@ const AuthorizationPage = (props) => {
     };
 
     const titleClasses = [styles.title, styles.titleField].join(' ');
+
     return (
         <div className={styles.page}>
             <DocumentTitle title={props.documentTitle}/>
@@ -87,9 +88,9 @@ const AuthorizationPage = (props) => {
 };
 
 const mapStateToProps = store => {
-    const authorizationReducer = store.authorizationReducer;
-    const {page, mode} = store.authorizationModeReducer;
-    return {...authorizationReducer, mode, ...page};
+
+    const {page, mode} = store.authorizationMode;
+    return {...store.authorization, mode, ...page};
 };
 
 const mapDispatchToProps = (dispatch) => ({

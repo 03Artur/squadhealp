@@ -1,19 +1,23 @@
 import {takeLatest, takeEvery} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
-import {loginUserSaga, signUpUserSaga, getAuthorizedUserSaga} from './authorizationSagas';
+import * as authorizationSagas from './authorizationSagas';
 import * as userSagas from './crudUserSaga';
 
 function* rootSaga() {
+
     /*
     * AUTHORIZATION SAGAS MIDDLEWARE
     * */
-    yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, loginUserSaga);
-    yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, signUpUserSaga);
-    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, getAuthorizedUserSaga,);
+    yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, authorizationSagas.loginUserSaga);
+    yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, authorizationSagas.signUpUserSaga);
+    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, authorizationSagas.getAuthorizedUserSaga,);
+    yield takeEvery(ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION, authorizationSagas.logoutUserSaga);
+
     /*
     * CRUD USERS SAGAS MIDDLEWARE
     * */
     yield takeLatest(ACTION_TYPES.GET_USERS_ACTION, userSagas.getUsersSaga);
+
     /*
     * CRUD USER SAGAS MIDDLEWARE
     * */

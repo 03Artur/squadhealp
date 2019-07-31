@@ -21,6 +21,7 @@ import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 * */
 import styles from './UserItem.module.scss';
 import DropDownMenu from "../DropDownMenu/DropDownMenu";
+import {logoutActionCreator} from "../../../../../actions/authorizationActionCreators";
 
 class UserItem extends React.Component {
     constructor(props) {
@@ -28,16 +29,22 @@ class UserItem extends React.Component {
         this.state = {
             isMenuOpen: false,
             chevron: faChevronDown,
-            menuItems: [{
-                text: 'View Dashboard View Dashboard View Dashboard View Dashboard', onClick: () => {
-                }
-            }, {
-                text: 'My Account', onClick: () => {
-                }
-            }, {
-                text: 'Logout', onClick: () => {
-                }
-            },],
+            menuItems: [
+                {
+                    text: 'View Dashboard',
+                    onClick: () => {
+                    },
+                },
+                {
+                    text: 'My Account',
+                    onClick: () => {
+                    }
+                },
+                {
+                    text: 'Logout',
+                    onClick: this.props.logoutAction,
+                },
+            ],
         };
         this.toggleContainer = React.createRef();
 
@@ -100,8 +107,12 @@ UserItem.defaultPros = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {user} = store.authorizationReducer;
+    const {user} = store.authorization;
     return {user};
 };
+const mapDispatchToProps = dispatch => ({
+    logoutAction: () => dispatch(logoutActionCreator())
 
-export default connect(mapStateToProps)(UserItem)
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserItem)

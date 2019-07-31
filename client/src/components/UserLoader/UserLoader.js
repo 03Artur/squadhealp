@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -28,12 +28,11 @@ const UserLoader = (props) => {
 
 
     useEffect(() => {
+
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             props.getAuthorizedUser();
         }
     }, []);
-
-
 
 
     const renderSpinner = () => (
@@ -43,7 +42,7 @@ const UserLoader = (props) => {
     );
 
     const render = () => {
-        if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
+        if (localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY) && !props.user) {
             return renderSpinner();
         } else {
             return props.children;
@@ -56,7 +55,7 @@ const UserLoader = (props) => {
 
 
 const mapStateToProps = store => {
-    return store.authorizationReducer;
+    return store.authorization;
 
 };
 const mapDispatchToProps = dispatch => ({

@@ -29,7 +29,7 @@ LinkButton.defaultProps = {
 };
 
 const mapStateToProps = state => {
-    const {linkButton} = state.authorizationModeReducer;
+    const {linkButton} = state.authorizationMode;
     return {...linkButton};
 };
 

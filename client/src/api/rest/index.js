@@ -9,9 +9,8 @@ import store from '../../store';
 import history from '../../history';
 import {removeTokens} from '../../utils/localStorage'
 import {LOCAL_STORAGE_KEYS, PATH} from "../../constants";
-import {baseURL} from "../baseURL";
-
-
+import {authorizeUrl, baseURL} from "../baseURL";
+import ACTION_TYPES from '../../actions/actiontsTypes';
 
 
 const instance = axios.create({
@@ -28,32 +27,21 @@ instance.interceptors.request.use(config => {
     if (config.headers.Authorization !== accessToken) {
         config.headers.Authorization = accessToken
     }
-    console.log(++count, " URL: ", config.url);
-
+    console.log(++count," config: ",config);
     return config;
-
-
 }, err => {
     return Promise.reject(err);
 });
-
 
 /*
 * RESPONSE INTERCEPTOR
 * */
 instance.interceptors.response.use(
     response => {
-
-        console.group("RESPONSE");
-        console.log(response);
-        console.groupEnd();
-        if()
-
         return response
     },
     async err => {
         const {response: {status}} = err;
-
         switch (status) {
             case 419: {
                 await refreshTokens();
@@ -68,7 +56,6 @@ instance.interceptors.response.use(
             default :
                 return Promise.reject(err);
         }
-
         return Promise.reject(err)
     });
 

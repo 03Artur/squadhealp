@@ -17,7 +17,7 @@ import Picture from './Picture/Picture';
 * Styles
 * */
 import styles from './UserItem.module.scss';
-import {ROLE_STRING} from "../../../constants";
+import {ROLE, ROLE_STRING} from "../../../constants";
 
 const UserItem = ({user, ...props}) => {
     const classNames = [styles.container, props.className];
@@ -56,7 +56,7 @@ UserItem.propTypes = {
         email: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        role: PropTypes.number.isRequired,
+        role: PropTypes.oneOf(Object.values(ROLE)).isRequired,
         profilePicture: PropTypes.string,
         isBanned: PropTypes.bool.isRequired,
         isActive: PropTypes.bool,
