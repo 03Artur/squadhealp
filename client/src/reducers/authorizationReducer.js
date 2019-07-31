@@ -5,7 +5,6 @@ const initialState = {
     user: null,
     isFetching: false,
     error: null,
-    isShowError: false,
 };
 
 export default function (state = initialState, action) {
@@ -24,6 +23,7 @@ export default function (state = initialState, action) {
                 ...state,
                 isFetching: false,
                 user: action.user,
+                error: null,
             }
         }
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
@@ -32,21 +32,14 @@ export default function (state = initialState, action) {
                 ...state,
                 isFetching: false,
                 error: action.error,
-                isShowError: true,
+
             }
         }
-        case ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION: {
 
-            return {
-                ...state,
-                isShowError: false,
-            }
-        }
-        case ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION:
-
+        case ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION: {
             return initialState;
+        }
         default: {
-
             return state;
         }
     }

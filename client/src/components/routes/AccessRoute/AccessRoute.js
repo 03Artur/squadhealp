@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom'
 
@@ -13,25 +13,30 @@ import {connect} from 'react-redux';
 /*
 * UTILS
 * */
-import {PATH, ROLE} from '../../constants'
+import {PATH,  ROLE} from '../../../constants'
 
 
-const PrivateRoute = ({roles, path, component: Component, redirectTo, ...props}) => {
+const AccessRoute = ({roles, redirectTo, user, ...props}) => {
 
+    const render = () => {
+        console.group("AccessRouter");
+        console.log("User: ",user);
+        console.log("Role: ",roles);
+        console.groupEnd()
+        if (user && roles.includes(user.role)) {
+            return (<Route   {...props}/>)
 
-    const render = (props) => {
-        if (!props.user && !roles.includes(props.user.role)) {
-            return (<Redirect to={redirectTo}/>)
         } else {
-            return (<Route path={path} {...props} render={props.render}/>)
+            return <Redirect to={redirectTo}/>
         }
     };
-    return (
-        render()
-    )
+
+    return render();
+
+
 };
 
-PrivateRoute.propTypes = {
+AccessRoute.propTypes = {
     roles: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ROLE))).isRequired,
     path: PropTypes.string.isRequired,
     component: PropTypes.node,
@@ -39,7 +44,7 @@ PrivateRoute.propTypes = {
     render: PropTypes.func,
 
 };
-PrivateRoute.defaultProps = {
+AccessRoute.defaultProps = {
     redirectTo: PATH.HOME,
 };
 
@@ -53,4 +58,4 @@ const mapStateToProps = store => {
 };
 
 
-export default connect(mapStateToProps)(PrivateRoute)
+export default connect(mapStateToProps)(AccessRoute)

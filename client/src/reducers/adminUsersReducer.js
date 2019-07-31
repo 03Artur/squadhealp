@@ -73,11 +73,13 @@ export default (state = getInitialState(), action) => {
             }
         }
         case ACTION_TYPES.UPDATE_USER_RESPONSE: {
+            //find user index in users array by id
             const userIndex = state.users.findIndex(item => item.id === action.user.id);
 
             const newUsers = _.cloneDeep(state.users);
 
             newUsers[userIndex] = action.user;
+
             return {
                 ...state,
                 users: newUsers,

@@ -61,7 +61,8 @@ export const updateUserById = async (req, res, next) => {
         });
 
         if (!user) {
-            next(new NotFoundError);
+            return next(new NotFoundError);
+
         }
         const result = await user.update(req.body);
         res.send(result);

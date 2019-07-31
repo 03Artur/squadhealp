@@ -12,14 +12,12 @@ import history from './history';
 /*
 * CONSTANTS IMPORT
 * */
-import {PATH} from "./constants"
+import {PATH, FORM_ROLE_VALUES, ROLE} from "./constants"
 import Test from "./pages/TestPage/TestPage";
 /*
 * COMPONENTS IMPORT
 * */
-/*
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-*/
+import AccessRoute from './components/routes/AccessRoute/AccessRoute';
 import UserLoader from "./components/UserLoader/UserLoader";
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -35,7 +33,7 @@ const App = (props) => (
                     <Route exact path={PATH.HOME} render={(props) => <HomePage {...props}/>}/>
                     <Route path={PATH.LOGIN} render={(props) => <AuthorizationPage {...props}/>}/>
                     <Route path={PATH.SIGN_UP} render={(props) => <AuthorizationPage {...props}/>}/>
-                    <Route path={PATH.ADMIN} render={(props) => <AdminPage {...props}/>}/>
+                    <AccessRoute roles={[ROLE.ADMIN]} path={PATH.ADMIN} render={(props) => <AdminPage {...props}/>}/>
                     <Route path={'/test'} render={(props) => <Test {...props}/>}/>
                 </Switch>
             </Suspense>

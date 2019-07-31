@@ -41,9 +41,5 @@ export const changeModeToSignUpActionCreator = () => {
     }
 };
 
-export const coverErrorActionCreator = () => {
-    return {
-        type: ACTION_TYPES.AUTHORIZATION_COVER_ERROR_ACTION,
-    }
-}
+
 

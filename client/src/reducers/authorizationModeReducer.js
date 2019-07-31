@@ -1,5 +1,5 @@
 import ACTION_TYPES from '../actions/actiontsTypes';
-import {AUTHORIZATION_MODE, PATH, ROLE} from '../constants'
+import {AUTHORIZATION_MODE, PATH, FORM_ROLE_VALUES} from '../constants'
 
 const initialState = {
 
@@ -52,7 +52,7 @@ export default function (state = initialState, action) {
                 form: {
                     submitButtonText: "create account",
                     initialValues: {
-                        role: ROLE.BUYER,
+                        role: FORM_ROLE_VALUES.BUYER,
                     },
 
                 },
