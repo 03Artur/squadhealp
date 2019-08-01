@@ -23,6 +23,7 @@ import UserLoader from "./components/UserLoader/UserLoader";
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const AuthorizationPage = lazy(() => import("./pages/AuthorizationPage/AuthorizationPage"));
 const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
+const StartContestPage = lazy(() => import('./pages/StartContestPage/StartContestPage'));
 
 
 const App = (props) => (
@@ -34,6 +35,7 @@ const App = (props) => (
                     <Route path={PATH.LOGIN} render={(props) => <AuthorizationPage {...props}/>}/>
                     <Route path={PATH.SIGN_UP} render={(props) => <AuthorizationPage {...props}/>}/>
                     <AccessRoute roles={[ROLE.ADMIN]} path={PATH.ADMIN} render={(props) => <AdminPage {...props}/>}/>
+                    <AccessRoute roles={[ROLE.BUYER]} path={PATH.START_CONTEST} render={(props) => <StartContestPage {...props}/>}/>
                     <Route path={'/test'} render={(props) => <Test {...props}/>}/>
                 </Switch>
             </Suspense>

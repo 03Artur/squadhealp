@@ -1,25 +1,25 @@
 //REACT
 import React from 'react';
 //COMPONENTS
-import Input from './inputs/Input/Input';
-import InputRadio from './inputs/InputRadio/InputRadio';
-import SubmitButton from './buttons/SubmitButton/SubmitButton';
-import Spinner from '../Spinner/Spinner';
+import Input from '../inputs/Input/Input';
+import InputRadio from '../inputs/InputRadio/InputRadio';
+import SubmitButton from '../buttons/SubmitButton/SubmitButton';
+import Spinner from '../../Spinner/Spinner';
 //REDUX & FRIENDS
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-import {loginActionCreator, signUpActionCreator} from "../../actions/authorizationActionCreators";
+import {loginActionCreator, signUpActionCreator} from "../../../actions/authorizationActionCreators";
 
 //UTILS
-import {AUTHORIZATION_MODE, ROLE} from '../../constants/index';
-import * as VALIDATION from '../../utils/reduxFormValuesValidations'
+import {AUTHORIZATION_MODE, ROLE} from '../../../constants';
+import * as VALIDATION from '../../../utils/reduxFormValuesValidations'
 //STYLES
-import styles from './AuthorizationForm.module.scss';
+import styles from './BusinessInfoForm.module.scss';
 /*
 import Error from "../notification/Error/Error";
 */
 
-function AuthorizationForm(props) {
+function BusinessInfoForm(props) {
     const renderField = (name, type, validate, component, placeholder, value = '') => {
         return (
             <div className={styles.fieldContainer}>
@@ -141,8 +141,8 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
         // a unique name for the form
-        form: 'AuthorizationForm',
+        form: 'BusinessInfoForm',
         enableReinitialize: true,
-    })(AuthorizationForm));
+    })(BusinessInfoForm));
 
 

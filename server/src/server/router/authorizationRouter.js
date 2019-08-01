@@ -18,9 +18,7 @@ router.post('/login',
     findUserByEmail,
     checkUserBan,
     comparePassword,
-/*
     checkRefreshTokensLimit,
-*/
     loginUser);
 
 router.post('/signup',

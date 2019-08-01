@@ -12,9 +12,9 @@ export default async function (req, res, next) {
             }
         });
         if (req.user) {
-            next();
+            return next();
         } else {
-            next(new NotFoundError("User not found."))
+            return next(new NotFoundError("User not found."))
         }
 
     } catch (e) {

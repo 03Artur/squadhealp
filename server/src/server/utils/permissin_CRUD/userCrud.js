@@ -1,4 +1,4 @@
-import {ROLE} from '../constants'
+import {ROLE} from '../../constants'
 
 export const ROLE_CRUD_USER_PERMISSIONS = new Map([
     [

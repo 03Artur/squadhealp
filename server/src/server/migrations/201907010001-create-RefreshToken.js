@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('RefreshTokens', {
+        return queryInterface.createTable('RefreshToken', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = {
                 allowNull: false,
                 onDelete: 'CASCADE',
                 references: {
-                    model: 'Users',
+                    model: 'User',
                     key: 'id'
                 }
             },
@@ -33,6 +33,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('RefreshTokens');
+        return queryInterface.dropTable('RefreshToken');
     }
 };

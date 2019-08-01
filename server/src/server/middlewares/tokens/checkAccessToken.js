@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import {REGEXP} from "../../utils/regexp";
-import {TOKEN_PRIVATE_KEY} from "../../utils/constants";
+import {TOKEN_PRIVATE_KEY} from "../../constants";
 import {AuthenticationTimeoutError, UnauthorizedError} from '../../errors';
 
 import util from 'util'
@@ -11,14 +11,14 @@ export default async (req, res, next) => {
     try {
 
         if (!req.headers.authorization) {
-            next(new UnauthorizedError());
-            return;
+            return next(new UnauthorizedError());
+
         }
 
         const token = req.headers.authorization.replace(REGEXP.AUTHORIZATION_BEARER, '');
 
         req.accessTokenPayload = await verifyToken(token, TOKEN_PRIVATE_KEY);
-        next();
+        return next();
 
     } catch (e) {
         next(new AuthenticationTimeoutError());

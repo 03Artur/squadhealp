@@ -13,7 +13,7 @@ import {loginActionCreator, signUpActionCreator, modeActionCreator} from "../../
 * */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
-import AuthorizationForm from '../../components/Form/AuthorizationForm';
+import AuthorizationForm from '../../components/forms/AuthorizationForm/AuthorizationForm';
 /*
 * STYLES
 * */

@@ -6,8 +6,8 @@ import {User, RefreshToken} from '../models';
 import db from '../models';
 
 //UTILS
-import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../utils/constants";
-import {BadRequestError, UnauthorizedError, NotFoundError} from '../errors'
+import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN, TOKEN_PRIVATE_KEY} from "../constants";
+import {BadRequestError, UnauthorizedError, NotFoundError, ForbiddenError} from '../errors'
 
 //Sequelize instance
 const sequelize = db.sequelize;
@@ -47,8 +47,7 @@ export const signUpUser = async (req, res, next) => {
             transaction,
         });
         if (!user) {
-            next(new BadRequestError());
-            return;
+            return next(new BadRequestError());
         }
         let refreshToken = await RefreshToken.create({
             userId: user.id,
@@ -83,7 +82,7 @@ export const getUserByAccessTokenPayload = async (req, res, next) => {
             },
         });
         if (!user) {
-            next(new NotFoundError())
+            return next(new NotFoundError())
 
         }
         res.send(user);
@@ -96,9 +95,10 @@ export const updateRefreshToken = async (req, res, next) => {
     try {
         let transaction = await sequelize.transaction();
         let refreshToken = await RefreshToken.findByPk(req.refreshTokenPayload.id);
+
         if (!refreshToken) {
-            next(new BadRequestError());
-            return;
+            return next(new BadRequestError());
+
         }
         const user = await User.findByPk(refreshToken.userId, {
             transaction,
@@ -106,6 +106,9 @@ export const updateRefreshToken = async (req, res, next) => {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
         });
+        if (user.isBanned) {
+            return next(new ForbiddenError());
+        }
         refreshToken = await refreshToken.update({
             tokenString: jwt.sign({id: refreshToken.id}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
         }, {

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import {SALT_ROUND} from '../../utils/constants'
+import {SALT_ROUND} from '../../constants'
 
 export default async (req, res, next) => {
 
@@ -9,7 +9,7 @@ export default async (req, res, next) => {
             req.body.password = await bcrypt.hash(req.body.password, salt);
         }
 
-        next();
+        return next();
     } catch (e) {
         next(e);
     }

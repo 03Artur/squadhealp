@@ -4,9 +4,9 @@ export default function (req, res, next) {
 
     try {
         if (req.user.isBanned) {
-            next(new ForbiddenError("User banned."));
+            return next(new ForbiddenError("User banned."));
         } else {
-            next();
+            return next();
         }
     } catch (e) {
         next(e);

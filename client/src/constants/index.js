@@ -18,7 +18,9 @@ export const PATH = {
     SIGN_UP: '/signup',
     AUTHORIZATION: '/authorization',
     ADMIN: '/admin',
-    USERS: '/users'
+    USERS: '/users',
+    START_CONTEST: '/contest',
+
 };
 
 export const ROLE = {

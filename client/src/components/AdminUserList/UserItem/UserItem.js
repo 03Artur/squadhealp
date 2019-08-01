@@ -59,7 +59,7 @@ UserItem.propTypes = {
         role: PropTypes.oneOf(Object.values(ROLE)).isRequired,
         profilePicture: PropTypes.string,
         isBanned: PropTypes.bool.isRequired,
-        isActive: PropTypes.bool,
+
 
     }),
     className: PropTypes.string,

@@ -6,7 +6,7 @@ const ROLE= {
 };
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Users', {
+        return queryInterface.createTable('User', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -46,10 +46,13 @@ module.exports = {
                     isIn: [Object.values(ROLE)],
                 }
             },
-            isActive: {
-                type: Sequelize.BOOLEAN,
+            balance: {
+                type: Sequelize.REAL,
                 allowNull: false,
-                defaultValue: true,
+                defaultValue: 0,
+                validate: {
+                    min: 0,
+                }
             },
             isBanned: {
                 type: Sequelize.BOOLEAN,
@@ -68,6 +71,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Users');
+        return queryInterface.dropTable('User');
     }
 };

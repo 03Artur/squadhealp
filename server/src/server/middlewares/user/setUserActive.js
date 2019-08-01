@@ -7,7 +7,7 @@ async function setUserActive(req, res, next) {
         req.user = await req.user.update({
             isActive: true,
         });
-        next();
+        return next();
 
 
     } catch (e) {

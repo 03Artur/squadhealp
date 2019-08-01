@@ -18,7 +18,7 @@ import {
 * */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
-import AuthorizationForm from '../../components/Form/AuthorizationForm';
+import AuthorizationForm from '../../components/forms/AuthorizationForm/AuthorizationForm';
 import Error from "../../components/notifications/Error/Error";
 /*
 * STYLES

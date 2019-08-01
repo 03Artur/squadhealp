@@ -1,6 +1,5 @@
-import {ROLE} from "../utils/constants";
+import {ROLE} from "../constants";
 
-const moment = require('moment');
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -51,10 +50,13 @@ module.exports = (sequelize, DataTypes) => {
                 isIn: [Object.values(ROLE)],
             },
         },
-        isActive: {
-            type: DataTypes.BOOLEAN,
+        balance: {
+            type: DataTypes.REAL,
             allowNull: false,
-            defaultValue: false,
+            defaultValue: 0,
+            validate: {
+                min: 0,
+            }
         },
         isBanned: {
             type: DataTypes.BOOLEAN,
@@ -63,5 +65,12 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
+
+    User.associate = function (models) {
+        User.hasMany(models.Entry, {foreignKey: 'userId', targetKey: 'id'});
+        User.hasMany(models.BusinessInfo, {foreignKey: 'userId', targetKey: 'id'});
+        User.hasMany(models.RefreshToken, {foreignKey: 'userId', targetKey: 'id'});
+
+    };
     return User;
 };

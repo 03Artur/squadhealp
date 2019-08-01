@@ -9,7 +9,7 @@ const passwordRule = yup.string().matches(REGEXP.PASSWORD);
 const roleRule = yup.string().oneOf(Object.values(ROLE));
 
 
-export const createUserSchema = yup.object({
+export const createContestSchema = yup.object({
     firstName: nameRule.required(),
     lastName: nameRule.required(),
     email: emailRule.required(),
@@ -17,7 +17,7 @@ export const createUserSchema = yup.object({
     role: roleRule.required(),
 });
 
-export const updateUserSchema = yup.object({
+export const updateContestSchema = yup.object({
     firstName: nameRule,
     lastName: nameRule,
     email: emailRule,

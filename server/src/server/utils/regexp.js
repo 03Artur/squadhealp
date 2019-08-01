@@ -1,5 +1,5 @@
 
-import {AUTHORIZATION_BEARER} from "./constants";
+import {AUTHORIZATION_BEARER} from "../constants";
 
 const tokenBearerPattern = `^${AUTHORIZATION_BEARER}`;
 

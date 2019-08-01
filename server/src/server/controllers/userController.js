@@ -1,7 +1,6 @@
-import 'babel-polyfill';
 import {User, RefreshToken} from '../models';
 import createToken from '../middlewares/tokens/createToken'
-import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../utils/constants";
+import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../constants";
 import {NotFoundError, BadRequestError} from '../errors';
 
 export const createUser = async (req, res, next) => {
@@ -29,8 +28,8 @@ export const findAndCountAllUsers = async (req, res, next) => {
 
         });
         if (!result) {
-            next(new NotFoundError("Users not found"));
-            return
+            return next(new NotFoundError("Users not found"));
+
         }
         res.send(result);
     } catch (e) {
@@ -46,7 +45,7 @@ export const getUserById = async (req, res, next) => {
         });
 
         if (!user) {
-            next(new NotFoundError);
+            return next(new NotFoundError);
         }
         res.send(user);
     } catch (e) {

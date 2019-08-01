@@ -20,3 +20,5 @@ export const passwordValidation = value => (
 export const confirmPasswordValidation = (value, allValues) => {
     return allValues.password && value === allValues.password ? undefined : "Password does not match";
 };
+
+

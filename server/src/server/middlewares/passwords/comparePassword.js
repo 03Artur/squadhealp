@@ -5,9 +5,9 @@ export default async (req, res, next) => {
     try {
 
         if (await bcrypt.compare(req.body.password, req.user.password)) {
-            next();
+            return next();
         } else {
-            next(new BadRequestError('The password does not match'))
+            return next(new BadRequestError('The password does not match'))
         }
     } catch (e) {
         next(new BadRequestError('The password does not match'))

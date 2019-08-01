@@ -12,8 +12,7 @@ import {connect} from 'react-redux';
 /*
 * Components
 * */
-
-
+import Header from '../../components/headers/Header/Header'
 /*
 * tyles
 * */
@@ -30,6 +29,7 @@ const StartContestPage = (props) => {
 
     return (
         <Fragment>
+            <Header/>
 
         </Fragment>
     )
