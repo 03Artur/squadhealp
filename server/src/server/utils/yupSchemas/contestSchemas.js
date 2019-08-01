@@ -1,28 +1,23 @@
-import {ROLE} from "../../constants";
-
+import {CONTEST_TYPE} from "../../constants";
 const yup = require('yup');
-import {REGEXP} from '../regexp';
 
-const title = yup.string().matches(REGEXP.NAME);
-const style = yup.string().email();
-const passwordRule = yup.string().matches(REGEXP.PASSWORD);
-const roleRule = yup.string().oneOf(Object.values(ROLE));
+const title = yup.string();
+const style = yup.string();
+const type = yup.oneOf(Object.values(CONTEST_TYPE));
 
 
 export const createContestSchema = yup.object({
-    firstName: nameRule.required(),
-    lastName: nameRule.required(),
-    email: emailRule.required(),
-    password: passwordRule.required(),
-    role: roleRule.required(),
+    businessInfoId: yup.number().integer().required().min(0),
+    title: title.required(),
+    style: style.required(),
+    type: type.required(),
+
 });
 
 export const updateContestSchema = yup.object({
-    firstName: nameRule,
-    lastName: nameRule,
-    email: emailRule,
-    password: passwordRule,
-    role: roleRule,
+    title,
+    style,
+    type,
 });
 
 

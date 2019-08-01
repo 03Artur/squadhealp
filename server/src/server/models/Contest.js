@@ -1,5 +1,8 @@
 'use strict';
 
+import {ACTION, ROLE} from "../constants";
+import {CrudRule,Rule} from "../utils/permission_CRUD/Rule";
+
 module.exports = (sequelize, DataTypes) => {
     const Contest = sequelize.define('Contest', {
         id: {
@@ -56,6 +59,11 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
+
+    Contest.crudRules = new CrudRule(
+        new Rule([],)
+    )
+
     Contest.associate = function (models) {
         Contest.belongsTo(models.BusinessInfo, {foreignKey: 'businessInfoId', targetKey: 'id'});
         Contest.hasMany(models.Entry, {foreignKey: 'contestId', targetKey: 'id'});

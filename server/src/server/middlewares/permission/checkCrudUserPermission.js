@@ -1,5 +1,5 @@
 import {ForbiddenError, NotFoundError} from '../../errors';
-import {ROLE_CRUD_USER_PERMISSIONS} from '../../utils/permissin_CRUD/userCrud';
+import {ROLE_CRUD_USER_PERMISSIONS} from '../../utils/permission_CRUD/crudRule';
 import {User} from './../../models';
 import {ROLE} from "../../constants";
 
@@ -35,7 +35,6 @@ export default async function (req, res, next) {
             const obj = await User.findByPk(parseInt(req.params.id));
             if (!obj) {
                 return next(new NotFoundError("User not found"));
-                return;
             }
             objRole = obj.role;
         }

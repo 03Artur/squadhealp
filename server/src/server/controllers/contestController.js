@@ -6,7 +6,8 @@ import appError, {NotFoundError} from '../errors';
 export const createBusinessInfo = async (req, res, next) => {
 
     try {
-        const businessInfo = await BusinessInfo.create(req.body);
+
+        const businessInfo = await BusinessInfo.create(req.body.businessInfo);
         if (!businessInfo) {
             return next(new appError.BadRequestError())
         }
@@ -16,7 +17,21 @@ export const createBusinessInfo = async (req, res, next) => {
     }
 
 };
+export const updateBusinessInfo = async (req, res, next) => {
 
+    try {
+        let businessInfo = await BusinessInfo.findByPk(req.params.id);
+        if (!businessInfo) {
+            return next(new appError.BadRequestError())
+        }
+        businessInfo = await BusinessInfo.update(req.body);
+
+        res.send(businessInfo);
+    } catch (e) {
+        next(e);
+    }
+
+};
 
 export const createContest = async (req, res, next) => {
 

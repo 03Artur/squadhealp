@@ -1,4 +1,5 @@
-import {ROLE} from "../constants";
+import {ROLE, ACTION} from "../constants";
+import Rule from '../utils/permission_CRUD/Rule';
 
 
 module.exports = (sequelize, DataTypes) => {
@@ -63,8 +64,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: false,
         },
-    });
 
+
+    });
+    User.crudRule = new Map([
+        [ ACTION.CREATE, new Rule([ROLE.ADMIN])],
+        [ACTION.READ, new Rule( [ROLE.ADMIN])]
+    ]);
 
     User.associate = function (models) {
         User.hasMany(models.Entry, {foreignKey: 'userId', targetKey: 'id'});
