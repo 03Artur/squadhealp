@@ -1,7 +1,7 @@
-import {BadRequestError} from './../../errors';
-import {createUserSchema, updateUserSchema} from '../../utils/yupSchemas/userSchemas';
+import {BadRequestError} from '../../errors';
+import {} from '../../utils/yupSchemas/contestSchemas';
 
-export async function validationCreateUser(req, res, next) {
+export async function validateDataOnCreateContest(req, res, next) {
     try {
         if (await createUserSchema.isValid(req.body)) {
             return next();
@@ -14,7 +14,7 @@ export async function validationCreateUser(req, res, next) {
     }
 }
 
-export async function validationUpdateUser(req, res, next) {
+export async function validateDataOnUpdateContest(req, res, next) {
     try {
         if (await updateUserSchema.isValid(req.body)) {
             return next();

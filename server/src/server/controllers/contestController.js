@@ -40,7 +40,6 @@ export const activateNextContest = async (req, res, next) => {
             where: {
                 businessInfoId: businessInfoId,
                 isPaid: true,
-
             },
             limit: 1,
             order: [["priority", "DESC"]],

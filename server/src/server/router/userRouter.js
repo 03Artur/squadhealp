@@ -1,7 +1,7 @@
 import express from 'express';
 import {createUser, deleteUserById, getUserById, updateUserById, findAndCountAllUsers} from '../controllers/userController'
-import hashPassword from './../middlewares/passwords/hashPassword'
-import {validationCreateUser, validationUpdateUser} from '../middlewares/dataValidation/userValidation'
+import hashPassword from '../middlewares/password/hashPassword'
+import {validationCreateUser, validationUpdateUser} from '../middlewares/user/userValidation'
 import checkUserCrudPermission, {isItAdmin} from '../middlewares/permission/checkUserCrudPermission';
 
 const router = express.Router();

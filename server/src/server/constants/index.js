@@ -47,6 +47,14 @@ module.exports = {
         [CONTEST_TYPE.LOGO, 9],
         [CONTEST_TYPE.NAME, 10],
     ]),
+    CONTEST_COST: new Map([
+            [CONTEST_TYPE.TAGLINE, 72.15],
+            [CONTEST_TYPE.LOGO, 91.43],
+            [CONTEST_TYPE.NAME, 100.0],
+        ]
+    )
+
+    ,
     DEVICES_COUNT: 3,
     SALT_ROUND: 10,
     AUTHORIZATION_BEARER: 'Bearer ',

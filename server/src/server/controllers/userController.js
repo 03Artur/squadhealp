@@ -1,5 +1,5 @@
 import {User, RefreshToken} from '../models';
-import createToken from '../middlewares/tokens/createToken'
+import createToken from '../utils/func/createToken'
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../constants";
 import {NotFoundError, BadRequestError} from '../errors';
 
