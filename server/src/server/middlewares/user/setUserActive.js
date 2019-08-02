@@ -1,4 +1,4 @@
-import {User} from '../../models';
+import {Users} from '../../models';
 
 async function setUserActive(req, res, next) {
 

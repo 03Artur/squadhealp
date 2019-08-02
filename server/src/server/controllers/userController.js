@@ -1,14 +1,14 @@
-import {User, RefreshToken} from '../models';
+import {Users, RefreshTokens} from '../models';
 import createToken from '../utils/func/createToken'
 import {ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN} from "../constants";
 import {NotFoundError, BadRequestError} from '../errors';
 
 export const createUser = async (req, res, next) => {
     try {
-        const user = await User.build(req.body);
+        const user = await Users.build(req.body);
 
         const newUser = await user.save();
-        newUser.password = undefined;
+        newUsers.password = undefined;
         res.send(newUser);
     } catch (e) {
         next(e);
@@ -20,7 +20,7 @@ export const findAndCountAllUsers = async (req, res, next) => {
 
 
         const query = req.query;
-        const result = await User.findAndCountAll({
+        const result = await Users.findAndCountAll({
             order: [['id', 'ASC']],
             attributes: {exclude: ['password']},
             limit: query.limit,
@@ -40,7 +40,7 @@ export const findAndCountAllUsers = async (req, res, next) => {
 export const getUserById = async (req, res, next) => {
     try {
         parseInt(req.params.id);
-        const user = await User.findByPk(parseInt(req.params.id), {
+        const user = await Users.findByPk(parseInt(req.params.id), {
             attributes: {exclude: ['password']}
         });
 
@@ -55,7 +55,7 @@ export const getUserById = async (req, res, next) => {
 
 export const updateUserById = async (req, res, next) => {
     try {
-        const user = await User.findByPk(parseInt(req.params.id), {
+        const user = await Users.findByPk(parseInt(req.params.id), {
             attributes: {exclude: ['password']}
         });
 
@@ -72,7 +72,7 @@ export const updateUserById = async (req, res, next) => {
 
 export const deleteUserById = async (req, res, next) => {
     try {
-        const result = await User.destroy({
+        const result = await Users.destroy({
             where: {
                 id: parseInt(req.params.id)
             }

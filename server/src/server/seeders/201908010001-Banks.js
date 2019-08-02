@@ -1,6 +1,6 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('Bank', [
+        return queryInterface.bulkInsert('Banks', [
             {
                 number: '0000111122223333',
                 expiry: '12/99',

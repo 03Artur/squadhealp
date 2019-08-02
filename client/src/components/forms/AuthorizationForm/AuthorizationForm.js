@@ -15,6 +15,7 @@ import {AUTHORIZATION_MODE, ROLE} from '../../../constants';
 import * as VALIDATION from '../../../utils/reduxFormValuesValidations'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
+
 /*
 import Error from "../notification/Error/Error";
 */
@@ -97,7 +98,6 @@ function AuthorizationForm(props) {
     };
 
 
-
     const renderButtonContent = () => {
         if (props.isFetching) {
             return (
@@ -140,9 +140,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        // a unique name for the form
-        form: 'AuthorizationForm',
-        enableReinitialize: true,
-    })(AuthorizationForm));
+            // a unique name for the form
+            form: 'AuthorizationForm',
+            enableReinitialize: true,
+        }
+    )(AuthorizationForm)
+);
 
 

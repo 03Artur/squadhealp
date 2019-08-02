@@ -5,13 +5,40 @@ import * as contestController from '../controllers/contestController'
 const router = express.Router();
 
 
-router.post('/business',contestMW.validateDataOnCreateContest, contestController.createContest);
-router.put('/business',contestMW.validateDataOnUpdateContest, contestController.updateContest);
-router.post('/contest', contestController.createContestTask);
+router.post('/contest',
+    contestMW.checkUserCrudContestPermissions,
+    contestMW.validateContestOnCreate,
+    contestController.createContest);
+
+
+router.put('/contest',
+    contestMW.checkUserCrudContestPermissions,
+    contestMW.validateContestOnUpdate,
+    contestController.updateContest);
+
+
+router.post('/contest/task',
+    contestMW.checkUserCrudTaskPermissions,
+    contestMW.validateTaskOnCreate,
+    contestMW.addCostToTask,
+    contestMW.addPriorityToTask,
+    contestController.createTask
+);
+
+router.put('/contest/task',
+    contestMW.checkUserCrudTaskPermissions,
+    contestMW.validateTaskOnUpdate,
+    contestMW.addCostToTask,
+    contestMW.addPriorityToTask,
+    contestController.updateTaskById,
+);
+
+
 router.get('/contest:id',);
 router.get('/contests',);
-router.put('/contest:id', contestController.updateContestTaskById);
+router.put('/contest:id', contestController.updateTaskById);
 router.delete('/contest:id',);
+
 
 module.exports = router;
 

@@ -1,5 +1,5 @@
 import {sequelize, User} from '../models';
-import {Contest, ContestTask} from '../models';
+import {Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 
 
@@ -7,11 +7,11 @@ export const createContest = async (req, res, next) => {
 
     try {
 
-        const businessInfo = await Contest.create(req.body.businessInfo);
-        if (!businessInfo) {
+        const contest = await Contests.create(req.body.contest);
+        if (!contest) {
             return next(new appError.BadRequestError())
         }
-        res.send(businessInfo);
+        res.send(contest);
     } catch (e) {
         next(e);
     }
@@ -20,11 +20,11 @@ export const createContest = async (req, res, next) => {
 export const updateContest = async (req, res, next) => {
 
     try {
-        let businessInfo = await Contest.findByPk(req.params.id);
+        let businessInfo = await Contests.findByPk(req.params.id);
         if (!businessInfo) {
             return next(new appError.BadRequestError())
         }
-        businessInfo = await Contest.update(req.body);
+        businessInfo = await Contests.update(req.body);
 
         res.send(businessInfo);
     } catch (e) {
@@ -33,14 +33,14 @@ export const updateContest = async (req, res, next) => {
 
 };
 
-export const createContestTask = async (req, res, next) => {
+export const createTask = async (req, res, next) => {
 
     try {
-        const contest = await ContestTask.create(req.body);
-        if (!contest) {
+        const task = await Tasks.create(req.body);
+        if (!task) {
             return next(new appError.BadRequestError())
         }
-        res.send(contest);
+        res.send(task);
 
     } catch (e) {
         next(e)
@@ -51,7 +51,8 @@ export const activateNextContestTask = async (req, res, next) => {
 
     try {
         const businessInfoId = parseInt(req.params.id);
-        let contest = (await ContestTask.findAll({
+
+        let contest = (await Tasks.findAll({
             where: {
                 businessInfoId: businessInfoId,
                 isPaid: true,
@@ -59,6 +60,7 @@ export const activateNextContestTask = async (req, res, next) => {
             limit: 1,
             order: [["priority", "DESC"]],
         }))[0];
+
         if (!contest) {
             return next(new appError.NotFoundError())
         }
@@ -69,16 +71,16 @@ export const activateNextContestTask = async (req, res, next) => {
     }
 };
 
-export const updateContestTaskById = async (req, res, next) => {
+export const updateTaskById = async (req, res, next) => {
     try {
 
-        let contest = await ContestTask.findByPk(req.params.id);
-        if (!contest) {
+        let task = await Tasks.findByPk(req.params.id);
+        if (!task) {
             return next(new appError.NotFoundError())
         }
-        contest = await contest.update(req.body);
+        task = await task.update(req.body);
 
-        res.send(contest);
+        res.send(task);
 
     } catch (e) {
         next(e);

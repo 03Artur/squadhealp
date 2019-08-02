@@ -1,19 +1,20 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Contest', {
+        return queryInterface.createTable('Contests', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+
             userId: {
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
                 references: {
-                    model: 'User',
+                    model: 'Users',
                     key: 'id'
                 },
                 allowNull: false,
@@ -60,6 +61,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Contest');
+        return queryInterface.dropTable('Contests');
     }
 };

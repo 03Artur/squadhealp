@@ -3,7 +3,7 @@
 
 
 module.exports = (sequelize, DataTypes) => {
-    const ContestTask = sequelize.define('ContestTask', {
+    const Tasks = sequelize.define('Tasks', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -66,14 +66,14 @@ module.exports = (sequelize, DataTypes) => {
 
 
 
-    ContestTask.associate = function (models) {
-        ContestTask.belongsTo(models.Contest, {foreignKey: 'businessInfoId', targetKey: 'id'});
-        ContestTask.hasMany(models.Entry, {foreignKey: 'contestId', targetKey: 'id'});
-        ContestTask.belongsTo(models.Entry, {foreignKey: 'winnerId', targetKey: 'id',});
+    Tasks.associate = function (models) {
+        Tasks.belongsTo(models.Contests, {foreignKey: 'contestId', targetKey: 'id'});
+        Tasks.hasMany(models.Entries, {foreignKey: 'taskId', targetKey: 'id'});
+        Tasks.belongsTo(models.Entries, {foreignKey: 'winnerId', targetKey: 'id',});
 
     };
 
 
-    return ContestTask;
+    return Tasks;
 };
     

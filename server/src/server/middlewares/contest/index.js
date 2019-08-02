@@ -1,13 +1,17 @@
-import addCostToContestTask from './addCostToContestTask';
-import addPriorityToContestTask from './addPriorityToContestTask';
-import {validateDataOnCreateContestTask,validateDataOnUpdateContestTask} from './validateContestTask';
-import {validateDataOnCreateContest,validateDataOnUpdateContest} from './validateContest';
+import addCostToTask from './task/addCostToTask';
+import addPriorityToTask from './task/addPriorityToTask';
+import checkUserCrudTaskPermissions from './task/checkUserCrudTaskPermissions';
+import {validateTaskOnCreate, validateTaskOnUpdate} from './task/validateTask';
+import {validateContestOnCreate, validateContestOnUpdate} from './validateContest';
+import checkUserCrudContestPermissions from './checkUserCrudContestPermissions';
 
 export default {
-    addPriorityToContestTask,
-    addCostToContestTask,
-    validateDataOnUpdateContestTask,
-    validateDataOnCreateContestTask,
-    validateDataOnCreateContest,
-    validateDataOnUpdateContest,
+    addPriorityToTask,
+    addCostToTask,
+    validateTaskOnUpdate,
+    validateTaskOnCreate,
+    validateContestOnCreate,
+    validateContestOnUpdate,
+    checkUserCrudContestPermissions,
+    checkUserCrudTaskPermissions,
 }

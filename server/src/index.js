@@ -24,9 +24,7 @@ app.use(authorizationRouter);
 
 //Access Token required
 
-/*
 app.use(checkAccessToken);
-*/
 
 
 app.use(userRouter);

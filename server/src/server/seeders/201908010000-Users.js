@@ -8,7 +8,7 @@ const ROLE = {
 };
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('User', [
+        return queryInterface.bulkInsert('Users', [
             {
                 firstName: 'Arthur',
                 lastName: 'Chubukliev',

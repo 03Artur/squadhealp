@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const RefreshToken = sequelize.define('RefreshToken', {
+    const RefreshTokens = sequelize.define('RefreshTokens', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'CASCADE',
             references: {
                 key: 'id',
-                model: 'User'
+                model: 'Users'
             }
         },
         tokenString: {
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
-    RefreshToken.associate = function (models) {
-        RefreshToken.belongsTo(models.User, {foreignKey: 'userId', sourceKey: 'id'});
+    RefreshTokens.associate = function (models) {
+        RefreshTokens.belongsTo(models.Users, {foreignKey: 'userId', sourceKey: 'id'});
     };
-    return RefreshToken;
+    return RefreshTokens;
 };

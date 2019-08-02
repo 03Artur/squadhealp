@@ -21,7 +21,7 @@ export const nameNotExistCreateContestSchema = yup.object({
 
 });
 
-export const updateContestSchema = yup.object({
+export const updateNameExistContestSchema = yup.object({
 
     name: yup.string().notRequired(),
     type: yup.string().notRequired(),
@@ -30,6 +30,7 @@ export const updateContestSchema = yup.object({
     targetCustomers: strSchema,
 
 });
+
 
 
 

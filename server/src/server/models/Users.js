@@ -3,7 +3,7 @@ const Rule = require('../utils/permission_CRUD/classes/Rule');
 const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
 
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
+    const Users = sequelize.define('Users', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     const allRolesArr = Object.values(ROLE);
 
-    User.crudRule = new Map([
+    Users.crudRule = new Map([
 
         [ROLE.ADMIN, new CrudRule(
             new Rule(allRolesArr),
@@ -97,9 +97,9 @@ module.exports = (sequelize, DataTypes) => {
      * @param object
      * @returns {*}
      */
-    User.checkPermission = (action, actor, object) => {
+    Users.checkPermission = (action, actor, object) => {
         console.log(actor);
-        const crudRule = User.crudRule.get(actor.role);
+        const crudRule = Users.crudRule.get(actor.role);
         if (crudRule) {
             return crudRule.checkPermission(action, object.role, actor.id === object.id);
         }
@@ -112,19 +112,19 @@ module.exports = (sequelize, DataTypes) => {
      * @param object
      * @returns {*}
      */
-    User.prototype.checkPermission = function(action, object) {
+    Users.prototype.checkPermission = function(action, object) {
 
         console.log(this);
 
-        return User.checkPermission(action, this, object);
+        return Users.checkPermission(action, this, object);
 
     };
 
-    User.associate = function (models) {
-        User.hasMany(models.Entry, {foreignKey: 'userId', targetKey: 'id'});
-        User.hasMany(models.Contest, {foreignKey: 'userId', targetKey: 'id'});
-        User.hasMany(models.RefreshToken, {foreignKey: 'userId', targetKey: 'id'});
+    Users.associate = async function (models) {
+        await Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id'});
+        await Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id'});
+        await Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id'});
 
     };
-    return User;
+    return Users;
 };

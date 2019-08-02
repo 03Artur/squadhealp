@@ -1,5 +1,5 @@
 import {ForbiddenError, NotFoundError} from '../../errors';
-import {User} from './../../models';
+import {Userss} from './../../models';
 import {ROLE} from "../../constants";
 
 
@@ -26,12 +26,12 @@ export default async function (req, res, next) {
         if (req.method === ACTION.CREATE) {
             obj = req.body;
         } else {
-            obj = await User.findByPk(parseInt(req.params.id));
+            obj = await Users.findByPk(parseInt(req.params.id));
             if (!obj) {
-                return next(new NotFoundError("User not found"));
+                return next(new NotFoundError("Users not found"));
             }
         }
-        if (User.checkPermission(req.method, req.accessTokenPayload, obj)) {
+        if (Users.checkPermission(req.method, req.accessTokenPayload, obj)) {
             next()
         } else {
             next(new ForbiddenError())

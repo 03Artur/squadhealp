@@ -3,7 +3,7 @@ const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
 const {ROLE} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
-    const Contest = sequelize.define('Contest', {
+    const Contests = sequelize.define('Contests', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -49,33 +49,40 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-
-    Contest.crudRules = new CrudRule(
-        new Rule([ROLE.BUYER], true),
-        new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true),
-        new Rule([], true),
-        new Rule([], true),
+    Contests.crudRules = new CrudRule(
+        new Rule([ ROLE.ADMIN,ROLE.BUYER], true),
+        new Rule([ ROLE.ADMIN,ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true),
+        new Rule([ ROLE.ADMIN,], true),
+        new Rule([ ROLE.ADMIN,], true),
     );
 
-    Contest.checkPermission = (action, actor, businessInfo) => {
-        return Contest.crudRules.checkPermission(action, actor.role, actor.id === businessInfo.userId)
+
+    Contests.checkPermission = (action, actor, contest) => {
+        return Contests.crudRules.checkPermission(action, actor.role, actor.id === contest.userId)
     };
 
-    Contest.prototype.checkPermission = (action, actor) => {
-        return Contest.checkPermission(action, actor, this)
+    Contests.prototype.checkPermission = (action, actor) => {
+        return Contests.checkPermission(action, actor, this)
     };
 
-    Contest.associate = function (models) {
-        Contest.hasMany(
-            models.ContestTask,
+    Contests.associate = function (models) {
+        Contests.hasMany(
+            models.Tasks,
             {
-                foreignKey: 'ContestId',
+                foreignKey: 'contestId',
+                targetKey: 'id',
+            }
+        );
+        Contests.belongsTo(
+            models.Users,
+            {
+                foreignKey: 'userId',
                 targetKey: 'id',
             }
         )
     };
 
-    return Contest;
+    return Contests;
 };
 
 

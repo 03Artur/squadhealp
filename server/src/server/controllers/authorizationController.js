@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 
 //DATA BASE
-import {User, RefreshToken} from '../models';
+import {Users, RefreshTokens} from '../models';
 import db from '../models';
 
 //UTILS
@@ -16,7 +16,7 @@ export const loginUser = async (req, res, next) => {
     try {
         const user = req.user;
         let transaction = await sequelize.transaction();
-        let refreshToken = await RefreshToken.create({
+        let refreshToken = await RefreshTokens.create({
             userId: user.id,
             tokenString: "",
         }, {
@@ -43,13 +43,13 @@ export const loginUser = async (req, res, next) => {
 export const signUpUser = async (req, res, next) => {
     try {
         let transaction = await sequelize.transaction();
-        const user = await User.create(req.body, {
+        const user = await Users.create(req.body, {
             transaction,
         });
         if (!user) {
             return next(new BadRequestError());
         }
-        let refreshToken = await RefreshToken.create({
+        let refreshToken = await RefreshTokens.create({
             userId: user.id,
             tokenString: "null",
         }, {
@@ -77,7 +77,7 @@ export const signUpUser = async (req, res, next) => {
 export const getUserByAccessTokenPayload = async (req, res, next) => {
     try {
 
-        let user = await User.findByPk(req.accessTokenPayload.id, {
+        let user = await Users.findByPk(req.accessTokenPayload.id, {
             attributes: {
                 exclude: ['password', 'createdAt', 'updatedAt'],
             },
@@ -95,13 +95,13 @@ export const getUserByAccessTokenPayload = async (req, res, next) => {
 export const updateRefreshToken = async (req, res, next) => {
     try {
         let transaction = await sequelize.transaction();
-        let refreshToken = await RefreshToken.findByPk(req.refreshTokenPayload.id);
+        let refreshToken = await RefreshTokens.findByPk(req.refreshTokenPayload.id);
 
         if (!refreshToken) {
             return next(new BadRequestError());
 
         }
-        const user = await User.findByPk(refreshToken.userId, {
+        const user = await Users.findByPk(refreshToken.userId, {
             transaction,
             attributes: {
                 exclude: ['password', 'createdAt', 'updatedAt'],
@@ -131,7 +131,7 @@ export const deleteRefreshToken = async (req, res, next) => {
 
     try {
 
-        const result = await RefreshToken.destroy({
+        const result = await RefreshTokens.destroy({
             where: {
                 tokenString: req.body.refreshToken,
             }

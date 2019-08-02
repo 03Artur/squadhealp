@@ -1,15 +1,18 @@
-import {RefreshToken} from './../../models';
+import {RefreshTokens} from './../../models';
 import {DEVICES_COUNT} from "../../constants";
 import {sequelize} from '../../models'
 
 async function checkRefreshTokensLimit(req, res, next) {
 
     try {
-        const result = await RefreshToken.findAndCountAll({
+
+
+        const result = await RefreshTokens.findAndCountAll({
             where: {
                 userId: req.user.id,
             }
         });
+
         let transaction = sequelize.transaction();
         if (result.count >= DEVICES_COUNT) {
             result.forEach(item => item.destroy({transaction}));
