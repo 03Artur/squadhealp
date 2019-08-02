@@ -25,6 +25,7 @@ export const ROLE = {
     BUYER: "BUYER",
         CREATIVE: "CREATIVE",
         ADMIN: "ADMIN",
+
 };
 
 module.exports = {

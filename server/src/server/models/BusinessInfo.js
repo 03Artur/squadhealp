@@ -1,3 +1,7 @@
+import CrudRule from "../utils/permission_CRUD/classes/CrudRule";
+import {Rule} from "../utils/permission_CRUD/classes/Rule";
+import {ROLE} from "../constants";
+
 module.exports = (sequelize, DataTypes) => {
     const BusinessInfo = sequelize.define('BusinessInfo', {
         id: {
@@ -45,9 +49,24 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
+
+    BusinessInfo.crudRules = new CrudRule(
+        new Rule([ROLE.BUYER], true),
+        new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true),
+        new Rule([], true),
+        new Rule([], true),
+    );
+
+    BusinessInfo.checkPermission = (action, actor, businessInfo) => {
+        return BusinessInfo.crudRules.checkPermission(action, actor.role, actor.id === businessInfo.userId)
+    };
+
+    BusinessInfo.prototype.checkPermission = (action, actor) => {
+        return BusinessInfo.checkPermission(action, actor, this)
+    };
+
     BusinessInfo.associate = function (models) {
         BusinessInfo.hasMany(
-
             models.Contest,
             {
                 foreignKey: 'BusinessInfoId',

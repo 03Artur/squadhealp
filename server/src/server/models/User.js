@@ -1,5 +1,5 @@
 import {ROLE, ACTION} from "../constants";
-import Rule from '../utils/permission_CRUD/Rule';
+import Rule, {CrudRule} from '../utils/permission_CRUD/classes/Rule';
 
 
 module.exports = (sequelize, DataTypes) => {
@@ -67,10 +67,41 @@ module.exports = (sequelize, DataTypes) => {
 
 
     });
+    const allRolesArr = Object.values(ROLE);
+
     User.crudRule = new Map([
-        [ ACTION.CREATE, new Rule([ROLE.ADMIN])],
-        [ACTION.READ, new Rule( [ROLE.ADMIN])]
+
+        [ROLE.ADMIN, new CrudRule(
+            new Rule(allRolesArr),
+            new Rule(allRolesArr, true),
+            new Rule(allRolesArr, true),
+            new Rule([ROLE.CREATIVE, ROLE.BUYER], false),
+        )],
+
+        [ROLE.BUYER, new CrudRule(
+            new Rule([]),
+            new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
+            new Rule([], true),
+            new Rule([], true))],
+
+        [ROLE.CREATIVE, new CrudRule(
+            new Rule([]),
+            new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
+            new Rule([], true),
+            new Rule([], true)),],
     ]);
+
+    User.checkPermission = (action, actor, object) => {
+        const crudRule = User.crudRule.get(actor.role);
+        if (crudRule) {
+            return crudRule.checkPermission(action, object.role, actor.id === object.id);
+        }
+        return undefined;
+    };
+    User.prototype.checkPermission = (action, object) => {
+        return User.checkPermission(action, this, object);
+
+    };
 
     User.associate = function (models) {
         User.hasMany(models.Entry, {foreignKey: 'userId', targetKey: 'id'});

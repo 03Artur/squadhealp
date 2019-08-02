@@ -1,7 +1,7 @@
-import {ROLE, ACTION} from '../../constants';
+import {ROLE, ACTION} from '../../../constants';
 
 
-export  class Rule {
+export class Rule {
     /**
      *
      * @param {Array.<ROLE>} canActRoles
@@ -22,16 +22,16 @@ export  class Rule {
 
     checkPermission(role, isOwner = false) {
         if (isOwner) {
-            return this.canActRoles.includes(role);
-        } else {
             return this.canActOwner;
+
+        } else {
+            return this.canActRoles.includes(role);
         }
     }
 }
 
 
-
- export class CrudRule {
+/*export class CrudRule {
     constructor(createRule, readRule, updateRule, deleteRule) {
         this.rule = new Map([
             [ACTION.CREATE, createRule],
@@ -48,4 +48,4 @@ export  class Rule {
         }
         return undefined;
     }
-}
+}*/
