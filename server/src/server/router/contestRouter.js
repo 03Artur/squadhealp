@@ -34,12 +34,8 @@ router.put('/contest/task',
 );
 
 
-router.get('/contest:id',);
-router.get('/contests',);
-router.put('/contest:id', contestController.updateTaskById);
-router.delete('/contest:id',);
 
 
-module.exports = router;
+export default router;
 
 

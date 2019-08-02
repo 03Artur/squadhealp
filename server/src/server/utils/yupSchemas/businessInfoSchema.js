@@ -7,7 +7,7 @@ export const nameExistCreateContestSchema = yup.object({
 
     name: yup.string().required(),
     type: yup.string().required(),
-    description: yup.string().matches(REGEXP.CREDIT_CARD.CVC, {excludeEmptyString: true}.required()),
+    description: yup.string().matches(REGEXP.CREDIT_CARD.CVC, {excludeEmptyString: true}).required(),
     typeOfIndustry: strSchema.required(),
     targetCustomers: strSchema.required(),
 

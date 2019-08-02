@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import DocumentTitle from 'react-document-title';
 
 
@@ -8,12 +8,13 @@ import DocumentTitle from 'react-document-title';
 import Header from "../../components/headers/Header/Header";
 
 function HomePage(props) {
+
     return (
-        <React.Fragment>
+        <Fragment>
             <DocumentTitle title="Home"/>
             <Header/>
             <h1>Home Page</h1>
-        </React.Fragment>
+        </Fragment>
     );
 
 }

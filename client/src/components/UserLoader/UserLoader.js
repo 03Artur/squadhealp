@@ -28,7 +28,7 @@ const UserLoader = (props) => {
 
 
     useEffect(() => {
-
+        localStorage.clear();
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             props.getAuthorizedUser();
         }

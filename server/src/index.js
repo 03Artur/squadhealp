@@ -2,20 +2,15 @@ import express from 'express';
 import router from './server/router/index';
 import cors from 'cors';
 import errorHandler from './server/middlewares/error'
-import checkAccessToken from "./server/middlewares/token/checkAccessToken";
+
 import authorizationRouter from './server/router/authorizationRouter';
-import userRouter from './server/router/userRouter';
-import path from 'path';
-import testRouter from './server/router/testRouter'
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
-app.use(testRouter)
 
-app.use('/api', router);
 //static image files
 app.use('/images', express.static('/server/public/images'));
 
@@ -23,16 +18,10 @@ app.use('/images', express.static('/server/public/images'));
 app.use(authorizationRouter);
 
 //Access Token required
-
-app.use(checkAccessToken);
-
-
-app.use(userRouter);
-
+app.use(router);
 
 //Error Handler
 app.use(errorHandler);
 
 app.listen(PORT);
-
 

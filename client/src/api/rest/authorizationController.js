@@ -17,7 +17,7 @@ export const refreshTokens = () => axios.post(refreshTokensUrl, {refreshToken: l
 /*logout*/
 export const logoutUser = () => axios.delete(logoutURL, {refreshToken: localStorage.get(LOCAL_STORAGE_KEYS.REFRESH_TOKEN_KEY)}).then(response => {
     removeTokens();
-    return response;
+    return Promise.resolve(response);
 });
 
 /*load user from DB by tokens from local storage*/

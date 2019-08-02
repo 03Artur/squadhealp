@@ -1,4 +1,4 @@
-import {sequelize, User} from '../models';
+import {sequelize, Users} from '../models';
 import {Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 
@@ -7,7 +7,9 @@ export const createContest = async (req, res, next) => {
 
     try {
 
-        const contest = await Contests.create(req.body.contest);
+        req.body.userId = req.accessTokenPayload.id;
+
+        const contest = await Contests.create(req.body);
         if (!contest) {
             return next(new appError.BadRequestError())
         }
@@ -36,6 +38,7 @@ export const updateContest = async (req, res, next) => {
 export const createTask = async (req, res, next) => {
 
     try {
+        res.send(req.accessTokenPayload);
         const task = await Tasks.create(req.body);
         if (!task) {
             return next(new appError.BadRequestError())
@@ -50,17 +53,19 @@ export const createTask = async (req, res, next) => {
 export const activateNextContestTask = async (req, res, next) => {
 
     try {
+        let transaction = sequelize.transaction();
+
         const businessInfoId = parseInt(req.params.id);
 
         let contest = (await Tasks.findAll({
             where: {
                 businessInfoId: businessInfoId,
                 isPaid: true,
+                isActive: false,
             },
             limit: 1,
             order: [["priority", "DESC"]],
         }))[0];
-
         if (!contest) {
             return next(new appError.NotFoundError())
         }

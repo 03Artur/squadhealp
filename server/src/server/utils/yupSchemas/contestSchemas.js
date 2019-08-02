@@ -3,7 +3,7 @@ const yup = require('yup');
 
 const title = yup.string();
 const style = yup.string();
-const type = yup.oneOf(Object.values(TASK_TYPE));
+const type = yup.string().oneOf(Object.values(TASK_TYPE));
 
 
 export const createTaskSchema = yup.object({

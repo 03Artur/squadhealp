@@ -5,8 +5,8 @@ import {ACTION} from '../../constants';
 export default async function checkUserCrudContestPermissions(req, res, next) {
     try {
         let contest = null;
-        if (req.method === ACTION.CREATE) {
-            contest = req.body.contest;
+        if (req.method.toUpperCase() === ACTION.CREATE) {
+            contest = req.body;
         } else {
             contest = await Contests.findByPk(parseInt(req.param.id));
             if (!contest) {

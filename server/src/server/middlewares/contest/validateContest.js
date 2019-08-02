@@ -7,14 +7,17 @@ import {
 
 export async function validateContestOnCreate(req, res, next) {
     try {
-        const {isNameExist, businessInfo} = req.body;
-        if (isNameExist && nameExistCreateContestSchema.isValid(businessInfo)) {
+        const {contest} = req.body;
+
+        const validateSchema =  req.body.isNameExist ? nameExistCreateContestSchema : nameNotExistCreateContestSchema;
+
+        if (validateSchema.isValid(contest)) {
+
             return next()
-        } else if (!isNameExist && nameNotExistCreateContestSchema.isValid(businessInfo)) {
-            return next();
         } else {
             return next(new BadRequestError())
         }
+
     } catch (e) {
         next(new BadRequestError());
     }
