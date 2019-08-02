@@ -37,9 +37,6 @@ export default function (state = initialState, action) {
             }
         }
 
-        case ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION: {
-            return initialState;
-        }
         default: {
             return state;
         }

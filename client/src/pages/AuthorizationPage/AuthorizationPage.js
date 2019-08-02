@@ -51,17 +51,13 @@ const AuthorizationPage = (props) => {
         }
     };
 
-    const [isShowError, setIsShowError] = useState(true);
 
-    const coverError = () => {
-        if (isShowError)
-            setIsShowError(false);
-    };
+
     const renderError = () => {
-        if (isShowError && props.error) {
+        if ( props.error) {
             return (
                 <div className={styles.errorContainer}>
-                    <Error onClick={coverError} message={props.error.message}/>
+                    <Error message={props.error.message}/>
                 </div>
             )
         }

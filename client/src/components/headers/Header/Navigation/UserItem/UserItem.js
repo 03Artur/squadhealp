@@ -111,7 +111,7 @@ const mapStateToProps = store => {
     return {user};
 };
 const mapDispatchToProps = dispatch => ({
-    logoutAction: () => dispatch(logoutActionCreator())
+    logoutAction: () =>{  console.log("LOGOUT ACTION"); return  dispatch(logoutActionCreator())}
 
 });
 

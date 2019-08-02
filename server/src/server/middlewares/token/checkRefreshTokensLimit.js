@@ -6,17 +6,20 @@ async function checkRefreshTokensLimit(req, res, next) {
 
     try {
 
-
-        const result = await RefreshTokens.findAndCountAll({
+        const options = {
             where: {
                 userId: req.user.id,
             }
-        });
+        };
 
-        let transaction = sequelize.transaction();
-        if (result.count >= DEVICES_COUNT) {
-            result.forEach(item => item.destroy({transaction}));
-            transaction.commit();
+        const count = await RefreshTokens.count(options);
+
+
+        if (count >= DEVICES_COUNT) {
+            const numbersOfDestroyedRows = await RefreshTokens.destroy(options)
+            if(numbersOfDestroyedRows === count){
+                console.log('Very good =)')
+            }
         }
         return next();
     } catch (e) {

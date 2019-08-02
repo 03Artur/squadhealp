@@ -15,9 +15,12 @@ export const signUpUser = (data) => axios.post(signUpURL, data).then(setTokensTo
 export const refreshTokens = () => axios.post(refreshTokensUrl, {refreshToken: localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN_KEY)}).then(setTokensToLocalStorage);
 
 /*logout*/
-export const logoutUser = () => axios.delete(logoutURL, {refreshToken: localStorage.get(LOCAL_STORAGE_KEYS.REFRESH_TOKEN_KEY)}).then(response => {
+export const logoutUser = () => axios.delete(`${logoutURL}?tokenString=${localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN_KEY)}`).then(response => {
     removeTokens();
     return Promise.resolve(response);
+}).catch(error => {
+    removeTokens();
+    return  Promise.reject(error);
 });
 
 /*load user from DB by tokens from local storage*/

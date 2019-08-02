@@ -133,7 +133,7 @@ export const deleteRefreshToken = async (req, res, next) => {
 
         const result = await RefreshTokens.destroy({
             where: {
-                tokenString: req.body.refreshToken,
+                tokenString: req.query.tokenString,
             }
         });
         res.send({
