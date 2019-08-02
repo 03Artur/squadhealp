@@ -1,0 +1,5 @@
+@import "../../../commonStyles";
+.container{
+  @include flex-container(space-between,center);
+
+}

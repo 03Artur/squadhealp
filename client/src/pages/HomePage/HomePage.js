@@ -6,6 +6,7 @@ import DocumentTitle from 'react-document-title';
 * COMPONENTS
 * */
 import Header from "../../components/headers/Header/Header";
+import HomeNavigation from "../../components/navigations/HomeNavigation/HomeNavigation";
 
 function HomePage(props) {
 
@@ -13,6 +14,7 @@ function HomePage(props) {
         <Fragment>
             <DocumentTitle title="Home"/>
             <Header/>
+            <HomeNavigation/>
             <h1>Home Page</h1>
         </Fragment>
     );

@@ -3,7 +3,7 @@
 * */
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-
+import {Link} from 'react-router-dom';
 /*
 * Redux & friends
 * */
@@ -12,12 +12,13 @@ import {connect} from 'react-redux';
 /*
 * Components
 * */
-
+import Logo from '../../Logo/Logo'
 
 /*
-* tyles
+* Styles
 * */
 import styles from './HomeNavigation.module.scss';
+import {PATH} from "../../../constants";
 
 /*
 * UTILS
@@ -29,8 +30,9 @@ const HomeNavigation = (props) => {
 
 
     return (
-        <nav className={styles.}>
-
+        <nav className={styles.container}>
+            <Logo isColor={true}/>
+            <Link to={PATH.START_CONTEST}>Start Contest</Link>
         </nav>
     )
 };
