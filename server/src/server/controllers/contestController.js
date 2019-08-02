@@ -20,23 +20,19 @@ export const createContest = async (req, res, next) => {
 
 };
 export const updateContest = async (req, res, next) => {
-
     try {
         let businessInfo = await Contests.findByPk(req.params.id);
         if (!businessInfo) {
             return next(new appError.BadRequestError())
         }
         businessInfo = await Contests.update(req.body);
-
         res.send(businessInfo);
     } catch (e) {
         next(e);
     }
-
 };
 
 export const createTask = async (req, res, next) => {
-
     try {
         res.send(req.accessTokenPayload);
         const task = await Tasks.create(req.body);
@@ -44,7 +40,6 @@ export const createTask = async (req, res, next) => {
             return next(new appError.BadRequestError())
         }
         res.send(task);
-
     } catch (e) {
         next(e)
     }
@@ -54,9 +49,7 @@ export const activateNextContestTask = async (req, res, next) => {
 
     try {
         let transaction = sequelize.transaction();
-
         const businessInfoId = parseInt(req.params.id);
-
         let contest = (await Tasks.findAll({
             where: {
                 businessInfoId: businessInfoId,
