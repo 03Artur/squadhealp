@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Contest', {
+        return queryInterface.createTable('ContestTask', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -15,7 +15,7 @@ module.exports = {
                 onDelete: 'CASCADE',
                 onUpdate: "CASCADE",
                 references: {
-                    model: 'BusinessInfo',
+                    model: 'Contest',
                     key: 'id'
                 },
                 allowNull: false,
@@ -82,6 +82,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Contest');
+        return queryInterface.dropTable('ContestTask');
     }
 };

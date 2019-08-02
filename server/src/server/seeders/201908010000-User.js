@@ -1,7 +1,11 @@
 'use strict'
 const bcrypt = require('bcrypt');
-const {ROLE} = require('../constants');
+const ROLE = {
+    BUYER: "BUYER",
+    CREATIVE: "CREATIVE",
+    ADMIN: "ADMIN",
 
+};
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('User', [

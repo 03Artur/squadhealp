@@ -1,16 +1,16 @@
 import {BadRequestError} from '../../errors';
 import {
-    nameNotExistCreateBusinessInfoSchema,
-    nameExistCreateBusinessInfoSchema,
-    updateBusinessInfoSchema
+    nameNotExistCreateContestSchema,
+    nameExistCreateContestSchema,
+    updateContestSchema
 } from '../../utils/yupSchemas/businessInfoSchema';
 
-export async function validateDataOnCreateBusinessInfo(req, res, next) {
+export async function validateDataOnCreateContest(req, res, next) {
     try {
         const {isNameExist, businessInfo} = req.body;
-        if (isNameExist && nameExistCreateBusinessInfoSchema.isValid(businessInfo)) {
+        if (isNameExist && nameExistCreateContestSchema.isValid(businessInfo)) {
             return next()
-        } else if (!isNameExist && nameNotExistCreateBusinessInfoSchema.isValid(businessInfo)) {
+        } else if (!isNameExist && nameNotExistCreateContestSchema.isValid(businessInfo)) {
             return next();
         } else {
             return next(new BadRequestError())
@@ -20,9 +20,9 @@ export async function validateDataOnCreateBusinessInfo(req, res, next) {
     }
 }
 
-export async function validateDataOnUpdateBusinessInfo(req, res, next) {
+export async function validateDataOnUpdateContest(req, res, next) {
     try {
-        if (await updateBusinessInfoSchema.isValid(req.body)) {
+        if (await updateContestSchema.isValid(req.body)) {
             return next();
         } else {
             return next(new BadRequestError());

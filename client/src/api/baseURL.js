@@ -3,6 +3,7 @@ export const baseURL = 'http://localhost:3000';
 export const restURL = `${baseURL}`;
 export const adminUrl = `/admin`;
 export const loginURL = `/login`;
+export const logoutURL = `/logout`;
 export const signUpURL = `/signup`;
 export const authorizeUrl = `/authorize`;
 export const refreshTokensUrl = `/refresh`;

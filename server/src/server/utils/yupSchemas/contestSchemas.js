@@ -6,7 +6,7 @@ const style = yup.string();
 const type = yup.oneOf(Object.values(CONTEST_TYPE));
 
 
-export const createContestSchema = yup.object({
+export const createContestTaskSchema = yup.object({
     businessInfoId: yup.number().integer().required().min(0),
     title: title.required(),
     style: style.required(),
@@ -14,7 +14,7 @@ export const createContestSchema = yup.object({
 
 });
 
-export const updateContestSchema = yup.object({
+export const updateContestTaskSchema = yup.object({
     title,
     style,
     type,

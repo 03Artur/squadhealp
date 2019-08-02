@@ -1,42 +1,42 @@
 import {sequelize, User} from '../models';
-import {BusinessInfo, Contest} from '../models';
+import {Contest, ContestTask} from '../models';
 import appError, {NotFoundError} from '../errors';
 
-
-export const createBusinessInfo = async (req, res, next) => {
-
-    try {
-
-        const businessInfo = await BusinessInfo.create(req.body.businessInfo);
-        if (!businessInfo) {
-            return next(new appError.BadRequestError())
-        }
-        res.send(businessInfo);
-    } catch (e) {
-        next(e);
-    }
-
-};
-export const updateBusinessInfo = async (req, res, next) => {
-
-    try {
-        let businessInfo = await BusinessInfo.findByPk(req.params.id);
-        if (!businessInfo) {
-            return next(new appError.BadRequestError())
-        }
-        businessInfo = await BusinessInfo.update(req.body);
-
-        res.send(businessInfo);
-    } catch (e) {
-        next(e);
-    }
-
-};
 
 export const createContest = async (req, res, next) => {
 
     try {
-        const contest = await Contest.create(req.body);
+
+        const businessInfo = await Contest.create(req.body.businessInfo);
+        if (!businessInfo) {
+            return next(new appError.BadRequestError())
+        }
+        res.send(businessInfo);
+    } catch (e) {
+        next(e);
+    }
+
+};
+export const updateContest = async (req, res, next) => {
+
+    try {
+        let businessInfo = await Contest.findByPk(req.params.id);
+        if (!businessInfo) {
+            return next(new appError.BadRequestError())
+        }
+        businessInfo = await Contest.update(req.body);
+
+        res.send(businessInfo);
+    } catch (e) {
+        next(e);
+    }
+
+};
+
+export const createContestTask = async (req, res, next) => {
+
+    try {
+        const contest = await ContestTask.create(req.body);
         if (!contest) {
             return next(new appError.BadRequestError())
         }
@@ -47,11 +47,11 @@ export const createContest = async (req, res, next) => {
     }
 };
 
-export const activateNextContest = async (req, res, next) => {
+export const activateNextContestTask = async (req, res, next) => {
 
     try {
         const businessInfoId = parseInt(req.params.id);
-        let contest = (await Contest.findAll({
+        let contest = (await ContestTask.findAll({
             where: {
                 businessInfoId: businessInfoId,
                 isPaid: true,
@@ -69,10 +69,10 @@ export const activateNextContest = async (req, res, next) => {
     }
 };
 
-export const updateContestById = async (req, res, next) => {
+export const updateContestTaskById = async (req, res, next) => {
     try {
 
-        let contest = await Contest.findByPk(req.params.id);
+        let contest = await ContestTask.findByPk(req.params.id);
         if (!contest) {
             return next(new appError.NotFoundError())
         }

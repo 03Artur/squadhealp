@@ -10,7 +10,7 @@ export const CONTEST_TYPE = {
  * @enum {string}
  */
 
-export const ACTION = {
+ const ACTION = {
     CREATE: "POST",
     READ: "GET",
     UPDATE: "PUT",
@@ -21,7 +21,7 @@ export const ACTION = {
  *
  * @enum {string}
  */
-export const ROLE = {
+ const ROLE = {
     BUYER: "BUYER",
         CREATIVE: "CREATIVE",
         ADMIN: "ADMIN",

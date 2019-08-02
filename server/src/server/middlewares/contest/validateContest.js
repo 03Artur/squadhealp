@@ -1,9 +1,9 @@
 import {BadRequestError} from '../../errors';
-import {createContestSchema, updateContestSchema} from '../../utils/yupSchemas/contestSchemas';
+import {createContestTaskSchema, updateContestTaskSchema} from '../../utils/yupSchemas/contestSchemas';
 
-export async function validateDataOnCreateContest(req, res, next) {
+export async function validateDataOnCreateContestTask(req, res, next) {
     try {
-        if (await createContestSchema.isValid(req.body)) {
+        if (await createContestTaskSchema.isValid(req.body)) {
             return next();
         } else {
             return next(new BadRequestError());
@@ -13,9 +13,9 @@ export async function validateDataOnCreateContest(req, res, next) {
     }
 }
 
-export async function validateDataOnUpdateContest(req, res, next) {
+export async function validateDataOnUpdateContestTask(req, res, next) {
     try {
-        if (await updateContestSchema.isValid(req.body)) {
+        if (await updateContestTaskSchema.isValid(req.body)) {
             return next();
         } else {
             return next(new BadRequestError());

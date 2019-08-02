@@ -1,14 +1,8 @@
 import {ForbiddenError, NotFoundError} from '../../errors';
-import {ROLE_CRUD_USER_PERMISSIONS} from '../../utils/permission_CRUD/crudRule';
 import {User} from './../../models';
 import {ROLE} from "../../constants";
 
-function checkPermission(isActToSelf, actorRole, objRole, rule) {
-    return isActToSelf ?
-        rule.self.includes(actorRole) :
-        rule.other.get(actorRole).includes(objRole);
 
-}
 
 export function isItAdmin(req, res, next) {
 
@@ -25,47 +19,26 @@ export function isItAdmin(req, res, next) {
 
 }
 
+
 export default async function (req, res, next) {
     try {
-
-        let objRole = null;
-        if (req.method === 'POST') {
-            objRole = req.body.role;
+        let obj = null;
+        if (req.method === ACTION.CREATE) {
+            obj = req.body;
         } else {
-            const obj = await User.findByPk(parseInt(req.params.id));
+            obj = await User.findByPk(parseInt(req.params.id));
             if (!obj) {
                 return next(new NotFoundError("User not found"));
             }
-            objRole = obj.role;
         }
-
-        const {role: actorRole, id} = req.accessTokenPayload;
-        const isActToSelf = id === parseInt(req.params.id);
-
-        if (checkPermission(isActToSelf, actorRole, objRole, ROLE_CRUD_USER_PERMISSIONS.get(req.method))) {
-            return next();
+        if (User.checkPermission(req.method, req.accessTokenPayload, obj)) {
+            next()
         } else {
-            return next(new ForbiddenError())
+            next(new ForbiddenError())
         }
 
     } catch (e) {
         next(new ForbiddenError());
     }
 
-}
-
-export const testCheckCrudUserPermission = async function(req,res,next) {
-    try{
-
-        if( User.checkPermission(req.method,req.accessTokenPayload,req.body)){
-            return next()
-        }else{
-            return next(new ForbiddenError())
-        }
-
-
-    }catch (e) {
-        next(new ForbiddenError());
-    }
-
-}
+};

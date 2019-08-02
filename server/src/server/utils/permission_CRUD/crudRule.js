@@ -1,4 +1,4 @@
-import {ROLE} from '../../constants'
+const {ROLE} = require( '../../constants/index');
 
 export const ROLE_CRUD_USER_PERMISSIONS = new Map([
     [

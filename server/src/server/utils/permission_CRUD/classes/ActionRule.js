@@ -1,5 +1,4 @@
 import Rule from './Rule'
-import {ACTION, ROLE} from "../../../constants";
 
 module.exports = class ActionRule extends Rule {
 

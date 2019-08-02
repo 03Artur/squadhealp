@@ -3,7 +3,7 @@ import {REGEXP} from '../regexp';
 
 const strSchema = yup.string().matches(/.{1,255}/);
 
-export const nameExistCreateBusinessInfoSchema = yup.object({
+export const nameExistCreateContestSchema = yup.object({
 
     name: yup.string().required(),
     type: yup.string().required(),
@@ -13,7 +13,7 @@ export const nameExistCreateBusinessInfoSchema = yup.object({
 
 });
 
-export const nameNotExistCreateBusinessInfoSchema = yup.object({
+export const nameNotExistCreateContestSchema = yup.object({
 
     description: yup.string().matches(/.+/).required(),
     typeOfIndustry: strSchema.required(),
@@ -21,7 +21,7 @@ export const nameNotExistCreateBusinessInfoSchema = yup.object({
 
 });
 
-export const updateBusinessInfoSchema = yup.object({
+export const updateContestSchema = yup.object({
 
     name: yup.string().notRequired(),
     type: yup.string().notRequired(),

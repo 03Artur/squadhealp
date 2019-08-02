@@ -15,7 +15,7 @@ async function checkRefreshTokensLimit(req, res, next) {
             result.forEach(item => item.destroy({transaction}));
             transaction.commit();
         }
-       return next();
+        return next();
     } catch (e) {
         next(e);
     }

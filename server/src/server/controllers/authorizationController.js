@@ -18,7 +18,7 @@ export const loginUser = async (req, res, next) => {
         let transaction = await sequelize.transaction();
         let refreshToken = await RefreshToken.create({
             userId: user.id,
-            tokenString: "null",
+            tokenString: "",
         }, {
             transaction,
         });
@@ -73,6 +73,7 @@ export const signUpUser = async (req, res, next) => {
     }
 
 };
+
 export const getUserByAccessTokenPayload = async (req, res, next) => {
     try {
 
@@ -126,10 +127,32 @@ export const updateRefreshToken = async (req, res, next) => {
     }
 };
 
+export const deleteRefreshToken = async (req, res, next) => {
+
+    try {
+
+        const result = await RefreshToken.destroy({
+            where: {
+                tokenString: req.body.refreshToken,
+            }
+        });
+        res.send({
+            numberOfDestroyedRows: result,
+        });
+
+    } catch (e) {
+        next(e);
+    }
+
+};
+
 function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
     return !isRefreshToken ?
         jwt.sign({id, role, email, isBanned,}, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN})
         :
         jwt.sign({userEmail: email}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN});
 }
+
+
+
 

@@ -1,6 +1,6 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
-import {signUpUser, loginUser, getAuthorizedUser} from '../api/rest/authorizationController';
+import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
 import history from "../history";
 import {PATH} from "../constants";
 
@@ -21,10 +21,18 @@ export function* loginUserSaga({data: user}) {
 }
 
 export function* logoutUserSaga() {
-
-    localStorage.clear();
-    history.push(PATH.HOME)
-
+    yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
+    try {
+        const {data} = yield logoutUser();
+        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: null});
+    } catch (e) {
+        yield put({
+            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, error: {
+                status: e.response.status,
+                message: e.response.data,
+            }
+        });
+    }
 }
 
 export function* signUpUserSaga({data: user}) {

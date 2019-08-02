@@ -1,8 +1,8 @@
-import Rule from './Rule';
-import {ACTION} from "../../../constants";
+const Rule = require('./Rule');
+const {ACTION} = require("../../../constants/index");
 
 
-module.exports =  class CrudRule {
+module.exports = class CrudRule {
 
     /**
      *
@@ -29,16 +29,6 @@ module.exports =  class CrudRule {
         return undefined
     }
 
-}
+};
 
-
-export class UserCrudRule extends CrudRule {
-    constructor( createRule, readRule, updateRule, deleteRule) {
-        super(createRule, readRule, updateRule, deleteRule);
-
-    }
-    checkPermission( action, role, isOwner = false) {
-        return super.checkPermission(action, role, isOwner);
-    }
-}
 

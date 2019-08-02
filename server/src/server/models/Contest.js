@@ -1,12 +1,9 @@
 'use strict';
 
-import {ACTION, ROLE} from "../constants";
-import {Rule} from "../utils/permission_CRUD/classes/Rule";
-import CrudRule from "../utils/permission_CRUD/classes/CrudRule";
 
 
 module.exports = (sequelize, DataTypes) => {
-    const Contest = sequelize.define('Contest', {
+    const ContestTask = sequelize.define('ContestTask', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -69,14 +66,14 @@ module.exports = (sequelize, DataTypes) => {
 
 
 
-    Contest.associate = function (models) {
-        Contest.belongsTo(models.BusinessInfo, {foreignKey: 'businessInfoId', targetKey: 'id'});
-        Contest.hasMany(models.Entry, {foreignKey: 'contestId', targetKey: 'id'});
-        Contest.belongsTo(models.Entry, {foreignKey: 'winnerId', targetKey: 'id',});
+    ContestTask.associate = function (models) {
+        ContestTask.belongsTo(models.Contest, {foreignKey: 'businessInfoId', targetKey: 'id'});
+        ContestTask.hasMany(models.Entry, {foreignKey: 'contestId', targetKey: 'id'});
+        ContestTask.belongsTo(models.Entry, {foreignKey: 'winnerId', targetKey: 'id',});
 
     };
 
 
-    return Contest;
+    return ContestTask;
 };
     

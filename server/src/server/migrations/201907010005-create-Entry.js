@@ -24,7 +24,7 @@ module.exports = {
                 onDelete: 'CASCADE',
                 onUpdate: "CASCADE",
                 references: {
-                    model: 'Contest',
+                    model: 'ContestTask',
                     key: 'id'
                 },
                 allowNull: false,

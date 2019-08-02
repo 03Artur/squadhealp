@@ -5,7 +5,13 @@ import comparePassword from '../middlewares/password/comparePassword';
 import hashPassword from '../middlewares/password/hashPassword';
 import {validateDataOnCreateUser} from '../middlewares/user/validateUser'
 import checkRefreshToken from '../middlewares/token/checkRefreshToken'
-import {loginUser, signUpUser, updateRefreshToken, getUserByAccessTokenPayload} from './../controllers/authorizationController';
+import {
+    loginUser,
+    signUpUser,
+    updateRefreshToken,
+    getUserByAccessTokenPayload,
+    deleteRefreshToken
+} from './../controllers/authorizationController';
 import checkRefreshTokensLimit from '../middlewares/token/checkRefreshTokensLimit'
 import setUserActive from './../middlewares/user/setUserActive';
 import checkUserBan from './../middlewares/permission/checkUserBan';
@@ -20,6 +26,9 @@ router.post('/login',
     comparePassword,
     checkRefreshTokensLimit,
     loginUser);
+
+router.delete('/logout',
+    deleteRefreshToken);
 
 router.post('/signup',
     validateDataOnCreateUser,

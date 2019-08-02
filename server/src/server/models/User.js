@@ -98,26 +98,31 @@ module.exports = (sequelize, DataTypes) => {
      * @returns {*}
      */
     User.checkPermission = (action, actor, object) => {
+        console.log(actor);
         const crudRule = User.crudRule.get(actor.role);
         if (crudRule) {
             return crudRule.checkPermission(action, object.role, actor.id === object.id);
         }
         return undefined;
     };
+
     /**
      *
      * @param action
      * @param object
      * @returns {*}
      */
-    User.prototype.checkPermission = (action, object) => {
+    User.prototype.checkPermission = function(action, object) {
+
+        console.log(this);
+
         return User.checkPermission(action, this, object);
 
     };
 
     User.associate = function (models) {
         User.hasMany(models.Entry, {foreignKey: 'userId', targetKey: 'id'});
-        User.hasMany(models.BusinessInfo, {foreignKey: 'userId', targetKey: 'id'});
+        User.hasMany(models.Contest, {foreignKey: 'userId', targetKey: 'id'});
         User.hasMany(models.RefreshToken, {foreignKey: 'userId', targetKey: 'id'});
 
     };

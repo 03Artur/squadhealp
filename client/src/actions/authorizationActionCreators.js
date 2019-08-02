@@ -1,5 +1,4 @@
 import ACTION_TYPES from './actiontsTypes';
-import {AUTHORIZATION_MODE} from "../constants";
 
 
 export const signUpActionCreator = (data) => {

@@ -1,4 +1,4 @@
-const {User, BusinessInfo} = require('../../models');
+const {User, Contest} = require('../../models');
 const {ROLE} = require("../../constants");
 
 
@@ -17,7 +17,7 @@ const businessInfoObject = {
 
 
 console.log("can ADMIN create ADMIN: ", User.checkPermission("POST", userActor, userObject));
-console.log("can ADMIN create BusinessInfo: ", BusinessInfo.checkPermission("POST", userActor, businessInfoObject));
+console.log("can ADMIN create Contest: ", Contest.checkPermission("POST", userActor, businessInfoObject));
 
 
 

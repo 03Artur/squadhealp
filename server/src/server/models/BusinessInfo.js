@@ -3,7 +3,7 @@ const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
 const {ROLE} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
-    const BusinessInfo = sequelize.define('BusinessInfo', {
+    const Contest = sequelize.define('Contest', {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -50,32 +50,32 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
-    BusinessInfo.crudRules = new CrudRule(
+    Contest.crudRules = new CrudRule(
         new Rule([ROLE.BUYER], true),
         new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true),
         new Rule([], true),
         new Rule([], true),
     );
 
-    BusinessInfo.checkPermission = (action, actor, businessInfo) => {
-        return BusinessInfo.crudRules.checkPermission(action, actor.role, actor.id === businessInfo.userId)
+    Contest.checkPermission = (action, actor, businessInfo) => {
+        return Contest.crudRules.checkPermission(action, actor.role, actor.id === businessInfo.userId)
     };
 
-    BusinessInfo.prototype.checkPermission = (action, actor) => {
-        return BusinessInfo.checkPermission(action, actor, this)
+    Contest.prototype.checkPermission = (action, actor) => {
+        return Contest.checkPermission(action, actor, this)
     };
 
-    BusinessInfo.associate = function (models) {
-        BusinessInfo.hasMany(
-            models.Contest,
+    Contest.associate = function (models) {
+        Contest.hasMany(
+            models.ContestTask,
             {
-                foreignKey: 'BusinessInfoId',
+                foreignKey: 'ContestId',
                 targetKey: 'id',
             }
         )
     };
 
-    return BusinessInfo;
+    return Contest;
 };
 
 

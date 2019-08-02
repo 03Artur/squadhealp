@@ -1,5 +1,4 @@
-const {ROLE, ACTION} = require("../constants");
-
+const {ROLE, ACTION} = require("../../../constants/index");
 
 module.exports =  class Rule {
     /**

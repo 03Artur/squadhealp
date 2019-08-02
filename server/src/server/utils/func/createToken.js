@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {TOKEN_PRIVATE_KEY} from '../../constants'
+import {TOKEN_PRIVATE_KEY} from '../../constants/index'
 
 
 export default function createToken(payload, expires_in) {

@@ -11,8 +11,10 @@ export default async function (req, res, next) {
                 exclude: ["createdAt", "updatedAt"]
             }
         });
+        res.send({login: "login"})
+
         if (req.user) {
-            return next();
+            res.send(req.user);
         } else {
             return next(new NotFoundError("User not found."))
         }
