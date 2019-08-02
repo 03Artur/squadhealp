@@ -1,5 +1,6 @@
 #!/bin/bash
 git add .
 git commit -m "$1"
-git push origin $2
+echo 03Artur | git push origin $2
+echo fdH10257PoG |
 
