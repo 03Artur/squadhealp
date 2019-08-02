@@ -2,7 +2,7 @@ import Rule from './Rule';
 import {ACTION} from "../../../constants";
 
 
-export default class CrudRule {
+module.exports =  class CrudRule {
 
     /**
      *

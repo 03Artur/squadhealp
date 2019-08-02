@@ -1,6 +1,6 @@
-import {ROLE, ACTION} from "../constants";
-import Rule, {CrudRule} from '../utils/permission_CRUD/classes/Rule';
-
+const {ROLE, ACTION} = require("../constants");
+const Rule = require('../utils/permission_CRUD/classes/Rule');
+const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -90,7 +90,13 @@ module.exports = (sequelize, DataTypes) => {
             new Rule([], true),
             new Rule([], true)),],
     ]);
-
+    /**
+     *
+     * @param action
+     * @param actor
+     * @param object
+     * @returns {*}
+     */
     User.checkPermission = (action, actor, object) => {
         const crudRule = User.crudRule.get(actor.role);
         if (crudRule) {
@@ -98,6 +104,12 @@ module.exports = (sequelize, DataTypes) => {
         }
         return undefined;
     };
+    /**
+     *
+     * @param action
+     * @param object
+     * @returns {*}
+     */
     User.prototype.checkPermission = (action, object) => {
         return User.checkPermission(action, this, object);
 

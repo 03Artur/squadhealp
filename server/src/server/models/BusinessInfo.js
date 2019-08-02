@@ -1,6 +1,6 @@
-import CrudRule from "../utils/permission_CRUD/classes/CrudRule";
-import {Rule} from "../utils/permission_CRUD/classes/Rule";
-import {ROLE} from "../constants";
+const Rule = require('../utils/permission_CRUD/classes/Rule');
+const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
+const {ROLE} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
     const BusinessInfo = sequelize.define('BusinessInfo', {

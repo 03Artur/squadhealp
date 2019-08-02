@@ -53,3 +53,19 @@ export default async function (req, res, next) {
     }
 
 }
+
+export const testCheckCrudUserPermission = async function(req,res,next) {
+    try{
+
+        if( User.checkPermission(req.method,req.accessTokenPayload,req.body)){
+            return next()
+        }else{
+            return next(new ForbiddenError())
+        }
+
+
+    }catch (e) {
+        next(new ForbiddenError());
+    }
+
+}

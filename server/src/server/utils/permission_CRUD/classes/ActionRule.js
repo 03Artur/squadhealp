@@ -1,7 +1,7 @@
 import Rule from './Rule'
 import {ACTION, ROLE} from "../../../constants";
 
-export default class ActionRule extends Rule {
+module.exports = class ActionRule extends Rule {
 
     constructor(action, canActRoles, canActOwner = true) {
         super(canActRoles, canActOwner);
@@ -12,7 +12,7 @@ export default class ActionRule extends Rule {
         return super.checkPermission(role, isOwner);
     }
 
-}
+};
 
 
 

@@ -37,6 +37,7 @@ module.exports = {
         expiry: "12/99",
         cvc: "123",
     },
+    ACTION,
     CONTEST_TYPE,
     CONTEST_PRIORITY: new Map([
         [CONTEST_TYPE.TAGLINE, 8],

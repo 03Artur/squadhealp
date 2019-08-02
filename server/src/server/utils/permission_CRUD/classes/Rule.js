@@ -1,7 +1,7 @@
-import {ROLE, ACTION} from '../../../constants';
+const {ROLE, ACTION} = require("../constants");
 
 
-export class Rule {
+module.exports =  class Rule {
     /**
      *
      * @param {Array.<ROLE>} canActRoles
