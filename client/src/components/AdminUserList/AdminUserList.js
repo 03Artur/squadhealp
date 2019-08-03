@@ -1,7 +1,7 @@
 /*
 * React 
 * */
-import React, {userState, useEffect} from 'react';
+import React, {userState, useEffect, useLayoutEffect} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -25,13 +25,26 @@ import Spinner from "../Spinner/Spinner";
 
 
 function AdminUserList(props) {
-    useEffect(() => {
-        window.addEventListener('scroll', onScroll);
-        return () => {
-            window.removeEventListener('scroll', onScroll);
-        }
-    });
 
+
+    useLayoutEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+
+    }, [props.users.length]);
+
+    const onScroll = (e) => {
+        console.group("onScroll")
+        console.log(e);
+        console.log(props.users.length);
+        console.log(props.users.length < props.count && (window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)
+        console.groupEnd();
+        if (e.type === 'scroll' && (props.users.length < props.count) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
+            props.setQueryStringAction();
+
+        }
+
+    };
 
     useEffect(() => {
         props.getUsersAction(props.history.location.search);
@@ -42,14 +55,6 @@ function AdminUserList(props) {
     }, [props.query]);
 
 
-    const onScroll = (e) => {
-
-        if ((props.count > props.users.length) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
-            props.setQueryStringAction();
-
-        }
-
-    };
     const renderSpinner = () => {
         if (props.isFetching) {
             return <Spinner/>
@@ -57,6 +62,7 @@ function AdminUserList(props) {
     };
 
     const renderUserItems = () => {
+        console.log("}}}}}}}}}}}}}}}}}}}}}}}}")
         return props.users.map(user => (<UserItem key={user.id} user={user}/>));
     };
 
@@ -76,26 +82,21 @@ function AdminUserList(props) {
 
 AdminUserList.propTypes = {};
 
-AdminUserList.defaultProps = {
-
-    users: [],
-
-};
+AdminUserList.defaultProps = {};
 
 const mapStateToProps = store => {
 
-    return store.adminUsers;
+    const {users, query, isFetching, count} = store.adminUsers;
+    return {users, query, isFetching, count}
 
 };
 
 const mapDispatchToProps = dispatch => ({
 
-    getUsersAction: (queryString) => {
-        return dispatch(getUsersActionCreator(queryString))
-    },
-    setQueryStringAction: () => {
-        return dispatch(setQueryStringActionCreator())
-    },
+    getUsersAction: queryString => dispatch(getUsersActionCreator(queryString)),
+
+    setQueryStringAction: () => dispatch(setQueryStringActionCreator())
+
 
 });
 

@@ -10,13 +10,6 @@ router.post('/contest',
     contestMW.validateContestOnCreate,
     contestController.createContest);
 
-
-router.put('/contest',
-    contestMW.checkUserCrudContestPermissions,
-    contestMW.validateContestOnUpdate,
-    contestController.updateContest);
-
-
 router.post('/contest/task',
     contestMW.checkUserCrudTaskPermissions,
     contestMW.validateTaskOnCreate,
@@ -24,6 +17,14 @@ router.post('/contest/task',
     contestMW.addPriorityToTask,
     contestController.createTask
 );
+
+router.put('/contest',
+    contestMW.checkUserCrudContestPermissions,
+    contestMW.validateContestOnUpdate,
+    contestController.updateContest);
+
+
+
 
 router.put('/contest/task',
     contestMW.checkUserCrudTaskPermissions,

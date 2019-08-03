@@ -10,16 +10,16 @@ function getInitialState() {
         limit: 10,
         offset: 0,
     };
-   /* if (history.location.search) {
+    if (history.location.search) {
         query = queryString.parse(history.location.search);
-    }*/
-    return new Map({
+    }
+    return {
         users: [],
         count: 0,
         isFetching: false,
         error: null,
         query,
-    }).toJS()
+    }
 }
 
 
@@ -31,16 +31,15 @@ export default (state = getInitialState(), action) => {
                 ...state,
                 isFetching: true,
                 error: null,
-            }
+            };
         }
         case ACTION_TYPES.GET_USERS_RESPONSE: {
 
-            const newUsers = [...(_.cloneDeep(state.users)), ...action.users];
 
             return {
                 ...state,
                 isFetching: false,
-                users: newUsers,
+                users: _.cloneDeep([...state.users, ...action.users]),
                 count: action.count,
             };
 
@@ -50,7 +49,7 @@ export default (state = getInitialState(), action) => {
                 ...state,
                 isFetching: false,
                 error: action.error,
-            }
+            };
         }
         case ACTION_TYPES.GET_USERS_LIMIT_CHANGE: {
             return {
@@ -70,20 +69,18 @@ export default (state = getInitialState(), action) => {
                     ...state.query,
                     offset: (parseInt(state.query.offset) + parseInt(state.query.limit)),
                 },
-            }
+            };
         }
         case ACTION_TYPES.UPDATE_USER_RESPONSE: {
             //find user index in users array by id
-            const userIndex = state.users.findIndex(item => item.id === action.user.id);
 
             const newUsers = _.cloneDeep(state.users);
-
+            const userIndex = newUsers.findIndex(item => item.id === action.user.id);
             newUsers[userIndex] = action.user;
-
             return {
                 ...state,
                 users: newUsers,
-            }
+            };
         }
 
 
