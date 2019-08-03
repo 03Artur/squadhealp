@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
         [ROLE.ADMIN, new CrudRule(
             new Rule(allRolesArr),
             new Rule(allRolesArr, true),
-            new Rule(allRolesArr, true),
+            new Rule([ROLE.BUYER,ROLE.CREATIVE], false),
             new Rule([ROLE.CREATIVE, ROLE.BUYER], false),
         )],
 
@@ -98,7 +98,6 @@ module.exports = (sequelize, DataTypes) => {
      * @returns {*}
      */
     Users.checkPermission = (action, actor, object) => {
-        console.log(actor);
         const crudRule = Users.crudRule.get(actor.role);
         if (crudRule) {
             return crudRule.checkPermission(action, object.role, actor.id === object.id);
@@ -114,7 +113,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     Users.prototype.checkPermission = function(action, object) {
 
-        console.log(this);
 
         return Users.checkPermission(action, this, object);
 

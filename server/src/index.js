@@ -18,9 +18,7 @@ app.use('/images', express.static('/server/public/images'));
 app.use(authorizationRouter);
 
 //Access Token required
-/*
 app.use(router);
-*/
 
 //Error Handler
 app.use(errorHandler);

@@ -146,7 +146,7 @@ export const deleteRefreshToken = async (req, res, next) => {
 
 };
 
-function signToken({id, role, email, isBanned, rest}, isRefreshToken = false) {
+function signToken({id, role, email, isBanned}, isRefreshToken = false) {
     return !isRefreshToken ?
         jwt.sign({id, role, email, isBanned,}, TOKEN_PRIVATE_KEY, {expiresIn: ACCESS_TOKEN_EXPIRES_IN})
         :

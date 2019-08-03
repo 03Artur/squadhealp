@@ -2,7 +2,7 @@ import ACTION_TYPES from '../actions/actiontsTypes';
 import _ from 'lodash';
 import history from '../history';
 import queryString from 'query-string';
-
+import {Map} from 'immutable';
 
 function getInitialState() {
 
@@ -10,16 +10,16 @@ function getInitialState() {
         limit: 10,
         offset: 0,
     };
-    if (history.location.search) {
+   /* if (history.location.search) {
         query = queryString.parse(history.location.search);
-    }
-    return {
+    }*/
+    return new Map({
         users: [],
         count: 0,
         isFetching: false,
         error: null,
         query,
-    }
+    }).toJS()
 }
 
 
