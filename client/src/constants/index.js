@@ -12,6 +12,7 @@ export const AUTHORIZATION_MODE = {
 
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
 
+
 export const PATH = {
     HOME: '/',
     LOGIN: '/login',
@@ -20,18 +21,59 @@ export const PATH = {
     ADMIN: '/admin',
     USERS: '/users',
     START_CONTEST: '/contest',
+    DASHBOARD: '/dashboard'
 
 };
+
+export const TASK_TYPE = {
+    NAME: 'Name',
+    LOGO: "Logo",
+    TAGLINE: "Tagline",
+};
+export const TASK_TYPE_DESCRIPTION = new Map([
+    [TASK_TYPE.NAME, "Get up and running with the perfect name"],
+    [TASK_TYPE.LOGO, "Kickstart your venture with a unique, memorable logo"],
+    [TASK_TYPE.TAGLINE, "Connect deeply with your target audience with an on-target tagline"],
+    [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO, "Get the essentials needed to establish your brand together and save"],
+    [TASK_TYPE.NAME + " + " + TASK_TYPE.TAGLINE, "Communicate your vision with the perfect Name/Tagline combo"],
+    [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO + " + " + TASK_TYPE.TAGLINE, "Establish your entire brand identity and save with this bundle"],
+]);
+export const TASK_TYPE_IMAGES = new Map([
+        [
+            TASK_TYPE.NAME,
+            {
+                defaultImg: 'nameGrey.png',
+                hoverImg: 'nameGreen.png',
+            },
+        ],
+        [
+            TASK_TYPE.TAGLINE, {
+
+            defaultImg: 'taglineGrey.png',
+            hoverImg: 'taglineGreen.png',
+        }
+        ],
+        [
+            TASK_TYPE.LOGO,
+            {
+
+                defaultImg: 'logoGrey.png',
+                hoverImg: 'logoGreen.png',
+
+            }
+        ],
+    ]
+);
 
 export const ROLE = {
     BUYER: "BUYER",
     CREATIVE: "CREATIVE",
     ADMIN: "ADMIN",
+
 };
 export const ROLE_STRING = new Map([
     [ROLE.ADMIN, 'admin'],
     [ROLE.CREATIVE, 'creative'],
     [ROLE.BUYER, 'buyer'],
-
 ]);
 

@@ -1,0 +1,30 @@
+@import "../../commonStyles";
+
+.popularTypesContainer {
+  width: 100%;
+  background-color: $appGreenColor;
+  text-align: center;
+
+  .container {
+    @include container();
+
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      & > li {
+       
+        padding: 0 15px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .typesContainer {
+
+  }
+}

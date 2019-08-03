@@ -18,21 +18,11 @@
 }
 
 .contactDetails {
-
   padding: 0 15px;
   border-left: $mainHeaderBorder;
   border-right: $mainHeaderBorder;
   height: $mainHeaderHeight;
   @include flex-container(center, center);
-
-  .icon {
-    transform: scaleX(-1);
-    -moz-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    -ms-transform: scaleX(-1);
-    width: 11px;
-    margin-right: 10px;
-  }
 }
 
 .col {

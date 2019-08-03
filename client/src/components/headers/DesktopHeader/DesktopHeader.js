@@ -12,21 +12,20 @@ import {connect} from 'react-redux';
 /*
 * Components
 * */
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPhone} from '@fortawesome/free-solid-svg-icons';
 import Navigation from "./Navigation/Navigation";
 /*
 * Styles
 * */
-import styles from './Header.module.scss';
+import styles from './DesktopHeader.module.scss';
 
 /*
 * UTILS
 * */
 import {PHONE_NUMBER} from "../../../constants";
 import HomeNavigation from "../../navigations/HomeNavigation/HomeNavigation";
+import ContactDetails from "./ContactiDetails/ContactDetails";
 
-const Header = (props) => {
+const DesktopHeader = (props) => {
 
     return (
         <Fragment>
@@ -35,8 +34,8 @@ const Header = (props) => {
                 <div className={styles.row}>
                     <div className={styles.col}>
                         <div className={styles.contactDetails}>
-                            <FontAwesomeIcon className={styles.icon} icon={faPhone}/>
-                            <a href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER}</a>
+
+                            <ContactDetails/>
                         </div>
                     </div>
                     <div className={[styles.col,styles.navContainer].join(' ')}>
@@ -53,9 +52,9 @@ const Header = (props) => {
     )
 };
 
-Header.propTypes = {};
+DesktopHeader.propTypes = {};
 
-Header.defaultPros = {};
+DesktopHeader.defaultPros = {};
 
 /*
 * React redux
@@ -63,4 +62,4 @@ Header.defaultPros = {};
 const mapStateToProps = store => ({});
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(DesktopHeader)

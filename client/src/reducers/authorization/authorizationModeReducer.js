@@ -1,5 +1,5 @@
-import ACTION_TYPES from '../actions/actiontsTypes';
-import {AUTHORIZATION_MODE, PATH, ROLE} from '../constants'
+import ACTION_TYPES from '../../actions/actiontsTypes';
+import {AUTHORIZATION_MODE, PATH, ROLE} from '../../constants'
 
 const initialState = {
 

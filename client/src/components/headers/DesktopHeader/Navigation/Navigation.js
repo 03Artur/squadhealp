@@ -15,7 +15,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 
 
-import UserItem from "./UserItem/UserItem";
+import UserItem from "../../UserItem/UserItem";
 /*
 * Styles
 * */

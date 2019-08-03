@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 
 
 /*
-* tyles
+* styles
 * */
 import styles from './Template.module.scss';
 

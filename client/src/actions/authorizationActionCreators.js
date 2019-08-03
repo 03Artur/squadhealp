@@ -1,4 +1,6 @@
 import ACTION_TYPES from './actiontsTypes';
+import {ROLE,PATH} from "../constants";
+import Link from "../utils/classes/Link";
 
 
 export const signUpActionCreator = (data) => {
@@ -40,5 +42,35 @@ export const changeModeToSignUpActionCreator = () => {
     }
 };
 
+export const getNavigationActionCreator = (role) => {
+
+    const action = {
+        type: ACTION_TYPES.GET_GUEST_NAVIGATION,
+        userNav: [
+            new Link("View dashboard",PATH.DASHBOARD),
+            new Link("Logout",""),
+        ],
+        menuNav: [
+            {
+
+            }
+        ]
+
+    };
+    switch (role) {
+        case ROLE.ADMIN:
+            return {
+
+            };
+        case ROLE.CREATIVE:
+            return [];
+        case ROLE.BUYER:
+            return [];
+        default:
+            return action;
+    }
+
+
+};
 
 

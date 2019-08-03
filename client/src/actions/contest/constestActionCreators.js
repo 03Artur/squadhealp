@@ -1,4 +1,4 @@
-import ACTION_TYPES from './actiontsTypes';
+import ACTION_TYPES from '../actiontsTypes';
 
 export const getAllContestsActionCreator = () => {
     return {
@@ -27,3 +27,9 @@ export const deleteContestActionCreator = (contest) => {
     }
 };
 
+export const setSelectedTypesActionCreator = types => {
+    return {
+        type: ACTION_TYPES.SET_SELECTED_TASK_TYPES,
+        types:types,
+    }
+};

@@ -33,6 +33,8 @@ router.put('/contest/task',
     contestController.updateTaskById,
 );
 
+router.get('/contesttype',
+    )
 
 
 

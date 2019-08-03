@@ -1,4 +1,4 @@
-import REGEXP from './regExps'
+import REGEXP from '../regExps'
 
 export const emailValidation = value => (
     REGEXP.EMAIL.test(value) ? undefined : 'Email is not valid format'

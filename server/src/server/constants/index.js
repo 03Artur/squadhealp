@@ -8,6 +8,40 @@ export const TASK_TYPE = {
  *
  * @enum {string}
  */
+let TASK_TYPE_INFO = new Map([
+        [
+            TASK_TYPE.NAME,
+            {
+                images: {
+                    grey: 'nameGrey.png',
+                    green: 'nameGreen.png',
+                },
+                description: "Get up and running with the perfect name.",
+            }
+        ],
+        [
+            TASK_TYPE.TAGLINE,
+            {
+                images: {
+                    grey: 'taglineGrey.png',
+                    green: 'taglineGreen.png',
+                },
+                description: "Connect deeply with your target audience with an on-target tagline",
+            }
+        ],
+        [
+            TASK_TYPE.LOGO,
+            {
+                images: {
+                    grey: 'logoGrey.png',
+                    green: 'logoGreen.png',
+                },
+                description: "Kickstart your venture with a unique, memorable logo",
+            }
+        ],
+    ]
+);
+
 
 const ACTION = {
     CREATE: "POST",

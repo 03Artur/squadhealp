@@ -1,12 +1,18 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,lazy, Suspense} from 'react';
 import DocumentTitle from 'react-document-title';
-
+import {Route} from 'react-router-dom';
 import styles from './HomePage.module.scss';
+
 /*
 * COMPONENTS
 * */
-import Header from "../../components/headers/Header/Header";
-import HomeNavigation from "../../components/navigations/HomeNavigation/HomeNavigation";
+import Header from "../../components/headers/DesktopHeader/DesktopHeader";
+import AccessRoute from "../../components/routes/AccessRoute/AccessRoute";
+import {PATH, ROLE} from "../../constants";
+
+const StartContestPage = lazy(() => import('../StartContestPage/StartContestPage'));
+const AdminPage = lazy(() => import('../AdminPage/AdminPage'));
+
 
 function HomePage(props) {
 
@@ -14,8 +20,9 @@ function HomePage(props) {
         <div className={styles.pageContainer}>
             <DocumentTitle title="Home"/>
             <Header/>
+            <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATH.START_CONTEST} render = {props => <StartContestPage {...props}/>}/>
 
-            <h1>Home Page</h1>
+
         </div>
     );
 

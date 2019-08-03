@@ -20,8 +20,8 @@ import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 * Styles
 * */
 import styles from './UserItem.module.scss';
-import DropDownMenu from "../DropDownMenu/DropDownMenu";
-import {logoutActionCreator} from "../../../../../actions/authorizationActionCreators";
+import DropDownMenu from "../DesktopHeader/Navigation/DropDownMenu/DropDownMenu";
+import {logoutActionCreator} from "../../../actions/authorizationActionCreators";
 
 class UserItem extends React.Component {
     constructor(props) {
