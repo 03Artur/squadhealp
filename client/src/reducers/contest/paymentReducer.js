@@ -2,25 +2,25 @@ import ACTION_TYPES from "../../actions/actiontsTypes";
 
 const initialState = {
     isFetching: false,
-    contest: null,
+    isPaid: false,
     error: null,
 };
 
-export default function createContestReducer(state = initialState, action) {
+export default function paymentReducer(state = initialState, action) {
     switch (action.type) {
 
-        case ACTION_TYPES.CREATE_CONTEST_REQUEST :
+        case ACTION_TYPES.TASK_PAYMENT_REQUEST :
             return {
                 ...state,
                 isFetching: true,
 
             };
-        case ACTION_TYPES.CREATE_CONTEST_RESPONSE :
+        case ACTION_TYPES.TASK_PAYMENT_RESPONSE :
             return {
                 ...state,
-                contest: action.contest,
+                isPaid: action.isPaid,
             };
-        case ACTION_TYPES.CREATE_CONTEST_ERROR :
+        case ACTION_TYPES.TASK_PAYMENT_ACTION :
             return {
 
                 ...state,

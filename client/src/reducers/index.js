@@ -5,7 +5,7 @@ import authorizationModeReducer from './authorization/authorizationModeReducer';
 import {authorizationFormReducer} from './formReducers'
 import adminUsersReducer from './adminUsersReducer';
 import taskTypesReducer from './contest/taskTypeReducer';
-
+import createContestReducer from "./contest/createContestReducer";
 
 const appReducer = combineReducers({
     authorization: authorizationReducer,
@@ -14,6 +14,7 @@ const appReducer = combineReducers({
     adminUsers: adminUsersReducer,
     form: formReducer,
     taskTypes: taskTypesReducer,
+    createContest: createContestReducer,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

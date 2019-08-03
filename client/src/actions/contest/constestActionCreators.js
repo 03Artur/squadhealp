@@ -33,3 +33,10 @@ export const setSelectedTypesActionCreator = types => {
         types:types,
     }
 };
+
+export const createContestActionCreator = contest => {
+    return {
+        type: ACTION_TYPES.CREATE_CONTEST_ACTION,
+        contest: contest,
+    }
+};

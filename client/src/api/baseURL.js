@@ -1,15 +1,36 @@
-
+/*
+* BASE URL
+* */
 export const baseURL = 'http://localhost:3000';
-export const restURL = `${baseURL}`;
-export const adminUrl = `/admin`;
+
+
+/*
+* AUTHORIZATION
+* */
 export const loginURL = `/login`;
 export const logoutURL = `/logout`;
 export const signUpURL = `/signup`;
 export const authorizeUrl = `/authorize`;
 export const refreshTokensUrl = `/refresh`;
+
+
+/*
+* CRUD CONTEST & TASK URL
+* */
+export const contestUrl = `/contest`;
+export const taskUrl = `/contest/task`;
+
+
+/*
+* ADMIN
+* */
+export const adminUrl = `/admin`;
 export const userUrl = `/user`;
 export const usersUrl = `/users`;
 
+/*
+* Static paths
+* */
 export const imagesURL = `${baseURL}/images`;
 export const iconImagesURL = `${baseURL}/images/icons`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
