@@ -13,7 +13,7 @@ import {connect} from 'react-redux';
 * Components
 * */
 import Logo from '../../Logo/Logo'
-
+import LinkButton from "../../headers/LinkButtun/LinkButton";
 /*
 * Styles
 * */
@@ -25,34 +25,30 @@ import {PATH} from "../../../constants";
 * */
 
 
-
 const HomeNavigation = (props) => {
 
+    const combinedClassNamesString = [styles.container, props.className].join(' ');
 
     return (
-        <nav className={styles.container}>
+        <nav className={combinedClassNamesString}>
             <Logo isColor={true}/>
-            <Link to={PATH.START_CONTEST}>Start Contest</Link>
+            <LinkButton className={styles.linkButton} to={PATH.START_CONTEST}>Start Contest</LinkButton>
         </nav>
     )
 };
 
 HomeNavigation.propTypes = {
-
+    className: PropTypes.string,
 };
 
 HomeNavigation.defaultPros = {
-
+    className: '',
 };
 
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
-
-});
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapStateToProps = store => ({});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigation)

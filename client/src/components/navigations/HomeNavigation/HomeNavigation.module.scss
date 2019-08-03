@@ -1,5 +1,17 @@
 @import "../../../commonStyles";
 .container{
   @include flex-container(space-between,center);
+  flex: 1;
+}
+.linkButton{
+  border-color: $appGreenColor;
+  color: $appGreenColor;
+  font-size: 14px ;
+  font-weight: 400;
+  padding: 14px 18px;
 
+  &:hover{
+    background-color: $appGreenColor;
+    color: white;
+  }
 }

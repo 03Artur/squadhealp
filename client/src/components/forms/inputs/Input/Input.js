@@ -1,20 +1,20 @@
-import styles from './Input.module.sass';
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './Input.module.sass';
 
 export default function Input({input, type, meta: {touched,visited, error, warning}, ...props}) {
-
 
     const inputClassNames = [styles.input, styles.inputField];
     const errorClassNames = [styles.error, styles.errorField];
 
-
     if (touched && error) {
         inputClassNames.push(styles.invalid);
-    }else if(visited && ! error){
+    }else if(visited && !error){
         inputClassNames.push(styles.valid)
     }
 
+    const joinedInputClassNames = inputClassNames.join(' ');
+    const joinedErrorClassNames = errorClassNames.join(' ');
 
     const renderError = () => {
         if (touched && error) {
@@ -23,9 +23,6 @@ export default function Input({input, type, meta: {touched,visited, error, warni
             );
         }
     };
-    const joinedInputClassNames = inputClassNames.join(' ');
-    const joinedErrorClassNames = errorClassNames.join(' ');
-
 
     return (
         <div className={styles.container}>

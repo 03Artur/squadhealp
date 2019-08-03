@@ -24,10 +24,12 @@ import styles from './Header.module.scss';
 * UTILS
 * */
 import {PHONE_NUMBER} from "../../../constants";
+import HomeNavigation from "../../navigations/HomeNavigation/HomeNavigation";
 
 const Header = (props) => {
 
     return (
+        <Fragment>
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.row}>
@@ -41,8 +43,13 @@ const Header = (props) => {
                         <Navigation/>
                     </div>
                 </div>
+
             </div>
         </header>
+            <div className={styles.container}>
+            <HomeNavigation/>
+            </div>
+        </Fragment>
     )
 };
 

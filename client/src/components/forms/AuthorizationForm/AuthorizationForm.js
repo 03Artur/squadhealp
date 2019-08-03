@@ -21,6 +21,7 @@ import Error from "../notification/Error/Error";
 */
 
 function AuthorizationForm(props) {
+
     const renderField = (name, type, validate, component, placeholder, value = '') => {
         return (
             <div className={styles.fieldContainer}>

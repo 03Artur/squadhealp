@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import DocumentTitle from 'react-document-title';
 
-
+import styles from './HomePage.module.scss';
 /*
 * COMPONENTS
 * */
@@ -11,12 +11,12 @@ import HomeNavigation from "../../components/navigations/HomeNavigation/HomeNavi
 function HomePage(props) {
 
     return (
-        <Fragment>
+        <div className={styles.pageContainer}>
             <DocumentTitle title="Home"/>
             <Header/>
-            <HomeNavigation/>
+
             <h1>Home Page</h1>
-        </Fragment>
+        </div>
     );
 
 }
