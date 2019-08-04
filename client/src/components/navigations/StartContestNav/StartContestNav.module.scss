@@ -1,0 +1,50 @@
+@import "../../../commonStyles";
+
+
+.nav {
+  .container {
+    @include container();
+    box-sizing: border-box;
+    border-color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    @media screen and(max-width: 768px){
+      p{
+        display: none;
+      }
+
+    }
+    .row {
+      @include flex-container(space-between, center);
+
+    }
+    p{
+      text-align: left;
+    }
+    .col {
+      flex: 1;
+      &:first-child{
+        @media screen and(max-width: 768px){
+            display: none;
+          }
+      }
+    }
+
+    .buttonContainer {
+      @include flex-container(flex-end);
+      @media screen and(max-width: 768px){
+        justify-content: space-around;
+      }
+    }
+
+  }
+}
+
+.nextButton {
+  background-color: $appOrange !important;
+  margin: 0 15px;
+  @media screen and(max-width: 768px){
+    margin: 0;
+  }
+}

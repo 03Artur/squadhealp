@@ -6,15 +6,18 @@
   text-align: center;
   background-color: #f5f5f5;
   min-height: 350px;
-  max-width: 320px;
-  min-width: 280px;
+  max-width: 250px;
+  min-width: 200px;
+  display: inline-block;
   width: 100%;
   height: auto;
 
   p {
     margin-bottom: auto;
   }
-
+  h5{
+    font-size: 17px;
+  }
   img {
     height: 48px;
     width: 48px;

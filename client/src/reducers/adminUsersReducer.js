@@ -10,9 +10,9 @@ function getInitialState() {
         limit: 10,
         offset: 0,
     };
-    if (history.location.search) {
+    /*if (history.location.search) {
         query = queryString.parse(history.location.search);
-    }
+    }*/
     return {
         users: [],
         count: 0,
@@ -63,11 +63,14 @@ export default (state = getInitialState(), action) => {
 
         }
         case ACTION_TYPES.SET_USERS_QUERY_STRING_ACTION: {
+            const oldOffset = parseInt(state.query.offset);
+            const oldLimit = parseInt(state.query.limit);
+            let newOffset = (oldOffset + oldLimit)>state.count?state.count:(oldOffset + oldLimit);
             return {
                 ...state,
                 query: {
                     ...state.query,
-                    offset: (parseInt(state.query.offset) + parseInt(state.query.limit)),
+                    offset: newOffset,
                 },
             };
         }

@@ -34,16 +34,10 @@ function AdminUserList(props) {
     }, [props.users.length]);
 
     const onScroll = (e) => {
-        console.group("onScroll")
-        console.log(e);
-        console.log(props.users.length);
-        console.log(props.users.length < props.count && (window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)
-        console.groupEnd();
         if (e.type === 'scroll' && (props.users.length < props.count) && ((window.scrollY + window.innerHeight + 100) >= document.body.scrollHeight)) {
             props.setQueryStringAction();
 
         }
-
     };
 
     useEffect(() => {
@@ -66,11 +60,21 @@ function AdminUserList(props) {
         return props.users.map(user => (<UserItem key={user.id} user={user}/>));
     };
 
+    const renderMoreButton = () => {
+        if (props.users.length < props.count) {
+            return (
+                <div className={styles.moreButton} onClick={props.setQueryStringAction}>...more</div>
+            )
+        }
+    }
 
     return (
         <div className={styles.container}>
             {
                 renderUserItems()
+            }
+            {
+                renderMoreButton()
             }
             {
                 renderSpinner()
