@@ -2,17 +2,11 @@ import React, {Fragment} from 'react'
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import _ from 'lodash';
 
-class CreateContestStep{
-    constructor(path){
-        this.isDone = false;
-        this.path
-
-    }
-}
 
 
 
-export default function createContestStepsReducer(state = initialState, action) {
+
+export default function createContestStepsReducer(state , action) {
     switch (action.type) {
         case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION:{
 

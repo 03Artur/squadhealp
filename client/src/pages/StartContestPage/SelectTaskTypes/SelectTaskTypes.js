@@ -18,11 +18,14 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './SelectTaskTypes.module.scss';
-import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
+import {PATH, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
 import TaskTypeCard from "../../../components/TaskTypeCard/TaskTypeCard";
 import ProgressInfo from "../../../components/ProgressInfo/ProgressInfo";
 import StartContestNav from "../../../components/navigations/StartContestNav/StartContestNav";
-import {setSelectedTypesActionCreator} from "../../../actions/contest/constestActionCreators";
+import {
+    removeSelectedTypesActionCreator,
+    setSelectedTypesActionCreator
+} from "../../../actions/contest/constestActionCreators";
 
 /*
 * UTILS
@@ -31,8 +34,13 @@ import {setSelectedTypesActionCreator} from "../../../actions/contest/constestAc
 
 const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
     useEffect(() => {
+        if(selectedTypes){
+            props.removeSelectedTypesAction()
+        }
+    }, [])
+    useEffect(() => {
         if (selectedTypes) {
-            console.log(selectedTypes);
+            props.history.push(`${PATH.START_CONTEST}${PATH.BUSINESS}`);
         }
     }, [selectedTypes]);
 
@@ -48,7 +56,7 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
                 <li key={title}>
                     <TaskTypeCard className={className} title={title} icons={icons}
                                   description={description}
-                                  onClick={() => props.selectTypes(item)}/>
+                                  onClick={() => props.selectTypesAction(item)}/>
                 </li>)
         }));
 
@@ -61,12 +69,16 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
         return renderTypeCards(combinations);
     };
     const onNextClick = () => {
-
-    }
+        if (selectedTypes) {
+            props.history.push(`${PATH.START_CONTEST}${PATH.BUSINESS}`);
+        } else {
+            alert("Please select contest type");
+        }
+    };
     return (
         <Fragment>
             <ProgressInfo/>
-            <div className={[styles.typesContainer,styles.singleCardsContainer].join(' ')}>
+            <div className={[styles.typesContainer, styles.singleCardsContainer].join(' ')}>
                 <div className={styles.container}>
                     <ul className={styles.row}>
                         {
@@ -84,7 +96,7 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
                     </ul>
                 </div>
             </div>
-            <StartContestNav onNextClick={}/>
+            <StartContestNav onNextClick={onNextClick}/>
         </Fragment>
     )
 };
@@ -102,7 +114,8 @@ SelectTaskTypes.defaultPros = {};
 
 const mapStateToProps = store => store.selectedTaskTypes;
 const mapDispatchToProps = dispatch => ({
-    selectTypes: types => dispatch(setSelectedTypesActionCreator(types))
+    selectTypesAction: types => dispatch(setSelectedTypesActionCreator(types)),
+    removeSelectedTypesAction: () => dispatch(removeSelectedTypesActionCreator()),
 
 });
 

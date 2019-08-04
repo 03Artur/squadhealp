@@ -4,7 +4,7 @@ import styles from './Input.module.sass';
 
 export default function Input({input, type, meta: {touched,visited, error, warning}, ...props}) {
 
-    const inputClassNames = [styles.input, styles.inputField];
+    const inputClassNames = [styles.input, styles.inputField, props.className];
     const errorClassNames = [styles.error, styles.errorField];
 
     if (touched && error) {
@@ -46,6 +46,7 @@ Input.propTypes = {
     required: PropTypes.bool,
     pattern: PropTypes.string,
     type: PropTypes.string,
+    className: PropTypes.string,
 
 };
 
@@ -56,4 +57,5 @@ Input.defaultProps = {
     required: false,
     pattern: null,
     type: 'text',
+    className: '',
 };

@@ -26,6 +26,12 @@ export const deleteContestActionCreator = (contest) => {
         contest,
     }
 };
+export const removeSelectedTypesActionCreator = () => {
+    return {
+        type: ACTION_TYPES.REMOVE_SELECTED_TASK_TYPES,
+
+    }
+};
 
 export const setSelectedTypesActionCreator = types => {
     return {

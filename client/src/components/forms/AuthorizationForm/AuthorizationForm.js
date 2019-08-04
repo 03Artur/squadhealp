@@ -142,7 +142,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
             // a unique name for the form
-            form: 'AuthorizationForm',
+            form: 'authorizationForm',
             enableReinitialize: true,
         }
     )(AuthorizationForm)

@@ -32,9 +32,9 @@ import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
 import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
 import LinkList from "../../utils/classes/LinkList";
 import ContestInfo from "./ContestInfo/ContestInfo";
+import {taskPaymentActionCreator} from "../../actions/payment/taskPaymentActionCreator";
 
 let StartContestPage = (props) => {
-
 
 
     useEffect(() => {
@@ -45,7 +45,7 @@ let StartContestPage = (props) => {
     })
     useEffect(() => {
         if (props.selectedTypes) {
-            props.setIsNameExistAction(!props.selectedTypes.contains(TASK_TYPE.NAME));
+            props.setIsNameExistAction(!props.selectedTypes.includes(TASK_TYPE.NAME));
         }
 
     }, [props.selectedTypes]);
@@ -58,7 +58,7 @@ let StartContestPage = (props) => {
         <Fragment>
             <ProgressInfo/>
             <Route exact path={PATH.START_CONTEST + "/"} render={props => (<SelectTaskTypes {...props}/>)}/>
-            <Route  path={`${PATH.START_CONTEST}/${PATH.BUSINESS}`} render={props => (<ContestInfo {...props}/>)}/>
+            <Route path={`${PATH.START_CONTEST}${PATH.BUSINESS}`} render={props => (<ContestInfo {...props}/>)}/>
         </Fragment>
     )
 };
@@ -75,7 +75,7 @@ const mapDispatchToProps = dispatch => ({
     setIsNameExistAction: isNameExist => dispatch(setIsNameExistActionCreator(isNameExist)),
     createContestAction: contest => dispatch(createContestActionCreator(contest)),
     createTaskAction: task => dispatch(createTaskActionCreator(task)),
-    paymentAction: bankCard => dispatch(pay)
+    paymentAction: (taskId, bankCard) => dispatch(taskPaymentActionCreator(taskId, bankCard))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)
