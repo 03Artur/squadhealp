@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 /*
 * styles
 * */
-import styles from './SelectTask.module.scss';
+import styles from './SelectTaskTypes.module.scss';
 import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
 import TaskTypeCard from "../../../components/TaskTypeCard/TaskTypeCard";
 import ProgressInfo from "../../../components/ProgressInfo/ProgressInfo";
@@ -30,7 +30,7 @@ import {setSelectedTypesActionCreator} from "../../../actions/contest/constestAc
 
 
 
-const SelectTask = ({typesCombinations, selectedTypes, ...props}) => {
+const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
     useEffect(() => {
         if (selectedTypes) {
             console.log(selectedTypes);
@@ -74,20 +74,20 @@ const SelectTask = ({typesCombinations, selectedTypes, ...props}) => {
     )
 };
 
-SelectTask.propTypes = {
+SelectTaskTypes.propTypes = {
 
 };
 
-SelectTask.defaultPros = {
+SelectTaskTypes.defaultPros = {
 
 };
 
 /*
 * React redux
 * */
-SelectTask.propTypes = {};
+SelectTaskTypes.propTypes = {};
 
-SelectTask.defaultPros = {};
+SelectTaskTypes.defaultPros = {};
 
 const mapStateToProps = store => store.taskTypes;
 const mapDispatchToProps = dispatch => ({
@@ -95,4 +95,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectTask)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypes)

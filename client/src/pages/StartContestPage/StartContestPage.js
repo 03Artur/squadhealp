@@ -24,15 +24,22 @@ import {setSelectedTypesActionCreator} from "../../actions/contest/constestActio
 import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES, TASK_TYPE} from "../../constants";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
 import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
+import LinkList from "../../utils/classes/LinkList";
 
 let StartContestPage = () => {
 
+    useEffect(()=>{
+        const list = new LinkList([1,2,3,4,5,6]);
+        for(let item of list){
+            console.log(item);
+        }
+    })
 
 
     return (
         <Fragment>
             <ProgressInfo />
-            <Route path={}/>
+
             <StartContestNav />
         </Fragment>
     )

@@ -51,7 +51,7 @@ ProgressInfo.defaultPros = {
 * React redux
 * */
 const mapStateToProps = store => {
-    return store.createContestStepsReducer;
+    return store.createContestSteps;
 }
 const mapDispatchToProps = dispatch => ({
 

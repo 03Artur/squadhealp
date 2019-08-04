@@ -29,9 +29,9 @@ const initialState = {
 export default function createContestStepsReducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION:
-            return {};
+            return state;
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION:
-            return {};
+            return state;
         case ACTION_TYPES.DONE_CURRENT_STEP_ACTION:
             const newState = _.cloneDeep(state);
             newState.currentStep.isDone = action.isDone;
