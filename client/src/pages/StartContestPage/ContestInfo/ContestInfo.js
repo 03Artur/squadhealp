@@ -46,9 +46,10 @@ ContestInfo.defaultPros = {
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
-
-});
+const mapStateToProps = store => {
+    const {isNameExist} = store.createContest;
+    return {isNameExist}
+};
 const mapDispatchToProps = dispatch => ({
 
 });

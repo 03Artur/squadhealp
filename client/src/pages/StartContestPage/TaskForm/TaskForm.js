@@ -18,6 +18,8 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './TaskForm.module.scss';
+import StartContestNav from "../../../components/navigations/StartContestNav/StartContestNav";
+import {createTaskActionCreator} from "../../../actions/contest/constestActionCreators";
 
 /*
 * UTILS
@@ -28,10 +30,12 @@ import styles from './TaskForm.module.scss';
 const Template = (props) => {
 
 
+
     return (
         <Fragment>
-
+            <StartContestNav onNextClick={} onPrevClick={}/>
         </Fragment>
+
     )
 };
 
@@ -46,11 +50,12 @@ Template.defaultPros = {
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
-
-});
+const mapStateToProps = store => {
+        const {selectedTypes} = store.selectedTaskTypes;
+        return {selectedTypes};
+};
 const mapDispatchToProps = dispatch => ({
-
+    createTaskAction: task => dispatch(createTaskActionCreator(task)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Template)

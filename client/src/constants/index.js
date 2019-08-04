@@ -21,6 +21,7 @@ export const PATH = {
     ADMIN: '/admin',
     USERS: '/users',
     START_CONTEST: '/contest',
+    BUSINESS: '/business',
     DASHBOARD: '/dashboard'
 
 };

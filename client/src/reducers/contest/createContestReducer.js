@@ -1,5 +1,5 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
-import {Map} from "immutable"
+import {Map, List} from "immutable"
 
 const initialState = new Map({
     isFetching: false,
@@ -28,11 +28,10 @@ export default function createContestReducer(state = initialState, action) {
         case ACTION_TYPES.CREATE_TASK_RESPONSE :
             return new Map({
                 ...state,
-                tasks: [...state.tasks, action.task]
+                tasks: new List([...state.tasks, action.task]).toJS(),
             }).toJS();
         case ACTION_TYPES.CREATE_CONTEST_ERROR :
             return new Map({
-
                 ...state,
                 isFetching: false,
                 error: action.error,

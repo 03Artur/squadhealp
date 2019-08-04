@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 /*
 * styles
 * */
-import styles from './Payment.module.scss';
+import styles from './TaskPayment.module.scss';
 
 /*
 * UTILS
@@ -25,7 +25,7 @@ import styles from './Payment.module.scss';
 
 
 
-const Payment = (props) => {
+const TaskPayment = (props) => {
 
 
     return (
@@ -35,11 +35,11 @@ const Payment = (props) => {
     )
 };
 
-Payment.propTypes = {
+TaskPayment.propTypes = {
 
 };
 
-Payment.defaultPros = {
+TaskPayment.defaultPros = {
 
 };
 
@@ -53,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Payment)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskPayment)

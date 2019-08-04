@@ -60,7 +60,9 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
         const combinations = typesCombinations.filter(item => item.length > 1);
         return renderTypeCards(combinations);
     };
+    const onNextClick = () => {
 
+    }
     return (
         <Fragment>
             <ProgressInfo/>
@@ -82,6 +84,7 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
                     </ul>
                 </div>
             </div>
+            <StartContestNav onNextClick={}/>
         </Fragment>
     )
 };

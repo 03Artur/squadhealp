@@ -41,6 +41,15 @@ export const createContestActionCreator = contest => {
     }
 };
 
+export const setCreateContestStepsAction = steps => {
+    return {
+        type: ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION,
+        steps: steps,
+
+    }
+};
+
+
 export const setIsNameExistActionCreator = (isNameExist) => ({
     type: ACTION_TYPES.SET_IS_NAME_EXIST,
     isNameExist: isNameExist,
@@ -48,7 +57,7 @@ export const setIsNameExistActionCreator = (isNameExist) => ({
 
 export const createTaskActionCreator = (task) => ({
     type: ACTION_TYPES.CREATE_TASK_ACTION,
-    task:task,
+    task: task,
 });
 
 

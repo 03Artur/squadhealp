@@ -19,7 +19,7 @@ import SelectTaskTypes from "./SelectTaskTypes/SelectTaskTypes";
 * */
 import styles from './StartContestPage.module.scss';
 import {
-    createContestActionCreator, createTaskActionCreator,
+    createContestActionCreator, createTaskActionCreator, setCreateContestStepsAction,
     setIsNameExistActionCreator,
     setSelectedTypesActionCreator
 } from "../../actions/contest/constestActionCreators";
@@ -31,8 +31,11 @@ import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES, TASK_TYPE, PATH} from "../../co
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
 import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
 import LinkList from "../../utils/classes/LinkList";
+import ContestInfo from "./ContestInfo/ContestInfo";
 
 let StartContestPage = (props) => {
+
+
 
     useEffect(() => {
         const list = new LinkList([1, 2, 3, 4, 5, 6]);
@@ -47,11 +50,15 @@ let StartContestPage = (props) => {
 
     }, [props.selectedTypes]);
 
+    const onNextClick = () => {
+
+        return
+    }
     return (
         <Fragment>
             <ProgressInfo/>
             <Route exact path={PATH.START_CONTEST + "/"} render={props => (<SelectTaskTypes {...props}/>)}/>
-            <StartContestNav/>
+            <Route  path={`${PATH.START_CONTEST}/${PATH.BUSINESS}`} render={props => (<ContestInfo {...props}/>)}/>
         </Fragment>
     )
 };
