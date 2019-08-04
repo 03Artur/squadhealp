@@ -8,11 +8,12 @@ const initialState = {
         [TASK_TYPE.TAGLINE],
         [TASK_TYPE.NAME,TASK_TYPE.LOGO],
         [TASK_TYPE.NAME,TASK_TYPE.TAGLINE],
+        [TASK_TYPE.LOGO,TASK_TYPE.TAGLINE],
         [TASK_TYPE.NAME,TASK_TYPE.LOGO,TASK_TYPE.TAGLINE],
     ],
 };
 
-export default function taskTypesReducer(state = initialState, action) {
+export default function selectedTaskTypesReducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPES.SET_SELECTED_TASK_TYPES:
             return {

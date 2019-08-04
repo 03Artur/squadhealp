@@ -30,7 +30,7 @@ export const deleteContestActionCreator = (contest) => {
 export const setSelectedTypesActionCreator = types => {
     return {
         type: ACTION_TYPES.SET_SELECTED_TASK_TYPES,
-        types:types,
+        types: types,
     }
 };
 
@@ -40,3 +40,17 @@ export const createContestActionCreator = contest => {
         contest: contest,
     }
 };
+
+export const setIsNameExistActionCreator = (isNameExist) => ({
+    type: ACTION_TYPES.SET_IS_NAME_EXIST,
+    isNameExist: isNameExist,
+});
+
+export const createTaskActionCreator = (task) => ({
+    type: ACTION_TYPES.CREATE_TASK_ACTION,
+    task:task,
+});
+
+
+
+

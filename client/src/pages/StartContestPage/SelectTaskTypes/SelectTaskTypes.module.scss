@@ -1,8 +1,10 @@
-@import "../../commonStyles";
+@import "../../../commonStyles";
 
-.popularTypesContainer {
+
+
+
+.typesContainer {
   width: 100%;
-  background-color: $appGreenColor;
   text-align: center;
 
   .container {
@@ -29,7 +31,10 @@
 
   }
 }
+.singleCardsContainer{
+  background-color: $appGreenColor;
 
+}
 .singleCard{
   background-color: white;
 }

@@ -29,7 +29,6 @@ import {setSelectedTypesActionCreator} from "../../../actions/contest/constestAc
 * */
 
 
-
 const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
     useEffect(() => {
         if (selectedTypes) {
@@ -47,20 +46,25 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
 
             return (
                 <li key={title}>
-                    <TaskTypeCard className={className}  title={title} icons={icons}
+                    <TaskTypeCard className={className} title={title} icons={icons}
                                   description={description}
                                   onClick={() => props.selectTypes(item)}/>
                 </li>)
         }));
+
     const renderSingleTypes = () => {
         const combinations = typesCombinations.filter(item => item.length === 1);
-        return renderTypeCards(combinations,styles.singleCard);
+        return renderTypeCards(combinations, styles.singleCard);
+    };
+    const renderGroupTypes = () => {
+        const combinations = typesCombinations.filter(item => item.length > 1);
+        return renderTypeCards(combinations);
     };
 
     return (
         <Fragment>
-            <ProgressInfo />
-            <div className={styles.popularTypesContainer}>
+            <ProgressInfo/>
+            <div className={[styles.typesContainer,styles.singleCardsContainer].join(' ')}>
                 <div className={styles.container}>
                     <ul className={styles.row}>
                         {
@@ -69,18 +73,22 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
                     </ul>
                 </div>
             </div>
-            <StartContestNav />
+            <div className={styles.typesContainer}>
+                <div className={styles.container}>
+                    <ul className={styles.row}>
+                        {
+                            renderGroupTypes()
+                        }
+                    </ul>
+                </div>
+            </div>
         </Fragment>
     )
 };
 
-SelectTaskTypes.propTypes = {
+SelectTaskTypes.propTypes = {};
 
-};
-
-SelectTaskTypes.defaultPros = {
-
-};
+SelectTaskTypes.defaultPros = {};
 
 /*
 * React redux
@@ -89,7 +97,7 @@ SelectTaskTypes.propTypes = {};
 
 SelectTaskTypes.defaultPros = {};
 
-const mapStateToProps = store => store.taskTypes;
+const mapStateToProps = store => store.selectedTaskTypes;
 const mapDispatchToProps = dispatch => ({
     selectTypes: types => dispatch(setSelectedTypesActionCreator(types))
 

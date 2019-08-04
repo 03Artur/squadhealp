@@ -4,7 +4,7 @@ import authorizationReducer from './authorization/authorizationReducer';
 import authorizationModeReducer from './authorization/authorizationModeReducer';
 import {authorizationFormReducer} from './formReducers'
 import adminUsersReducer from './adminUsersReducer';
-import taskTypesReducer from './contest/taskTypeReducer';
+import selectedTaskTypesReducer from './contest/taskTypeReducer';
 import createContestReducer from "./contest/createContestReducer";
 import createContestStepsReducer from './contest/createContestStepsReducer'
 const appReducer = combineReducers({
@@ -13,7 +13,7 @@ const appReducer = combineReducers({
     authorizationForm: authorizationFormReducer,
     adminUsers: adminUsersReducer,
     form: formReducer,
-    taskTypes: taskTypesReducer,
+    selectedTaskTypes: selectedTaskTypesReducer,
     createContest: createContestReducer,
     createContestSteps:createContestStepsReducer,
 });

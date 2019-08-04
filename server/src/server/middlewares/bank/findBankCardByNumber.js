@@ -12,7 +12,7 @@ export default async (req, res, next) => {
         if (card.cvc !== cvc || card.expiry !== expiry) {
             return next(new appError.BadRequestError())
         }
-
+        req.creditCard = card;
         return next()
 
     } catch (e) {
