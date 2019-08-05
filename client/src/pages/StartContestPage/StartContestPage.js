@@ -9,11 +9,8 @@ import {Route} from 'react-router-dom';
 * */
 import {connect} from 'react-redux';
 import {
-    createContestActionCreator,
-    createTaskActionCreator,
     setIsNameExistActionCreator,
 } from "../../actions/contest/constestActionCreators";
-import {taskPaymentActionCreator} from "../../actions/payment/taskPaymentActionCreator";
 
 /*
 * Components
@@ -49,9 +46,9 @@ let StartContestPage = ({steps, ...props}) => {
     const renderStep = (step) => {
 
         const Component = createContestStep(step);
-
+        console.log(step);
         return (
-            <Route key={step.value.path} path={step.value.path} render={props => <Component {...props}/>}/>
+            <Route key={step.path} path={step.path} render={props => <Component {...props}/>}/>
         );
     };
 
@@ -89,4 +86,4 @@ const mapStateToProps = store => ({
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)
+export default connect(mapStateToProps)(StartContestPage)

@@ -19,7 +19,7 @@ export const refreshTokensUrl = `/refresh`;
 * */
 export const contestUrl = `/contest`;
 export const taskUrl = `/contest/task`;
-
+export const contestPaymentUrl = '/payment/contest';
 
 /*
 * ADMIN

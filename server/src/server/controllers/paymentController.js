@@ -3,7 +3,7 @@ import {Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import {SQUAD_HELP_BANK_CARD} from '../constants'
 
-export async function taskPaymentController(req, res, next) {
+export async function contestPaymentController(req, res, next) {
     try {
         let transaction = await sequelize.transaction();
         const {cost} = req.task;

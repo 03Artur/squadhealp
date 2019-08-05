@@ -34,11 +34,17 @@ import {
 
 const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
 
-    /*useEffect(() => {
+    useEffect(() => {
+        if(selectedTypes.length){
+            props.onSubmitSuccess()
+        }
+    }, [selectedTypes]);
+
+    useEffect(() => {
         if(selectedTypes.length){
             props.removeSelectedTypesAction()
         }
-    }, []);*/
+    }, []);
 
 
 
@@ -53,7 +59,7 @@ const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
                 <li key={title}>
                     <TaskTypeCard className={className} title={title} icons={icons}
                                   description={description}
-                                  onClick={() => props.selectTypesAction(item)}/>
+                                  onClick={() => props.onSubmit(item)}/>
                 </li>)
         }));
 
@@ -73,7 +79,8 @@ const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
         }
     };
     return (
-        <form>
+        <Fragment>
+            <ProgressInfo/>
             <div className={[styles.typesContainer, styles.singleCardsContainer].join(' ')}>
                 <div className={styles.container}>
                     <ul className={styles.row}>
@@ -92,11 +99,13 @@ const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
                     </ul>
                 </div>
             </div>
-        </form>
+            <StartContestNav onNextClick={onNextClick}/>
+        </Fragment>
     )
 };
 
-SelectTaskTypesForm.propTypes = {};
+SelectTaskTypesForm.propTypes = {
+};
 
 SelectTaskTypesForm.defaultPros = {};
 
@@ -109,7 +118,6 @@ SelectTaskTypesForm.defaultPros = {};
 
 const mapStateToProps = store => store.selectedTaskTypes;
 const mapDispatchToProps = dispatch => ({
-    selectTypesAction: types => dispatch(setSelectedTypesActionCreator(types)),
     removeSelectedTypesAction: () => dispatch(removeSelectedTypesActionCreator()),
 
 });

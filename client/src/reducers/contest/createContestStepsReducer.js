@@ -11,12 +11,14 @@ import {
     createTaskActionCreator, nextCreateContestStepActionCreate,
     setSelectedTypesActionCreator
 } from "../../actions/contest/constestActionCreators";
+import {contestPaymentActionCreator} from "../../actions/payment/contestPaymentActionCreator";
 
 
 
 const initialState = {
     steps: new List([
         {
+            isNotRenderNav: true,
             path: COMPLEX_PATH.SELECT_TASK_TYPE,
             component: SelectTaskTypes,
             onSubmit: (types) => store.dispatch(setSelectedTypesActionCreator(types)),
@@ -30,6 +32,11 @@ const initialState = {
             path: COMPLEX_PATH.CREATE_TASK,
             component: null,
             onSubmit: (task) => store.dispatch(createTaskActionCreator(task)),
+        },
+        {
+            path: COMPLEX_PATH.TASK_PAYMENT,
+            component: null,
+            onSubmit: (id,creditCard) => store.dispatch(contestPaymentActionCreator(id, creditCard)),
         },
     ])
 };

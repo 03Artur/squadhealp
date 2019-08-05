@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 /*
 * Redux & friends
 * */
-import {connect}
+import {connect} from 'react-redux';
 
 
 import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
@@ -21,14 +21,14 @@ import {
 * */
 
 
-const CreateContestStep = (Form, step) => {
+const CreateContestStep = (step) => {
 
     const StepComponent = (props) => {
 
 
         const onNextClick = () => {
 
-            step.value.onSubmit()
+            step.onSubmit()
 
         };
 
@@ -36,22 +36,25 @@ const CreateContestStep = (Form, step) => {
             props.prevStepAction()
         };
 
-
+        const Form = step.component;
         return (
             <Fragment>
-                <Form  {step.value.onSubmit} onSubmitSuccess={props.nextStepAction} {...props}/>
-                <StartContestNav onPrevClick={onPrevClick} onNextClick={onNextClick}/>
+                <Form onSubmi={step.onSubmit} onSubmitSuccess={props.nextStepAction} {...props}/>
+                {
+                    !step.isNotRenderNav && <StartContestNav onPrevClick={onPrevClick} onNextClick={onNextClick}/>
+                }
             </Fragment>
         )
     };
 
     const mapStateToProps = store => ({});
+
     const mapDispatchToProps = dispatch => ({
         nextStepAction: () => dispatch(nextCreateContestStepActionCreate()),
         prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
     });
 
-    export default connect(mapStateToProps, mapDispatchToProps)(StepComponent)
+   return connect(mapStateToProps, mapDispatchToProps)(StepComponent)
 
 
 };

@@ -22,6 +22,7 @@ export function* createContest({contest}) {
         })
     }
 }
+
 export function* createTaskSaga({task}) {
     yield put({type: ACTION_TYPE.CREATE_TASK_REQUEST});
     try {
@@ -60,4 +61,24 @@ export function* getAllUserContestsSaga({id}) {
             },
         })
     }
+}
+
+
+export function* contestPaymentSaga({contestId, creditCard}) {
+    yield put({type: ACTION_TYPE.CONTEST_PAYMENT_REQUEST});
+    try {
+
+        const {data} = yield contestController.contestPaymentById(contestId,creditCard);
+        yield put
+
+    } catch (e) {
+        yield put({
+            type: ACTION_TYPE.CONTEST_PAYMENT_ERROR,
+            error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
+        })
+    }
+
 }

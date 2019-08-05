@@ -7,10 +7,10 @@ import findTaskById from "../middlewares/contest/task/findTaskById";
 const router = express.Router();
 
 
-router.put('/task/payment:id',
-    bankMW.bankCardValidation,
+router.put('/payment/contest:id',
+    /*bankMW.bankCardValidation,
     bankMW.findBankCardByNumber,
-    findTaskById,
+    findTaskById,*/
     bankMW.checkSolvency,
 
     );

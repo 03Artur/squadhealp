@@ -9,18 +9,18 @@ const initialState = {
 export default function paymentReducer(state = initialState, action) {
     switch (action.type) {
 
-        case ACTION_TYPES.TASK_PAYMENT_REQUEST :
+        case ACTION_TYPES.CONTEST_PAYMENT_REQUEST :
             return {
                 ...state,
                 isFetching: true,
 
             };
-        case ACTION_TYPES.TASK_PAYMENT_RESPONSE :
+        case ACTION_TYPES.CONTEST_PAYMENT_RESPONSE :
             return {
                 ...state,
                 isPaid: action.isPaid,
             };
-        case ACTION_TYPES.TASK_PAYMENT_ACTION :
+        case ACTION_TYPES.CONTEST_PAYMENT_ERROR :
             return {
 
                 ...state,
