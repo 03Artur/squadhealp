@@ -2,7 +2,7 @@ import {TASK_TYPE} from "../../constants";
 import ACTION_TYPES from '../../actions/actiontsTypes';
 import _ from 'lodash';
 const initialState = {
-    selectedTypes: null,
+    selectedTypes: [],
     typesCombinations: [
         [TASK_TYPE.NAME],
         [TASK_TYPE.LOGO],
@@ -23,7 +23,7 @@ export default function selectedTaskTypesReducer(state = initialState, action) {
         case ACTION_TYPES.REMOVE_SELECTED_TASK_TYPES:
             return {
                 ...state,
-                selectedTypes: null,
+                selectedTypes: [],
             };
         default:
             return state;

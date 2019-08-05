@@ -8,19 +8,21 @@ import PropTypes from 'prop-types';
 * Redux & friends
 * */
 import Spinner from '../../Spinner/Spinner';
+
 //REDUX & FRIENDS
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-import {loginActionCreator, signUpActionCreator} from "../../../actions/authorizationActionCreators";
 /*
 * Components
 * */
-
+import Input from './Input/Input'
 
 /*
-* tyles
+* Styles
 * */
 import styles from './ContestForm.module.scss';
+import Select from "./Select/Select";
+import {NAME_TYPE, TASK_TYPE} from "../../../constants";
 
 /*
 * UTILS
@@ -29,42 +31,42 @@ import styles from './ContestForm.module.scss';
 
 const ContestForm = (props) => {
 
-    const renderField = (name, type, validate, component, placeholder, value = '') => {
-        return (
-            <div className={styles.fieldContainer}>
-                <Field name={name} component={component} placeholder={placeholder} type={type}
-                       validate={validate} value={value}/>
-            </div>
-        )
-    };
     const renderNamesFields = () => {
-        if (props.isNameExist) {
+        if (!props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    {
-                        renderField()
-                    }
+                    <Field name="name" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                           component={Input} type="text"/>
+                    <Field name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
+                           type="text"/>
                 </Fragment>
             )
         }
-    }
+    };
+
     const renderFields = () => {
         return (
             <Fragment>
-                {
-                    renderField()
-                }
-                {
-                    renderField()
-                }
+                <Field name="typeOfIndustry" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                       component={Input} type="text"/>
+                <Field name="targetCustomers" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                       component={Input} type="text"/>
+                <Field name="description" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                       component={Input} type="text"/>
             </Fragment>
         )
-    }
+    };
+
 
     return (
-        <Fragment>
-            <Field/>
-        </Fragment>
+        <div className={styles.container}>
+            {
+                renderNamesFields()
+            }
+            {
+                renderFields()
+            }
+        </div>
     )
 };
 
@@ -76,9 +78,10 @@ ContestForm.defaultPros = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {isNameExist} = store.createContest;
-    return {isNameExist};
+    const {selectedTypes} = store.selectedTaskTypes;
+    return {selectedTypes};
 };
+
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(

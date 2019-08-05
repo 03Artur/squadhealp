@@ -18,6 +18,7 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './ContestInfo.module.scss';
+import ContestForm from "../../../components/forms/ContestForm/ContestForm";
 
 /*
 * UTILS
@@ -30,7 +31,7 @@ const ContestInfo = (props) => {
 
     return (
         <Fragment>
-
+            <ContestForm />
         </Fragment>
     )
 };

@@ -32,7 +32,7 @@ const HomeNavigation = (props) => {
     return (
         <nav className={combinedClassNamesString}>
             <Logo isColor={true}/>
-            <LinkButton className={styles.linkButton} to={PATH.START_CONTEST}>Start Contest</LinkButton>
+            <LinkButton className={styles.linkButton} to={PATH.CONTEST}>Start Contest</LinkButton>
         </nav>
     )
 };

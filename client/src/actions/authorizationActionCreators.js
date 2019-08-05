@@ -41,6 +41,13 @@ export const changeModeToSignUpActionCreator = () => {
         type: ACTION_TYPES.AUTHORIZATION_SIGN_UP_MODE_ACTION,
     }
 };
+export const closeErrorActionCreator = () => {
+    console.log("closeErrorActionCreator");
+    return {
+        type: ACTION_TYPES.USER_AUTHORIZATION_ERROR,
+        error: null,
+    }
+};
 
 export const getNavigationActionCreator = (role) => {
 

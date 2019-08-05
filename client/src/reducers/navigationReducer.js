@@ -1,5 +1,5 @@
 import ACTION_TYPES from './../actions/actiontsTypes';
-
+import _ from 'lodash';
 
 const initialState = {
     user: null,
@@ -8,19 +8,25 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
+    console.log(action);
     switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
+
+            const newState = _.cloneDeep(state);
+
             return {
-                ...state,
+                ...newState,
                 isFetching: true,
                 error: null,
 
             }
         }
         case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
+            const newState = _.cloneDeep(state);
+
             return {
-                ...state,
+                ...newState,
                 isFetching: false,
                 user: action.user,
                 error: null,
@@ -28,14 +34,17 @@ export default function (state = initialState, action) {
             }
         }
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
+            const newState = _.cloneDeep(state);
+
 
             return {
-                ...state,
+                ...newState,
                 isFetching: false,
                 error: action.error,
 
             }
         }
+
 
         default: {
             return state;

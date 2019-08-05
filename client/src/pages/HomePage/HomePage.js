@@ -20,7 +20,7 @@ function HomePage(props) {
         <div className={styles.pageContainer}>
             <DocumentTitle title="Home"/>
             <Header/>
-            <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATH.START_CONTEST} render = {props => <StartContestPage {...props}/>}/>
+            <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATH.CONTEST} render = {props => <StartContestPage {...props}/>}/>
 
 
         </div>

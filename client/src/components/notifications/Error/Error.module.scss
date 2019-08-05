@@ -1,4 +1,23 @@
 @import "../../../commonStyles";
+
+
+.errorContainer {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  @include flex-container(center, center);
+  flex-direction: column;
+
+
+
+  & * {
+    z-index: 9999;
+  }
+}
+
 .container{
   @include flex-container(center, center);
   flex-direction: column;

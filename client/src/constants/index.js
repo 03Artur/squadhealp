@@ -13,6 +13,9 @@ export const AUTHORIZATION_MODE = {
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
 
 
+
+
+
 export const PATH = {
     HOME: '/',
     LOGIN: '/login',
@@ -20,10 +23,20 @@ export const PATH = {
     AUTHORIZATION: '/authorization',
     ADMIN: '/admin',
     USERS: '/users',
-    START_CONTEST: '/contest',
+    CONTEST: '/contest',
     BUSINESS: '/business',
-    DASHBOARD: '/dashboard'
+    DASHBOARD: '/dashboard',
+    TASK: '/task,',
+    PAYMENT: '/payment',
+    TYPE:'/type'
 
+};
+
+export const COMPLEX_PATH = {
+    CREATE_CONTEST: `${PATH.CONTEST}${PATH.BUSINESS}`,
+    CREATE_TASK: `${PATH.CONTEST}${PATH.TASK}`,
+    TASK_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
+    SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`
 };
 
 export const TASK_TYPE = {
@@ -31,6 +44,13 @@ export const TASK_TYPE = {
     LOGO: "Logo",
     TAGLINE: "Tagline",
 };
+
+export const NAME_TYPE = {
+    COMPANY: 'Company',
+    PRODUCT: 'Product',
+    PROJECT: 'Project',
+};
+
 export const TASK_TYPE_DESCRIPTION = new Map([
     [TASK_TYPE.NAME, "Get up and running with the perfect name"],
     [TASK_TYPE.LOGO, "Kickstart your venture with a unique, memorable logo"],

@@ -15,7 +15,10 @@ export function* createContest({contest}) {
     } catch (e) {
         yield put({
             type: ACTION_TYPE.CREATE_CONTEST_ERROR,
-            error: e.response.data,
+            error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         })
     }
 }
@@ -31,7 +34,10 @@ export function* createTaskSaga({task}) {
     } catch (e) {
         yield put({
             type: ACTION_TYPE.CREATE_TASK_ERROR,
-            error: e.response.data,
+            error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         })
     }
 }
@@ -48,7 +54,10 @@ export function* getAllUserContestsSaga({id}) {
     } catch (e) {
         yield put({
             type: ACTION_TYPE.GET_ALL_USER_CONTESTS_ERROR,
-            error: e.response.data,
+            error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         })
     }
 }

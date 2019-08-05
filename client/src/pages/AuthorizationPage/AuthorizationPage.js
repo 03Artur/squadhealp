@@ -9,8 +9,8 @@ import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {
     changeModeToLoginActionCreator,
-    changeModeToSignUpActionCreator,
-    coverErrorActionCreator,
+    changeModeToSignUpActionCreator, closeErrorActionCreator,
+
 } from "../../actions/authorizationActionCreators";
 
 /*
@@ -20,6 +20,7 @@ import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
 import AuthorizationForm from '../../components/forms/AuthorizationForm/AuthorizationForm';
 import Error from "../../components/notifications/Error/Error";
+
 /*
 * STYLES
 * */
@@ -52,13 +53,11 @@ const AuthorizationPage = (props) => {
     };
 
 
-
     const renderError = () => {
-        if ( props.error) {
+        if (props.error) {
+
             return (
-                <div className={styles.errorContainer}>
-                    <Error message={props.error.message}/>
-                </div>
+                <Error onClick={props.closeErrorAction} message={`${props.error.status} ${props.error.message}`}/>
             )
         }
     };
@@ -92,7 +91,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = (dispatch) => ({
     changeModeToLoginAction: () => dispatch(changeModeToLoginActionCreator()),
     changeModeToSignUpAction: () => dispatch(changeModeToSignUpActionCreator()),
-
+    closeErrorAction: () => dispatch(closeErrorActionCreator())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);

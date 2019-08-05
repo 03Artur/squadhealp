@@ -33,14 +33,16 @@ import {
 
 
 const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
+
     useEffect(() => {
-        if(selectedTypes){
+        if(selectedTypes.length){
             props.removeSelectedTypesAction()
         }
-    }, [])
+    }, []);
+
     useEffect(() => {
-        if (selectedTypes) {
-            props.history.push(`${PATH.START_CONTEST}${PATH.BUSINESS}`);
+        if (selectedTypes.length) {
+            props.history.push(`${PATH.CONTEST}${PATH.BUSINESS}`);
         }
     }, [selectedTypes]);
 
@@ -70,7 +72,7 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
     };
     const onNextClick = () => {
         if (selectedTypes) {
-            props.history.push(`${PATH.START_CONTEST}${PATH.BUSINESS}`);
+            props.history.push(props.next);
         } else {
             alert("Please select contest type");
         }

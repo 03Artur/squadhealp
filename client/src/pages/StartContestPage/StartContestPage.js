@@ -1,38 +1,40 @@
 /*
 * React
 * */
-
-import React, {Component, Fragment, useEffect,} from 'react';
+import React, {Fragment, useEffect,} from 'react';
 import {Route} from 'react-router-dom';
 
 /*
 * Redux & friends
 * */
 import {connect} from 'react-redux';
+import {
+    createContestActionCreator,
+    createTaskActionCreator,
+    setIsNameExistActionCreator,
+} from "../../actions/contest/constestActionCreators";
+import {taskPaymentActionCreator} from "../../actions/payment/taskPaymentActionCreator";
 
 /*
 * Components
 * */
 import SelectTaskTypes from "./SelectTaskTypes/SelectTaskTypes";
+import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
+import CreateContest from "./CreateContest/CreateContest";
+
 /*
 * Styles
 * */
+
 import styles from './StartContestPage.module.scss';
-import {
-    createContestActionCreator, createTaskActionCreator, setCreateContestStepsAction,
-    setIsNameExistActionCreator,
-    setSelectedTypesActionCreator
-} from "../../actions/contest/constestActionCreators";
+
 
 /*
 * UTILS
 * */
-import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES, TASK_TYPE, PATH} from "../../constants";
-import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
-import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
+import {TASK_TYPE, COMPLEX_PATH} from "../../constants";
 import LinkList from "../../utils/classes/LinkList";
-import ContestInfo from "./ContestInfo/ContestInfo";
-import {taskPaymentActionCreator} from "../../actions/payment/taskPaymentActionCreator";
+
 
 let StartContestPage = (props) => {
 
@@ -42,23 +44,16 @@ let StartContestPage = (props) => {
         for (let item of list) {
             console.log(item);
         }
-    })
-    useEffect(() => {
-        if (props.selectedTypes) {
-            props.setIsNameExistAction(!props.selectedTypes.includes(TASK_TYPE.NAME));
-        }
+    });
 
-    }, [props.selectedTypes]);
 
-    const onNextClick = () => {
+    const steps = [PATH.CONTEST, `${PATH.CONTEST}${PATH.BUSINESS}`,];
 
-        return
-    }
     return (
         <Fragment>
             <ProgressInfo/>
-            <Route exact path={PATH.START_CONTEST + "/"} render={props => (<SelectTaskTypes {...props}/>)}/>
-            <Route path={`${PATH.START_CONTEST}${PATH.BUSINESS}`} render={props => (<ContestInfo {...props}/>)}/>
+            <Route exact path={steps[0]} render={props => (<SelectTaskTypes nextStep = {steps[1]} {...props}/>)}/>
+            <Route path={steps[1]} render={props => (<CreateContest prevStep = {steps[0]}  {...props}/>)}/>
         </Fragment>
     )
 };
@@ -71,8 +66,8 @@ const mapStateToProps = store => ({
 
     ...store.selectedTaskTypes
 });
+
 const mapDispatchToProps = dispatch => ({
-    setIsNameExistAction: isNameExist => dispatch(setIsNameExistActionCreator(isNameExist)),
     createContestAction: contest => dispatch(createContestActionCreator(contest)),
     createTaskAction: task => dispatch(createTaskActionCreator(task)),
     paymentAction: (taskId, bankCard) => dispatch(taskPaymentActionCreator(taskId, bankCard))

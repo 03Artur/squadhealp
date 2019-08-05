@@ -24,15 +24,15 @@ import styles from './Input.module.scss';
 * */
 
 
-const Input = ({input,meta, ...props}) => {
+const Input = ({input,meta,placeholder, ...props}) => {
 
 
     return (
         <div className={styles.container}>
-            <label className={styles.label}>{
+            <label className={styles.label} >{
                 props.label
             }</label>
-            <input {...input} className={styles.input}/>
+            <input placeholder={placeholder} {...input} className={styles.input}/>
         </div>
     )
 };

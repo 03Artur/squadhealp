@@ -6,7 +6,6 @@ const initialState = new Map({
     contest: null,
     error: null,
     tasks: null,
-    isNameExist: false,
 }).toJS();
 
 export default function createContestReducer(state = initialState, action) {
@@ -36,11 +35,6 @@ export default function createContestReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.error,
             }).toJS();
-        case ACTION_TYPES.SET_IS_NAME_EXIST:
-            return new Map({
-                ...state,
-                isNameExist: action.isNameExist,
-            });
         default:
             return state;
 

@@ -12,7 +12,10 @@ export function* loginUserSaga({data: user}) {
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e.response,
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         });
     }
 }
@@ -26,7 +29,10 @@ export function* logoutUserSaga() {
 
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e.response,
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         });
     }
 }
@@ -40,7 +46,10 @@ export function* signUpUserSaga({data: user}) {
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data.user});
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: e.response,
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         });
     }
 }
@@ -52,7 +61,10 @@ export function* getAuthorizedUserSaga() {
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, error: e.response,
+            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
         });
     }
 }

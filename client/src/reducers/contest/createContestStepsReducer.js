@@ -1,16 +1,32 @@
 import React, {Fragment} from 'react'
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import _ from 'lodash';
+import LinkList from "../../utils/classes/LinkList";
+import {PATH} from "../../constants";
 
 
+const initialState = new LinkList([
+    {
+        isDone: false,
+        path: PATH.CONTEST,
+    },
+    {
+        isDone: false,
+        path: `${PATH.CONTEST}${PATH.BUSINESS}`,
+    },
+    {
+      isDone: false,
+      path: `${PATH.CONTEST}${PATH.BUSINESS}`
+    },
+])
 
 
-
-export default function createContestStepsReducer(state , action) {
+export default function createContestStepsReducer(state, action) {
     switch (action.type) {
-        case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION:{
 
-        }
+        case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION:
+            return state;
+
         case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION:
             return state;
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION:
