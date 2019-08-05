@@ -26,7 +26,7 @@ import createContestStepsReducer from "../../reducers/contest/createContestSteps
 
 
 
-const ProgressInfo = (props) => {
+const ProgressInfo = ({steps,...props}) => {
 
 
     return (
@@ -51,6 +51,8 @@ ProgressInfo.defaultPros = {
 * React redux
 * */
 const mapStateToProps = store => ({
+    ...store.createContestSteps,
+
 });
 const mapDispatchToProps = dispatch => ({
 

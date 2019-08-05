@@ -5,6 +5,7 @@ export default class LinkList {
         this.current = null;
         this.tail = null;
         this.length = 0;
+
         for (let i = 0; i < values.length; i++) {
             this.add(values[i])
 
@@ -15,8 +16,6 @@ export default class LinkList {
         let current = this.head;
         return {
             next() {
-
-
                 if (current === null) {
                     return {
                         done: true
@@ -33,7 +32,7 @@ export default class LinkList {
         }
     }
 
-    remove(node) {
+    /*remove(node) {
         if (!this.length) {
             return undefined
         }
@@ -55,20 +54,15 @@ export default class LinkList {
         this.length--;
         return node;
 
-    }
+    }*/
 
-    removeByIndex(index) {
-        if (index >= this.length) {
-            return;
-        }
-        let count = 0;
-    }
 
     add(value) {
         const newNode = new Node(null, null, value);
         if (!this.length) {
             this.head = newNode;
             this.tail = newNode;
+            this.current = newNode;
 
         } else {
             this.tail.next = newNode;
@@ -80,13 +74,25 @@ export default class LinkList {
         return this.tail;
     }
 
-    insert(value, index) {
-
-    }
-
 
     next() {
+        if (this.current) {
+            if (this.current.next) {
+                this.current = this.current.next
+                return this.current;
+            }
+        }
+        return null;
+    }
 
+    prev() {
+        if (this.current) {
+            if (this.current.prev) {
+                this.current = this.current.prev;
+                return this.current
+            }
+        }
+        return null;
     }
 
 

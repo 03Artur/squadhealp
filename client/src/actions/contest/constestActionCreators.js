@@ -56,6 +56,20 @@ export const setCreateContestStepsAction = steps => {
 };
 
 
+export const nextCreateContestStepActionCreate = () => {
+
+    return {
+        type: ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION,
+    }
+}
+export const prevCreateContestStepActionCreate = () => {
+
+    return {
+        type: ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION,
+    }
+}
+
+
 
 
 export const createTaskActionCreator = (task) => ({

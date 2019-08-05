@@ -1,43 +1,54 @@
 import React, {Fragment} from 'react'
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import _ from 'lodash';
-import LinkList from "../../utils/classes/LinkList";
-import {PATH} from "../../constants";
+import List from "../../utils/classes/LinkList";
+import {COMPLEX_PATH} from "../../constants";
+import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
+import CreateContest from "../../components/forms/CreateContest/CreateContest";
+import store from '../../store'
+import {
+    createContestActionCreator,
+    createTaskActionCreator, nextCreateContestStepActionCreate,
+    setSelectedTypesActionCreator
+} from "../../actions/contest/constestActionCreators";
 
 
-const initialState = new LinkList([
-    {
-        isDone: false,
-        path: PATH.CONTEST,
-    },
-    {
-        isDone: false,
-        path: `${PATH.CONTEST}${PATH.BUSINESS}`,
-    },
-    {
-      isDone: false,
-      path: `${PATH.CONTEST}${PATH.BUSINESS}`
-    },
-])
+
+const initialState = {
+    steps: new List([
+        {
+            path: COMPLEX_PATH.SELECT_TASK_TYPE,
+            component: SelectTaskTypes,
+            onSubmit: (types) => store.dispatch(setSelectedTypesActionCreator(types)),
+        },
+        {
+            path: COMPLEX_PATH.CREATE_CONTEST,
+            component: CreateContest,
+            onSubmit: (contest) => store.dispatch(createContestActionCreator(contest)),
+        },
+        {
+            path: COMPLEX_PATH.CREATE_TASK,
+            component: null,
+            onSubmit: (task) => store.dispatch(createTaskActionCreator(task)),
+        },
+    ])
+};
 
 
-export default function createContestStepsReducer(state, action) {
+export default function createContestStepsReducer(state = initialState, action) {
     switch (action.type) {
 
-        case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION:
-            return state;
-
-        case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION:
-            return state;
-        case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION:
-            return state;
-        case ACTION_TYPES.DONE_CURRENT_STEP_ACTION:
+        case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION: {
             const newState = _.cloneDeep(state);
-            newState.currentStep.isDone = action.isDone;
-            return {
-                ...newState,
-                isDone: action.isDone,
-            };
+            newState.next();
+            return newState;
+        }
+        case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION: {
+            const newState = _.cloneDeep(state);
+            newState.prev();
+            return newState;
+        }
+
         default:
             return state;
     }

@@ -18,8 +18,8 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './CreateContest.module.scss';
-import ContestForm from "../../../components/forms/ContestForm/ContestForm";
-import StartContestNav from "../../../components/navigations/StartContestNav/StartContestNav";
+import ContestForm from "../ContestForm/ContestForm";
+import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {createContestActionCreator} from "../../../actions/contest/constestActionCreators";
 
 /*

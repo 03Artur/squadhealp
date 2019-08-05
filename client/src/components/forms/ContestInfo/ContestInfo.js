@@ -18,7 +18,7 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './ContestInfo.module.scss';
-import ContestForm from "../../../components/forms/ContestForm/ContestForm";
+import ContestForm from "../ContestForm/ContestForm";
 
 /*
 * UTILS

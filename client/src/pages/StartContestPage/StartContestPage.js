@@ -18,9 +18,9 @@ import {taskPaymentActionCreator} from "../../actions/payment/taskPaymentActionC
 /*
 * Components
 * */
-import SelectTaskTypes from "./SelectTaskTypes/SelectTaskTypes";
+import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
-import CreateContest from "./CreateContest/CreateContest";
+import CreateContest from "../../components/forms/CreateContest/CreateContest";
 
 /*
 * Styles
@@ -32,28 +32,46 @@ import styles from './StartContestPage.module.scss';
 /*
 * UTILS
 * */
-import {TASK_TYPE, COMPLEX_PATH} from "../../constants";
-import LinkList from "../../utils/classes/LinkList";
+import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
+import createContestStep from "../../components/HOCs/CreateContestStep/CreateContestStep";
 
 
-let StartContestPage = (props) => {
-
+let StartContestPage = ({steps, ...props}) => {
 
     useEffect(() => {
-        const list = new LinkList([1, 2, 3, 4, 5, 6]);
-        for (let item of list) {
-            console.log(item);
+        if (steps) {
+            if (steps.current) {
+                props.history.push(steps.current.value.path);
+            }
         }
-    });
+    }, [steps]);
 
+    const renderStep = (step) => {
 
-    const steps = [PATH.CONTEST, `${PATH.CONTEST}${PATH.BUSINESS}`,];
+        const Component = createContestStep(step);
+
+        return (
+            <Route key={step.value.path} path={step.value.path} render={props => <Component {...props}/>}/>
+        );
+    };
+
+    const renderSteps = () => {
+        const result = [];
+        for (let step of steps) {
+            result.push(
+                renderStep(step)
+            )
+        }
+        return result;
+    };
 
     return (
         <Fragment>
             <ProgressInfo/>
-            <Route exact path={steps[0]} render={props => (<SelectTaskTypes nextStep = {steps[1]} {...props}/>)}/>
-            <Route path={steps[1]} render={props => (<CreateContest prevStep = {steps[0]}  {...props}/>)}/>
+            {
+                renderSteps()
+            }
+            <StartContestNav/>
         </Fragment>
     )
 };
@@ -64,13 +82,11 @@ StartContestPage.defaultPros = {};
 
 const mapStateToProps = store => ({
 
-    ...store.selectedTaskTypes
+    ...store.selectedTaskTypes,
+    ...store.createContestSteps,
+
 });
 
-const mapDispatchToProps = dispatch => ({
-    createContestAction: contest => dispatch(createContestActionCreator(contest)),
-    createTaskAction: task => dispatch(createTaskActionCreator(task)),
-    paymentAction: (taskId, bankCard) => dispatch(taskPaymentActionCreator(taskId, bankCard))
-});
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)

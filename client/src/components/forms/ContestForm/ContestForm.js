@@ -29,7 +29,7 @@ import {NAME_TYPE, TASK_TYPE} from "../../../constants";
 * */
 
 
-const ContestForm = (props) => {
+const ContestForm = ({handleSubmit, ...props}) => {
 
     const renderNamesFields = () => {
         if (!props.selectedTypes.includes(TASK_TYPE.NAME)) {
@@ -59,14 +59,14 @@ const ContestForm = (props) => {
 
 
     return (
-        <div className={styles.container}>
+        <form onSubmit={handleSubmit}>
             {
                 renderNamesFields()
             }
             {
                 renderFields()
             }
-        </div>
+        </form>
     )
 };
 

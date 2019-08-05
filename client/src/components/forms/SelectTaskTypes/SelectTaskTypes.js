@@ -19,9 +19,9 @@ import {connect} from 'react-redux';
 * */
 import styles from './SelectTaskTypes.module.scss';
 import {PATH, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
-import TaskTypeCard from "../../../components/TaskTypeCard/TaskTypeCard";
-import ProgressInfo from "../../../components/ProgressInfo/ProgressInfo";
-import StartContestNav from "../../../components/navigations/StartContestNav/StartContestNav";
+import TaskTypeCard from "../../TaskTypeCard/TaskTypeCard";
+import ProgressInfo from "../../ProgressInfo/ProgressInfo";
+import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {
     removeSelectedTypesActionCreator,
     setSelectedTypesActionCreator
@@ -32,19 +32,14 @@ import {
 * */
 
 
-const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
+const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
 
-    useEffect(() => {
+    /*useEffect(() => {
         if(selectedTypes.length){
             props.removeSelectedTypesAction()
         }
-    }, []);
+    }, []);*/
 
-    useEffect(() => {
-        if (selectedTypes.length) {
-            props.history.push(`${PATH.CONTEST}${PATH.BUSINESS}`);
-        }
-    }, [selectedTypes]);
 
 
     const renderTypeCards = (combinations, className = '') => (
@@ -78,8 +73,7 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
         }
     };
     return (
-        <Fragment>
-            <ProgressInfo/>
+        <form>
             <div className={[styles.typesContainer, styles.singleCardsContainer].join(' ')}>
                 <div className={styles.container}>
                     <ul className={styles.row}>
@@ -98,21 +92,20 @@ const SelectTaskTypes = ({typesCombinations, selectedTypes, ...props}) => {
                     </ul>
                 </div>
             </div>
-            <StartContestNav onNextClick={onNextClick}/>
-        </Fragment>
+        </form>
     )
 };
 
-SelectTaskTypes.propTypes = {};
+SelectTaskTypesForm.propTypes = {};
 
-SelectTaskTypes.defaultPros = {};
+SelectTaskTypesForm.defaultPros = {};
 
 /*
 * React redux
 * */
-SelectTaskTypes.propTypes = {};
+SelectTaskTypesForm.propTypes = {};
 
-SelectTaskTypes.defaultPros = {};
+SelectTaskTypesForm.defaultPros = {};
 
 const mapStateToProps = store => store.selectedTaskTypes;
 const mapDispatchToProps = dispatch => ({
@@ -121,4 +114,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypes)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypesForm)

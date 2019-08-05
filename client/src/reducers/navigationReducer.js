@@ -33,6 +33,7 @@ export default function (state = initialState, action) {
 
             }
         }
+
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
             const newState = _.cloneDeep(state);
 

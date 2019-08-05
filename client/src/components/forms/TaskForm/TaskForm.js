@@ -18,7 +18,7 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './TaskForm.module.scss';
-import StartContestNav from "../../../components/navigations/StartContestNav/StartContestNav";
+import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {createTaskActionCreator} from "../../../actions/contest/constestActionCreators";
 
 /*
