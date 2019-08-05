@@ -1,37 +1,22 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
+import ContestForm from "../../components/forms/ContestForm/ContestForm";
+
 
 export default class Test extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            limit: 10,
-            offset: 20,
-            where: JSON.stringify({
-                isBanned: true,
-            })
-        }
+
 
     }
 
 
-    componentDidMount() {
-        this.props.history.push({
-            search: queryString.stringify(this.state)
-    })
-
-    }
-    parseSearch = () => {
-        console.log(queryString.parse(this.props.location.search))
-    };
 
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-    }
-
+    submit = vakues => console.log(vakues);
     render() {
-        return <button onClick={this.parseSearch}/>
+        return <ContestForm onSubmit={this.submit}/>
     }
 
 };

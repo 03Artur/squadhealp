@@ -1,11 +1,13 @@
 import express from 'express';
 import contestMW from '../middlewares/contest'
 import * as contestController from '../controllers/contestController'
+import checkAccessToken from "../middlewares/token/checkAccessToken";
 
 const router = express.Router();
 
 
 router.post('/contest',
+    checkAccessToken,
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnCreate,
     contestController.createContest);

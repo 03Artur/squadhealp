@@ -34,6 +34,7 @@ const App = (props) => {
             <Router history={history}>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
+
                         <AccessRoute roles={[ROLE.ADMIN]} path={PATH.ADMIN}
                                      render={(props) => <AdminPage {...props}/>}/>
                         <Route path={[PATH.LOGIN, PATH.SIGN_UP]}

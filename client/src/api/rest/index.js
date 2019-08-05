@@ -27,7 +27,7 @@ instance.interceptors.request.use(config => {
     if (config.headers.Authorization !== accessToken) {
         config.headers.Authorization = accessToken
     }
-    console.log(++count," config: ",config);
+    console.log(config);
     return config;
 }, err => {
     return Promise.reject(err);

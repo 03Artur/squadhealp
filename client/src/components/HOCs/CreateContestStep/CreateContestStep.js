@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {Component, Fragment} from 'react';
+import React, {useEffect, Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -20,29 +20,16 @@ import {
 * UTILS
 * */
 
-
-const CreateContestStep = (step) => {
+export default (step) => {
 
     const StepComponent = (props) => {
 
 
-        const onNextClick = () => {
 
-            step.onSubmit()
-
-        };
-
-        const onPrevClick = () => {
-            props.prevStepAction()
-        };
-
-        const Form = step.component;
+        const Form = step.form;
         return (
             <Fragment>
-                <Form onSubmi={step.onSubmit} onSubmitSuccess={props.nextStepAction} {...props}/>
-                {
-                    !step.isNotRenderNav && <StartContestNav onPrevClick={onPrevClick} onNextClick={onNextClick}/>
-                }
+                <Form onPrevClick = {props.prevStepAction} onSubmit={step.onSubmit} onSubmitSuccess={step.onSubmitSuccess} {...props}/>
             </Fragment>
         )
     };
@@ -50,14 +37,15 @@ const CreateContestStep = (step) => {
     const mapStateToProps = store => ({});
 
     const mapDispatchToProps = dispatch => ({
-        nextStepAction: () => dispatch(nextCreateContestStepActionCreate()),
-        prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
-    });
+            nextStepAction: () => dispatch(nextCreateContestStepActionCreate()),
+            prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
+        })
+    ;
 
-   return connect(mapStateToProps, mapDispatchToProps)(StepComponent)
+    return connect(mapStateToProps, mapDispatchToProps)(StepComponent)
 
 
 };
 
 
-export default CreateContestStep
+

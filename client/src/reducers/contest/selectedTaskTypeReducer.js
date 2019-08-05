@@ -1,8 +1,10 @@
 import {TASK_TYPE} from "../../constants";
 import ACTION_TYPES from '../../actions/actiontsTypes';
 import _ from 'lodash';
+
+
 const initialState = {
-    selectedTypes: [],
+    selectedTypes: null,
     typesCombinations: [
         [TASK_TYPE.NAME],
         [TASK_TYPE.LOGO],

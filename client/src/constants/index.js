@@ -26,9 +26,10 @@ export const PATH = {
     CONTEST: '/contest',
     BUSINESS: '/business',
     DASHBOARD: '/dashboard',
-    TASK: '/task,',
+    TASK: '/task',
     PAYMENT: '/payment',
-    TYPE:'/type'
+    TYPE:'/type',
+    TEST: '/test'
 
 };
 

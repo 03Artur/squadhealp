@@ -17,7 +17,6 @@ import {
 * */
 import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
-import CreateContest from "../../components/forms/CreateContest/CreateContest";
 
 /*
 * Styles
@@ -29,24 +28,23 @@ import styles from './StartContestPage.module.scss';
 /*
 * UTILS
 * */
-import StartContestNav from "../../components/navigations/StartContestNav/StartContestNav";
 import createContestStep from "../../components/HOCs/CreateContestStep/CreateContestStep";
 
 
 let StartContestPage = ({steps, ...props}) => {
 
     useEffect(() => {
-        if (steps) {
-            if (steps.current) {
-                props.history.push(steps.current.value.path);
-            }
+
+        if (props.location.pathname !== props.currentStep.value.path) {
+            props.history.push(props.currentStep.value.path);
         }
-    }, [steps]);
+
+    }, [props.currentStep]);
 
     const renderStep = (step) => {
 
         const Component = createContestStep(step);
-        console.log(step);
+
         return (
             <Route key={step.path} path={step.path} render={props => <Component {...props}/>}/>
         );
@@ -68,7 +66,7 @@ let StartContestPage = ({steps, ...props}) => {
             {
                 renderSteps()
             }
-            <StartContestNav/>
+
         </Fragment>
     )
 };
@@ -77,13 +75,16 @@ StartContestPage.propTypes = {};
 
 StartContestPage.defaultPros = {};
 
-const mapStateToProps = store => ({
+const mapStateToProps = store => {
 
-    ...store.selectedTaskTypes,
-    ...store.createContestSteps,
+const {steps,currentStep} = store.createContestSteps;
+    return {
+        ...store.selectedTaskTypes,
+        steps,
+        currentStep
+    }
 
-});
-
+};
 
 
 export default connect(mapStateToProps)(StartContestPage)

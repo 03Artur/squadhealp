@@ -23,16 +23,18 @@ import Input from './Input/Input'
 import styles from './ContestForm.module.scss';
 import Select from "./Select/Select";
 import {NAME_TYPE, TASK_TYPE} from "../../../constants";
+import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 
 /*
 * UTILS
 * */
 
 
-const ContestForm = ({handleSubmit, ...props}) => {
+let ContestForm = ({handleSubmit, ...props}) => {
 
     const renderNamesFields = () => {
-        if (!props.selectedTypes.includes(TASK_TYPE.NAME)) {
+
+        if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
                     <Field name="name" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
@@ -47,26 +49,35 @@ const ContestForm = ({handleSubmit, ...props}) => {
     const renderFields = () => {
         return (
             <Fragment>
-                <Field name="typeOfIndustry" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                <Field name="typeOfIndustry" placeholder={"typeOfIndustry"} label='Type of Industry'
                        component={Input} type="text"/>
-                <Field name="targetCustomers" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                <Field name="targetCustomers" placeholder={"e.g. Smith & Forest"} label='Target customers'
                        component={Input} type="text"/>
-                <Field name="description" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                <Field name="description" placeholder={"e.g. Smith & Forest"} label='description'
                        component={Input} type="text"/>
             </Fragment>
+
         )
     };
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            {
-                renderNamesFields()
-            }
-            {
-                renderFields()
-            }
-        </form>
+
+            <div className={styles.formContainer}>
+                <div className={styles.container}>
+
+                    {
+                        renderNamesFields()
+                    }
+                    {
+                        renderFields()
+                    }
+
+
+                </div>
+                <StartContestNav onPrevClick={props.onPrevClick} onNextClick={handleSubmit}/>
+            </div>
+
     )
 };
 
@@ -86,5 +97,6 @@ const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: "contestForm"
-    })(ContestForm))
+        form: "testForm"
+    })(ContestForm)
+)

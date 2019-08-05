@@ -19,10 +19,6 @@ import {PATH,  ROLE} from '../../../constants'
 const AccessRoute = ({roles, redirectTo, user, ...props}) => {
 
     const render = () => {
-        console.group("AccessRouter");
-        console.log("User: ",user);
-        console.log("Role: ",roles);
-        console.groupEnd()
         if (user && roles.includes(user.role)) {
             return (<Route   {...props}/>)
 

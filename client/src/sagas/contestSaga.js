@@ -10,8 +10,6 @@ export function* createContest({contest}) {
             type: ACTION_TYPE.CREATE_CONTEST_RESPONSE,
             contest: data,
         })
-
-
     } catch (e) {
         yield put({
             type: ACTION_TYPE.CREATE_CONTEST_ERROR,

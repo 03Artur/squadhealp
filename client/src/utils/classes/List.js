@@ -1,13 +1,12 @@
-export default class LinkList {
+export default class MyList {
 
     constructor(values = []) {
         this.head = null;
-        this.current = null;
         this.tail = null;
         this.length = 0;
 
         for (let i = 0; i < values.length; i++) {
-            this.add(values[i])
+            this._add(values[i])
 
         }
     }
@@ -22,7 +21,8 @@ export default class LinkList {
                     }
                 } else {
                     const value = current.value;
-                    current = current.next;
+                    console.log("Iterator next");
+                    current = current._nextNode;
                     return {
                         done: false,
                         value: value,
@@ -58,15 +58,14 @@ export default class LinkList {
 
 
     add(value) {
-        const newNode = new Node(null, null, value);
-        if (!this.length) {
+        let newNode = new MyNode(null, null, value);
+        if (this.length===0) {
             this.head = newNode;
             this.tail = newNode;
-            this.current = newNode;
 
-        } else {
-            this.tail.next = newNode;
-            newNode.prev = this.tail;
+        } else if(this.length) {
+            newNode._prevNode = this.tail;
+            this.tail._nextNode = newNode;
             this.tail = newNode;
 
         }
@@ -74,34 +73,31 @@ export default class LinkList {
         return this.tail;
     }
 
+    _add(value) {
+        let node = new MyNode(value);
 
-    next() {
-        if (this.current) {
-            if (this.current.next) {
-                this.current = this.current.next
-                return this.current;
-            }
+        if (this.length) {
+            this.tail._nextNode = node;
+            node._prevNode = this.tail;
+            this.tail = node;
+        } else {
+            this.head = node;
+            this.tail = node;
         }
-        return null;
-    }
 
-    prev() {
-        if (this.current) {
-            if (this.current.prev) {
-                this.current = this.current.prev;
-                return this.current
-            }
-        }
-        return null;
-    }
+        this.length++;
+
+        return node;
+    };
+
 
 
 }
 
-class Node {
-    constructor(prev, next, value) {
-        this.prev = prev;
-        this.next = next;
+class MyNode {
+    constructor( value) {
+        this._prevNode = null;
+        this._nextNode = null;
         this.value = value;
     }
 }

@@ -26,11 +26,12 @@ import styles from './NavButton.module.scss';
 
 const NavButton = (props) => {
 
-    const onClick = (e) => {
-        if (props.isEnable) {
-            props.onClick(e);
-        }
-    };
+   const checkClick = () => {
+       if(props.isEnable){
+           props.onClick();
+       }
+   }
+
     const getClassName = () => {
         const classNames = [styles.container, props.className];
         if(!props.isEnable){
@@ -39,9 +40,9 @@ const NavButton = (props) => {
         return  classNames.join(" ");
 
     };
-    const classNames = getClassName()
+    const classNames = getClassName();
     return (
-        <div onClick={onClick} className={classNames}>
+        <div onClick={checkClick} className={classNames}>
             {
                 props.text
             }
@@ -56,13 +57,11 @@ NavButton.propTypes = {
     onClick: PropTypes.func,
 };
 
-NavButton.defaultPros = {
+NavButton.defaultProps = {
     className: '',
     text: "button",
     isEnable: true,
-    onClick: function (e) {
-        e.preventDefault()
-    }
+
 };
 
 /*

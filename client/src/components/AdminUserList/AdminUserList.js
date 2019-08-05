@@ -56,7 +56,6 @@ function AdminUserList(props) {
     };
 
     const renderUserItems = () => {
-        console.log("}}}}}}}}}}}}}}}}}}}}}}}}")
         return props.users.map(user => (<UserItem key={user.id} user={user}/>));
     };
 

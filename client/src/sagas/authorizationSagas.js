@@ -24,7 +24,6 @@ export function* logoutUserSaga() {
 
     try {
         const {data} = yield logoutUser();
-        console.log(data);
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: null});
 
     } catch (e) {

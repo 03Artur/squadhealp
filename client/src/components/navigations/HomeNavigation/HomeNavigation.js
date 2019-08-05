@@ -32,7 +32,7 @@ const HomeNavigation = (props) => {
     return (
         <nav className={combinedClassNamesString}>
             <Logo isColor={true}/>
-            <LinkButton className={styles.linkButton} to={PATH.CONTEST}>Start Contest</LinkButton>
+            <LinkButton className={styles.linkButton} to={props.currentStep.value.path}>Start Contest</LinkButton>
         </nav>
     )
 };
@@ -48,7 +48,14 @@ HomeNavigation.defaultPros = {
 /*
 * React redux
 * */
-const mapStateToProps = store => ({});
+const mapStateToProps = store => {
+
+    const {currentStep} = store.createContestSteps;
+        return {
+            currentStep
+        }
+
+};
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigation)
