@@ -5,9 +5,9 @@ import checkAccessToken from "../middlewares/token/checkAccessToken";
 
 const router = express.Router();
 
+router.use(checkAccessToken);
 
 router.post('/contest',
-    checkAccessToken,
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnCreate,
     contestController.createContest);
@@ -24,9 +24,6 @@ router.put('/contest',
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnUpdate,
     contestController.updateContest);
-
-
-
 
 router.put('/contest/task',
     contestMW.checkUserCrudTaskPermissions,

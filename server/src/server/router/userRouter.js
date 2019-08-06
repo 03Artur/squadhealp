@@ -3,8 +3,11 @@ import {createUser, deleteUserById, getUserById, updateUserById, findAndCountAll
 import hashPassword from '../middlewares/password/hashPassword'
 import {validateDataOnCreateUser, validateDataOnUpdateUser} from '../middlewares/user/validateUser'
 import checkUserCrudPermission, {isItAdmin} from '../middlewares/permission/checkCrudUserPermission';
+import checkAccessToken from "../middlewares/token/checkAccessToken";
 
 const router = express.Router();
+
+router.use(checkAccessToken);
 
 router.get('/users', isItAdmin, findAndCountAllUsers);
 
