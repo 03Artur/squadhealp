@@ -50,8 +50,8 @@ module.exports = (sequelize, DataTypes) => {
 
     });
     Contests.crudRules = new CrudRule(
-        new Rule([ ROLE.ADMIN,ROLE.BUYER], true),
-        new Rule([ ROLE.ADMIN,ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true),
+        new Rule([ ROLE.ADMIN, ROLE.BUYER]),
+        new Rule([ ROLE.ADMIN,ROLE.BUYER,ROLE.CREATIVE], true),
         new Rule([ ROLE.ADMIN,], true),
         new Rule([ ROLE.ADMIN,], true),
     );

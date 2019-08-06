@@ -6,7 +6,7 @@ module.exports =  class Rule {
      * @param {Array.<ROLE>} canActRoles
      * @param canActOwner
      */
-    constructor(canActRoles, canActOwner = true) {
+    constructor(canActRoles, canActOwner = false) {
 
         this.canActRoles = canActRoles;
         this.canActOwner = canActOwner;

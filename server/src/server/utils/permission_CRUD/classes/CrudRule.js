@@ -21,14 +21,21 @@ module.exports = class CrudRule {
         ])
     }
 
+    addRule(action,rule){
+        this.rules.set(action,rule);
+    }
+
     checkPermission(action, role, isOwner = false) {
         const rule = this.rules.get(action);
         if (rule) {
             return rule.checkPermission(role, isOwner);
         }
-        return undefined
+        return null;
     }
 
 };
+
+
+
 
 

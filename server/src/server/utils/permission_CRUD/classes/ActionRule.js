@@ -7,9 +7,6 @@ module.exports = class ActionRule extends Rule {
         this.action = action;
     }
 
-    checkPermission(role, isOwner = false) {
-        return super.checkPermission(role, isOwner);
-    }
 
 };
 

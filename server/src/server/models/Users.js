@@ -68,6 +68,14 @@ module.exports = (sequelize, DataTypes) => {
 
     });
     const allRolesArr = Object.values(ROLE);
+    const buyerRules =new CrudRule(
+        new Rule([]),
+        new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
+        new Rule([], true),
+        new Rule([], true));
+
+
+    buyerRules.addRule(ACTION.BAN,new Rule([ROLE.CREATIVE],false));
 
     Users.crudRule = new Map([
 
@@ -78,11 +86,7 @@ module.exports = (sequelize, DataTypes) => {
             new Rule([ROLE.CREATIVE, ROLE.BUYER], false),
         )],
 
-        [ROLE.BUYER, new CrudRule(
-            new Rule([]),
-            new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
-            new Rule([], true),
-            new Rule([], true))],
+        [ROLE.BUYER,buyerRules ],
 
         [ROLE.CREATIVE, new CrudRule(
             new Rule([]),

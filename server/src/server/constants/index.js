@@ -48,6 +48,7 @@ const ACTION = {
     READ: "GET",
     UPDATE: "PUT",
     DELETE: "DELETE",
+    BAN:"BAN",
 };
 
 /**
