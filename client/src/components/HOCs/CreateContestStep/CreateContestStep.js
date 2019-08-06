@@ -24,8 +24,6 @@ export default (step) => {
 
     const StepComponent = (props) => {
 
-
-
         const Form = step.form;
         return (
             <Fragment>
