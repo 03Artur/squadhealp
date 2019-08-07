@@ -5,7 +5,8 @@ import MyList from "../../utils/classes/List";
 import {COMPLEX_PATH, PATH} from "../../constants";
 import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
 import ContestForm from "../../components/forms/ContestForm/ContestForm";
-import store from '../../store'
+import store from '../../store';
+
 import {
     createContestActionCreator,
     createTaskActionCreator, nextCreateContestStepActionCreate,
@@ -15,37 +16,35 @@ import {contestPaymentActionCreator} from "../../actions/payment/contestPaymentA
 import history from "../../history";
 
 
+
+
+
+const allSteps = new Map([
+
+    [COMPLEX_PATH.SELECT_TASK_TYPE, ]
+
+])
+
+
+
+
+
 const getInitialState = () => {
-    const steps = new MyList([
+    const steps = [
         {
             path: COMPLEX_PATH.SELECT_TASK_TYPE,
-            form: SelectTaskTypes,
-            onSubmit: (types) => store.dispatch(setSelectedTypesActionCreator(types)),
-            onSubmitSuccess: () => store.dispatch(nextCreateContestStepActionCreate())
         },
         {
             path: COMPLEX_PATH.CREATE_CONTEST,
-            form: ContestForm,
-            onSubmit: (contest) => { console.log(contest); return store.dispatch(createContestActionCreator(contest))},
-            onSubmitSuccess: () => store.dispatch(nextCreateContestStepActionCreate())
 
         },
         {
-            path: COMPLEX_PATH.CREATE_TASK,
-            form: (props) => <h1>Form 3</h1>,
-            onSubmit: (task) => store.dispatch(createTaskActionCreator(task)),
-            onSubmitSuccess: () => store.dispatch(nextCreateContestStepActionCreate())
-
+            path: COMPLEX_PATH.CREATE_TASK
         },
         {
             path: COMPLEX_PATH.TASK_PAYMENT,
-            form: (props) => <h1>Form 4</h1>,
-            onSubmit: (id, creditCard) => store.dispatch(contestPaymentActionCreator(id, creditCard)),
-            onSubmitSuccess: () => {
-                history.push(PATH.DASHBOARD)
-            },
         },
-    ]);
+    ];
 
     return ({
         currentStep: steps.head,

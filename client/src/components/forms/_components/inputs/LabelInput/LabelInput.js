@@ -27,6 +27,7 @@ import styles from './LabelInput.module.scss';
 const LabelInput = ({input,meta,placeholder, ...props}) => {
 
 
+
     return (
         <div className={styles.container}>
             <label className={styles.label} >{
@@ -39,6 +40,8 @@ const LabelInput = ({input,meta,placeholder, ...props}) => {
 
 LabelInput.propTypes = {
     label: PropTypes.string,
+    placeholder: PropTypes.string,
+
 };
 
 LabelInput.defaultPros = {};

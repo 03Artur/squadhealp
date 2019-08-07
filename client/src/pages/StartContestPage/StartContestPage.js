@@ -31,6 +31,10 @@ import styles from './StartContestPage.module.scss';
 import createContestStep from "../../components/HOCs/CreateContestStep/CreateContestStep";
 
 
+
+
+
+
 let StartContestPage = ({steps, ...props}) => {
 
     useEffect(() => {

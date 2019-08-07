@@ -33,8 +33,9 @@ const TaskForm = ({handleSubmit, ...props}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field name={} component = {LabelInput}/>
-            <StartContestNav onPrevClick={} onNextClick={handleSubmit}/>
+            <Field validate ={} name="Title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
+            <Field name="" component = {LabelInput}/>
+            <Field name="" component = {LabelInput}/>
         </form>
     )
 };

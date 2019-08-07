@@ -17,21 +17,21 @@ import {connect} from 'react-redux';
 /*
 * styles
 * */
-import styles from './SelectTaskTypes.module.scss';
-import {PATH, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
-import TaskTypeCard from "../../TaskTypeCard/TaskTypeCard";
-import ProgressInfo from "../../ProgressInfo/ProgressInfo";
+import styles from './TaskTypeForm.module.scss';
+import {PATH, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../../constants";
+import RadioTaskTypeCard from "./RadioTaskTypeCard/RadioTaskTypeCard";
+
 import {
     removeSelectedTypesActionCreator,
     setSelectedTypesActionCreator
-} from "../../../actions/contest/constestActionCreators";
+} from "../../../../actions/contest/constestActionCreators";
 
 /*
 * UTILS
 * */
 
 
-const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
+const TaskTypeForm = ({typesCombinations, selectedTypes, ...props}) => {
 
 
 
@@ -89,18 +89,18 @@ const SelectTaskTypesForm = ({typesCombinations, selectedTypes, ...props}) => {
     )
 };
 
-SelectTaskTypesForm.propTypes = {};
+TaskTypeForm.propTypes = {};
 
-SelectTaskTypesForm.defaultPros = {};
+TaskTypeForm.defaultPros = {};
 
 /*
 * React redux
 * */
-SelectTaskTypesForm.propTypes = {
+TaskTypeForm.propTypes = {
 
 };
 
-SelectTaskTypesForm.defaultPros = {};
+TaskTypeForm.defaultPros = {};
 
 const mapStateToProps = store => {
     const {selectedTypes, typesCombinations} = store.selectedTaskTypes;
@@ -111,4 +111,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypesForm)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskTypeForm)

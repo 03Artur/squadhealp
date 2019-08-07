@@ -25,7 +25,7 @@ import styles from './InputFile.module.scss';
 
 
 
-const InputFile = ({name ,...props}) => {
+const InputFile = ({name,input ,...props}) => {
 
 
     return (
@@ -33,11 +33,11 @@ const InputFile = ({name ,...props}) => {
         <div className={styles.container}>
             <label className={styles.labelButton}>
                 Choose file
-                <input multiple={false} type='file' className={styles.inputFile}/>
+                <input {...input} multiple={false} type='file' className={styles.inputFile}/>
 
             </label>
             <div className={styles.fileNameContainer}>
-                <span>No File Chosen</span>
+                <span>{input.value|"No File Chosen"}</span>
             </div>
         </div>
 

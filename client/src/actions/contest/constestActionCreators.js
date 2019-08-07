@@ -13,6 +13,7 @@ export const getContestActionCreator = (contestId) => {
     }
 };
 
+
 export const updateContestActionCreator = (contest) => {
     return {
         type: ACTION_TYPES.UPDATE_CONTEST_ACTION,

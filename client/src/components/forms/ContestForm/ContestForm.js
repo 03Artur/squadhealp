@@ -41,7 +41,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
         if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    <Field name="name" placeholder={"e.g. Smith & Forest"} label='Name of the company/business?'
+                    <Field name="name" placeholder={"e.g. Marketing Platform for Small Businesses"} label='Name of the company / business?'
                            component={LabelInput} type="text"/>
                     <Field name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
                            type="text"/>
@@ -53,16 +53,17 @@ let ContestForm = ({handleSubmit, ...props}) => {
     const renderFields = () => {
         return (
             <Fragment>
-                <Field name="typeOfIndustry" placeholder={"typeOfIndustry"} label='Type of Industry'
+                <Field name="typeOfIndustry" placeholder={"Input Your Industry"} label='Type of Industry'
                        component={LabelInput} type="text"/>
-                <Field name="targetCustomers" placeholder={"e.g. Smith & Forest"} label='Target customers'
+                <Field name="targetCustomers" placeholder={"i.e. designers, developers"} label='Who are your target customers?'
                        component={LabelInput} type="text"/>
-                <Field name="description" placeholder={"e.g. Smith & Forest"} label='description'
+                <Field name="description" placeholder={"e.g. Smith & Forest"} label='What does your company or business do?'
                        component={LabelInput} type="text"/>
             </Fragment>
 
         )
     };
+
 
 
     return (
@@ -79,15 +80,18 @@ let ContestForm = ({handleSubmit, ...props}) => {
 
 
                 </form>
-                <StartContestNav onPrevClick={props.onPrevClick} onNextClick={handleSubmit}/>
             </div>
 
     )
 };
 
-ContestForm.propTypes = {};
+ContestForm.propTypes = {
 
-ContestForm.defaultPros = {};
+};
+
+ContestForm.defaultPros = {
+
+};
 
 /*
 * React redux
