@@ -32,30 +32,6 @@ export default class MyList {
         }
     }
 
-    /*remove(node) {
-        if (!this.length) {
-            return undefined
-        }
-        if (this.length === 1) {
-            this.tail = null;
-            this.head = null;
-        } else if (this.tail === node) {
-            node.prev.next = null;
-            this.tail = node.prev;
-        } else if (this.head === node) {
-            this.head = node.next;
-            node.next.prev = null;
-        } else {
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-
-        }
-
-        this.length--;
-        return node;
-
-    }*/
-
 
     add(value) {
         let newNode = new MyNode(null, null, value);

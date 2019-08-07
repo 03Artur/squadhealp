@@ -23,7 +23,7 @@ router.use(checkAccessToken);
 const checkBanPermission = async (req, res, next) => {
     try {
         const {role, id} = req.accessTokenPayload;
-        const actorActionRules = Users.crudRule.get(role);
+        const actorActionRules = Users.actionRules.get(role);
         const banRule = actorActionRules.rules.get(ACTION.BAN);
 
         if (banRule) {

@@ -1,3 +1,6 @@
+import Rule from '../utils/permissions/classes/Rule';
+import ActionRules from '../utils/permissions/classes/ActionRules';
+
 export const TASK_TYPE = {
     NAME: 'Name',
     TAGLINE: 'Tagline',
@@ -44,11 +47,11 @@ let TASK_TYPE_INFO = new Map([
 
 
 const ACTION = {
-    CREATE: "POST",
-    READ: "GET",
-    UPDATE: "PUT",
+    POST: "POST",
+    GET: "GET",
+    PUT: "PUT",
     DELETE: "DELETE",
-    BAN:"BAN",
+    BAN: "BAN",
 };
 
 /**
@@ -61,6 +64,7 @@ const ROLE = {
     ADMIN: "ADMIN",
 
 };
+
 
 module.exports = {
 
@@ -92,3 +96,56 @@ module.exports = {
     REFRESH_TOKEN_EXPIRES_IN: (60 * 60 * 24 * 30),
 };
 
+
+export const ENTRY_ACTION_RULES = new ActionRules(
+    [
+        [ACTION.POST, new Rule([ROLE.CREATIVE])],
+        [ACTION.GET, new Rule([ROLE.ADMIN, ROLE.BUYER, ROLE.CREATIVE], true)],
+        [ACTION.PUT, new Rule([ROLE.ADMIN,], true)],
+        [ACTION.DELETE, new Rule([ROLE.ADMIN,], true)],
+    ]
+);
+
+
+export const CONTEST_ACTION_RULES = new ActionRules(
+    [
+        [ACTION.POST, new Rule([ROLE.ADMIN, ROLE.BUYER])],
+        [ACTION.GET, new Rule([ROLE.ADMIN, ROLE.BUYER, ROLE.CREATIVE], true)],
+        [ACTION.PUT, new Rule([ROLE.ADMIN,], true)],
+        [ACTION.DELETE, new Rule([ROLE.ADMIN,], true)],
+    ]
+);
+
+export const USERS_ACTION_RULES = new Map([
+    [
+        ROLE.ADMIN,
+        new ActionRules(
+            [
+                [ACTION.POST, new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN])],
+                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true)],
+                [ACTION.PUT, new Rule([ROLE.BUYER, ROLE.CREATIVE], true)],
+                [ACTION.DELETE, new Rule([ROLE.BUYER, ROLE.CREATIVE])],
+                [ACTION.BAN, new Rule([ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN])],
+
+            ]
+        )
+    ],
+    [
+        ROLE.BUYER,
+        new ActionRules(
+            [
+                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE,], true)],
+                [ACTION.PUT, new Rule([], true)],
+            ]
+        )
+    ],
+    [
+        ROLE.CREATIVE,
+        new ActionRules(
+            [
+                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE,], true)],
+                [ACTION.PUT, new Rule([], true)],
+            ]
+        ),
+    ],
+]);
