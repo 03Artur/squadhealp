@@ -51,16 +51,6 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-    Contests.actionRules = CONTEST_ACTION_RULES;
-
-
-    Contests.checkPermission = (action, actor, contest) => {
-        return Contests.actionRules.checkPermission(action, actor.role, actor.id === contest.userId)
-    };
-
-    Contests.prototype.checkPermission = (action, actor) => {
-        return Contests.checkPermission(action, actor, this)
-    };
 
     Contests.associate = function (models) {
         Contests.hasMany(
@@ -78,6 +68,21 @@ module.exports = (sequelize, DataTypes) => {
             }
         )
     };
+
+
+
+    Contests.actionRules = CONTEST_ACTION_RULES;
+
+
+    Contests.checkPermission = (action, actor, contest) => {
+        return Contests.actionRules.checkPermission(action, actor.role, actor.id === contest.userId)
+    };
+
+    Contests.prototype.checkPermission = (action, actor) => {
+        return Contests.checkPermission(action, actor, this)
+    };
+
+
 
     return Contests;
 };

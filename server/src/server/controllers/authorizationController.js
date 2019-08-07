@@ -114,6 +114,7 @@ export const updateRefreshToken = async (req, res, next) => {
             tokenString: jwt.sign({id: refreshToken.id}, TOKEN_PRIVATE_KEY, {expiresIn: REFRESH_TOKEN_EXPIRES_IN})
         }, {
             transaction,
+
         });
         await transaction.commit();
         res.send({

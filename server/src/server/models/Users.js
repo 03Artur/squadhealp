@@ -80,11 +80,12 @@ module.exports = (sequelize, DataTypes) => {
     };
 
 
-
-    Users.prototype.checkPermission = function (action, object) {
+    Users.prototype.canActToMe = function (action, actor) {
+        return Users.checkPermission(action, actor, this);
+    };
+    Users.prototype.canIAct = function (action, object) {
 
         return Users.checkPermission(action, this, object);
-
     };
 
     Users.associate = async function (models) {

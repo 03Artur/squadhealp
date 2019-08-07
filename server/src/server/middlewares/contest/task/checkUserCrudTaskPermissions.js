@@ -11,7 +11,7 @@ export default async function checkUserCrudTaskPermissions(req, res, next) {
             return next(appError.NotFoundError())
         }
 
-        if (contest.checkPermission(req.method, req.accessTokenPayload)) {
+        if (contest.canIAct(req.method, req.accessTokenPayload)) {
             return next();
         } else {
             return next(new appError.ForbiddenError());

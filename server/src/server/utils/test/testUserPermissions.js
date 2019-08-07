@@ -16,8 +16,8 @@ const businessInfoObject = {
 };
 
 
-console.log("can ADMIN create ADMIN: ", Users.checkPermission("POST", userActor, userObject));
-console.log("can ADMIN create Contest: ", Contests.checkPermission("POST", userActor, businessInfoObject));
+console.log("can ADMIN create ADMIN: ", Users.canIAct("POST", userActor, userObject));
+console.log("can ADMIN create Contest: ", Contests.canIAct("POST", userActor, businessInfoObject));
 
 
 

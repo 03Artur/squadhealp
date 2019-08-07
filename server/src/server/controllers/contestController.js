@@ -25,7 +25,9 @@ export const updateContest = async (req, res, next) => {
         if (!businessInfo) {
             return next(new appError.BadRequestError())
         }
-        businessInfo = await Contests.update(req.body);
+        businessInfo = await Contests.update(req.body,{
+            returning: true,
+        });
         res.send(businessInfo);
     } catch (e) {
         next(e);
@@ -48,20 +50,22 @@ export const createTask = async (req, res, next) => {
 export const activateNextContestTask = async (req, res, next) => {
 
     try {
-        let transaction = sequelize.transaction();
-        const businessInfoId = parseInt(req.params.id);
+        const contestId = parseInt(req.params.id);
+
         let contest = (await Tasks.findAll({
             where: {
-                businessInfoId: businessInfoId,
+                contestId: contestId,
                 isPaid: true,
                 isActive: false,
             },
             limit: 1,
             order: [["priority", "DESC"]],
         }))[0];
+
         if (!contest) {
-            return next(new appError.NotFoundError())
+            return next(new appError.NotFoundError());
         }
+
         contest = await contest.update({isActive: true});
         res.send(contest);
     } catch (e) {

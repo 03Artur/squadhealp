@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 /*
 * styles
 * */
-import styles from '../Input/Input.module.scss';
+import styles from '../../_components/inputs/LabelInput/LabelInput.module.scss';
 
 /*
 * UTILS

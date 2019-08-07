@@ -17,14 +17,14 @@ import {connect} from 'react-redux';
 /*
 * styles
 * */
-import styles from './Input.module.scss';
+import styles from './LabelInput.module.scss';
 
 /*
 * UTILS
 * */
 
 
-const Input = ({input,meta,placeholder, ...props}) => {
+const LabelInput = ({input,meta,placeholder, ...props}) => {
 
 
     return (
@@ -37,14 +37,14 @@ const Input = ({input,meta,placeholder, ...props}) => {
     )
 };
 
-Input.propTypes = {
+LabelInput.propTypes = {
     label: PropTypes.string,
 };
 
-Input.defaultPros = {};
+LabelInput.defaultPros = {};
 
 /*
 * React redux
 * */
 
-export default Input;
+export default LabelInput;

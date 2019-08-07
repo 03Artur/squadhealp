@@ -2,6 +2,8 @@
 
 
 
+import {ENTRY_ACTION_RULES} from "../constants";
+
 module.exports = (sequelize, DataTypes) => {
     const Tasks = sequelize.define('Tasks', {
         id: {
@@ -58,20 +60,6 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-
-
-
-
-
-
-
-
-    Tasks.associate = function (models) {
-        Tasks.belongsTo(models.Contests, {foreignKey: 'contestId', targetKey: 'id'});
-        Tasks.hasMany(models.Entries, {foreignKey: 'taskId', targetKey: 'id'});
-        Tasks.belongsTo(models.Entries, {foreignKey: 'winnerId', targetKey: 'id',});
-
-    };
 
 
     return Tasks;

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Input.module.sass';
+import styles from './ErrorInput.module.sass';
 
-export default function Input({input, type, meta: {touched,visited, error, warning}, ...props}) {
+export default function ErrorInput({input, type, meta: {touched,visited, error, warning}, ...props}) {
 
     const inputClassNames = [styles.input, styles.inputField, props.className];
     const errorClassNames = [styles.error, styles.errorField];
@@ -39,7 +39,7 @@ export default function Input({input, type, meta: {touched,visited, error, warni
     );
 }
 
-Input.propTypes = {
+ErrorInput.propTypes = {
     isPassword: PropTypes.bool,
     placeholder: PropTypes.string,
     onchange: PropTypes.func,
@@ -50,7 +50,7 @@ Input.propTypes = {
 
 };
 
-Input.defaultProps = {
+ErrorInput.defaultProps = {
     isPassword: false,
     placeholder: '',
     onchange: null,

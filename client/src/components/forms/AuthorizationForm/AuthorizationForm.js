@@ -1,9 +1,9 @@
 //REACT
 import React from 'react';
 //COMPONENTS
-import Input from '../inputs/Input/Input';
-import InputRadio from '../inputs/InputRadio/InputRadio';
-import SubmitButton from '../buttons/SubmitButton/SubmitButton';
+import ErrorInput from '../_components/inputs/ErrorInput/ErrorInput';
+import InputRadio from '../_components/inputs/InputRadio/InputRadio';
+import SubmitButton from '../_components/buttons/SubmitButton/SubmitButton';
 import Spinner from '../../Spinner/Spinner';
 //REDUX & FRIENDS
 import {connect} from 'react-redux'
@@ -46,21 +46,21 @@ function AuthorizationForm(props) {
         return <React.Fragment>
             <div className={styles.fieldRow}>
                 <div className={styles.fieldCol}>{
-                    renderField('firstName', 'text', VALIDATION.nameValidation, Input, 'First name')
+                    renderField('firstName', 'text', VALIDATION.nameValidation, ErrorInput, 'First name')
                 }</div>
                 <div className={styles.fieldCol}>{
-                    renderField('lastName', 'text', VALIDATION.nameValidation, Input, 'Last name')
+                    renderField('lastName', 'text', VALIDATION.nameValidation, ErrorInput, 'Last name')
                 }</div>
             </div>
             <div className={styles.fieldRow}>{
-                renderField('email', 'email', VALIDATION.emailValidation, Input, 'Email Address')
+                renderField('email', 'email', VALIDATION.emailValidation, ErrorInput, 'Email Address')
             }</div>
             <div className={styles.fieldRow}>
                 <div className={styles.fieldCol}>                    {
-                    renderField('password', 'password', VALIDATION.passwordValidation, Input, 'Password')
+                    renderField('password', 'password', VALIDATION.passwordValidation, ErrorInput, 'Password')
                 }</div>
                 <div className={styles.fieldCol}>       {
-                    renderField('passwordConfirmation', 'password', VALIDATION.confirmPasswordValidation, Input, 'Password Confirmation')
+                    renderField('passwordConfirmation', 'password', VALIDATION.confirmPasswordValidation, ErrorInput, 'Password Confirmation')
                 }</div>
             </div>
             <div className={styles.fieldRow}>
@@ -78,10 +78,10 @@ function AuthorizationForm(props) {
         return (
             <div className={styles.fieldRow}>
                 <div className={styles.col}>{
-                    renderField('email', 'email', VALIDATION.emailValidation, Input, 'Email Address')
+                    renderField('email', 'email', VALIDATION.emailValidation, ErrorInput, 'Email Address')
                 }</div>
                 <div className={styles.col}>{
-                    renderField('password', 'password', VALIDATION.passwordValidation, Input, 'Password')
+                    renderField('password', 'password', VALIDATION.passwordValidation, ErrorInput, 'Password')
                 }</div>
             </div>
         )
