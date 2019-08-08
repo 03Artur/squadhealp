@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment,useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -22,13 +22,18 @@ import styles from './RadioTaskTypeCard.module.scss';
 /*
 * UTILS
 * */
-import {iconImagesURL} from "../../../../../api/baseURL";
+import {iconImagesURL} from "../../../../api/baseURL";
 
 const RadioTaskTypeCard = ({title, icons, description, input, ...props}) => {
 
+
+    useEffect(()=>{
+        console.log(input);
+    });
+
     const renderIcons = () => {
         return icons.map(item => (
-            <Fragment key={item.defaultImg}>
+            <Fragment key={item.defaultImg} >
                 <img src={`${iconImagesURL}/taskType/${item.defaultImg}`}
                      className={styles.defaultIcon} alt="icon"/>
                 <img src={`${iconImagesURL}/taskType/${item.hoverImg}`} className={styles.hoverIcon}
@@ -54,7 +59,7 @@ const RadioTaskTypeCard = ({title, icons, description, input, ...props}) => {
                     description
                 }
             </p>
-            <input style={{display: "none"}} {...input} type="radio" onClick={props.onClick}/>
+            <input style={{display: "none"}} {...input} onClick={props.onClick}/>
         </label>
     )
 };

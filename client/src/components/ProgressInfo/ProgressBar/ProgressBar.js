@@ -24,43 +24,46 @@ import styles from './ProgressBar.module.scss';
 * */
 
 
-
-const ProgressBar = ({steps, currentStep,...props}) => {
+const ProgressBar = ({steps, currentStepIndex, ...props}) => {
 
 
     const renderSteps = () => {
-        const items = [];
-            for(let item of steps){
-                items.push(<Step title={item.title}/>)
-            }
+        return steps.map((item, index) => (
+
+                <div key={index} className={styles.stepContainer}>
+                    {
+                        <div className={styles.stepConnection} style={index===0?{borderColor:"transparent"}:undefined}/>
+                    }
+                    <Step title={`${index+1}. ${steps[currentStepIndex].name}`} isDone={index < currentStepIndex}
+                          isCurrent={index === currentStepIndex}/>
+                </div>
+            )
+        );
+
     };
 
 
     return (
         <div className={styles.container}>
-
+            {
+                renderSteps()
+            }
         </div>
     )
 };
 
-ProgressBar.propTypes = {
+ProgressBar.propTypes = {};
 
-};
-
-ProgressBar.defaultPros = {
-
-};
+ProgressBar.defaultPros = {};
 
 /*
 * React redux
 * */
 const mapStateToProps = store => {
-        const {steps, currentStep} = store.createContestSteps;
-        return {steps, currentStep};
+    const {steps, currentStepIndex} = store.createContestSteps;
+    return {steps, currentStepIndex};
 };
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProgressBar)
 

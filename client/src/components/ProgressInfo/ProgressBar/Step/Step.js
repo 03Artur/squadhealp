@@ -25,14 +25,14 @@ import styles from './Step.module.scss';
 * */
 
 
-const Step = (isDone, isCurrent, title) => {
+const Step = ({isDone, isCurrent, tip, ...props}) => {
 
-    const containerClasses = [styles.container];
+    const containerClasses = [styles.container, isCurrent&&styles.current,isDone&&styles.done];
 
     const renderTip = () => {
         return (
             <div className={styles.tipContainer}>{
-                title
+                tip
             }</div>
         )
     };

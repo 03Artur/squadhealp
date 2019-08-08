@@ -15,7 +15,7 @@ import {
 /*
 * Components
 * */
-import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
+import SelectTaskTypes from "./steps/SelectTaskTypes/SelectTaskTypes";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
 
 /*
@@ -29,48 +29,29 @@ import styles from './StartContestPage.module.scss';
 * UTILS
 * */
 import createContestStep from "../../components/HOCs/CreateContestStep/CreateContestStep";
+import {COMPLEX_PATH} from "../../constants";
+import CreateContest from './steps/CreateContest/CreateContest'
+import CreateTask from "./steps/CreateTask/CreateTask";
 
-
-
-
-
-
-let StartContestPage = ({steps, ...props}) => {
+let StartContestPage = ({steps, currentStepIndex, ...props}) => {
 
     useEffect(() => {
 
-        if (props.location.pathname !== props.currentStep.value.path) {
-            props.history.push(props.currentStep.value.path);
+        if (steps[currentStepIndex].isDone && props.location.pathname !== steps[props.currentStepIndex].path) {
+            props.history.push(steps[props.currentStepIndex].path);
         }
 
-    }, [props.currentStep]);
+    }, [steps[currentStepIndex].isDone]);
 
-    const renderStep = (step) => {
 
-        const Component = createContestStep(step);
-
-        return (
-            <Route key={step.path} path={step.path} render={props => <Component {...props}/>}/>
-        );
-    };
-
-    const renderSteps = () => {
-        const result = [];
-        for (let step of steps) {
-            result.push(
-                renderStep(step)
-            )
-        }
-        return result;
-    };
 
     return (
         <Fragment>
             <ProgressInfo/>
-            {
-                renderSteps()
-            }
-
+            <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component = {SelectTaskTypes}/>
+            <Route path={COMPLEX_PATH.CREATE_CONTEST} component = {CreateContest}/>
+            <Route path={COMPLEX_PATH.CREATE_CONTEST} component = {CreateTask}/>
+            <Route path ={COMPLEX_PATH.TASK_PAYMENT} render = {props=>(<h1>Where's the money, Lebowski?</h1>)}/>
         </Fragment>
     )
 };
@@ -81,11 +62,11 @@ StartContestPage.defaultPros = {};
 
 const mapStateToProps = store => {
 
-const {steps,currentStep} = store.createContestSteps;
+    const {steps, currentStepIndex} = store.createContestSteps;
     return {
         ...store.selectedTaskTypes,
         steps,
-        currentStep
+        currentStepIndex,
     }
 
 };

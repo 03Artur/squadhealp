@@ -41,7 +41,8 @@ let ContestForm = ({handleSubmit, ...props}) => {
         if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    <Field name="name" placeholder={"e.g. Marketing Platform for Small Businesses"} label='Name of the company / business?'
+                    <Field name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
+                           label='Name of the company / business?'
                            component={LabelInput} type="text"/>
                     <Field name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
                            type="text"/>
@@ -55,9 +56,11 @@ let ContestForm = ({handleSubmit, ...props}) => {
             <Fragment>
                 <Field name="typeOfIndustry" placeholder={"Input Your Industry"} label='Type of Industry'
                        component={LabelInput} type="text"/>
-                <Field name="targetCustomers" placeholder={"i.e. designers, developers"} label='Who are your target customers?'
+                <Field name="targetCustomers" placeholder={"i.e. designers, developers"}
+                       label='Who are your target customers?'
                        component={LabelInput} type="text"/>
-                <Field name="description" placeholder={"e.g. Smith & Forest"} label='What does your company or business do?'
+                <Field name="description" placeholder={"e.g. Smith & Forest"}
+                       label='What does your company or business do?'
                        component={LabelInput} type="text"/>
             </Fragment>
 
@@ -65,33 +68,26 @@ let ContestForm = ({handleSubmit, ...props}) => {
     };
 
 
-
     return (
 
-            <div className={styles.formContainer}>
-                <form onSubmit={} className={styles.container} encType={"multipart/form-data"}>
+        <div className={styles.formContainer}>
+            <form onSubmit={handleSubmit} className={styles.container} encType={"multipart/form-data"}>
+                {
+                    renderNamesFields()
+                }
 
-                    {
-                        renderNamesFields()
-                    }
-                    {
-                        renderFields()
-                    }
-
-
-                </form>
-            </div>
+                {
+                    renderFields()
+                }
+            </form>
+        </div>
 
     )
 };
 
-ContestForm.propTypes = {
+ContestForm.propTypes = {};
 
-};
-
-ContestForm.defaultPros = {
-
-};
+ContestForm.defaultPros = {};
 
 /*
 * React redux

@@ -22,6 +22,7 @@ import ContestForm from "../ContestForm/ContestForm";
 import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {prevCreateContestStepActionCreate} from "../../../actions/contest/constestActionCreators";
 import LabelInput from "../_components/inputs/LabelInput/LabelInput";
+import InputFile from "../_components/inputs/InputFile/InputFile";
 
 /*
 * UTILS
@@ -33,9 +34,9 @@ const TaskForm = ({handleSubmit, ...props}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field validate ={} name="Title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
-            <Field name="" component = {LabelInput}/>
-            <Field name="" component = {LabelInput}/>
+            <Field validate ={[]} name="title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
+            <Field name="style" component = {LabelInput}/>
+            <Field name="files" component = {InputFile}/>
         </form>
     )
 };

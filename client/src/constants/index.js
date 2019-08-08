@@ -13,15 +13,7 @@ export const AUTHORIZATION_MODE = {
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
 
 
-export const  CREATE_CONTEST_STEPS = {
-    SELECT_TASK_TYPE: "SELECT_TASK_TYPE",
-    CREATE_CONTEST: 'CREATE_CONTEST',
-    CREATE_NAME_TASK: 'CREATE_NAME_TASK',
-    CREATE_LOGO_TASK: 'CREATE_LOGO_TASK',
-    CREATE_TAGLINE_TASK: 'CREATE_TAGLINE_TASK',
-    CONTEST_PAYMENT: 'CONTEST_PAYMENT',
 
-};
 
 
 export const PATH = {
@@ -36,7 +28,7 @@ export const PATH = {
     DASHBOARD: '/dashboard',
     TASK: '/task',
     PAYMENT: '/payment',
-    TYPE:'/type',
+    TYPE: '/type',
     TEST: '/test'
 
 };
@@ -48,6 +40,13 @@ export const COMPLEX_PATH = {
     TASK_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
     SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`
 };
+
+
+
+
+
+
+
 
 export const TASK_TYPE = {
     NAME: 'Name',

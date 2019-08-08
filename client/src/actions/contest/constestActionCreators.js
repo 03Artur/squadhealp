@@ -13,7 +13,6 @@ export const getContestActionCreator = (contestId) => {
     }
 };
 
-
 export const updateContestActionCreator = (contest) => {
     return {
         type: ACTION_TYPES.UPDATE_CONTEST_ACTION,
@@ -27,6 +26,7 @@ export const deleteContestActionCreator = (contest) => {
         contest,
     }
 };
+
 export const removeSelectedTypesActionCreator = () => {
     return {
         type: ACTION_TYPES.REMOVE_SELECTED_TASK_TYPES,
@@ -56,28 +56,34 @@ export const setCreateContestStepsAction = steps => {
     }
 };
 
-
 export const nextCreateContestStepActionCreate = () => {
 
     return {
         type: ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION,
     }
-}
+};
+
 export const prevCreateContestStepActionCreate = () => {
 
     return {
         type: ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION,
     }
-}
+};
 
+export const doneCurrentStepActionCreator = () => {
+    return {
+        type: ACTION_TYPES.DONE_CURRENT_STEP_ACTION,
+    }
+};
 
-
+export const setCurrentStepActionCreate = (step) => {
+    return {
+        type: ACTION_TYPES.SET_CURRENT_STEP_ACTION,
+        step,
+    }
+};
 
 export const createTaskActionCreator = (task) => ({
     type: ACTION_TYPES.CREATE_TASK_ACTION,
     task: task,
 });
-
-
-
-
