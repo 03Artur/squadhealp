@@ -1,33 +1,37 @@
 /*
 * React
 * */
-import React, {Component, Fragment, useEffect,} from 'react';
+import React from 'react';
 
 import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
-import {PATH, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
-import RadioTaskTypeCard from "./RadioTaskTypeCard/RadioTaskTypeCard";
+import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
+
+import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
+
+const formName = 'taskTypeForm';
+
+let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
 
 
-let TaskTypeForm = ({typesCombinations, handleSubmit, ...props}) => {
+    const onCardClick = async (value) => {
 
+        await dispatch(change(formName, 'selectedTaskTypes', value));
+
+        await dispatch(submit(formName));
+    };
 
     const renderTypeCards = (combinations, className = '') => (
-        combinations.map((item,index) => {
+
+        combinations.map((item) => {
 
             const title = item.join(' + ');
             const icons = item.map(type => TASK_TYPE_IMAGES.get(type));
             const description = TASK_TYPE_DESCRIPTION.get(title);
 
             return (
-                <Field name="taskTypes" type={'radio'} key={title}  component ={RadioTaskTypeCard}
-                    value={item} className={className}
-                                       title={title}
-                                       icons={icons}
-                                       description={description}
-                                       onClick={item=> handleSubmit(item)}/>
-
+                <TaskTypeCard key={title} onClick={()=> onCardClick(item)} icons={icons} title={title} className={className} description={description}/>
             )
         }));
 
@@ -41,8 +45,7 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, ...props}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-
+        <form className={styles.formContainer} onSubmit={handleSubmit}>
             <div className={[styles.typesContainer, styles.singleCardsContainer].join(' ')}>
                 <div className={styles.container}>
                     <div className={styles.title}>
@@ -51,9 +54,11 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, ...props}) => {
                             away</p>
                         <hr/>
                     </div>
+
                     <ul className={styles.row}>{
                         renderSingleTypes()
                     }</ul>
+
                 </div>
             </div>
             <div className={styles.typesContainer}>
@@ -63,9 +68,11 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, ...props}) => {
                         <p>Launch multiple contests and pay a discounted bundle price</p>
                         <hr/>
                     </div>
+
                     <ul className={styles.row}>{
                         renderGroupTypes()
                     } </ul>
+
                 </div>
             </div>
         </form>
@@ -80,12 +87,12 @@ TaskTypeForm.defaultPros = {};
 const mapStateToProps = state => {
     const {typesCombinations} = state.selectedTaskTypes;
     return {typesCombinations};
-}
+};
 
-TaskTypeForm = connect(mapStateToProps)(TaskTypeForm);
+export default connect(mapStateToProps)(reduxForm({
+    form: formName,
+})(TaskTypeForm));
 
 
-export default reduxForm({
-    form: "taskTypeForm",
-})(TaskTypeForm);
+
 

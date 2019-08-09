@@ -9,6 +9,7 @@ import {Route} from 'react-router-dom';
 * */
 import {connect} from 'react-redux';
 import {
+    nextCreateContestStepActionCreate,
     setIsNameExistActionCreator,
 } from "../../actions/contest/constestActionCreators";
 
@@ -35,30 +36,44 @@ import CreateTask from "./steps/CreateTask/CreateTask";
 
 let StartContestPage = ({steps, currentStepIndex, ...props}) => {
 
+
     useEffect(() => {
 
-        if (steps[currentStepIndex].isDone && props.location.pathname !== steps[props.currentStepIndex].path) {
-            props.history.push(steps[props.currentStepIndex].path);
+        const currentStepPath = steps[currentStepIndex].path;
+
+        if (currentStepPath !== props.location.pathname) {
+            props.history.push(currentStepPath);
+        }
+    }, [currentStepIndex]);
+
+
+    useEffect(() => {
+
+        if (steps[currentStepIndex].isDone) {
+            props.nextStepAction();
         }
 
     }, [steps[currentStepIndex].isDone]);
 
 
-
     return (
         <Fragment>
             <ProgressInfo/>
-            <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component = {SelectTaskTypes}/>
-            <Route path={COMPLEX_PATH.CREATE_CONTEST} component = {CreateContest}/>
-            <Route path={COMPLEX_PATH.CREATE_CONTEST} component = {CreateTask}/>
-            <Route path ={COMPLEX_PATH.TASK_PAYMENT} render = {props=>(<h1>Where's the money, Lebowski?</h1>)}/>
+            <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
+            <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateContest}/>
+            <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateTask}/>
+            <Route path={COMPLEX_PATH.TASK_PAYMENT} render={props => (<h1>Where's the money, Lebowski?</h1>)}/>
         </Fragment>
     )
 };
 
-StartContestPage.propTypes = {};
+StartContestPage.propTypes = {
 
-StartContestPage.defaultPros = {};
+};
+
+StartContestPage.defaultPros = {
+
+};
 
 const mapStateToProps = store => {
 
@@ -70,6 +85,9 @@ const mapStateToProps = store => {
     }
 
 };
+const mapDispatchToProps = dispatch => ({
+    nextStepAction: () => dispatch(nextCreateContestStepActionCreate())
+});
 
 
-export default connect(mapStateToProps)(StartContestPage)
+export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)

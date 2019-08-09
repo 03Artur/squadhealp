@@ -24,14 +24,13 @@ const SelectTaskTypes = ({typesCombinations, steps, currentStepIndex, selectedTy
         }
     }, [selectedTypes]);
 
-    const submit = (values) => {
-        console.log(values);
-        /*return;
-        props.setSelectedTypesAction(values);*/
+    const handleSubmit = (values) => {
+        const {selectedTaskTypes} = values;
+        props.setSelectedTypesAction(selectedTaskTypes);
     };
 
     return (
-        <TaskTypeForm onSubmit={submit}/>
+        <TaskTypeForm onSubmitSuccess={doneStepAction}  onSubmit={handleSubmit}/>
     )
 };
 

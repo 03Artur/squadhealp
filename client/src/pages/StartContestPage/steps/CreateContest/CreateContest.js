@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import ContestForm from "../../../../components/forms/ContestForm/ContestForm";
+import {submit} from 'redux-form';
 import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
 import {connect} from 'react-redux';
 import {
@@ -11,20 +12,27 @@ import {
 function CreateContest({contest, doneStepAction, createContestAction, prevStepAction, steps, currentStepIndex, ...props}) {
 
 
-    const submit = (values) => {
+    const handleSubmit = (values) => {
         createContestAction(values);
     };
+
+    const handlerSubmitSuccess = () => {
+        doneStepAction()
+    };
+
     useEffect(() => {
         if (contest && steps[currentStepIndex]) {
             doneStepAction()
         }
     }, [contest]);
 
+    const onNextClick = () => props.dispatch("contestFrom");
+
 
     return (
         <React.Fragment>
-            <ContestForm onSubmit={submit}/>
-            <StartContestNav onPrevClick={prevStepAction} onNextClick={submit}/>
+            <ContestForm onSubmit={handleSubmit}/>
+            <StartContestNav onPrevClick={prevStepAction} onSubmitSuccess = {handlerSubmitSuccess} onNextClick={onNextClick}/>
         </React.Fragment>
     )
 

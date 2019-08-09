@@ -101,6 +101,6 @@ const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: "testForm"
+        form: "contestFrom"
     })(ContestForm)
 )

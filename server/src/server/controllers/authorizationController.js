@@ -15,6 +15,9 @@ const sequelize = db.sequelize;
 export const loginUser = async (req, res, next) => {
     try {
         const user = req.user;
+
+        user.password = undefined;
+
         let transaction = await sequelize.transaction();
         let refreshToken = await RefreshTokens.create({
             userId: user.id,
@@ -27,7 +30,9 @@ export const loginUser = async (req, res, next) => {
         }, {
             transaction,
         });
+
         await transaction.commit();
+
         res.send({
             user,
             tokenPair: {
@@ -83,8 +88,7 @@ export const getUserByAccessTokenPayload = async (req, res, next) => {
             },
         });
         if (!user) {
-            return next(new NotFoundError())
-
+            return next(new NotFoundError());
         }
         res.send(user);
     } catch (e) {

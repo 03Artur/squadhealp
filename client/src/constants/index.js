@@ -66,6 +66,7 @@ export const TASK_TYPE_DESCRIPTION = new Map([
     [TASK_TYPE.TAGLINE, "Connect deeply with your target audience with an on-target tagline"],
     [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO, "Get the essentials needed to establish your brand together and save"],
     [TASK_TYPE.NAME + " + " + TASK_TYPE.TAGLINE, "Communicate your vision with the perfect Name/Tagline combo"],
+    [TASK_TYPE.LOGO + " + " + TASK_TYPE.TAGLINE,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam commodi'],
     [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO + " + " + TASK_TYPE.TAGLINE, "Establish your entire brand identity and save with this bundle"],
 ]);
 export const TASK_TYPE_IMAGES = new Map([
