@@ -6,7 +6,7 @@ import withStoryBookContainer from '../HOCs/withStorybookContainer/withStorybook
 
 import Spinner from './Spinner';
 
-const Elem = withStoryBookContainer(<Spinner/>);
+const Elem = withStoryBookContainer(Spinner);
 
 storiesOf("Spinner", module)
     .add('default', () => (

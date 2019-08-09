@@ -1,6 +1,8 @@
+import {USERS_ACTION_RULES} from "../constants";
+
 const {ROLE, ACTION} = require("../constants");
-const Rule = require('../utils/permission_CRUD/classes/Rule');
-const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
+const Rule = require('../utils/permissions/classes/Rule');
+const ActionRules = require('../utils/permissions/classes/ActionRules');
 
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define('Users', {
@@ -65,61 +67,25 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false,
         },
 
-
     });
-    const allRolesArr = Object.values(ROLE);
-    const buyerRules =new CrudRule(
-        new Rule([]),
-        new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
-        new Rule([], true),
-        new Rule([], true));
 
+    Users.actionRules = USERS_ACTION_RULES;
 
-    buyerRules.addRule(ACTION.BAN,new Rule([ROLE.CREATIVE],false));
-
-    Users.crudRule = new Map([
-
-        [ROLE.ADMIN, new CrudRule(
-            new Rule(allRolesArr),
-            new Rule(allRolesArr, true),
-            new Rule([ROLE.BUYER,ROLE.CREATIVE], false),
-            new Rule([ROLE.CREATIVE, ROLE.BUYER], false),
-        )],
-
-        [ROLE.BUYER,buyerRules ],
-
-        [ROLE.CREATIVE, new CrudRule(
-            new Rule([]),
-            new Rule([ROLE.CREATIVE, ROLE.BUYER], true),
-            new Rule([], true),
-            new Rule([], true)),],
-    ]);
-    /**
-     *
-     * @param action
-     * @param actor
-     * @param object
-     * @returns {*}
-     */
     Users.checkPermission = (action, actor, object) => {
-        const crudRule = Users.crudRule.get(actor.role);
-        if (crudRule) {
-            return crudRule.checkPermission(action, object.role, actor.id === object.id);
+        const actorRoleActionRules = Users.actionRules.get(actor.role);
+        if (actorRoleActionRules) {
+            return actorRoleActionRules.checkPermission(action, object.role, actor.id === object.id);
         }
-        return undefined;
+        return null;
     };
 
-    /**
-     *
-     * @param action
-     * @param object
-     * @returns {*}
-     */
-    Users.prototype.checkPermission = function(action, object) {
 
+    Users.prototype.canActToMe = function (action, actor) {
+        return Users.checkPermission(action, actor, this);
+    };
+    Users.prototype.canIAct = function (action, object) {
 
         return Users.checkPermission(action, this, object);
-
     };
 
     Users.associate = async function (models) {

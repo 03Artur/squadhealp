@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
 import ContestForm from "../../components/forms/ContestForm/ContestForm";
-
+import TestForm from '../../components/forms/_TestForm/_TestForm';
 
 export default class Test extends Component {
 
@@ -11,12 +11,26 @@ export default class Test extends Component {
 
     }
 
+    onChange = (values) => {
+        console.group("onChange");
+        console.log(values);
+        console.groupEnd();
+    };
 
 
+    submit(values) {
+        console.group("onSubmit");
+        console.log(values);
+        console.groupEnd()
+    };
 
-    submit = vakues => console.log(vakues);
     render() {
-        return <ContestForm onSubmit={this.submit}/>
+        return (
+            <React.Fragment>
+                <h1>Test Page</h1>
+                <TestForm onSubmit={this.submit}/>
+            </React.Fragment>
+        )
     }
 
 };

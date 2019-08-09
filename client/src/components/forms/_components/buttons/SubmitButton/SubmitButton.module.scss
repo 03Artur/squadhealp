@@ -1,0 +1,28 @@
+@import "../../../../../commonStyles";
+
+.container {
+  @include flex-container(center, center);
+  background-color: #28d2d0;
+  box-sizing: border-box;
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 24px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 1200px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 1px;
+  }
+}
+
+.disable {
+  background-color: #777777;
+  color: #222222;
+  cursor: default;
+}

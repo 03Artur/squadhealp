@@ -37,6 +37,23 @@ export const findAndCountAllUsers = async (req, res, next) => {
     }
 };
 
+
+
+export const banUser = async (req, res, next) => {
+    try {
+       const user = await req.user.update({
+            isBanned: true
+        }, {
+            returning: true,
+        });
+
+        res.send(user);
+
+    } catch (e) {
+        next(e)
+    }
+};
+
 export const getUserById = async (req, res, next) => {
     try {
         parseInt(req.params.id);
@@ -63,7 +80,9 @@ export const updateUserById = async (req, res, next) => {
             return next(new NotFoundError);
 
         }
-        const result = await user.update(req.body);
+        const result = await user.update(req.body,{
+            returning: true,
+        });
         res.send(result);
     } catch (e) {
         next(e);

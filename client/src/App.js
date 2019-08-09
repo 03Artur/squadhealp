@@ -19,9 +19,9 @@ import Test from "./pages/TestPage/TestPage";
 * */
 import AccessRoute from './components/routes/AccessRoute/AccessRoute';
 import UserLoader from "./components/UserLoader/UserLoader";
-import Header from "./components/headers/DesktopHeader/DesktopHeader";
 
-const StartContestPage = lazy(() => import("./pages/StartContestPage/StartContestPage"));
+import TestPage from './pages/TestPage/TestPage'
+
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const AuthorizationPage = lazy(() => import("./pages/AuthorizationPage/AuthorizationPage"));
@@ -35,10 +35,12 @@ const App = (props) => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
 
-                        <AccessRoute roles={[ROLE.ADMIN]} path={PATH.ADMIN}
+                        <AccessRoute exact roles={[ROLE.ADMIN]} path={PATH.ADMIN}
                                      render={(props) => <AdminPage {...props}/>}/>
                         <Route path={[PATH.LOGIN, PATH.SIGN_UP]}
                                render={(props) => <AuthorizationPage {...props}/>}/>
+                        <Route path={PATH.TEST} render={(props) => <TestPage {...props}/>}/>
+
                         <Route path={PATH.HOME} render={(props) => <HomePage {...props}/>}/>
                     </Switch>
                 </Suspense>

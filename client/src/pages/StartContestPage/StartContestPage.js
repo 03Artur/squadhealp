@@ -1,90 +1,62 @@
-/*
-* React
-* */
+
 import React, {Fragment, useEffect,} from 'react';
 import {Route} from 'react-router-dom';
-
-/*
-* Redux & friends
-* */
 import {connect} from 'react-redux';
-import {
-    setIsNameExistActionCreator,
-} from "../../actions/contest/constestActionCreators";
-
-/*
-* Components
-* */
-import SelectTaskTypes from "../../components/forms/SelectTaskTypes/SelectTaskTypes";
+import { nextCreateContestStepActionCreate,} from "../../actions/contest/constestActionCreators";
+import SelectTaskTypes from "./steps/SelectTaskTypes/SelectTaskTypes";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
-
-/*
-* Styles
-* */
-
-import styles from './StartContestPage.module.scss';
+import {COMPLEX_PATH} from "../../constants";
+import CreateContest from './steps/CreateContest/CreateContest'
+import CreateTask from "./steps/CreateTask/CreateTask";
 
 
-/*
-* UTILS
-* */
-import createContestStep from "../../components/HOCs/CreateContestStep/CreateContestStep";
-
-
-let StartContestPage = ({steps, ...props}) => {
+let StartContestPage = ({steps, currentStepIndex, ...props}) => {
 
     useEffect(() => {
-
-        if (props.location.pathname !== props.currentStep.value.path) {
-            props.history.push(props.currentStep.value.path);
+        const currentStepPath = steps[currentStepIndex].path;
+        if (currentStepPath !== props.location.pathname) {
+            props.history.push(currentStepPath);
         }
+    }, [currentStepIndex]);
 
-    }, [props.currentStep]);
-
-    const renderStep = (step) => {
-
-        const Component = createContestStep(step);
-
-        return (
-            <Route key={step.path} path={step.path} render={props => <Component {...props}/>}/>
-        );
-    };
-
-    const renderSteps = () => {
-        const result = [];
-        for (let step of steps) {
-            result.push(
-                renderStep(step)
-            )
+    useEffect(() => {
+        if (steps[currentStepIndex].isDone) {
+            console.group("useEffect [isDone]: ");
+            props.nextStepAction();
+            console.groupEnd();
         }
-        return result;
-    };
+    }, [steps[currentStepIndex].isDone]);
 
     return (
         <Fragment>
             <ProgressInfo/>
-            {
-                renderSteps()
-            }
-
+            <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
+            <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateContest}/>
+            <Route path={COMPLEX_PATH.CREATE_TASK} component={CreateTask}/>
+            <Route path={COMPLEX_PATH.TASK_PAYMENT} render={props => (<h1>Where's the money, Lebowski?</h1>)}/>
         </Fragment>
     )
 };
 
-StartContestPage.propTypes = {};
-
-StartContestPage.defaultPros = {};
-
-const mapStateToProps = store => {
-
-const {steps,currentStep} = store.createContestSteps;
-    return {
-        ...store.selectedTaskTypes,
-        steps,
-        currentStep
-    }
+StartContestPage.propTypes = {
 
 };
 
+StartContestPage.defaultPros = {
 
-export default connect(mapStateToProps)(StartContestPage)
+};
+
+const mapStateToProps = store => {
+    const {steps, currentStepIndex} = store.createContestSteps;
+    return {
+        steps,
+        currentStepIndex,
+        ...store.selectedTaskTypes,
+    }
+};
+
+const mapDispatchToProps = dispatch => ({
+    nextStepAction: () => dispatch(nextCreateContestStepActionCreate())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)

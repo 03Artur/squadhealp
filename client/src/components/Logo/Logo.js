@@ -20,18 +20,20 @@ export default function Logo(props) {
 
     return (
         <Link to='/'>
-            <img className={settings.className} src={settings.logoSrc} alt="Logo"/>
+            <img className={[settings.className, props.className].join(' ')} src={settings.logoSrc} alt="Logo"/>
         </Link>
     )
 };
 
 
 Logo.propTypes = {
+    className: PropTypes.string,
     isColor: PropTypes.bool,
 };
 
 Logo.defaultProps = {
     isColor: true,
+    className: '',
 };
 
 

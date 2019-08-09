@@ -1,27 +1,7 @@
-/*
-* React
-* */
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
-
-/*
-* Redux & friends
-* */
 import {connect} from 'react-redux';
-
-/*
-* Components
-* */
 import Navigation from "./Navigation/Navigation";
-/*
-* Styles
-* */
 import styles from './DesktopHeader.module.scss';
-
-/*
-* UTILS
-* */
-import {PHONE_NUMBER} from "../../../constants";
 import HomeNavigation from "../../navigations/HomeNavigation/HomeNavigation";
 import ContactDetails from "./ContactiDetails/ContactDetails";
 
@@ -34,7 +14,6 @@ const DesktopHeader = (props) => {
                 <div className={styles.row}>
                     <div className={styles.col}>
                         <div className={styles.contactDetails}>
-
                             <ContactDetails/>
                         </div>
                     </div>

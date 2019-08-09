@@ -1,6 +1,8 @@
-const Rule = require('../utils/permission_CRUD/classes/Rule');
-const CrudRule = require('../utils/permission_CRUD/classes/CrudRule');
-const {ROLE} = require("../constants");
+import {CONTEST_ACTION_RULES} from "../constants";
+
+const Rule = require('../utils/permissions/classes/Rule');
+const ActionRules = require('../utils/permissions/classes/ActionRules');
+const {ROLE, ACTION} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
     const Contests = sequelize.define('Contests', {
@@ -49,21 +51,6 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-    Contests.crudRules = new CrudRule(
-        new Rule([ ROLE.ADMIN, ROLE.BUYER]),
-        new Rule([ ROLE.ADMIN,ROLE.BUYER,ROLE.CREATIVE], true),
-        new Rule([ ROLE.ADMIN,], true),
-        new Rule([ ROLE.ADMIN,], true),
-    );
-
-
-    Contests.checkPermission = (action, actor, contest) => {
-        return Contests.crudRules.checkPermission(action, actor.role, actor.id === contest.userId)
-    };
-
-    Contests.prototype.checkPermission = (action, actor) => {
-        return Contests.checkPermission(action, actor, this)
-    };
 
     Contests.associate = function (models) {
         Contests.hasMany(
@@ -81,6 +68,21 @@ module.exports = (sequelize, DataTypes) => {
             }
         )
     };
+
+
+
+    Contests.actionRules = CONTEST_ACTION_RULES;
+
+
+    Contests.checkPermission = (action, actor, contest) => {
+        return Contests.actionRules.checkPermission(action, actor.role, actor.id === contest.userId)
+    };
+
+    Contests.prototype.checkPermission = (action, actor) => {
+        return Contests.checkPermission(action, actor, this)
+    };
+
+
 
     return Contests;
 };

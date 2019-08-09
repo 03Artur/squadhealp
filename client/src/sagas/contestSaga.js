@@ -2,10 +2,14 @@ import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
 
-export function* createContest({contest}) {
+export function* createContestSaga({contest}) {
     yield put({type: ACTION_TYPE.CREATE_CONTEST_REQUEST});
     try {
+
         const {data} = yield contestController.createContest(contest);
+        console.group("createContestSaga");
+        console.log(data);
+        console.groupEnd();
         yield put({
             type: ACTION_TYPE.CREATE_CONTEST_RESPONSE,
             contest: data,
@@ -29,7 +33,6 @@ export function* createTaskSaga({task}) {
             type: ACTION_TYPE.CREATE_TASK_RESPONSE,
             task: data,
         })
-
     } catch (e) {
         yield put({
             type: ACTION_TYPE.CREATE_TASK_ERROR,

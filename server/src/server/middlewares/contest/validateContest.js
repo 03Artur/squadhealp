@@ -12,7 +12,7 @@ export async function validateContestOnCreate(req, res, next) {
         const validateSchema =  req.body.isNameExist ? nameExistCreateContestSchema : nameNotExistCreateContestSchema;
 
         if (validateSchema.isValid(contest)) {
-
+            console.log("validateContestOnCreate");
             return next()
         } else {
             return next(new BadRequestError())

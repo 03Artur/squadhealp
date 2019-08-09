@@ -1,28 +1,13 @@
-/*
-* React
-* */
+
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-/*
-* Redux & friends
-* */
 import {connect} from 'react-redux';
-
-/*
-* Components
-* */
 import Logo from '../../Logo/Logo'
 import LinkButton from "../../headers/LinkButtun/LinkButton";
-/*
-* Styles
-* */
 import styles from './HomeNavigation.module.scss';
-import {PATH} from "../../../constants";
+import {COMPLEX_PATH, PATH} from "../../../constants";
 
-/*
-* UTILS
-* */
 
 
 const HomeNavigation = (props) => {
@@ -32,7 +17,7 @@ const HomeNavigation = (props) => {
     return (
         <nav className={combinedClassNamesString}>
             <Logo isColor={true}/>
-            <LinkButton className={styles.linkButton} to={props.currentStep.value.path}>Start Contest</LinkButton>
+            <LinkButton className={styles.linkButton} to={COMPLEX_PATH.SELECT_TASK_TYPE}>Start Contest</LinkButton>
         </nav>
     )
 };
@@ -45,17 +30,5 @@ HomeNavigation.defaultPros = {
     className: '',
 };
 
-/*
-* React redux
-* */
-const mapStateToProps = store => {
 
-    const {currentStep} = store.createContestSteps;
-        return {
-            currentStep
-        }
-
-};
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeNavigation)
+export default HomeNavigation
