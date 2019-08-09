@@ -22,6 +22,7 @@ const getInitialState = () => {
     ];
     return ({
         currentStepIndex: 0,
+
         steps,
     });
 };
@@ -31,15 +32,17 @@ export default function createContestStepsReducer(state = getInitialState(), act
     switch (action.type) {
 
         case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION: {
-            const {steps, currentStepIndex} = state;
-            if (steps[currentStepIndex].isDone) {
-                return {
-                    ...state,
-                    currentStepIndex: state.currentStepIndex++,
-                };
-            } else {
-                return state;
+            return {
+                ...state,
+                currentStepIndex: (
+                    state.currentStepIndex < (state.steps.length - 1)
+                        ?
+                        state.currentStepIndex + 1
+                        :
+                        state.currentStepIndex),
             }
+
+
         }
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION: {
 
@@ -53,6 +56,7 @@ export default function createContestStepsReducer(state = getInitialState(), act
             const newState = _.cloneDeep(state);
             const {steps, currentStepIndex} = newState;
             steps[currentStepIndex].isDone = true;
+            console.log(newState);
 
             return newState;
         }
@@ -61,15 +65,17 @@ export default function createContestStepsReducer(state = getInitialState(), act
             const newState = _.cloneDeep(state);
             const {steps, currentStepIndex} = newState;
             steps[currentStepIndex] = action.step;
-
             return newState;
         }
 
         case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION: {
 
             const newState = _.cloneDeep(state);
+            const steps = action.steps;
+            steps.sort((a, b) => a.order -b.order);
+            console.log(steps);
+            newState.steps = steps;
 
-            newState.steps = action.steps;
 
             return newState;
         }

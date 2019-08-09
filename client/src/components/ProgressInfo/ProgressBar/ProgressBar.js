@@ -34,7 +34,7 @@ const ProgressBar = ({steps, currentStepIndex, ...props}) => {
                     {
                         <div className={styles.stepConnection} style={index===0?{borderColor:"transparent"}:undefined}/>
                     }
-                    <Step title={`${index+1}. ${steps[currentStepIndex].name}`} isDone={index < currentStepIndex}
+                    <Step tip={`${index+1}. ${steps[currentStepIndex].progressTip}`} title={`${index+1}. ${steps[currentStepIndex].name}`} isDone={index < currentStepIndex}
                           isCurrent={index === currentStepIndex}/>
                 </div>
             )

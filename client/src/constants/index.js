@@ -13,9 +13,6 @@ export const AUTHORIZATION_MODE = {
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
 
 
-
-
-
 export const PATH = {
     HOME: '/',
     LOGIN: '/login',
@@ -42,12 +39,6 @@ export const COMPLEX_PATH = {
 };
 
 
-
-
-
-
-
-
 export const TASK_TYPE = {
     NAME: 'Name',
     LOGO: "Logo",
@@ -64,11 +55,21 @@ export const TASK_TYPE_DESCRIPTION = new Map([
     [TASK_TYPE.NAME, "Get up and running with the perfect name"],
     [TASK_TYPE.LOGO, "Kickstart your venture with a unique, memorable logo"],
     [TASK_TYPE.TAGLINE, "Connect deeply with your target audience with an on-target tagline"],
-    [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO, "Get the essentials needed to establish your brand together and save"],
-    [TASK_TYPE.NAME + " + " + TASK_TYPE.TAGLINE, "Communicate your vision with the perfect Name/Tagline combo"],
-    [TASK_TYPE.LOGO + " + " + TASK_TYPE.TAGLINE,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam commodi'],
-    [TASK_TYPE.NAME + " + " + TASK_TYPE.LOGO + " + " + TASK_TYPE.TAGLINE, "Establish your entire brand identity and save with this bundle"],
+    [`${TASK_TYPE.NAME} + ${TASK_TYPE.LOGO}`, "Get the essentials needed to establish your brand together and save"],
+    [`${TASK_TYPE.NAME} + ${TASK_TYPE.TAGLINE}`, "Communicate your vision with the perfect Name/Tagline combo"],
+    [`${TASK_TYPE.LOGO} + ${TASK_TYPE.TAGLINE}`, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam commodi'],
+    [`${TASK_TYPE.NAME} + ${TASK_TYPE.LOGO} + ${TASK_TYPE.TAGLINE}`, "Establish your entire brand identity and save with this bundle"],
 ]);
+
+export const FORM_NAMES = {
+    CONTEST_FORM: 'contestForm',
+    TASK_FORM: 'taskForm',
+    TASK_TYPE_FORM: 'taskTypeForm',
+    PAYMENT_FORM: 'paymentForm',
+    AUTHORIZATION_FORM: 'authorizationForm',
+    TEST_FORM: 'testForm',
+};
+
 export const TASK_TYPE_IMAGES = new Map([
         [
             TASK_TYPE.NAME,

@@ -27,7 +27,7 @@ import InputFile from "../_components/inputs/InputFile/InputFile";
 /*
 * UTILS
 * */
-
+import {FORM_NAMES} from "../../../constants";
 
 const TaskForm = ({handleSubmit, ...props}) => {
 
@@ -48,17 +48,16 @@ TaskForm.defaultPros = {};
 /*
 * React redux
 * */
-const mapStateToProps = store => {
-    const {isNameExist} = store.createContest;
-    return {isNameExist}
-};
+const mapStateToProps = store => ({
+
+});
 const mapDispatchToProps = dispatch => ({
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: 'taskForm',
+        form: FORM_NAMES.TASK_FORM,
     })(TaskForm)
 
 )

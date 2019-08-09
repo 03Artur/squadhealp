@@ -6,20 +6,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, Field, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
-import {TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
+import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
 
 import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
 
-const formName = 'taskTypeForm';
 
 let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
 
 
     const onCardClick = async (value) => {
 
-        await dispatch(change(formName, 'selectedTaskTypes', value));
+        await dispatch(change(FORM_NAMES.TASK_TYPE_FORM, 'selectedTaskTypes', value));
 
-        await dispatch(submit(formName));
+        await dispatch(submit(FORM_NAMES.TASK_TYPE_FORM));
     };
 
     const renderTypeCards = (combinations, className = '') => (
@@ -90,7 +89,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(reduxForm({
-    form: formName,
+    form: FORM_NAMES.TASK_TYPE_FORM,
 })(TaskTypeForm));
 
 

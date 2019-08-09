@@ -4,9 +4,12 @@ import {ACTION} from '../../constants';
 
 export default async function checkUserCrudContestPermissions(req, res, next) {
     try {
+
         let contest = null;
-        if (req.method.toUpperCase() === ACTION.POST) {
+        if (req.method === ACTION.POST) {
+
             contest = req.body;
+
         } else {
             contest = await Contests.findByPk(parseInt(req.param.id));
             if (!contest) {
@@ -14,7 +17,8 @@ export default async function checkUserCrudContestPermissions(req, res, next) {
             }
         }
 
-        if (Contests.canIAct(req.method, req.accessTokenPayload, contest)) {
+        if (Contests.checkPermission(req.method, req.accessTokenPayload, contest)) {
+            console.log("checkUserCrudContestPermissions");
             return next();
         } else {
             return next(new appError.ForbiddenError());

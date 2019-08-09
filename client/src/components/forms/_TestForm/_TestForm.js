@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {reduxForm, Field, submit, change} from 'redux-form';
+import {FORM_NAMES} from "../../../constants";
 
 
 let CustomRadioInput = ({input, meta, ...props}) => {
@@ -37,8 +38,8 @@ let TestForm = ({handleSubmit, dispatch, ...props}) => {
             }
                  onClick={
                      async () => {
-                         await dispatch(change("testForm", 'test', ['Hello', 'From', 'Div']));
-                         await dispatch(submit("testForm"));
+                         await dispatch(change(FORM_NAMES.TEST_FORM, 'test', ['Hello', 'From', 'Div']));
+                         await dispatch(submit(FORM_NAMES.TEST_FORM));
                      }
                  }>{"hello"}</div>
             <div style={
@@ -46,8 +47,8 @@ let TestForm = ({handleSubmit, dispatch, ...props}) => {
             }
                  onClick={
                      async () => {
-                         await dispatch(change("testForm", 'test', ['YUPI KAY EAY']));
-                         await dispatch(submit("testForm"));
+                         await dispatch(change(FORM_NAMES.TEST_FORM, 'test', ['YUPI KAY EAY']));
+                         await dispatch(submit(FORM_NAMES.TEST_FORM));
                      }
                  }>{"hello"}
             </div>
@@ -57,7 +58,7 @@ let TestForm = ({handleSubmit, dispatch, ...props}) => {
 
 
 export default connect()(reduxForm({
-    form: "testForm",
+    form: FORM_NAMES.TEST_FORM,
 
 })(TestForm))
 

@@ -48,7 +48,7 @@ export const createContestActionCreator = contest => {
     }
 };
 
-export const setCreateContestStepsAction = steps => {
+export const setCreateContestStepsActionCreator = steps => {
     return {
         type: ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION,
         steps: steps,
@@ -71,6 +71,7 @@ export const prevCreateContestStepActionCreate = () => {
 };
 
 export const doneCurrentStepActionCreator = () => {
+    console.log("doneCurrentStepActionCreator");
     return {
         type: ACTION_TYPES.DONE_CURRENT_STEP_ACTION,
     }

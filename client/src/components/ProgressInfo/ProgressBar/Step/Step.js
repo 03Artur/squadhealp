@@ -33,7 +33,10 @@ const Step = ({isDone, isCurrent, tip, ...props}) => {
         return (
             <div className={styles.tipContainer}>{
                 tip
-            }</div>
+
+            }
+            <div className={styles.arrow}/>
+            </div>
         )
     };
     const renderCheck = () => {

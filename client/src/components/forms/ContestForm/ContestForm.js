@@ -1,43 +1,19 @@
-/*
-* React
-* */
 import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
 
-/*
-* Redux & friends
-* */
-import Spinner from '../../Spinner/Spinner';
 
-//REDUX & FRIENDS
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-/*
-* Components
-* */
 import LabelInput from '../_components/inputs/LabelInput/LabelInput'
 
-/*
-* Styles
-* */
 import styles from './ContestForm.module.scss';
 import Select from "./Select/Select";
 import {NAME_TYPE, TASK_TYPE} from "../../../constants";
-import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 
-/*
-* UTILS
-* */
-
+import {FORM_NAMES} from "../../../constants";
 
 let ContestForm = ({handleSubmit, ...props}) => {
 
-    const submit = (value) => {
-
-    };
-
     const renderNamesFields = () => {
-
         if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
@@ -63,35 +39,23 @@ let ContestForm = ({handleSubmit, ...props}) => {
                        label='What does your company or business do?'
                        component={LabelInput} type="text"/>
             </Fragment>
-
         )
     };
 
-
     return (
-
         <div className={styles.formContainer}>
             <form onSubmit={handleSubmit} className={styles.container} encType={"multipart/form-data"}>
                 {
                     renderNamesFields()
                 }
-
                 {
                     renderFields()
                 }
             </form>
         </div>
-
     )
 };
 
-ContestForm.propTypes = {};
-
-ContestForm.defaultPros = {};
-
-/*
-* React redux
-* */
 const mapStateToProps = store => {
     const {selectedTypes} = store.selectedTaskTypes;
     return {selectedTypes};
@@ -101,6 +65,6 @@ const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: "contestFrom"
+        form: FORM_NAMES.CONTEST_FORM
     })(ContestForm)
 )

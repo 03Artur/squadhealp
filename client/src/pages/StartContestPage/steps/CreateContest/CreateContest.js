@@ -7,13 +7,15 @@ import {
     createContestActionCreator, doneCurrentStepActionCreator,
     prevCreateContestStepActionCreate
 } from "../../../../actions/contest/constestActionCreators";
+import {FORM_NAMES} from "../../../../constants";
 
 
-function CreateContest({contest, doneStepAction, createContestAction, prevStepAction, steps, currentStepIndex, ...props}) {
+function CreateContest({contest, doneStepAction, prevStepAction, steps, currentStepIndex, ...props}) {
 
 
     const handleSubmit = (values) => {
-        createContestAction(values);
+        console.log(values);
+        props.createContestAction(values);
     };
 
     const handlerSubmitSuccess = () => {
@@ -26,18 +28,16 @@ function CreateContest({contest, doneStepAction, createContestAction, prevStepAc
         }
     }, [contest]);
 
-    const onNextClick = () => props.dispatch("contestFrom");
-
 
     return (
         <React.Fragment>
             <ContestForm onSubmit={handleSubmit}/>
-            <StartContestNav onPrevClick={prevStepAction} onSubmitSuccess = {handlerSubmitSuccess} onNextClick={onNextClick}/>
+            <StartContestNav onPrevClick={prevStepAction}
+                             onSubmitSuccess={handlerSubmitSuccess}
+                             onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )
-
 }
-
 
 const mapStateToProps = (state) => {
     const {contest} = state.createContest;
@@ -46,12 +46,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    createContestAction: (contest) => dispatch(createContestActionCreator(contest)),
+    createContestAction: contest => dispatch(createContestActionCreator(contest)),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
-    doneStepAction: () => dispatch(doneCurrentStepActionCreator())
+    doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
+    submitFormAction: () => dispatch(submit(FORM_NAMES.CONTEST_FORM)),
 
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateContest);
 
