@@ -12,11 +12,14 @@ import queryString from 'query-string';
 
 let StartContestPage = ({steps, currentStepIndex, ...props}) => {
 
+
+
+
     useEffect(() => {
-        if (steps[currentStepIndex].isDone) {
+        if (steps[currentStepIndex].query) {
             props.nextStepAction();
         }
-    }, [steps[currentStepIndex].isDone]);
+    }, [steps[currentStepIndex].query]);
 
     useEffect(() => {
         console.group("useEffect[currentStepIndex]");
@@ -24,10 +27,7 @@ let StartContestPage = ({steps, currentStepIndex, ...props}) => {
         console.log('currentStepPath: ', currentStepPath);
         console.log('currentStepIndex: ', currentStepIndex);
         if (currentStepPath !== props.location.pathname) {
-
             props.history.push(`${currentStepPath}?${queryString.stringify(props.query)}`);
-
-
         }
         console.groupEnd()
     }, [currentStepIndex]);
@@ -37,7 +37,7 @@ let StartContestPage = ({steps, currentStepIndex, ...props}) => {
             <ProgressInfo/>
             <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
             <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateContest}/>
-            <Route path={`${COMPLEX_PATH.CREATE_TASK}?type=${"Name"}`} component={CreateTask}/>
+            <Route path={COMPLEX_PATH.CREATE_TASK} component={CreateTask}/>
             <Route path={COMPLEX_PATH.TASK_PAYMENT} render={props => (<h1>Where's the money, Lebowski?</h1>)}/>
         </Fragment>
     )
@@ -59,7 +59,9 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    nextStepAction: () => dispatch(nextCreateContestStepActionCreator())
+    nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
+    createContestSetStateBySearch: () => dispatch(),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)

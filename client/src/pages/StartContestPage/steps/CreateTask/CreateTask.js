@@ -10,19 +10,20 @@ import StartContestNav from "../../../../components/navigations/StartContestNav/
 import {FORM_NAMES} from "../../../../constants";
 
 
-function CreateTask({type, contest, tasks, selectedTypes, nextStepAction, createTask, prevStepAction, setCurrentStepAction, ...props}) {
-
-
+function CreateTask({type, contest, tasks, selectedTypes, nextStepAction, prevStepAction, setCurrentStepAction, ...props}) {
 
 
     const handleSubmit = (values) => {
+        const formData = new FormData();
         values.contestId = contest.id;
-        createTask(values);
+        console.log(values);
+        return;
+        props.createTaskAction(values);
     };
 
     return (
         <React.Fragment>
-            <TaskForm onSubmitSuccess ={props.doneStepAction} onSubmit={handleSubmit}/>
+            <TaskForm onSubmitSuccess={props.doneStepAction} onSubmit={handleSubmit}/>
             <StartContestNav onPrevClick={prevStepAction} onNextClick={props.submitTaskForm}/>
         </React.Fragment>
     )
@@ -41,7 +42,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    createTask: task => dispatch(createTaskActionCreator(task)),
+    createTaskAction: (task) => dispatch(createTaskActionCreator(task)),
     nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
     doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
