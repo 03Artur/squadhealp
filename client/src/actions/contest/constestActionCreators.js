@@ -1,4 +1,5 @@
 import ACTION_TYPES from '../actiontsTypes';
+import {CREATE_CONTEST_STEP_INFO} from "../../constants/createContestConstants";
 
 export const getAllContestsActionCreator = () => {
     return {
@@ -41,22 +42,27 @@ export const setSelectedTypesActionCreator = types => {
     }
 };
 
-export const createContestActionCreator = contest => {
+export const createContestActionCreator = (isNameExist, contest) => {
     return {
         type: ACTION_TYPES.CREATE_CONTEST_ACTION,
         contest: contest,
+        isNameExist: isNameExist,
     }
 };
 
-export const setCreateContestStepsActionCreator = steps => {
+export const setCreateTaskStepsActionCreator = taskTypes => {
+
     return {
-        type: ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION,
-        steps: steps,
-
+        type: ACTION_TYPES.SET_CREATE_TASK_STEPS_ACTION,
+        taskSteps: taskTypes.map((item, index) => ({
+            ...CREATE_CONTEST_STEP_INFO.get(item),
+            query: null,
+            title: `TASK ${index + 1} of ${taskTypes.length}: ${item}`,
+        }))
     }
 };
 
-export const nextCreateContestStepActionCreate = () => {
+export const nextCreateContestStepActionCreator = () => {
 
     return {
         type: ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION,
@@ -71,7 +77,6 @@ export const prevCreateContestStepActionCreate = () => {
 };
 
 export const doneCurrentStepActionCreator = () => {
-    console.log("doneCurrentStepActionCreator");
     return {
         type: ACTION_TYPES.DONE_CURRENT_STEP_ACTION,
     }
@@ -88,3 +93,20 @@ export const createTaskActionCreator = (task) => ({
     type: ACTION_TYPES.CREATE_TASK_ACTION,
     task: task,
 });
+
+export const createContestSetQueryStringCreator = (query) => ({
+    type: ACTION_TYPES.CREATE_CONTEST_SET_QUERY_OBJECT,
+    query,
+});
+
+export const createContestRemoveQueryStringCreator = (query) => ({
+    type: ACTION_TYPES.CREATE_CONTEST_REMOVE_QUERY_OBJECT,
+
+});
+export const createContestAddParamToQueryStringCreator = (query) => ({
+    type: ACTION_TYPES.CREATE_CONTEST_ADD_PARAM_TO_QUERY_OBJECT,
+    query,
+
+});
+
+

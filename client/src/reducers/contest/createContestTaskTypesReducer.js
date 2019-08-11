@@ -3,7 +3,7 @@ import ACTION_TYPES from '../../actions/actiontsTypes';
 import _ from 'lodash';
 
 
-const initialState = {
+export const initialState = {
     selectedTypes: null,
     typesCombinations: [
         [TASK_TYPE.NAME],
@@ -16,7 +16,7 @@ const initialState = {
     ],
 };
 
-export default function selectedTaskTypesReducer(state = initialState, action) {
+export default function createContestTaskTypesReducer(state = initialState, action) {
     switch (action.type) {
         case ACTION_TYPES.SET_SELECTED_TASK_TYPES:
             const newState = _.cloneDeep(state);

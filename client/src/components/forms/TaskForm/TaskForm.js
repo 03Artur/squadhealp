@@ -34,7 +34,7 @@ const TaskForm = ({handleSubmit, ...props}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field validate ={[]} name="title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
+            <Field  name="title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
             <Field name="style" component = {LabelInput}/>
             <Field name="files" component = {InputFile}/>
         </form>

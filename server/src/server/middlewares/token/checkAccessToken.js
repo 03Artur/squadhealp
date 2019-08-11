@@ -18,6 +18,7 @@ export default async (req, res, next) => {
         const token = req.headers.authorization.replace(REGEXP.AUTHORIZATION_BEARER, '');
 
         req.accessTokenPayload = await verifyToken(token, TOKEN_PRIVATE_KEY);
+
         return next();
 
     } catch (e) {

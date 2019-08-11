@@ -7,12 +7,11 @@ import {
 
 export async function validateContestOnCreate(req, res, next) {
     try {
-        const {contest} = req.body;
+        const contest = req.body;
 
-        const validateSchema =  req.body.isNameExist ? nameExistCreateContestSchema : nameNotExistCreateContestSchema;
+        const validateSchema =  req.query.isNameExist ? nameExistCreateContestSchema : nameNotExistCreateContestSchema;
 
         if (validateSchema.isValid(contest)) {
-            console.log("validateContestOnCreate");
             return next()
         } else {
             return next(new BadRequestError())

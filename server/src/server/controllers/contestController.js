@@ -2,18 +2,16 @@ import {sequelize, Users, Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 
 
-export const createContest = async (req, res, next) => {
+export const upsertContest = async (req, res, next) => {
 
     try {
-
         req.body.userId = req.accessTokenPayload.id;
-        console.log(req.body);
-        const contest = await Contests.create(req.body);
-        console.log('2');
+        const contest = (await Contests.upsert(req.body, {
+            returning: true,
+        }));
         if (!contest) {
             return next(new appError.BadRequestError())
         }
-        console.log('3');
         res.send(contest);
     } catch (e) {
         next(e);

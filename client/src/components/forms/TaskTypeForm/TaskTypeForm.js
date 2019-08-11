@@ -84,7 +84,7 @@ TaskTypeForm.defaultPros = {};
 
 
 const mapStateToProps = state => {
-    const {typesCombinations} = state.selectedTaskTypes;
+    const {typesCombinations} = state.createContestTaskTypes;
     return {typesCombinations};
 };
 

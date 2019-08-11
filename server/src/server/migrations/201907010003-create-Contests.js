@@ -8,7 +8,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-
             userId: {
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
@@ -29,10 +28,6 @@ module.exports = {
             type: {
                 type: Sequelize.STRING,
                 allowNull: true,
-                validate: {
-                    isIn: ["Company", "Product", 'Project']
-                },
-
             },
             typeOfIndustry: {
                 type: Sequelize.STRING,
@@ -54,6 +49,11 @@ module.exports = {
                 validate: {
                     notEmpty: true,
                 },
+            },
+            isPaid: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
             },
             createdAt: Sequelize.DATE,
             updatedAt: Sequelize.DATE,

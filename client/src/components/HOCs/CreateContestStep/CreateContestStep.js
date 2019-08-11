@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 
 import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {
-    nextCreateContestStepActionCreate,
+    nextCreateContestStepActionCreator,
     prevCreateContestStepActionCreate
 } from "../../../actions/contest/constestActionCreators";
 
@@ -35,7 +35,7 @@ export default (step) => {
     const mapStateToProps = store => ({});
 
     const mapDispatchToProps = dispatch => ({
-            nextStepAction: () => dispatch(nextCreateContestStepActionCreate()),
+            nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
             prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
         })
     ;

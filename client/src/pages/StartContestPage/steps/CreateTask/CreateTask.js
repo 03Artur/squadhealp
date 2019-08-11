@@ -4,7 +4,7 @@ import {submit} from 'redux-form';
 import TaskForm from "../../../../components/forms/TaskForm/TaskForm";
 import {
     createTaskActionCreator, doneCurrentStepActionCreator,
-    nextCreateContestStepActionCreate, prevCreateContestStepActionCreate, setCurrentStepActionCreate
+    nextCreateContestStepActionCreator, prevCreateContestStepActionCreate, setCurrentStepActionCreate
 } from "../../../../actions/contest/constestActionCreators";
 import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
 import {FORM_NAMES} from "../../../../constants";
@@ -31,7 +31,7 @@ function CreateTask({type, contest, tasks, selectedTypes, nextStepAction, create
 const mapStateToProps = (state) => {
 
     const {contest, tasks} = state.createContest;
-    const {selectedTypes} = state.selectedTaskTypes;
+    const {selectedTypes} = state.createContestTaskTypes;
     return {
         contest,
         selectedTypes,
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
     createTask: task => dispatch(createTaskActionCreator(task)),
-    nextStepAction: () => dispatch(nextCreateContestStepActionCreate()),
+    nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
     doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
     submitTaskForm: () => dispatch(submit(FORM_NAMES.TASK_FORM))

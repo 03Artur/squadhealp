@@ -28,11 +28,6 @@ module.exports = {
                 },
 
             },
-            isPaid: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-                defaultValue: false,
-            },
             style: {
                 type: Sequelize.STRING,
                 allowNull: false,

@@ -12,7 +12,7 @@ import {loginActionCreator, signUpActionCreator} from "../../../actions/authoriz
 
 //UTILS
 import {AUTHORIZATION_MODE, ROLE} from '../../../constants';
-import * as VALIDATION from '../../../utils/redux-form/validateValue'
+import * as VALIDATION from '../../../utils/reduxForm/validateValue'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
 import {FORM_NAMES} from "../../../constants";

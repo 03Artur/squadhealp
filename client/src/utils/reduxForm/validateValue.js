@@ -9,8 +9,8 @@ export const nameValidation = value => (
     REGEXP.NAME.test(value) ? undefined : 'Name is not valid format'
 );
 
-export const emptyValidation = value => (
-    value ? undefined : "Field cannot be empty"
+export const notEmptyStringValidation = value => (
+    value && value.length>0 ? undefined : "Field cannot be empty"
 );
 
 export const passwordValidation = value => (

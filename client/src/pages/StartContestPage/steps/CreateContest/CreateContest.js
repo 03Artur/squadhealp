@@ -4,51 +4,62 @@ import {submit} from 'redux-form';
 import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
 import {connect} from 'react-redux';
 import {
-    createContestActionCreator, doneCurrentStepActionCreator,
+    createContestActionCreator, createContestRemoveQueryStringCreator, doneCurrentStepActionCreator,
     prevCreateContestStepActionCreate
 } from "../../../../actions/contest/constestActionCreators";
-import {FORM_NAMES} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPE} from "../../../../constants";
 
 
-function CreateContest({contest, doneStepAction, prevStepAction, steps, currentStepIndex, ...props}) {
+function CreateContest({contest, steps, currentStepIndex, ...props}) {
 
 
     const handleSubmit = (values) => {
-        console.log(values);
-        props.createContestAction(values);
+        console.group("handleSubmit");
+        console.log(!props.selectedTypes.includes(TASK_TYPE.NAME));
+        console.groupEnd();
+        props.createContestAction(!props.selectedTypes.includes(TASK_TYPE.NAME), values);
+
     };
 
-    const handlerSubmitSuccess = () => {
-        doneStepAction()
-    };
 
     useEffect(() => {
-        if (contest && steps[currentStepIndex]) {
-            doneStepAction()
+        if (contest) {
+            props.doneStepAction()
         }
     }, [contest]);
 
+    const handlePrevClick = () => {
+        console.log("handlePrevClick");
+        props.removeQueryAction();
+        props.prevStepAction();
+    };
 
     return (
         <React.Fragment>
             <ContestForm onSubmit={handleSubmit}/>
-            <StartContestNav onPrevClick={prevStepAction}
-                             onSubmitSuccess={handlerSubmitSuccess}
+            <StartContestNav onPrevClick={handlePrevClick}
+
                              onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )
 }
 
 const mapStateToProps = (state) => {
-    const {contest} = state.createContest;
-    const {steps, currentStepIndex} = state.createContestSteps;
-    return {contest, steps, currentStepIndex};
+    const {selectedTypes} = state.createContestTaskTypes;
+    return {
+        selectedTypes,
+        ...state.createContest,
+
+    }
+
+
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    createContestAction: contest => dispatch(createContestActionCreator(contest)),
+    createContestAction: (isNameExist, contest) => dispatch(createContestActionCreator(isNameExist, contest)),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
     doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
+    removeQueryAction: () => dispatch(createContestRemoveQueryStringCreator()),
     submitFormAction: () => dispatch(submit(FORM_NAMES.CONTEST_FORM)),
 
 });

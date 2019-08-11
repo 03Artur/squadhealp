@@ -1,25 +1,28 @@
-import React from 'react'
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import {COMPLEX_PATH, PATH} from "../../constants";
 import {CREATE_CONTEST_STEPS, CREATE_CONTEST_STEP_INFO} from "../../constants/createContestConstants";
 import _ from 'lodash';
 
+
+
+const initialSteps = [
+    {
+        ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.SELECT_TASK_TYPE),
+        query: null,
+    },
+    {
+        ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.CREATE_CONTEST),
+        query: null,
+    },
+    {
+        ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.CONTEST_PAYMENT),
+        query: null,
+    },
+];
+
 const getInitialState = () => {
 
-    const steps = [
-        {
-            ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.SELECT_TASK_TYPE),
-            isDone: false,
-        },
-        {
-            ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.CREATE_CONTEST),
-            isDone: false,
-        },
-        {
-            ...CREATE_CONTEST_STEP_INFO.get(CREATE_CONTEST_STEPS.CONTEST_PAYMENT),
-            isDone: false,
-        },
-    ];
+    const steps = _.cloneDeep(initialSteps);
     return ({
         currentStepIndex: 0,
 
@@ -39,17 +42,24 @@ export default function createContestStepsReducer(state = getInitialState(), act
                         ?
                         state.currentStepIndex + 1
                         :
-                        state.currentStepIndex),
+                        state.currentStepIndex
+                ),
             }
 
 
         }
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION: {
-
-            return {
-                ...state,
-                currentStepIndex: state.currentStepIndex--,
-            };
+            console.log(ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION);
+            const newState = _.cloneDeep(state);
+            newState.currentStepIndex = (
+                state.currentStepIndex > 0
+                    ?
+                    state.currentStepIndex - 1
+                    :
+                    0
+            );
+            newState.steps[newState.currentStepIndex].isDone = false;
+            return newState;
         }
         case ACTION_TYPES.DONE_CURRENT_STEP_ACTION: {
 
@@ -68,15 +78,12 @@ export default function createContestStepsReducer(state = getInitialState(), act
             return newState;
         }
 
-        case ACTION_TYPES.SET_CREATE_CONTEST_STEPS_ACTION: {
+        case ACTION_TYPES.SET_CREATE_TASK_STEPS_ACTION: {
 
             const newState = _.cloneDeep(state);
-            const steps = action.steps;
-            steps.sort((a, b) => a.order -b.order);
-            console.log(steps);
+            const steps = [...(_.cloneDeep(initialSteps)),...action.taskSteps];
+            steps.sort((a, b) => a.order - b.order);
             newState.steps = steps;
-
-
             return newState;
         }
 

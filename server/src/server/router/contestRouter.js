@@ -10,9 +10,9 @@ router.use(checkAccessToken);
 router.post('/contest',
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnCreate,
-    contestController.createContest);
+    contestController.upsertContest);
 
-router.post('/contest/task',
+router.post('contest/task',
     contestMW.checkUserCrudTaskPermissions,
     contestMW.validateTaskOnCreate,
     contestMW.addCostToTask,
@@ -20,7 +20,7 @@ router.post('/contest/task',
     contestController.createTask
 );
 
-router.put('/contest',
+router.put('/contest/:id',
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnUpdate,
     contestController.updateContest);

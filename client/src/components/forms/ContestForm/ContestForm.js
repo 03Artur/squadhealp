@@ -10,6 +10,7 @@ import Select from "./Select/Select";
 import {NAME_TYPE, TASK_TYPE} from "../../../constants";
 
 import {FORM_NAMES} from "../../../constants";
+import {notEmptyStringValidation} from "../../../utils/reduxForm/validateValue";
 
 let ContestForm = ({handleSubmit, ...props}) => {
 
@@ -17,10 +18,10 @@ let ContestForm = ({handleSubmit, ...props}) => {
         if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    <Field name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
+                    <Field validate={[notEmptyStringValidation]} name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
                            label='Name of the company / business?'
                            component={LabelInput} type="text"/>
-                    <Field name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
+                    <Field validate={[notEmptyStringValidation]} name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
                            type="text"/>
                 </Fragment>
             )
@@ -30,12 +31,12 @@ let ContestForm = ({handleSubmit, ...props}) => {
     const renderFields = () => {
         return (
             <Fragment>
-                <Field name="typeOfIndustry" placeholder={"Input Your Industry"} label='Type of Industry'
+                <Field validate={[notEmptyStringValidation]} name="typeOfIndustry" placeholder={"Input Your Industry"} label='Type of Industry'
                        component={LabelInput} type="text"/>
-                <Field name="targetCustomers" placeholder={"i.e. designers, developers"}
+                <Field validate={[notEmptyStringValidation]} name="targetCustomers" placeholder={"i.e. designers, developers"}
                        label='Who are your target customers?'
                        component={LabelInput} type="text"/>
-                <Field name="description" placeholder={"e.g. Smith & Forest"}
+                <Field validate={[notEmptyStringValidation]} name="description" placeholder={"e.g. Smith & Forest"}
                        label='What does your company or business do?'
                        component={LabelInput} type="text"/>
             </Fragment>
@@ -57,7 +58,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
 };
 
 const mapStateToProps = store => {
-    const {selectedTypes} = store.selectedTaskTypes;
+    const {selectedTypes} = store.createContestTaskTypes;
     return {selectedTypes};
 };
 

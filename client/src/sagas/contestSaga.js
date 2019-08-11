@@ -2,17 +2,18 @@ import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
 
-export function* createContestSaga({contest}) {
+export function* createContestSaga({isNameExist, contest}) {
     yield put({type: ACTION_TYPE.CREATE_CONTEST_REQUEST});
     try {
-
-        const {data} = yield contestController.createContest(contest);
         console.group("createContestSaga");
-        console.log(data);
+        console.log({isNameExist, contest});
+
+        const {data} = yield contestController.createContest(isNameExist,contest);
+        console.log("data: ",data);
         console.groupEnd();
         yield put({
             type: ACTION_TYPE.CREATE_CONTEST_RESPONSE,
-            contest: data,
+            contest: data[0],
         })
     } catch (e) {
         yield put({

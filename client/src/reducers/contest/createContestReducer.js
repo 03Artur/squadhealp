@@ -1,11 +1,32 @@
+import React, {useReducer} from 'react';
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import {Map, List} from "immutable"
+import _ from 'lodash';
+import {CREATE_CONTEST_STEP_INFO} from "../../constants/createContestConstants";
+import TaskTypeForm from "../../components/forms/TaskTypeForm/TaskTypeForm";
+import ContestForm from "../../components/forms/ContestForm/ContestForm";
+import TaskForm from "../../components/forms/TaskForm/TaskForm";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const initialState = new Map({
     isFetching: false,
     contest: null,
     error: null,
     tasks: null,
+
 }).toJS();
 
 export default function createContestReducer(state = initialState, action) {
@@ -19,11 +40,11 @@ export default function createContestReducer(state = initialState, action) {
 
             }).toJS();
         case ACTION_TYPES.CREATE_CONTEST_RESPONSE :
-            return new Map({
+            return (new Map({
                 ...state,
                 contest: action.contest,
 
-            }).toJS();
+            }).toJS());
         case ACTION_TYPES.CREATE_TASK_RESPONSE :
             return new Map({
                 ...state,
@@ -35,6 +56,7 @@ export default function createContestReducer(state = initialState, action) {
                 isFetching: false,
                 error: action.error,
             }).toJS();
+
         default:
             return state;
 
