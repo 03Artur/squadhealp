@@ -37,6 +37,8 @@ const ENTRY_ACTION_RULES = new ActionRules(
     ]
 );
 
+
+
 const CONTEST_ACTION_RULES = new ActionRules(
     [
         [ACTION.POST, new Rule([ROLE.ADMIN, ROLE.BUYER])],
@@ -102,6 +104,8 @@ module.exports = {
             [TASK_TYPE.LOGO, 91.43],
             [TASK_TYPE.NAME, 100.0],
         ]),
+    MULTER_TIME_FORMAT: 'YYMMDDHHmmss',
+
     DEVICES_COUNT: 3,
     SALT_ROUND: 10,
     AUTHORIZATION_BEARER: 'Bearer ',

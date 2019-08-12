@@ -99,7 +99,7 @@ export const createContestSetQueryStringCreator = (query) => ({
     query,
 });
 
-export const createContestRemoveQueryStringCreator = (query) => ({
+export const createContestRemoveQueryStringCreator = () => ({
     type: ACTION_TYPES.CREATE_CONTEST_REMOVE_QUERY_OBJECT,
 
 });

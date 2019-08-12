@@ -1,6 +1,10 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
+import {
+    createContestRemoveQueryStringCreator,
+    setSelectedTypesActionCreator
+} from "../actions/contest/constestActionCreators";
 
 export function* createContestSaga({isNameExist, contest}) {
     yield put({type: ACTION_TYPE.CREATE_CONTEST_REQUEST});
@@ -8,8 +12,8 @@ export function* createContestSaga({isNameExist, contest}) {
         console.group("createContestSaga");
         console.log({isNameExist, contest});
 
-        const {data} = yield contestController.createContest(isNameExist,contest);
-        console.log("data: ",data);
+        const {data} = yield contestController.createContest(isNameExist, contest);
+        console.log("data: ", data);
         console.groupEnd();
         yield put({
             type: ACTION_TYPE.CREATE_CONTEST_RESPONSE,
@@ -70,7 +74,7 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPE.CONTEST_PAYMENT_REQUEST});
     try {
 
-        const {data} = yield contestController.contestPaymentById(contestId,creditCard);
+        const {data} = yield contestController.contestPaymentById(contestId, creditCard);
         yield put
 
     } catch (e) {
@@ -84,3 +88,31 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     }
 
 }
+
+/*export function* getContestInDrawSaga({contestId}) {
+    yield put({type: ACTION_TYPE.GET_CONTEST_IN_DRAW_REQUEST});
+    try {
+        const {data} = yield
+    } catch (e) {
+
+    }
+}*/
+
+export function* updateStoreByQueryString({query}) {
+
+    try {
+        if (query.types) {
+            yield put(setSelectedTypesActionCreator(query.types))
+        }
+        if (query.contestId) {
+
+        }
+
+    } catch (e) {
+        yield put(createContestRemoveQueryStringCreator());
+    }
+
+}
+
+
+

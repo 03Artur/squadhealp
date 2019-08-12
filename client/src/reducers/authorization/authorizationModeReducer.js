@@ -54,14 +54,12 @@ export default function (state = initialState, action) {
                     initialValues: {
                         role: ROLE.BUYER,
                     },
-
                 },
                 linkButton: {
                     text: 'Login',
                     to: PATH.LOGIN
                 }
             };
-
 
         default:
             return state;

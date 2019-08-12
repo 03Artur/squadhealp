@@ -8,19 +8,6 @@ import ContestForm from "../../components/forms/ContestForm/ContestForm";
 import TaskForm from "../../components/forms/TaskForm/TaskForm";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const initialState = new Map({
     isFetching: false,
     contest: null,
@@ -31,7 +18,7 @@ const initialState = new Map({
 
 export default function createContestReducer(state = initialState, action) {
     switch (action.type) {
-
+        case ACTION_TYPES.GET_CONTEST_IN_DRAW_REQUEST:
         case ACTION_TYPES.CREATE_TASK_REQUEST:
         case ACTION_TYPES.CREATE_CONTEST_REQUEST :
             return new Map({

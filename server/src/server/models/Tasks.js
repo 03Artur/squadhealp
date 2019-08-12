@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isIn: ["Name", "Tagline", 'Logo']
+                isIn: [["Name", "Tagline", 'Logo']]
             }
         },
         priority: {
@@ -45,21 +45,38 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
 
         },
-        isPaid: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-        },
         cost: {
             type: DataTypes.REAL,
             allowNull: false,
             validate: {
                 min: 0,
             }
-
         },
 
     });
+    Tasks.associate = function (models) {
+        Tasks.hasMany(
+            models.Entries,
+            {
+                foreignKey: 'taskId',
+                targetKey: 'id',
+            }
+        );
+        Tasks.belongsTo(
+            models.Contests,
+            {
+                foreignKey: 'contestId',
+                targetKey: 'id',
+            }
+        );
+        Tasks.belongsTo(
+            models.Entries,
+            {
+                foreignKey: 'winnerId',
+                targetKey: 'id',
+            }
+        )
+    };
 
 
     return Tasks;

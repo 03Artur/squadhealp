@@ -18,7 +18,6 @@ export default async function checkUserCrudContestPermissions(req, res, next) {
         }
 
         if (Contests.checkPermission(req.method, req.accessTokenPayload, contest)) {
-            console.log("checkUserCrudContestPermissions");
             return next();
         } else {
             return next(new appError.ForbiddenError());

@@ -2,9 +2,11 @@ import {sequelize, Users, Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 
 
+
 export const upsertContest = async (req, res, next) => {
 
     try {
+
         req.body.userId = req.accessTokenPayload.id;
         const contest = (await Contests.upsert(req.body, {
             returning: true,
@@ -35,14 +37,18 @@ export const updateContest = async (req, res, next) => {
 
 export const createTask = async (req, res, next) => {
     try {
-        res.send(req.accessTokenPayload);
-        const task = await Tasks.create(req.body);
-        if (!task) {
-            return next(new appError.BadRequestError())
+
+        const contest = await Contests.findByPk(req.params.id);
+        if (!contest) {
+            return next(new appError.NotFoundError());
         }
-        res.send(task);
+        const newTask = await contest.createTask(req.body);
+        if (!newTask) {
+            return next(new appError.BadRequestError());
+        }
+        res.send(newTask);
     } catch (e) {
-        next(e)
+        next(e);
     }
 };
 
@@ -86,5 +92,23 @@ export const updateTaskById = async (req, res, next) => {
     } catch (e) {
         next(e);
     }
-
 };
+
+export const getContestById = async (req, res, next) => {
+    try {
+        const contest = await Contests.findByPk(req.params.id, {});
+        const tasks = await contest.getTasks();
+        if (!contest) {
+            return next(new appError.NotFoundError());
+        }
+
+        res.send({
+            contest: contest,
+            tasks: tasks
+        });
+    } catch (e) {
+        next(e);
+    }
+};
+
+
