@@ -7,7 +7,6 @@ export const CREATE_CONTEST_STEPS = {
     CREATE_LOGO_TASK: TASK_TYPE.LOGO,
     CREATE_TAGLINE_TASK: TASK_TYPE.TAGLINE,
     CONTEST_PAYMENT: 'CONTEST_PAYMENT',
-
 };
 
 
@@ -73,7 +72,5 @@ export const CREATE_CONTEST_STEP_INFO = new Map(
                 description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
             }
         ],
-
-
     ]
 );
