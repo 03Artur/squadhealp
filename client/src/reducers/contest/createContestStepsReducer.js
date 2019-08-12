@@ -35,38 +35,37 @@ export default function createContestStepsReducer(state = getInitialState(), act
     switch (action.type) {
 
         case ACTION_TYPES.NEXT_CREATE_CONTEST_STEP_ACTION: {
+            const newState = _.cloneDeep(state);
             return {
-                ...state,
+                ...newState,
                 currentStepIndex: (
-                    state.currentStepIndex < (state.steps.length - 1)
+                    newState.currentStepIndex < (newState.steps.length - 1)
                         ?
-                        state.currentStepIndex + 1
+                        newState.currentStepIndex + 1
                         :
-                        state.currentStepIndex
+                        newState.currentStepIndex
                 ),
             }
 
 
         }
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION: {
-            console.log(ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION);
             const newState = _.cloneDeep(state);
             newState.currentStepIndex = (
-                state.currentStepIndex > 0
+                newState.currentStepIndex > 0
                     ?
-                    state.currentStepIndex - 1
+                    newState.currentStepIndex - 1
                     :
                     0
             );
-            newState.steps[newState.currentStepIndex].isDone = false;
+            newState.steps[newState.currentStepIndex].query = null;
             return newState;
         }
         case ACTION_TYPES.DONE_CURRENT_STEP_ACTION: {
-
             const newState = _.cloneDeep(state);
-            const {steps, currentStepIndex} = newState;
-            steps[currentStepIndex].isDone = true;
-            console.log(newState);
+
+
+            newState.steps[newState.currentStepIndex].query = action.query;
 
             return newState;
         }

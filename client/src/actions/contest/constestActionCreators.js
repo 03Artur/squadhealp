@@ -76,9 +76,10 @@ export const prevCreateContestStepActionCreate = () => {
     }
 };
 
-export const doneCurrentStepActionCreator = () => {
+export const doneCurrentStepActionCreator = (query) => {
     return {
         type: ACTION_TYPES.DONE_CURRENT_STEP_ACTION,
+        query: query
     }
 };
 

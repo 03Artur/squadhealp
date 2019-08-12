@@ -23,34 +23,58 @@ import styles from './InputFile.module.scss';
 * UTILS
 * */
 
+const adaptFileEventToValue = delegate =>
+    e => {
+    console.log(e.target.files);
+    delegate(e.target.files);}
+
+const InputFile = ({
+                       input: {
+                           value: omitValue, onChange, onBlur, ...inputProps,
+                       },
+                       meta: omitMeta,
+                       ...props,
+                   }) => {
 
 
-const InputFile = ({name,input ,...props}) => {
 
+    const renderFileList = () => {
+        omitValue.map(item => (
+            <div>
+                {
+                    item.name
+                }
+            </div>
+        ))
+    };
 
     return (
-
         <div className={styles.container}>
             <label className={styles.labelButton}>
                 Choose file
-                <input {...input} multiple={false} type='file' className={styles.inputFile}/>
+                <input onChange={adaptFileEventToValue(onChange)}
+                       onBlur={adaptFileEventToValue(onBlur)}
+                       multiple={true}
+                       type="file"
+                       {...inputProps}
+                       {...props}
+                       className={styles.inputFile}/>
 
             </label>
             <div className={styles.fileNameContainer}>
-                <span>{input.value|"No File Chosen"}</span>
+                <span>{"No File Chosen"}</span>
+                {
+                    renderFileList()
+                }
             </div>
         </div>
 
     )
 };
 
-InputFile.propTypes = {
+InputFile.propTypes = {};
 
-};
-
-InputFile.defaultPros = {
-
-};
+InputFile.defaultPros = {};
 
 /*
 * React redux

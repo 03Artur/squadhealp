@@ -19,25 +19,27 @@ import {Field, reduxForm} from 'redux-form';
 * */
 import styles from './TaskForm.module.scss';
 import ContestForm from "../ContestForm/ContestForm";
-import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
-import {prevCreateContestStepActionCreate} from "../../../actions/contest/constestActionCreators";
-import LabelInput from "../_components/inputs/LabelInput/LabelInput";
-import InputFile from "../_components/inputs/InputFile/InputFile";
+import StartContestNav from "../../../navigations/StartContestNav/StartContestNav";
+import {prevCreateContestStepActionCreate} from "../../../../actions/contest/constestActionCreators";
+import LabelInput from "../../_components/inputs/LabelInput/LabelInput";
+import InputFile from "../../_components/inputs/InputFile/InputFile";
 
 /*
 * UTILS
 * */
-import {FORM_NAMES} from "../../../constants";
+import {FORM_NAMES} from "../../../../constants";
 
 const TaskForm = ({handleSubmit, ...props}) => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className={styles.formContainer}>
+        <form className={styles.container} onSubmit={handleSubmit}>
             <Field  name="title" label ="Title of your contest" placeholder="e.g. Need for Social Networking website" component = {LabelInput}/>
             <Field name="style" component = {LabelInput}/>
             <Field name="files" component = {InputFile}/>
         </form>
+        </div>
     )
 };
 

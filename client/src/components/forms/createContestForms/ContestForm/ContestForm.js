@@ -3,14 +3,14 @@ import React, {Component, Fragment} from 'react';
 
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-import LabelInput from '../_components/inputs/LabelInput/LabelInput'
+import LabelInput from '../../_components/inputs/LabelInput/LabelInput'
 
 import styles from './ContestForm.module.scss';
 import Select from "./Select/Select";
-import {NAME_TYPE, TASK_TYPE} from "../../../constants";
+import {NAME_TYPE, TASK_TYPE} from "../../../../constants";
 
-import {FORM_NAMES} from "../../../constants";
-import {notEmptyStringValidation} from "../../../utils/reduxForm/validateValue";
+import {FORM_NAMES} from "../../../../constants";
+import {notEmptyStringValidation} from "../../../../utils/reduxForm/validateValue";
 
 let ContestForm = ({handleSubmit, ...props}) => {
 

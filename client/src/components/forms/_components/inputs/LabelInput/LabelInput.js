@@ -32,7 +32,9 @@ const LabelInput = ({input,meta,placeholder, ...props}) => {
         <div className={styles.container}>
             <label className={styles.label} >{
                 props.label
-            }</label>
+            }
+
+            </label>
             <input placeholder={placeholder} {...input} className={styles.input}/>
         </div>
     )

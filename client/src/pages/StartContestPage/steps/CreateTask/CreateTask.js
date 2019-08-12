@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {submit} from 'redux-form';
-import TaskForm from "../../../../components/forms/TaskForm/TaskForm";
+import TaskForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {
     createTaskActionCreator, doneCurrentStepActionCreator,
     nextCreateContestStepActionCreator, prevCreateContestStepActionCreate, setCurrentStepActionCreate
@@ -14,9 +14,9 @@ function CreateTask({type, contest, tasks, selectedTypes, nextStepAction, prevSt
 
 
     const handleSubmit = (values) => {
-        const formData = new FormData();
-        values.contestId = contest.id;
+        console.group("Create task submit: ");
         console.log(values);
+        console.groupEnd();
         return;
         props.createTaskAction(values);
     };
@@ -45,7 +45,6 @@ const mapDispatchToProps = dispatch => ({
     createTaskAction: (task) => dispatch(createTaskActionCreator(task)),
     nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
-    doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
     submitTaskForm: () => dispatch(submit(FORM_NAMES.TASK_FORM))
 
 

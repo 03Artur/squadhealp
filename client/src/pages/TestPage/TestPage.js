@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
-import ContestForm from "../../components/forms/ContestForm/ContestForm";
+import ContestForm from "../../components/forms/createContestForms/ContestForm/ContestForm";
 import TestForm from '../../components/forms/_TestForm/_TestForm';
 
 export default class Test extends Component {

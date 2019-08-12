@@ -6,7 +6,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, Field, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
-import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../constants";
+import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../../constants";
 
 import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
 

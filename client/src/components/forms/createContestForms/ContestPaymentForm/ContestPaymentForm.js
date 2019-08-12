@@ -18,8 +18,8 @@ import {reduxForm} from 'redux-form';
 * styles
 * */
 import styles from './TaskPayment.module.scss';
-import {FORM_NAMES} from "../../../constants";
-import {contestPaymentActionCreator} from "../../../actions/payment/contestPaymentActionCreator";
+import {FORM_NAMES} from "../../../../constants";
+import {contestPaymentActionCreator} from "../../../../actions/payment/contestPaymentActionCreator";
 
 /*
 * UTILS

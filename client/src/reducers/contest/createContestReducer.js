@@ -3,9 +3,9 @@ import ACTION_TYPES from "../../actions/actiontsTypes";
 import {Map, List} from "immutable"
 import _ from 'lodash';
 import {CREATE_CONTEST_STEP_INFO} from "../../constants/createContestConstants";
-import TaskTypeForm from "../../components/forms/TaskTypeForm/TaskTypeForm";
-import ContestForm from "../../components/forms/ContestForm/ContestForm";
-import TaskForm from "../../components/forms/TaskForm/TaskForm";
+import TaskTypeForm from "../../components/forms/createContestForms/TaskTypeForm/TaskTypeForm";
+import ContestForm from "../../components/forms/createContestForms/ContestForm/ContestForm";
+import TaskForm from "../../components/forms/createContestForms/TaskForm/TaskForm";
 
 
 const initialState = new Map({

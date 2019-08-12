@@ -6,20 +6,11 @@ import {
     removeSelectedTypesActionCreator, setCreateTaskStepsActionCreator,
     setSelectedTypesActionCreator
 } from "../../../../actions/contest/constestActionCreators";
-import TaskTypeForm from "../../../../components/forms/TaskTypeForm/TaskTypeForm";
+import TaskTypeForm from "../../../../components/forms/createContestForms/TaskTypeForm/TaskTypeForm";
 import {CREATE_CONTEST_STEP_INFO, CREATE_CONTEST_STEPS} from "../../../../constants/createContestConstants";
 
 
-const SelectTaskTypes = ({typesCombinations, steps, currentStepIndex, selectedTypes,  ...props}) => {
-
-    useEffect( () => {
-        if (selectedTypes) {
-             props.setCreateTaskStepsAction(selectedTypes);
-             props.setQueryObjectAction({types: selectedTypes});
-             props.doneStepAction();
-        }
-    }, [selectedTypes]);
-
+const SelectTaskTypes = ({typesCombinations, steps, currentStepIndex, selectedTypes, ...props}) => {
 
 
 
@@ -30,7 +21,7 @@ const SelectTaskTypes = ({typesCombinations, steps, currentStepIndex, selectedTy
     };
 
     return (
-        <TaskTypeForm  onSubmit={handleSubmit}/>
+        <TaskTypeForm onSubmit={handleSubmit}/>
     )
 };
 
@@ -49,12 +40,7 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    doneStepAction: () => dispatch(doneCurrentStepActionCreator()),
     setSelectedTypesAction: (types) => dispatch(setSelectedTypesActionCreator(types)),
-    setCreateTaskStepsAction: (taskTypes) => dispatch(setCreateTaskStepsActionCreator(taskTypes)),
-    setQueryObjectAction: (query) => dispatch(createContestSetQueryStringCreator(query)),
-    nextStepAction: () => dispatch(nextCreateContestStepActionCreator())
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypes)
