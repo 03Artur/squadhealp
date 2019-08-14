@@ -6,7 +6,7 @@ const initialState = {
     error: null,
 };
 
-export default function paymentReducer(state = initialState, action) {
+export default function contestPaymentReducer(state = initialState, action) {
     switch (action.type) {
 
         case ACTION_TYPES.CONTEST_PAYMENT_REQUEST :

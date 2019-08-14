@@ -15,7 +15,7 @@ import {notEmptyStringValidation} from "../../../../utils/reduxForm/validateValu
 let ContestForm = ({handleSubmit, ...props}) => {
 
     const renderNamesFields = () => {
-        if (props.selectedTypes && !props.selectedTypes.includes(TASK_TYPE.NAME)) {
+        if (props.types && !props.types.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
                     <Field validate={[notEmptyStringValidation]} name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
@@ -58,8 +58,8 @@ let ContestForm = ({handleSubmit, ...props}) => {
 };
 
 const mapStateToProps = store => {
-    const {selectedTypes} = store.createContestTaskTypes;
-    return {selectedTypes};
+    const {query: {types}} = store.contestCreation;
+    return {types};
 };
 
 const mapDispatchToProps = dispatch => ({});

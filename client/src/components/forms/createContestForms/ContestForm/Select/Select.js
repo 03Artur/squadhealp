@@ -46,7 +46,7 @@ Select.propTypes = {
     label: PropTypes.string,
 };
 
-Select.defaultPros = {
+Select.defaultProps = {
     options: [],
 };
 

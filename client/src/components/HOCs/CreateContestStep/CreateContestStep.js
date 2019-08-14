@@ -14,7 +14,7 @@ import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
 import {
     nextCreateContestStepActionCreator,
     prevCreateContestStepActionCreate
-} from "../../../actions/contest/constestActionCreators";
+} from "../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 
 /*
 * UTILS

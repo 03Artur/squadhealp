@@ -1,37 +1,21 @@
-/*
-* React
-* */
-import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
-
-/*
-* Redux & friends
-* */
+import React from 'react';
 import {connect} from 'react-redux';
-
 import styles from './ProgressInfo.module.scss';
 import ProgressBar from "./ProgressBar/ProgressBar";
 
-/*
-* UTILS
-* */
-import {CREATE_CONTEST_STEP_INFO} from "../../constants/createContestConstants";
-
-
 const ProgressInfo = ({steps, currentStepIndex, ...props}) => {
-
 
     const renderInfo = () => {
 
-        const step = steps[currentStepIndex];
+        const stepInfo = steps[currentStepIndex];
 
         return (
             <React.Fragment>
                 <h2>
-                    {step.title}
+                    {stepInfo.title}
                 </h2>
                 <p>
-                    {step.description}
+                    {stepInfo.description}
                 </p>
             </React.Fragment>
         );
@@ -48,7 +32,7 @@ const ProgressInfo = ({steps, currentStepIndex, ...props}) => {
                     </div>
 
                     <div className={[styles.col, styles.progressBarContainer].join(' ')}>
-                        <ProgressBar/>
+                        <ProgressBar steps = {steps} currentStepIndex = {currentStepIndex}/>
                     </div>
                 </div>
             </div>
@@ -56,17 +40,16 @@ const ProgressInfo = ({steps, currentStepIndex, ...props}) => {
     )
 };
 
-ProgressInfo.propTypes = {};
 
-ProgressInfo.defaultPros = {};
 
-/*
-* React redux
-* */
-const mapStateToProps = store => ({
-    ...store.createContestSteps,
+const mapStateToProps = store => {
+    const {steps, currentStepIndex} = store.contestCreation;
+    return {
+        steps,
+        currentStepIndex,
+    }
 
-});
+};
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProgressInfo)

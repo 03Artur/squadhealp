@@ -47,19 +47,20 @@ router.put('/contest/:id',
     contestController.updateContest);
 
 router.post('/contest/:id/task',
-    upload.array('file', 8),
+    upload.array('files', 8),
+
     (req, res, next) => {
         try {
 
             req.body = JSON.parse(req.body.task);
-
             req.body.files = req.files.map(item=>item.filename);
-
             next();
+
         } catch (e) {
             next(e);
         }
     },
+
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateTaskOnCreate,
     contestMW.addCostToTask,
@@ -75,7 +76,12 @@ router.put('/contest/task',
     contestController.updateTaskById,
 );
 
-router.get('/contest/:id', contestController.getContestById)
+router.get('/contest/:id',
+/*
+    contestMW.checkUserCrudContestPermissions,
+*/
+    contestController.getContestById
+);
 
 
 export default router;

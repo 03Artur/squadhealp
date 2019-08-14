@@ -1,51 +1,28 @@
-/*
-* React
-* */
-import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
-
-/*
-* Redux & friends
-* */
-import {connect} from 'react-redux';
-
-/*
-* Components
-* */
-
-
-/*
-* styles
-* */
+import React from 'react';
 import styles from './InputFile.module.scss';
 
-/*
-* UTILS
-* */
 
 const adaptFileEventToValue = delegate =>
     e => {
-    console.log(e.target.files);
-    delegate(e.target.files);}
+        delegate(e.target.files);
+    };
 
-const InputFile = ({
-                       input: {
-                           value: omitValue, onChange, onBlur, ...inputProps,
-                       },
-                       meta: omitMeta,
-                       ...props,
-                   }) => {
-
-
+const InputFile = ({input: {value: omitValue, onChange, onBlur, ...inputProps,}, meta: omitMeta, ...props,}) => {
 
     const renderFileList = () => {
-        omitValue.map(item => (
-            <div>
-                {
-                    item.name
-                }
-            </div>
-        ))
+        if (omitValue) {
+            console.log(omitValue);
+            const fileNameList = [];
+            for (let i = 0; i < 3 && i < omitValue.length; i++) {
+                fileNameList.push(<li key={omitValue[i].name}>{omitValue[i].name}</li>)
+            }
+            if (omitValue.length > 3) {
+                fileNameList.push(<li key={"more"}>...</li>)
+            }
+            return fileNameList;
+        } else {
+            return <li>No File Chosen</li>;
+        }
     };
 
     return (
@@ -57,28 +34,15 @@ const InputFile = ({
                        multiple={true}
                        type="file"
                        {...inputProps}
-                       {...props}
                        className={styles.inputFile}/>
-
             </label>
-            <div className={styles.fileNameContainer}>
-                <span>{"No File Chosen"}</span>
+            <ul className={styles.fileNameContainer}>
                 {
                     renderFileList()
                 }
-            </div>
+            </ul>
         </div>
-
     )
 };
-
-InputFile.propTypes = {};
-
-InputFile.defaultPros = {};
-
-/*
-* React redux
-* */
-
 
 export default InputFile

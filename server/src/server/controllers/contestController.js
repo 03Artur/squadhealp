@@ -2,7 +2,6 @@ import {sequelize, Users, Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 
 
-
 export const upsertContest = async (req, res, next) => {
 
     try {
@@ -96,16 +95,23 @@ export const updateTaskById = async (req, res, next) => {
 
 export const getContestById = async (req, res, next) => {
     try {
-        const contest = await Contests.findByPk(req.params.id, {});
-        const tasks = await contest.getTasks();
-        if (!contest) {
+        const [contest] = await Contests.findAll({
+            where: {
+                id: req.params.id
+            },
+            include: [{
+                model: Tasks,
+
+            }]
+
+        });
+
+        if (contest) {
+
+            res.send(contest );
+        } else {
             return next(new appError.NotFoundError());
         }
-
-        res.send({
-            contest: contest,
-            tasks: tasks
-        });
     } catch (e) {
         next(e);
     }

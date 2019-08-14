@@ -63,7 +63,7 @@ export const TASK_TYPE_DESCRIPTION = new Map([
 
 export const FORM_NAMES = {
     CONTEST_FORM: 'contestForm',
-    TASK_FORM: 'taskForm',
+    TASKS_FORM: 'taskForm',
     TASK_TYPE_FORM: 'taskTypeForm',
     PAYMENT_FORM: 'paymentForm',
     AUTHORIZATION_FORM: 'authorizationForm',

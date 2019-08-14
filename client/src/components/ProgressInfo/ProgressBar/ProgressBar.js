@@ -26,7 +26,6 @@ import styles from './ProgressBar.module.scss';
 
 const ProgressBar = ({steps, currentStepIndex, ...props}) => {
 
-
     const renderSteps = () => {
         return steps.map((item, index) => (
 
@@ -39,9 +38,7 @@ const ProgressBar = ({steps, currentStepIndex, ...props}) => {
                 </div>
             )
         );
-
     };
-
 
     return (
         <div className={styles.container}>
@@ -52,18 +49,10 @@ const ProgressBar = ({steps, currentStepIndex, ...props}) => {
     )
 };
 
-ProgressBar.propTypes = {};
 
-ProgressBar.defaultPros = {};
 
-/*
-* React redux
-* */
-const mapStateToProps = store => {
-    const {steps, currentStepIndex} = store.createContestSteps;
-    return {steps, currentStepIndex};
-};
-const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProgressBar)
+
+
+export default ProgressBar;
 

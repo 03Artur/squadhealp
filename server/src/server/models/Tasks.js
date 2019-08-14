@@ -52,6 +52,11 @@ module.exports = (sequelize, DataTypes) => {
                 min: 0,
             }
         },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false,
+        }
 
     });
     Tasks.associate = function (models) {

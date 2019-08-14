@@ -1,46 +1,40 @@
 import React, {useEffect,} from 'react';
 import {connect} from 'react-redux';
-import {
-    createContestSetQueryStringCreator,
-    doneCurrentStepActionCreator, nextCreateContestStepActionCreator,
-    removeSelectedTypesActionCreator, setCreateTaskStepsActionCreator,
-    setSelectedTypesActionCreator
-} from "../../../../actions/contest/constestActionCreators";
 import TaskTypeForm from "../../../../components/forms/createContestForms/TaskTypeForm/TaskTypeForm";
-import {CREATE_CONTEST_STEP_INFO, CREATE_CONTEST_STEPS} from "../../../../constants/createContestConstants";
+import {
+    contestCreationAddParamToQueryParamsObjCreator, nextContestCreationStepActionCreator,
+} from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
+
+const SelectTaskTypes = (props) => {
+
+    const { steps, currentStepIndex} = props;
+    const {queryKey} = steps[currentStepIndex];
 
 
-const SelectTaskTypes = ({typesCombinations, steps, currentStepIndex, selectedTypes, ...props}) => {
 
 
-
-
-    const handleSubmit = (values) => {
-        const {selectedTaskTypes} = values;
-        props.setSelectedTypesAction(selectedTaskTypes);
+    const submit = (values) => {
+        props.selectTaskTypesAction({
+            [queryKey]: values.types,
+        });
     };
 
     return (
-        <TaskTypeForm onSubmit={handleSubmit}/>
-    )
+        <TaskTypeForm onSubmit={submit}/>
+    );
 };
 
-SelectTaskTypes.propTypes = {};
-
-SelectTaskTypes.defaultPros = {};
-
-SelectTaskTypes.propTypes = {};
-
-SelectTaskTypes.defaultPros = {};
-
-const mapStateToProps = store => {
-    const {steps, currentStepIndex} = store.createContestSteps;
-    const {selectedTypes, typesCombinations} = store.createContestTaskTypes;
-    return {selectedTypes, typesCombinations, steps, currentStepIndex};
+const mapStateToProps = state => {
+    const {query, steps, currentStepIndex} = state.contestCreation;
+    return {
+        query,
+        steps,
+        currentStepIndex,
+    }
 };
 
 const mapDispatchToProps = dispatch => ({
-    setSelectedTypesAction: (types) => dispatch(setSelectedTypesActionCreator(types)),
+    selectTaskTypesAction: query => dispatch(contestCreationAddParamToQueryParamsObjCreator(query)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypes)

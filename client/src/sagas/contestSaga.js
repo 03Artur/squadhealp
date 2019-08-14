@@ -1,27 +1,21 @@
 import {put} from 'redux-saga/effects';
-import ACTION_TYPE from '../actions/actiontsTypes';
+import ACTION_TYPES from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
-import {
-    createContestRemoveQueryStringCreator,
-    setSelectedTypesActionCreator
-} from "../actions/contest/constestActionCreators";
+
 
 export function* createContestSaga({isNameExist, contest}) {
-    yield put({type: ACTION_TYPE.CREATE_CONTEST_REQUEST});
+    yield put({type: ACTION_TYPES.CONTEST_CREATION_CREATE_CONTEST_REQUEST});
     try {
-        console.group("createContestSaga");
-        console.log({isNameExist, contest});
 
         const {data} = yield contestController.createContest(isNameExist, contest);
-        console.log("data: ", data);
-        console.groupEnd();
+        console.log(data);
         yield put({
-            type: ACTION_TYPE.CREATE_CONTEST_RESPONSE,
+            type: ACTION_TYPES.CONTEST_CREATION_CREATE_CONTEST_RESPONSE,
             contest: data[0],
         })
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.CREATE_CONTEST_ERROR,
+            type: ACTION_TYPES.CONTEST_CREATION_ERROR,
             error: {
                 status: e.response.status,
                 message: e.response.data,
@@ -30,17 +24,38 @@ export function* createContestSaga({isNameExist, contest}) {
     }
 }
 
+export function* getContestInDrawSaga({contestId}) {
+
+    yield put({type: ACTION_TYPES.CONTEST_CREATION_GET_CONTEST_IN_DRAW_REQUEST});
+    try {
+        const {data: { Tasks: tasks, ...contest}} = yield contestController.getContestById(contestId);
+        yield put({
+            type: ACTION_TYPES.CONTEST_CREATION_GET_CONTEST_IN_DRAW_RESPONSE,
+            contest,
+            tasks,
+        });
+    } catch (e) {
+        yield put({
+            type: ACTION_TYPES.GET_CONTEST_IN_DRAW_ERROR,
+            error: {
+                status: e.response.status,
+                message: e.response.data,
+            },
+        });
+    }
+}
+
 export function* createTaskSaga({task}) {
-    yield put({type: ACTION_TYPE.CREATE_TASK_REQUEST});
+    yield put({type: ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_REQUEST});
     try {
         const {data} = yield contestController.createTask(task);
         yield put({
-            type: ACTION_TYPE.CREATE_TASK_RESPONSE,
+            type: ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_RESPONSE,
             task: data,
         })
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.CREATE_TASK_ERROR,
+            type: ACTION_TYPES.CREATE_TASK_ERROR,
             error: {
                 status: e.response.status,
                 message: e.response.data,
@@ -50,17 +65,17 @@ export function* createTaskSaga({task}) {
 }
 
 export function* getAllUserContestsSaga({id}) {
-    yield put({type: ACTION_TYPE.GET_ALL_USER_CONTESTS_REQUEST});
+    yield put({type: ACTION_TYPES.GET_ALL_USER_CONTESTS_REQUEST});
     try {
         const {data} = yield contestController.getContestsByUserId(id);
         yield put({
-            type: ACTION_TYPE.GET_ALL_USER_CONTESTS_RESPONSE,
+            type: ACTION_TYPES.GET_ALL_USER_CONTESTS_RESPONSE,
             contests: data,
         })
 
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.GET_ALL_USER_CONTESTS_ERROR,
+            type: ACTION_TYPES.GET_ALL_USER_CONTESTS_ERROR,
             error: {
                 status: e.response.status,
                 message: e.response.data,
@@ -71,7 +86,7 @@ export function* getAllUserContestsSaga({id}) {
 
 
 export function* contestPaymentSaga({contestId, creditCard}) {
-    yield put({type: ACTION_TYPE.CONTEST_PAYMENT_REQUEST});
+    yield put({type: ACTION_TYPES.CONTEST_PAYMENT_REQUEST});
     try {
 
         const {data} = yield contestController.contestPaymentById(contestId, creditCard);
@@ -79,7 +94,7 @@ export function* contestPaymentSaga({contestId, creditCard}) {
 
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.CONTEST_PAYMENT_ERROR,
+            type: ACTION_TYPES.CONTEST_PAYMENT_ERROR,
             error: {
                 status: e.response.status,
                 message: e.response.data,
@@ -90,7 +105,7 @@ export function* contestPaymentSaga({contestId, creditCard}) {
 }
 
 /*export function* getContestInDrawSaga({contestId}) {
-    yield put({type: ACTION_TYPE.GET_CONTEST_IN_DRAW_REQUEST});
+    yield put({type: ACTION_TYPES.GET_CONTEST_IN_DRAW_REQUEST});
     try {
         const {data} = yield
     } catch (e) {
@@ -98,21 +113,7 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     }
 }*/
 
-export function* updateStoreByQueryString({query}) {
 
-    try {
-        if (query.types) {
-            yield put(setSelectedTypesActionCreator(query.types))
-        }
-        if (query.contestId) {
-
-        }
-
-    } catch (e) {
-        yield put(createContestRemoveQueryStringCreator());
-    }
-
-}
 
 
 

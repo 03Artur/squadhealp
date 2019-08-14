@@ -18,6 +18,7 @@ export const refreshTokensUrl = `/refresh`;
 * CRUD CONTEST & TASK URL
 * */
 export const contestUrl = `/contest`;
+export const userContestsUrl = `/contests`;
 export const taskUrl = `/contest/task`;
 export const contestPaymentUrl = '/payment/contest';
 

@@ -6,12 +6,10 @@
   box-sizing: border-box;
   display: flex;
 
-  & > * {
-    min-width: 200px;
-
-  }
 
   .labelButton {
+    min-width: 200px;
+
     cursor: pointer;
     display: inline-block;
     background-color: white;
@@ -27,6 +25,12 @@
     display: inline-block;
     padding: 12px;
     box-sizing: border-box;
+
+    li{
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
   }
 
 }

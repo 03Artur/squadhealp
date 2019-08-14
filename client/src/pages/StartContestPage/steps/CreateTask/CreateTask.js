@@ -1,53 +1,70 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {submit} from 'redux-form';
-import TaskForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
-import {
-    createTaskActionCreator, doneCurrentStepActionCreator,
-    nextCreateContestStepActionCreator, prevCreateContestStepActionCreate, setCurrentStepActionCreate
-} from "../../../../actions/contest/constestActionCreators";
+import TasksForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
+import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
-import {FORM_NAMES} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPE} from "../../../../constants";
+import {prevCreateContestStepActionCreate} from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 
 
-function CreateTask({type, contest, tasks, selectedTypes, nextStepAction, prevStepAction, setCurrentStepAction, ...props}) {
+function CreateTask(props) {
 
-
-    const handleSubmit = (values) => {
-        console.group("Create task submit: ");
-        console.log(values);
-        console.groupEnd();
-        return;
-        props.createTaskAction(values);
+    const submit = (values) => {
+        const tmp = Object.values(values);
+        const files tmp.reduce(
+            (result,item)=>{
+            const {files,...task}=item;
+            return {
+                files: [
+                    ...result.files,
+                    ...files,
+                ],
+                tasks: [
+                    ...result.tasks,
+                    task
+                ]
+            }
+            },{files:null,tasks:null});
+        const formData = new FormData();
+        /*formData.append("files", files);
+        formData.append('tasks', JSON.stringify(tasks));
+        props.createTaskAction(formData);*/
     };
 
+
+    const getInitialValues = () => {
+
+        return props.types.reduce((result, taskType) => {
+
+            result[taskType] = props.tasks.find(task => task.type === taskType);
+
+            return result
+        }, {});
+
+    };
     return (
         <React.Fragment>
-            <TaskForm onSubmitSuccess={props.doneStepAction} onSubmit={handleSubmit}/>
-            <StartContestNav onPrevClick={prevStepAction} onNextClick={props.submitTaskForm}/>
+            <TasksForm initialValues={getInitialValues()} onSubmit={submit}/>
+            <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )
 }
 
 const mapStateToProps = (state) => {
 
-    const {contest, tasks} = state.createContest;
-    const {selectedTypes} = state.createContestTaskTypes;
+    const {steps, currentStepIndex, query: {types}, tasks} = state.contestCreation;
     return {
-        contest,
-        selectedTypes,
-        tasks
+        types,
+        tasks,
     }
 };
 
 
 const mapDispatchToProps = dispatch => ({
-    createTaskAction: (task) => dispatch(createTaskActionCreator(task)),
-    nextStepAction: () => dispatch(nextCreateContestStepActionCreator()),
+    createTaskAction: (contestId, taskFormData) => dispatch(createTaskActionCreator(contestId, taskFormData)),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
-    submitTaskForm: () => dispatch(submit(FORM_NAMES.TASK_FORM))
-
-
+    submitFormAction: () => dispatch(submit(FORM_NAMES.TASKS_FORM)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);

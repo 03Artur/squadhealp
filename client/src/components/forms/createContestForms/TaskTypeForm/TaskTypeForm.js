@@ -1,10 +1,6 @@
-/*
-* React
-* */
 import React from 'react';
-
 import {connect} from 'react-redux';
-import {reduxForm, Field, change, submit} from 'redux-form';
+import {reduxForm, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
 import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../../constants";
 
@@ -13,24 +9,19 @@ import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
 
 let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
 
-
     const onCardClick = async (value) => {
-
-        await dispatch(change(FORM_NAMES.TASK_TYPE_FORM, 'selectedTaskTypes', value));
-
+        await dispatch(change(FORM_NAMES.TASK_TYPE_FORM, 'types', value));
         await dispatch(submit(FORM_NAMES.TASK_TYPE_FORM));
     };
 
     const renderTypeCards = (combinations, className = '') => (
-
         combinations.map((item) => {
-
             const title = item.join(' + ');
             const icons = item.map(type => TASK_TYPE_IMAGES.get(type));
             const description = TASK_TYPE_DESCRIPTION.get(title);
-
             return (
-                <TaskTypeCard key={title} onClick={()=> onCardClick(item)} icons={icons} title={title} className={className} description={description}/>
+                <TaskTypeCard key={title} onClick={() => onCardClick(item)} icons={icons} title={title}
+                              className={className} description={description}/>
             )
         }));
 
@@ -38,6 +29,7 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
         const combinations = typesCombinations.filter(item => item.length === 1);
         return renderTypeCards(combinations, styles.singleCard);
     };
+
     const renderGroupTypes = () => {
         const combinations = typesCombinations.filter(item => item.length > 1);
         return renderTypeCards(combinations);
@@ -53,11 +45,9 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
                             away</p>
                         <hr/>
                     </div>
-
                     <ul className={styles.row}>{
                         renderSingleTypes()
                     }</ul>
-
                 </div>
             </div>
             <div className={styles.typesContainer}>
@@ -67,24 +57,17 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
                         <p>Launch multiple contests and pay a discounted bundle price</p>
                         <hr/>
                     </div>
-
                     <ul className={styles.row}>{
                         renderGroupTypes()
                     } </ul>
-
                 </div>
             </div>
         </form>
     )
 };
 
-TaskTypeForm.propTypes = {};
-
-TaskTypeForm.defaultPros = {};
-
-
 const mapStateToProps = state => {
-    const {typesCombinations} = state.createContestTaskTypes;
+    const {typesCombinations} = state.contestCreation;
     return {typesCombinations};
 };
 
