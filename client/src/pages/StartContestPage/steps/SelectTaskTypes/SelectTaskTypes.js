@@ -2,25 +2,24 @@ import React, {useEffect,} from 'react';
 import {connect} from 'react-redux';
 import TaskTypeForm from "../../../../components/forms/createContestForms/TaskTypeForm/TaskTypeForm";
 import {
-    contestCreationAddParamToQueryParamsObjCreator, nextContestCreationStepActionCreator,
+    contestCreationAddParamToQueryParamsObjCreator, nextContestCreationStepActionCreator, selectTaskTypesActionCreator,
 } from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 
 const SelectTaskTypes = (props) => {
 
-    const { steps, currentStepIndex} = props;
+    const {steps, currentStepIndex} = props;
     const {queryKey} = steps[currentStepIndex];
 
 
-
-
     const submit = (values) => {
-        props.selectTaskTypesAction({
-            [queryKey]: values.types,
-        });
+        props.selectTaskTypesAction(
+                 values.types,
+
+        );
     };
 
     return (
-        <TaskTypeForm onSubmit={submit}/>
+        <TaskTypeForm onSubmitSuccess = {props.nextStepAction} onSubmit={submit}/>
     );
 };
 
@@ -34,7 +33,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    selectTaskTypesAction: query => dispatch(contestCreationAddParamToQueryParamsObjCreator(query)),
+    selectTaskTypesAction: types => dispatch(selectTaskTypesActionCreator(types)),
+    nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectTaskTypes)

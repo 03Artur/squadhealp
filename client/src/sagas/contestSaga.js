@@ -45,10 +45,10 @@ export function* getContestInDrawSaga({contestId}) {
     }
 }
 
-export function* createTaskSaga({task}) {
+export function* createTaskSaga({contestId, taskFormData}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_REQUEST});
     try {
-        const {data} = yield contestController.createTask(task);
+        const {data} = yield contestController.createTask(contestId, taskFormData);
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_RESPONSE,
             task: data,

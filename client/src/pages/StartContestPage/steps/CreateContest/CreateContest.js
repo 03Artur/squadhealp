@@ -17,17 +17,16 @@ function CreateContest(props) {
 
     const submit = (values) => {
         values.id = contestId;
-        if(_.isEqual(values,contest)){
-            props.nextStepAction()
-        }
-        else{
+        if (contestId && _.isEqual(values, contest)) {
+            props.nextStepAction();
+        } else {
             props.createContestAction(types.includes(TASK_TYPE.NAME), values);
         }
     };
 
     return (
         <React.Fragment>
-            <ContestForm onSubmitSuccess = { props.nextStepAction} initialValues={contest} onSubmit={submit}/>
+            <ContestForm initialValues={contest} onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )
@@ -45,8 +44,9 @@ const mapDispatchToProps = (dispatch) => ({
     addParamsToQueryAction: param => dispatch(contestCreationAddParamToQueryParamsObjCreator(param)),
     createContestAction: (isNameExist, contest) => dispatch(createContestActionCreator(isNameExist, contest)),
     prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
-    nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
     submitFormAction: () => dispatch(submit(FORM_NAMES.CONTEST_FORM)),
+    nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateContest);

@@ -12,6 +12,14 @@ export const AUTHORIZATION_MODE = {
 
 export const ACCESS_TOKEN_BEARER = 'Bearer ';
 
+export const CREATE_CONTEST_STEPS = {
+    SELECT_TASK_TYPE: "SELECT_TASK_TYPE",
+    CREATE_CONTEST: 'CREATE_CONTEST',
+    CONTEST_PAYMENT: 'CONTEST_PAYMENT',
+    CREATE_NAME_TASK: "CREATE_NAME_TASK",
+    CREATE_LOGO_TASK: "CREATE_LOGO_TASK",
+    CREATE_TAGLINE_TASK: "CREATE_TAGLINE_TASK",
+};
 
 export const PATH = {
     HOME: '/',
@@ -33,8 +41,7 @@ export const PATH = {
 export const COMPLEX_PATH = {
     CREATE_CONTEST: `${PATH.CONTEST}${PATH.BUSINESS}`,
     CREATE_TASK: `${PATH.CONTEST}${PATH.TASK}`,
-
-    TASK_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
+    CONTEST_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
     SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`
 };
 
@@ -50,6 +57,82 @@ export const NAME_TYPE = {
     PRODUCT: 'Product',
     PROJECT: 'Project',
 };
+
+export const CONTEST_CREATION_ALL_STEPS = new Map([
+    [CREATE_CONTEST_STEPS.SELECT_TASK_TYPE, {
+        queryKey: 'types',
+        order: 0,
+        path: COMPLEX_PATH.SELECT_TASK_TYPE,
+        title: 'Start a contest',
+        initialValues: {
+
+        },
+        progressTip: 'Select Contest Type',
+        description: 'Launching a contest on Squadhelp is very simple. Select the type of contest you would like to launch from the list below. Provide a detailed brief and select a pricing package. Begin receiving submissions instantly!',
+
+    }],
+    [CREATE_CONTEST_STEPS.CREATE_CONTEST, {
+        queryKey: 'contestId',
+        order: 1,
+        path: COMPLEX_PATH.CREATE_CONTEST,
+        title: 'Describe Your Business',
+        initialValues: {
+
+        },
+        progressTip: 'Your Business',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
+
+    }],
+    [CREATE_CONTEST_STEPS.CREATE_NAME_TASK, {
+        queryKey: 'Name',
+        order: 2,
+        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        initialValues: {
+            type: TASK_TYPE.NAME,
+        },
+        title: 'Name',
+        progressTip: 'Name',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
+
+    }],
+    [CREATE_CONTEST_STEPS.CREATE_LOGO_TASK, {
+        queryKey: 'Logo',
+        order: 3,
+        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        initialValues: {
+            type: TASK_TYPE.LOGO,
+        },
+        title: 'Logo',
+        progressTip: 'Logo',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
+
+    }],
+    [CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK, {
+        queryKey: 'Tagline',
+        order: 4,
+        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        initialValues: {
+            type: TASK_TYPE.TAGLINE,
+        },
+        title: 'Tagline',
+        progressTip: 'Tagline',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
+
+    }],
+    [CREATE_CONTEST_STEPS.CONTEST_PAYMENT, {
+        queryKey: 'isPaid',
+        order: 5,
+        initialValues: {
+            type: TASK_TYPE.NAME,
+        },
+        path: COMPLEX_PATH.CONTEST_PAYMENT,
+        title: 'Payment',
+        progressTip: 'Select Contest Type',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
+
+    }],
+]);
+
 
 export const TASK_TYPE_DESCRIPTION = new Map([
     [TASK_TYPE.NAME, "Get up and running with the perfect name"],

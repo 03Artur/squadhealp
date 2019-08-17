@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 * Redux & friends
 * */
 import {connect} from 'react-redux';
-import {reduxForm} from 'redux-form';
+import {reduxForm, Field} from 'redux-form';
 /*
 * Components
 * */
@@ -26,12 +26,13 @@ import {contestPaymentActionCreator} from "../../../../actions/payment/contestPa
 * */
 
 
-const ContestPaymentForm = ({handleSubmit, ...props}) => {
+const ContestPaymentForm = (props) => {
 
+    const {handleSubmit} = props;
 
     return (
         <form onSubmit={handleSubmit}>
-
+            <Field name={'number'} component={'input'} type='tel' placeholder={'Card number'}/>
         </form>
     )
 };
@@ -40,16 +41,8 @@ ContestPaymentForm.propTypes = {};
 
 ContestPaymentForm.defaultPros = {};
 
-/*
-* React redux
-* */
-const mapStateToProps = store => ({});
-const mapDispatchToProps = dispatch => ({
-    contestPaymentAction: (contestId, creditCard) => dispatch(contestPaymentActionCreator(contestId,creditCard)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    reduxForm({
-        form: FORM_NAMES.PAYMENT_FORM,
-    })(ContestPaymentForm)
-)
+export default reduxForm({
+    form: FORM_NAMES.PAYMENT_FORM,
+})(ContestPaymentForm)
+

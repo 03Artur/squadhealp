@@ -26,10 +26,23 @@ import styles from './LabelInput.module.scss';
 
 const LabelInput = ({input,meta,placeholder, ...props}) => {
 
-
+    const renderTip = () => {
+        if(meta.active){
+            return (
+                <div className={styles.tip}>
+                    <h3>Tip Title</h3>
+                    <div className={styles.tipText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                    <div className={styles.arrow}/>
+                </div>
+            );
+        }
+    };
 
     return (
         <div className={styles.container}>
+            {
+                renderTip()
+            }
             <label className={styles.label} >{
                 props.label
             }

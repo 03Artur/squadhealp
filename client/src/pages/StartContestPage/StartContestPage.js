@@ -8,13 +8,15 @@ import CreateContest from './steps/CreateContest/CreateContest'
 import CreateTask from "./steps/CreateTask/CreateTask";
 import queryString from 'query-string';
 import {
-    getContestInDrawActionCreator,
+    getContestInDrawActionCreator, insertTaskStepsToStepsActionCreator,
 } from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
+import {nextContestCreationStepActionCreator} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
+import ContestPayment from "./steps/ContestPayment/ContestPayment";
 
 
 let StartContestPage = (props) => {
 
-    const {query, steps, currentStepIndex,contest,tasks} = props;
+    const {query, steps, currentStepIndex, contest, tasks} = props;
 
 
     useEffect(() => {
@@ -24,11 +26,12 @@ let StartContestPage = (props) => {
 
     useEffect(() => {
         if (query.contestId && !props.contest) {
-            console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",query.contestId);
+            console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", query.contestId);
             props.loadContestInDrawAction(query.contestId);
 
         }
     }, [query.contestId]);
+
 
     useEffect(() => {
 
@@ -36,7 +39,7 @@ let StartContestPage = (props) => {
             props.history.push(`${steps[currentStepIndex].path}?${queryString.stringify(query)}`);
         }
 
-    }, [currentStepIndex]);
+    }, [currentStepIndex, query]);
 
 
     return (
@@ -47,7 +50,7 @@ let StartContestPage = (props) => {
 
             <Route path={COMPLEX_PATH.CREATE_TASK} component={CreateTask}/>
 
-            <Route path={COMPLEX_PATH.TASK_PAYMENT} render={props => (<h1>Where's the money, Lebowski?</h1>)}/>
+            <Route path={COMPLEX_PATH.CONTEST_PAYMENT} component={ContestPayment}/>
         </Fragment>
     )
 };
@@ -58,6 +61,8 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     loadContestInDrawAction: contestId => dispatch(getContestInDrawActionCreator(contestId)),
+    insertTaskStepsToStepsAction: types => dispatch(insertTaskStepsToStepsActionCreator(types)),
+    nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartContestPage)

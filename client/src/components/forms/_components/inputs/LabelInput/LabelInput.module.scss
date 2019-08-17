@@ -3,6 +3,53 @@
 .container {
   margin-top: 15px;
   width: 100%;
+  position: relative;
+}
+  .tip {
+    @media screen {
+
+    }
+
+    display: none;
+    border-radius: 6px;
+    $backgroundColor: #f8f8f8;
+    position: absolute;
+    left: 100%;
+    min-width: 180px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    margin-left: 11px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    background: $backgroundColor;
+    z-index: 10000;
+    font-family: 'Raleway', sans-serif;
+
+    h3 {
+      padding: 8px 14px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #495e8b;
+    }
+
+    .tipText {
+      box-sizing: border-box;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .arrow {
+      content: '';
+      position: absolute;
+      right: 100%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 11px 11px 11px 0;
+      border-color: transparent $backgroundColor transparent transparent;
+      top: calc(50% - 11px);
+    }
+  }
 
 
   .input {
@@ -25,12 +72,13 @@
     }
   }
 
-  .label {
-    float: left;
-    font-size: 19px;
-    color: #585859;
-    font-weight: 700;
-    margin-top: 12px;
-    margin-bottom: 5px;
-  }
+
+
+.label {
+  float: left;
+  font-size: 19px;
+  color: #585859;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 5px;
 }

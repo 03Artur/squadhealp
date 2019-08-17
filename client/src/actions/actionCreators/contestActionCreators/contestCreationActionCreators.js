@@ -1,5 +1,4 @@
 import ACTION_TYPES from "../../actiontsTypes";
-import {CREATE_CONTEST_STEP_INFO} from "../../../constants/createContestConstants";
 
 
 
@@ -10,17 +9,7 @@ export const selectTaskTypesActionCreator = types => {
     }
 };
 
-export const setCreateTaskStepsActionCreator = taskTypes => {
 
-    return {
-        type: ACTION_TYPES.SET_CREATE_TASK_STEPS_ACTION,
-        taskSteps: taskTypes.map((item, index) => ({
-            ...CREATE_CONTEST_STEP_INFO.get(item),
-            query: null,
-            title: `TASK ${index + 1} of ${taskTypes.length}: ${item}`,
-        }))
-    }
-};
 export const nextContestCreationStepActionCreator = () => {
 
     return {

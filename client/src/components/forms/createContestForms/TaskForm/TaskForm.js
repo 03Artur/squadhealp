@@ -37,46 +37,27 @@ const stylesMap = new Map([
 
 const TaskForm = (props) => {
 
-    const {handleSubmit, types, tasks} = props;
-
-    const renderFormSection = (taskType) => {
-        return (
-            <FormSection key={taskType} name={taskType}>
-                <Field name="title" label="Title of your contest" placeholder="e.g. Need for Social Networking website"
-                       component={LabelInput}/>
-                <Field name="style"
-                       options={stylesMap.get(taskType)}
-                       label={`Choose style of ${taskType}`}
-                       component={Select}/>
-                <Field name="files" component={InputFile}/>
-            </FormSection>
-        );
-    };
-
-    const renderFormSections = () => {
-        return types.map(taskType => renderFormSection(taskType))
-    };
+    const {handleSubmit,} = props;
 
     return (
         <div className={styles.formContainer}>
-            <form className={styles.container} onSubmit={handleSubmit}>{
-                renderFormSections()
-            }</form>
+            <form className={styles.container} onSubmit={handleSubmit}>
+                <Field name="title" label={`Title of your ${props.initialValues.type} contest`} placeholder="e.g. Need for Social Networking website"
+                       component={LabelInput}/>
+                <Field name="style"
+                       options={stylesMap.get(props.initialValues.type)}
+                       label={`Choose style of ${props.initialValues.type}`}
+                       component={Select}               />
+                <Field name="files" component={InputFile}/>
+            </form>
         </div>
     )
 };
 
-const mapStateToProps = state => {
 
-    const {query: {types}, tasks} = state.contestCreation;
 
-    return {
-        types,
-    }
-};
-
-export default connect(mapStateToProps)(reduxForm({
+export default reduxForm({
     form: FORM_NAMES.TASKS_FORM
-})(TaskForm));
+})(TaskForm);
 
 

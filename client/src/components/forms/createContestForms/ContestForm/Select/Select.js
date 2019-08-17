@@ -20,24 +20,41 @@ import styles from '../../../_components/inputs/LabelInput/LabelInput.module.scs
 * */
 
 
-const Select = ({options, input, label, ...props}) => {
+const Select = ({options, input, meta, label, ...props}) => {
 
+    const renderTip = () => {
+        if (meta.active) {
+            return (
+                <div className={styles.tip}>
+                    <h3>Tip Title</h3>
+                    <div className={styles.tipText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                    <div className={styles.arrow}/>
+                </div>
+            );
+        }
+    };
 
     const renderOptions = () => {
-
-        return options.map(item => (<option key={item}>{item}</option>))
-
+        return options.map((item) => (<option key={item}>{item}</option>));
     };
 
     return (
         <div className={styles.container}>
-            <label className={styles.label}>{label}</label>
-            <select {...input} className={styles.input}>
+            <label className={[styles.label].join(' ')}>
+                {label}
+            </label>
+            {
+                renderTip()
+            }
+            <select placeholder={'test'} {...input} className={styles.input}>
+                <option/>
                 {
                     renderOptions()
                 }
             </select>
+
         </div>
+
     )
 };
 
