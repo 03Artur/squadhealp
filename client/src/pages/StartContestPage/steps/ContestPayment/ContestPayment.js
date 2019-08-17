@@ -19,6 +19,7 @@ import {connect} from 'react-redux';
 * */
 import styles from './ContestPayment.module.scss';
 import ContestPaymentForm from "../../../../components/forms/createContestForms/ContestPaymentForm/ContestPaymentForm";
+import CreditCard from "../../../../components/CreditCard/CreditCard";
 
 /*
 * UTILS
@@ -33,6 +34,7 @@ const ContestPayment = (props) => {
         <Fragment>
             <h3>Checkout</h3>
             <div className={styles.checkoutContainer}>
+                <CreditCard/>
             <ContestPaymentForm/>
             </div>
         </Fragment>

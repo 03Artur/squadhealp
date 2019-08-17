@@ -12,7 +12,7 @@ const CreditCard = (props) => {
 
     return (
             <div className={styles.card}>
-                <div className={styles.frontSie}>
+                <div className={styles.frontSide}>
                     <span>Front</span>
                 </div>
                 <div className={styles.backSide}>

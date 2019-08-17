@@ -20,6 +20,7 @@ function CreateTask(props) {
         const formData = new FormData();
         formData.append("files", files);
         formData.append('task', JSON.stringify(task));
+        console.log("task: ", task);
         props.createTaskAction(props.contestId,formData);
     };
     const getInitialValues = () => {

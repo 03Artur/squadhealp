@@ -123,7 +123,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         queryKey: 'isPaid',
         order: 5,
         initialValues: {
-            type: TASK_TYPE.NAME,
         },
         path: COMPLEX_PATH.CONTEST_PAYMENT,
         title: 'Payment',

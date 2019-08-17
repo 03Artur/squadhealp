@@ -45,8 +45,7 @@ const getInitialState = () => {
         if (queryObj[item.queryKey]) {
             query[item.queryKey] = queryObj[item.queryKey];
             currentStepIndex++;
-        } else {
-            break;
+            console.log(currentStepIndex)
         }
     }
 
@@ -141,7 +140,6 @@ export default function contestCreationReducer(state = getInitialState(), action
                 isFetching: false,
                 error: action.error,
             }).toJS();
-
         /*
         *
         * QUERY

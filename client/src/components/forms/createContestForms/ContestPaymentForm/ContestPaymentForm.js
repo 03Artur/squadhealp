@@ -24,7 +24,40 @@ import {contestPaymentActionCreator} from "../../../../actions/payment/contestPa
 /*
 * UTILS
 * */
+const normalizeCardNumber = value => {
+    if (!value) {
+        return value;
+    }
+    const onlyNums = value.replace(/[^\d]/g, '');
+    let i = 4;
+    let result = onlyNums;
+    while (i < result.length) {
+        result = `${result.slice(0, i)} ${result.slice(i)}`;
+        i += 5;
+    }
+    return result;
+};
 
+
+const normalizeExpiry = value => {
+    if (!value) {
+        return value;
+    }
+
+
+    if(value.length===1&&value[0]>1){
+        value = `0`+value;
+    }
+    let template = "MMYY";
+    const onlyNums = value.replace(/[^\d]/g, '');
+    if (onlyNums.length > 2)
+        return `${onlyNums.slice(0, 2)} / ${onlyNums.slice(2)}`;
+    return onlyNums;
+};
+
+const normalizeCVC = value => {
+    return value.replace(/[^\d]/g, '');
+};
 
 const ContestPaymentForm = (props) => {
 
@@ -32,7 +65,12 @@ const ContestPaymentForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field name={'number'} component={'input'} type='tel' placeholder={'Card number'}/>
+            <Field normalize={normalizeCardNumber} pattern={/\d*/} name={'number'} component={'input'} maxLength={'19'}
+                   type='tel' placeholder={'Card Number'}/>
+            <Field  normalize={normalizeExpiry} pattern={/\d*/} name={'expiry'} component={'input'} maxLength={'7'}
+                   type='tel' placeholder={'MM / YY'}/>
+            <Field   normalize={normalizeCVC} pattern={/\d*/} name={'cvc'} component={'input'} maxLength={'3'}
+                   type='tel' placeholder={'CVC'}/>
         </form>
     )
 };
