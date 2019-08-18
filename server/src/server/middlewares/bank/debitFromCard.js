@@ -2,9 +2,7 @@ import {sequelize,} from '../../models';
 import {NotFoundError} from "../../errors";
 
 
-export default async
-
-function debitFromCard(req, res, next) {
+export default async function debitFromCard(req, res, next) {
     try {
         req.transaction = await sequelize.transaction();
 
@@ -15,6 +13,7 @@ function debitFromCard(req, res, next) {
             transaction: req.transaction,
             returning: true
         });
+
         if (req.creditCard) {
 
             return next();

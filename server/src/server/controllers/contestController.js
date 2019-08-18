@@ -64,29 +64,32 @@ export const activateNextContestTask = async (req, res, next) => {
 
     try {
 
+        req.contest = await req.contest.update({isPaid: true}, {
+            transaction: req.transaction,
+        });
 
-        let [task] = (await Tasks.findAll({
+
+        let [,[task]] = await Tasks.update({isActive: true}, {
             where: {
                 contestId: req.contest.id,
-                isPaid: true,
                 isActive: false,
             },
             limit: 1,
             order: [["priority", "DESC"]],
+            transaction: req.transaction,
+            returning: true,
+        });
 
-        }));
-
-        task = await task.update({isActive: true}, {transaction: req.transaction});
 
         const contest = await req.contest.reload({
             transaction: req.transaction
         });
+
         await req.transaction.commit();
 
         res.send(contest);
 
     } catch (e) {
-        req.transaction.rollback();
         next(e)
     }
 };

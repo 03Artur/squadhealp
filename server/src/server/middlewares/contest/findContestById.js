@@ -11,8 +11,12 @@ export default async function findContestById(req, res, next) {
 
             }]
         });
+
         if(contest){
             req.contest = contest;
+/*
+            res.send(req.contest);
+*/
             return next();
         }
         return next(new appError.NotFoundError())
