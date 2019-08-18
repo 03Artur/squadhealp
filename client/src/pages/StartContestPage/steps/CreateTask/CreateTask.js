@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {submit} from 'redux-form';
+import {submit, reset} from 'redux-form';
 import TasksForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
-import {FORM_NAMES, } from "../../../../constants";
+import {FORM_NAMES,} from "../../../../constants";
 import {
     nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
@@ -14,27 +14,30 @@ import {
 function CreateTask(props) {
 
 
-
     const submit = (values) => {
         const {files, ...task} = values;
         const formData = new FormData();
         formData.append("files", files);
         formData.append('task', JSON.stringify(task));
         console.log("task: ", task);
-        props.createTaskAction(props.contestId,formData);
+        props.createTaskAction(props.contestId, formData);
+    };
+    const submitSuccess = () => {
+        props.nextStepAction();
+        reset(FORM_NAMES.TASKS_FORM);
     };
     const getInitialValues = () => {
         const {type} = props.steps[props.currentStepIndex].initialValues;
-        if(type){
+        if (type) {
             const task = props.tasks.find(item => item.type === type);
-            if(task)
+            if (task)
                 return task;
         }
         return {type};
     };
     return (
         <React.Fragment>
-            <TasksForm  onSubmitSuccess = { props.nextStepAction} initialValues={getInitialValues()} onSubmit={submit}/>
+            <TasksForm onSubmitSuccess={submitSuccess} initialValues={getInitialValues()} onSubmit={submit}/>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )
@@ -42,7 +45,7 @@ function CreateTask(props) {
 
 const mapStateToProps = (state) => {
 
-    const {steps, currentStepIndex,query: {contestId}, tasks} = state.contestCreation;
+    const {steps, currentStepIndex, query: {contestId}, tasks} = state.contestCreation;
     return {
         steps,
         currentStepIndex,

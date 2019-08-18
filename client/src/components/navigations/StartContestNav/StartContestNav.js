@@ -34,8 +34,8 @@ const StartContestNav = (props) => {
                 <div className={styles.row}>
                     <p className={styles.col}>You are almost finished. Select a pricing package in the next step</p>
                     <div className={[styles.col, styles.buttonContainer].join(' ')}>
-                        <NavButton text={"back"}  onClick={props.onPrevClick}/>
-                        <NavButton text={"next"}  onClick={props.onNextClick} className={styles.nextButton}/>
+                        <NavButton text={props.prevButtonText}  onClick={props.onPrevClick}/>
+                        <NavButton text={props.nextButtonText}  onClick={props.onNextClick} className={styles.nextButton}/>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,15 @@ const StartContestNav = (props) => {
 StartContestNav.propTypes = {
     onNextClick: PropTypes.func,
     onPrevClick: PropTypes.func,
+    prevButtonText: PropTypes.string,
+    nextButtonText: PropTypes.string,
+
+};
+StartContestNav.defaultProps = {
+    onNextClick: (e) =>e,
+    onPrevClick: (e) =>e,
+    prevButtonText: 'back',
+    nextButtonText: 'next',
 };
 /*const defaultOnClick = function (e) {
     e.preventDefault()

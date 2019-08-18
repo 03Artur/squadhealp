@@ -12,7 +12,7 @@ import {
 } from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import {nextContestCreationStepActionCreator} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import ContestPayment from "./steps/ContestPayment/ContestPayment";
-
+import styles from './StartContestPage.module.scss';
 
 let StartContestPage = (props) => {
 

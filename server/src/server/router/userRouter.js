@@ -20,11 +20,6 @@ import appError from '../errors'
 
 const router = express.Router();
 
-router.use(checkAccessToken);
-
-
-
-
 router.get('/users', isItAdmin, findAndCountAllUsers);
 router.put('/ban/:id', checkBanPermission,banUser);
 router.post('/user', checkUserCrudPermission, validateDataOnCreateUser, hashPassword, createUser);

@@ -12,7 +12,6 @@ export default async (req, res, next) => {
 
         if (!req.headers.authorization) {
             return next(new UnauthorizedError());
-
         }
 
         const token = req.headers.authorization.replace(REGEXP.AUTHORIZATION_BEARER, '');

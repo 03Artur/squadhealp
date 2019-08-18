@@ -51,28 +51,42 @@ export const createTask = async (req, res, next) => {
     }
 };
 
+
+export const payContestById = async (req, res, next) => {
+    try {
+
+    } catch (e) {
+        next(e);
+    }
+};
+
 export const activateNextContestTask = async (req, res, next) => {
 
     try {
-        const contestId = parseInt(req.params.id);
 
-        let contest = (await Tasks.findAll({
+
+        let [task] = (await Tasks.findAll({
             where: {
-                contestId: contestId,
+                contestId: req.contest.id,
                 isPaid: true,
                 isActive: false,
             },
             limit: 1,
             order: [["priority", "DESC"]],
-        }))[0];
 
-        if (!contest) {
-            return next(new appError.NotFoundError());
-        }
+        }));
 
-        contest = await contest.update({isActive: true});
+        task = await task.update({isActive: true}, {transaction: req.transaction});
+
+        const contest = await req.contest.reload({
+            transaction: req.transaction
+        });
+        await req.transaction.commit();
+
         res.send(contest);
+
     } catch (e) {
+        req.transaction.rollback();
         next(e)
     }
 };
@@ -108,7 +122,7 @@ export const getContestById = async (req, res, next) => {
 
         if (contest) {
 
-            res.send(contest );
+            res.send(contest);
         } else {
             return next(new appError.NotFoundError());
         }

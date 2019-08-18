@@ -29,6 +29,8 @@ const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
 
 const App = (props) => {
 
+
+
     return (
         <UserLoader>
             <Router history={history}>

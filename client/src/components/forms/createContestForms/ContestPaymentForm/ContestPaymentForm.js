@@ -17,7 +17,7 @@ import {reduxForm, Field} from 'redux-form';
 /*
 * styles
 * */
-import styles from './TaskPayment.module.scss';
+import styles from './ContestPaymentForm.module.scss';
 import {FORM_NAMES} from "../../../../constants";
 import {contestPaymentActionCreator} from "../../../../actions/payment/contestPaymentActionCreator";
 
@@ -45,13 +45,14 @@ const normalizeExpiry = value => {
     }
 
 
-    if(value.length===1&&value[0]>1){
-        value = `0`+value;
+    if (value.length === 1 && value[0] > 1) {
+        value = `0` + value;
     }
-    let template = "MMYY";
     const onlyNums = value.replace(/[^\d]/g, '');
-    if (onlyNums.length > 2)
+
+    if (onlyNums.length > 2) {
         return `${onlyNums.slice(0, 2)} / ${onlyNums.slice(2)}`;
+    }
     return onlyNums;
 };
 
@@ -65,19 +66,41 @@ const ContestPaymentForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field normalize={normalizeCardNumber} pattern={/\d*/} name={'number'} component={'input'} maxLength={'19'}
-                   type='tel' placeholder={'Card Number'}/>
-            <Field  normalize={normalizeExpiry} pattern={/\d*/} name={'expiry'} component={'input'} maxLength={'7'}
-                   type='tel' placeholder={'MM / YY'}/>
-            <Field   normalize={normalizeCVC} pattern={/\d*/} name={'cvc'} component={'input'} maxLength={'3'}
-                   type='tel' placeholder={'CVC'}/>
+            <label className={styles.label}>
+                Card number
+                <br/>
+                <Field normalize={normalizeCardNumber} pattern={/\d*/} name={'number'} component={'input'}
+                       maxLength={'19'}
+                       type='tel' placeholder={'Card Number'}/>
+            </label>
+            <label htmlFor="">
+                * Expires
+                <br/>
+                <Field normalize={normalizeExpiry} pattern={/\d*/} name={'expiry'} component={'input'} maxLength={'7'}
+                       type='tel' placeholder={'MM / YY'}/>
+            </label>
+            <label htmlFor="">
+                * Security Code
+                <br/><Field onBlur = {props.onCvcBlur} onFocus ={props.onCvcFocus} normalize={normalizeCVC} pattern={/\d*/} name={'cvc'} component={'input'} maxLength={'3'}
+                            type='tel' placeholder={'CVC'}/>
+            </label>
         </form>
     )
 };
 
-ContestPaymentForm.propTypes = {};
+ContestPaymentForm.propTypes = {
+    onCvcBlur: PropTypes.func,
+    onCvcFocus: PropTypes.func,
+};
 
-ContestPaymentForm.defaultPros = {};
+ContestPaymentForm.defaultPros = {
+    onCvcBlur: (e) => {
+
+    },
+    onCvcFocus: (e) => {
+
+    },
+};
 
 
 export default reduxForm({

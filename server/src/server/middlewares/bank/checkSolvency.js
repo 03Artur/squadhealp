@@ -1,15 +1,13 @@
-import {Tasks} from '../../models'
 import appError from '../../errors'
 
 export default async (req, res, next) => {
     try {
+        req.bill = req.contest.Tasks.reduce((sum, task) => sum + task.cost, 0);
 
-
-        if (req.creditCard.balance < req.task.cost) {
-            return next(new appError.BadRequestError());
+        if (req.creditCard.balance > req.bill) {
+            return next();
         }
-        return next();
-
+        return next(new appError.BadRequestError());
 
     } catch (e) {
         next(e)

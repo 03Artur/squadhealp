@@ -90,7 +90,9 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     try {
 
         const {data} = yield contestController.contestPaymentById(contestId, creditCard);
-        yield put
+        console.group('contestPaymentSaga');
+        console.log(data);
+        console.groupEnd();
 
     } catch (e) {
         yield put({

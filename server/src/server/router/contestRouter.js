@@ -20,12 +20,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage});
-
-
 const router = express.Router();
-
-
-router.use(checkAccessToken);
 
 router.post('/contest',
     /*  contestMW.checkUserCrudContestPermissions,

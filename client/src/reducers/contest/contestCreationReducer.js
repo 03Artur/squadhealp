@@ -125,13 +125,15 @@ export default function contestCreationReducer(state = getInitialState(), action
             }).toJS());
 
         case ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_RESPONSE :
+            const query = {
+                ...state.queryString,
+                [action.task.type]:action.task.id,
+
+            };
             return new Map({
                 ...state,
                 tasks: new List([...state.tasks, action.task]).toJS(),
-                query: {
-                    ...state.query,
-                    [action.task.type]:action.task.id,
-                },
+                query,
             }).toJS();
 
         case ACTION_TYPES.CONTEST_CREATION_ERROR :

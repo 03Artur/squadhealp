@@ -3,16 +3,20 @@ import contestMW from '../middlewares/contest'
 import * as contestController from '../controllers/contestController'
 import bankMW from '../middlewares/bank';
 import findTaskById from "../middlewares/contest/task/findTaskById";
+import findContestById from "../middlewares/contest/findContestById";
+import {activateNextContestTask} from "../controllers/contestController";
 
 const router = express.Router();
 
 
-router.put('/payment/contest:id',
-    /*bankMW.bankCardValidation,
+router.post('/payment/contest/:id',
+    bankMW.bankCardValidation,
     bankMW.findBankCardByNumber,
-    findTaskById,*/
+    findContestById,
     bankMW.checkSolvency,
-
+    bankMW.debitFromCard,
+    bankMW.transferFundsToSite,
+    activateNextContestTask,
     );
 
 
