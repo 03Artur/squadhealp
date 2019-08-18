@@ -68,7 +68,6 @@ export const activateNextContestTask = async (req, res, next) => {
             transaction: req.transaction,
         });
 
-
         let [,[task]] = await Tasks.update({isActive: true}, {
             where: {
                 contestId: req.contest.id,
