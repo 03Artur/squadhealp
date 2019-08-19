@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ContestForm from "../../../../components/forms/createContestForms/ContestForm/ContestForm";
 import {submit} from 'redux-form';
-import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
+import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {connect} from 'react-redux';
 import {createContestActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import {FORM_NAMES, TASK_TYPE} from "../../../../constants";

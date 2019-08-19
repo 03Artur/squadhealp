@@ -26,19 +26,13 @@ let StartContestPage = (props) => {
 
     useEffect(() => {
         if (query.contestId && !props.contest) {
-            console.log("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", query.contestId);
             props.loadContestInDrawAction(query.contestId);
-
         }
     }, [query.contestId]);
 
 
     useEffect(() => {
-
-        if (steps[currentStepIndex].path !== props.location.pathname) {
             props.history.push(`${steps[currentStepIndex].path}?${queryString.stringify(query)}`);
-        }
-
     }, [currentStepIndex, query]);
 
 
@@ -47,9 +41,7 @@ let StartContestPage = (props) => {
             <ProgressInfo/>
             <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
             <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateContest}/>
-
             <Route path={COMPLEX_PATH.CREATE_TASK} component={CreateTask}/>
-
             <Route path={COMPLEX_PATH.CONTEST_PAYMENT} component={ContestPayment}/>
         </Fragment>
     )

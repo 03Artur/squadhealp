@@ -31,7 +31,6 @@ class Navigation extends Component {
                     <div className={styles.item} ref={this.toggleContainer}>
                         <UserItem/>
                     </div>
-
                     <div className={styles.item}>
                         <FontAwesomeIcon icon={faEnvelope}/>
                     </div>

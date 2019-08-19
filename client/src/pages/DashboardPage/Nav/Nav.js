@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import styles from './Nav.module.scss'
 
 function Nav(props) {
+
+    useEffect(() => {
+
+
+
+    },[])
+
 
 
     return (
@@ -15,13 +22,16 @@ function Nav(props) {
 
 
 function mapStateToProps(state) {
+    const {user} = state.authorization;
     return {
-
+        user
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav)

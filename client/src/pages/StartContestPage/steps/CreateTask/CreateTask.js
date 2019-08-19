@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {submit, reset} from 'redux-form';
 import TasksForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
-import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
+import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {FORM_NAMES,} from "../../../../constants";
 import {
     nextContestCreationStepActionCreator,

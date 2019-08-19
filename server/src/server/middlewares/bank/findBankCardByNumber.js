@@ -7,7 +7,6 @@ export default async (req, res, next) => {
         const {cvc, number, expiry} = req.body;
 
         const card = await Banks.findByPk(number);
-
         if (!card) {
             return next(new appError.NotFoundError())
         }

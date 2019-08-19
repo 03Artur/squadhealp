@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import styles from './UserItem.module.scss'
+function Header(props) {
 
-function UserItem(props) {
+    const {} = props;
 
 
     return (
@@ -14,16 +14,17 @@ function UserItem(props) {
 }
 
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     const {user} = state.authorization;
+
     return {
-        user
-    };
+        user,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserItem)
+   return {};
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

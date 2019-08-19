@@ -9,6 +9,6 @@ export const createTask = (contestId, taskFormData) => axios.post(`/contest/${co
         'Content-Type': 'multipart/form-data',
     }
 });
-export const contestPaymentById = (contestId, creditCard) => axios.put(`${contestPaymentUrl}/${contestId}`, creditCard);
+export const contestPaymentById = (contestId, creditCard) => axios.post(`${contestPaymentUrl}/${contestId}`, creditCard);
 
 

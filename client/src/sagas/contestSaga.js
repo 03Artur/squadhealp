@@ -72,7 +72,6 @@ export function* getAllUserContestsSaga({id}) {
             type: ACTION_TYPES.GET_ALL_USER_CONTESTS_RESPONSE,
             contests: data,
         })
-
     } catch (e) {
         yield put({
             type: ACTION_TYPES.GET_ALL_USER_CONTESTS_ERROR,
@@ -84,16 +83,21 @@ export function* getAllUserContestsSaga({id}) {
     }
 }
 
-
 export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPES.CONTEST_PAYMENT_REQUEST});
     try {
-
+        console.log( creditCard);
         const {data} = yield contestController.contestPaymentById(contestId, creditCard);
         console.group('contestPaymentSaga');
         console.log(data);
         console.groupEnd();
 
+       /* const {data: { Tasks: tasks, ...contest}} = data;
+        yield put({
+            type: ACTION_TYPES.CONTEST_CREATION_GET_CONTEST_IN_DRAW_RESPONSE,
+            contest,
+            tasks,
+        });*/
     } catch (e) {
         yield put({
             type: ACTION_TYPES.CONTEST_PAYMENT_ERROR,
@@ -103,19 +107,5 @@ export function* contestPaymentSaga({contestId, creditCard}) {
             },
         })
     }
-
 }
-
-/*export function* getContestInDrawSaga({contestId}) {
-    yield put({type: ACTION_TYPES.GET_CONTEST_IN_DRAW_REQUEST});
-    try {
-        const {data} = yield
-    } catch (e) {
-
-    }
-}*/
-
-
-
-
 

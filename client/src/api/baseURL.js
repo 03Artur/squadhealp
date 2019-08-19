@@ -33,7 +33,7 @@ export const usersUrl = `/users`;
 * Static paths
 * */
 export const imagesURL = `${baseURL}/images`;
-export const iconImagesURL = `${baseURL}/images/icons`;
+export const ICON_IMAGES_URL = `${imagesURL}/icons`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
 
 export const defaultUserIcon = `${imagesURL}/icons/user.svg`;

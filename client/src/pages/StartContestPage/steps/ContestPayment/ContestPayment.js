@@ -20,7 +20,7 @@ import {submit, formValueSelector} from 'redux-form';
 import styles from './ContestPayment.module.scss';
 import ContestPaymentForm from "../../../../components/forms/createContestForms/ContestPaymentForm/ContestPaymentForm";
 import CreditCard from "../../../../components/CreditCard/CreditCard";
-import StartContestNav from "../../../../components/navigations/StartContestNav/StartContestNav";
+import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {
     nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
@@ -52,9 +52,7 @@ const ContestPayment = (props) => {
             <div className={styles.checkoutContainer}>
 
                 <CreditCard flip={flipCard} {...props.cardValues}/>
-
                 <ContestPaymentForm onCvcBlur={() => setFlipCard(false)} onCvcFocus={() => setFlipCard(true)}  onSubmitSuccess={() => {
-                    alert("Payment Success")
                 }} onSubmit={submit}/>
             </div>
             <StartContestNav nextButtonText={"Pay Now"} onPrevClick={props.prevStepAction} onNextClick={props.submitContestPaymentFormAction}/>

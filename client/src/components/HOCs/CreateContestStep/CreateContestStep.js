@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 
-import StartContestNav from "../../navigations/StartContestNav/StartContestNav";
+import StartContestNav from "../../nav/StartContestNav/StartContestNav";
 import {
     nextCreateContestStepActionCreator,
     prevCreateContestStepActionCreate

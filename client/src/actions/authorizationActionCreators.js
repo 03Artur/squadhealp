@@ -37,6 +37,9 @@ export const changeModeToLoginActionCreator = () => {
     }
 };
 
+
+
+
 export const changeModeToSignUpActionCreator = () => {
 
     return {
@@ -51,31 +54,5 @@ export const closeErrorActionCreator = () => {
     }
 };
 
-export const getNavigationActionCreator = (role) => {
-
-    const action = {
-        type: ACTION_TYPES.GET_GUEST_NAVIGATION,
-        userNav: [
-            new Link("View dashboard", PATH.DASHBOARD),
-            new Link("Logout", ""),
-        ],
-        menuNav: [
-            {}
-        ]
-
-    };
-    switch (role) {
-        case ROLE.ADMIN:
-            return {};
-        case ROLE.CREATIVE:
-            return [];
-        case ROLE.BUYER:
-            return [];
-        default:
-            return action;
-    }
-
-
-};
 
 

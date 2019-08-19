@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import Navigation from "./Navigation/Navigation";
 import styles from './DesktopHeader.module.scss';
-import HomeNavigation from "../../navigations/HomeNavigation/HomeNavigation";
+import HomeNavigation from "../../nav/HomeNavigation/HomeNavigation";
 import ContactDetails from "./ContactiDetails/ContactDetails";
 
 const DesktopHeader = (props) => {

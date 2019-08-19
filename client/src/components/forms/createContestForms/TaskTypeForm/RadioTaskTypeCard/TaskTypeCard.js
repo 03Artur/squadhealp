@@ -22,15 +22,15 @@ import styles from './RadioTaskTypeCard.module.scss';
 /*
 * UTILS
 * */
-import {iconImagesURL} from "../../../../../api/baseURL";
+import {ICON_IMAGES_URL} from "../../../../../api/baseURL";
 
 
 const Icons = ({icons,...props}) => {
     return icons.map(item => (
         <Fragment key={item.defaultImg}>
-            <img src={`${iconImagesURL}/taskType/${item.defaultImg}`}
+            <img src={`${ICON_IMAGES_URL}/taskType/${item.defaultImg}`}
                  className={styles.defaultIcon} alt="icon"/>
-            <img src={`${iconImagesURL}/taskType/${item.hoverImg}`} className={styles.hoverIcon}
+            <img src={`${ICON_IMAGES_URL}/taskType/${item.hoverImg}`} className={styles.hoverIcon}
                  alt="icon"/>
         </Fragment>
     ))

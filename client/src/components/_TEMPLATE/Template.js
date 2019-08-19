@@ -39,7 +39,7 @@ Template.propTypes = {
 
 };
 
-Template.defaultPros = {
+Template.defaultProps = {
 
 };
 

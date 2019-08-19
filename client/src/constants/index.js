@@ -29,6 +29,7 @@ export const PATH = {
     ADMIN: '/admin',
     USERS: '/users',
     CONTEST: '/contest',
+    CONTESTS: '/contests',
     BUSINESS: '/business',
     DASHBOARD: '/dashboard',
     TASK: '/task',
@@ -42,7 +43,13 @@ export const COMPLEX_PATH = {
     CREATE_CONTEST: `${PATH.CONTEST}${PATH.BUSINESS}`,
     CREATE_TASK: `${PATH.CONTEST}${PATH.TASK}`,
     CONTEST_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
-    SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`
+    SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`,
+
+
+    DASHBOARD_CONTESTS: `${PATH.DASHBOARD}${PATH.CONTESTS}`,
+    DASHBOARD_CONTEST: `${PATH.DASHBOARD}${PATH.CONTEST}`,
+
+    DASHBOARD_USERS: `${PATH.DASHBOARD}${PATH.USERS}`,
 };
 
 
@@ -64,9 +71,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         order: 0,
         path: COMPLEX_PATH.SELECT_TASK_TYPE,
         title: 'Start a contest',
-        initialValues: {
-
-        },
+        initialValues: {},
         progressTip: 'Select Contest Type',
         description: 'Launching a contest on Squadhelp is very simple. Select the type of contest you would like to launch from the list below. Provide a detailed brief and select a pricing package. Begin receiving submissions instantly!',
 
@@ -75,10 +80,13 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         queryKey: 'contestId',
         order: 1,
         path: COMPLEX_PATH.CREATE_CONTEST,
-        title: 'Describe Your Business',
+
+
         initialValues: {
 
         },
+
+        title: 'Describe Your Business',
         progressTip: 'Your Business',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
 
@@ -122,8 +130,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.CONTEST_PAYMENT, {
         queryKey: 'isPaid',
         order: 5,
-        initialValues: {
-        },
+        initialValues: {},
         path: COMPLEX_PATH.CONTEST_PAYMENT,
         title: 'Payment',
         progressTip: 'Select Contest Type',
@@ -131,7 +138,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
 ]);
-
 
 export const TASK_TYPE_DESCRIPTION = new Map([
     [TASK_TYPE.NAME, "Get up and running with the perfect name"],
@@ -176,15 +182,15 @@ export const TASK_TYPE_IMAGES = new Map([
 
             }
         ],
-    ]
-);
+    ]);
 
 export const ROLE = {
     BUYER: "BUYER",
     CREATIVE: "CREATIVE",
     ADMIN: "ADMIN",
-
+    GUEST: 'GUEST',
 };
+
 export const ROLE_STRING = new Map([
     [ROLE.ADMIN, 'admin'],
     [ROLE.CREATIVE, 'creative'],

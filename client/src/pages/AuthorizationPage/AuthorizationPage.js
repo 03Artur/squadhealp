@@ -36,6 +36,7 @@ const AuthorizationPage = (props) => {
 
     useEffect(() => {
         if (props.user) {
+
             props.history.push(PATH.HOME);
         }
     }, [props.user]);
@@ -91,7 +92,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = (dispatch) => ({
     changeModeToLoginAction: () => dispatch(changeModeToLoginActionCreator()),
     changeModeToSignUpAction: () => dispatch(changeModeToSignUpActionCreator()),
-    closeErrorAction: () => dispatch(closeErrorActionCreator())
+    closeErrorAction: () => dispatch(closeErrorActionCreator()),
+    getUserNavigationAction: () => dispatch(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);

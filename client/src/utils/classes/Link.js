@@ -1,6 +1,17 @@
-export default class Link {
-    constructor(title, path) {
+export class MenuItem {
+    constructor(title, to='#', icon) {
         this.title = title;
-        this.path = path;
+        this.to = to;
+        this.icon = icon;
     }
 }
+
+export class Menu {
+    constructor( title ,items, icon) {
+        this.items = items;
+        this.title = title;
+        this.icon = icon;
+    }
+}
+
+

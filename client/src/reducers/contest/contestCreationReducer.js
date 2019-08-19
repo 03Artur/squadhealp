@@ -49,7 +49,6 @@ const getInitialState = () => {
         }
     }
 
-
     return new Map({
         isFetching: false,
         contest: null,
@@ -69,6 +68,14 @@ const getInitialState = () => {
         ],
     }).toJS();
 };
+
+
+
+
+
+
+
+
 
 
 export default function contestCreationReducer(state = getInitialState(), action) {
@@ -126,7 +133,7 @@ export default function contestCreationReducer(state = getInitialState(), action
 
         case ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_RESPONSE :
             const query = {
-                ...state.queryString,
+                ...state.query,
                 [action.task.type]:action.task.id,
 
             };

@@ -17,6 +17,8 @@ const AdminPage = lazy(() => import('../AdminPage/AdminPage'));
 
 function HomePage(props) {
 
+
+
     return (
         <div className={styles.pageContainer}>
             <DocumentTitle title="Home"/>
