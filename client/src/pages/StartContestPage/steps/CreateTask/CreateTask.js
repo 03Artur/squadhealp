@@ -22,10 +22,12 @@ function CreateTask(props) {
         console.log("task: ", task);
         props.createTaskAction(props.contestId, formData);
     };
+
     const submitSuccess = () => {
         props.nextStepAction();
         reset(FORM_NAMES.TASKS_FORM);
     };
+
     const getInitialValues = () => {
         const {type} = props.steps[props.currentStepIndex].initialValues;
         if (type) {
@@ -35,6 +37,7 @@ function CreateTask(props) {
         }
         return {type};
     };
+
     return (
         <React.Fragment>
             <TasksForm onSubmitSuccess={submitSuccess} initialValues={getInitialValues()} onSubmit={submit}/>
