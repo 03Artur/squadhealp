@@ -1,8 +1,11 @@
+import {Menu, MenuItem} from "../utils/classes/Link";
+
 export const LOCAL_STORAGE_KEYS = {
     ACCESS_TOKEN_KEY: 'ACCESS_TOKEN_KEY',
     REFRESH_TOKEN_KEY: 'REFRESH_TOKEN_KEY',
 
 };
+
 export const PHONE_NUMBER = '(877)\u00A0355-3585';
 
 export const AUTHORIZATION_MODE = {
@@ -45,10 +48,8 @@ export const COMPLEX_PATH = {
     CONTEST_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
     SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`,
 
-
     DASHBOARD_CONTESTS: `${PATH.DASHBOARD}${PATH.CONTESTS}`,
     DASHBOARD_CONTEST: `${PATH.DASHBOARD}${PATH.CONTEST}`,
-
     DASHBOARD_USERS: `${PATH.DASHBOARD}${PATH.USERS}`,
 };
 
@@ -82,9 +83,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         path: COMPLEX_PATH.CREATE_CONTEST,
 
 
-        initialValues: {
-
-        },
+        initialValues: {},
 
         title: 'Describe Your Business',
         progressTip: 'Your Business',
@@ -159,30 +158,30 @@ export const FORM_NAMES = {
 };
 
 export const TASK_TYPE_IMAGES = new Map([
-        [
-            TASK_TYPE.NAME,
-            {
-                defaultImg: 'nameGrey.png',
-                hoverImg: 'nameGreen.png',
-            },
-        ],
-        [
-            TASK_TYPE.TAGLINE, {
+    [
+        TASK_TYPE.NAME,
+        {
+            defaultImg: 'nameGrey.png',
+            hoverImg: 'nameGreen.png',
+        },
+    ],
+    [
+        TASK_TYPE.TAGLINE, {
 
-            defaultImg: 'taglineGrey.png',
-            hoverImg: 'taglineGreen.png',
+        defaultImg: 'taglineGrey.png',
+        hoverImg: 'taglineGreen.png',
+    }
+    ],
+    [
+        TASK_TYPE.LOGO,
+        {
+
+            defaultImg: 'logoGrey.png',
+            hoverImg: 'logoGreen.png',
+
         }
-        ],
-        [
-            TASK_TYPE.LOGO,
-            {
-
-                defaultImg: 'logoGrey.png',
-                hoverImg: 'logoGreen.png',
-
-            }
-        ],
-    ]);
+    ],
+]);
 
 export const ROLE = {
     BUYER: "BUYER",
@@ -197,3 +196,110 @@ export const ROLE_STRING = new Map([
     [ROLE.BUYER, 'buyer'],
 ]);
 
+
+const HOME_NAV = [
+    new Menu('Name Ideas', [
+        [
+            new MenuItem('Beauty'),
+            new MenuItem('Consulting'),
+            new MenuItem('E-Commerce'),
+            new MenuItem('Fashion & Clothing'),
+            new MenuItem('Finance'),
+            new MenuItem('Real Estate'),
+            new MenuItem('Tech'),
+        ],
+        [
+            new MenuItem('More Categories'),
+        ],
+
+    ]),
+    new Menu('Contests', [
+        [
+            new MenuItem('How it work'),
+            new MenuItem('Pricing'),
+            new MenuItem('Agency Services'),
+        ],
+        [
+            new MenuItem('Active Contests'),
+            new MenuItem('Winners'),
+            new MenuItem('Leaderboard'),
+        ],
+        [
+            new MenuItem('Become A Creative'),
+        ],
+
+    ]),
+    new Menu('Our Work', [
+        [
+            new MenuItem('Names'),
+            new MenuItem('Taglines'),
+            new MenuItem('Logos'),
+        ],
+        [
+            new MenuItem('Testimonials'),
+        ],
+    ]),
+    new Menu('Names For Sale', [
+        [
+            new MenuItem('Popular Names'),
+            new MenuItem('Short Names'),
+            new MenuItem('Intriguing Names'),
+            new MenuItem('Names By Category'),
+            new MenuItem('Visual Name Generator'),
+        ],
+        [
+            new MenuItem('Sell Your Domains'),
+        ],
+    ]),
+    new Menu('Blog', [
+        [
+            new MenuItem('Ultimate Naming Guide'),
+            new MenuItem('Poetic Devices in Business Naming'),
+            new MenuItem('Crowded Bar Theory'),
+        ],
+        [
+            new MenuItem('All Articles'),
+        ],
+    ]),
+];
+
+
+export const NAV_MAP = new Map([
+    [
+        ROLE.ADMIN, {
+        home: HOME_NAV,
+        useItem: [
+            new MenuItem('view dashboard', PATH.DASHBOARD,),
+        ],
+        dashboard: [
+            new MenuItem('users', COMPLEX_PATH.DASHBOARD_USERS, 'users.svg'),
+
+        ],
+    }],
+    [
+        ROLE.BUYER, {
+        home: HOME_NAV,
+        userItem: [
+            new MenuItem("Dashboard", PATH.DASHBOARD,),
+            new MenuItem("My Account",),
+            new MenuItem("Messages",),
+        ],
+        dashboard: []
+    }],
+    [
+        ROLE.CREATIVE, {
+        home: HOME_NAV,
+        userItem: [
+            new MenuItem("Dashboard", PATH.DASHBOARD,),
+            new MenuItem("My Contests",),
+            new MenuItem("My Account",),
+            new MenuItem("Messages",),
+        ],
+        dashboard: [
+            new MenuItem()
+        ],
+    }],
+    [ROLE.GUEST, {
+        home: HOME_NAV,
+    }]
+]);

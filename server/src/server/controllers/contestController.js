@@ -68,7 +68,7 @@ export const activateNextContestTask = async (req, res, next) => {
             transaction: req.transaction,
         });
 
-        let [,[task]] = await Tasks.update({isActive: true}, {
+        const result = await Tasks.update({isActive: true}, {
             where: {
                 contestId: req.contest.id,
                 isActive: false,
@@ -76,7 +76,7 @@ export const activateNextContestTask = async (req, res, next) => {
             limit: 1,
             order: [["priority", "DESC"]],
             transaction: req.transaction,
-            returning: true,
+
         });
 
 
