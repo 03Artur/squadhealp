@@ -1,5 +1,5 @@
 import ACTION_TYPES from '../../actions/actiontsTypes';
-import {AUTHORIZATION_MODE, PATH, ROLE} from '../../constants'
+import {AUTHORIZATION_MODE, PATHS, ROLE} from '../../constants'
 
 const initialState = {
 
@@ -14,7 +14,7 @@ const initialState = {
     },
     linkButton: {
         text: 'Sign Up',
-        to: PATH.SIGN_UP
+        to: PATHS.SIGN_UP
     },
 };
 
@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
                 },
                 linkButton: {
                     text: 'Sign Up',
-                    to: PATH.SIGN_UP
+                    to: PATHS.SIGN_UP
                 },
             };
         case ACTION_TYPES.AUTHORIZATION_SIGN_UP_MODE_ACTION:
@@ -57,7 +57,7 @@ export default function (state = initialState, action) {
                 },
                 linkButton: {
                     text: 'Login',
-                    to: PATH.LOGIN
+                    to: PATHS.LOGIN
                 }
             };
 

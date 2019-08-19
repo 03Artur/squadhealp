@@ -29,7 +29,7 @@ import styles from './AuthorizationPage.module.scss';
 /*
 * UTILS
 * */
-import {AUTHORIZATION_MODE, PATH, ROLE} from '../../constants';
+import {AUTHORIZATION_MODE, PATHS, ROLE} from '../../constants';
 
 const AuthorizationPage = (props) => {
 
@@ -37,7 +37,7 @@ const AuthorizationPage = (props) => {
     useEffect(() => {
         if (props.user) {
 
-            props.history.push(PATH.HOME);
+            props.history.push(PATHS.HOME);
         }
     }, [props.user]);
 
@@ -46,9 +46,9 @@ const AuthorizationPage = (props) => {
     }, [props.location.pathname]);
 
     const changeAuthorizationModeByLocation = () => {
-        if (props.location.pathname === PATH.SIGN_UP && props.mode !== AUTHORIZATION_MODE.SIGN_UP_MODE) {
+        if (props.location.pathname === PATHS.SIGN_UP && props.mode !== AUTHORIZATION_MODE.SIGN_UP_MODE) {
             props.changeModeToSignUpAction();
-        } else if (props.location.pathname === PATH.LOGIN && props.mode !== AUTHORIZATION_MODE.LOGIN_MODE) {
+        } else if (props.location.pathname === PATHS.LOGIN && props.mode !== AUTHORIZATION_MODE.LOGIN_MODE) {
             props.changeModeToLoginAction();
         }
     };

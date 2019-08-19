@@ -2,7 +2,7 @@ import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
 import history from "../history";
-import {PATH} from "../constants";
+import {PATHS} from "../constants";
 
 export function* loginUserSaga({data: user}) {
 
@@ -68,10 +68,7 @@ export function* getAuthorizedUserSaga() {
     }
 }
 
-export function* userLoaderRequestSaga() {
-    yield put
 
-}
 
 
 

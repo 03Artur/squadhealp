@@ -12,7 +12,7 @@ import history from './history';
 /*
 * CONSTANTS IMPORT
 * */
-import {PATH, ROLE} from "./constants"
+import {PATHS, ROLE} from "./constants"
 import Test from "./pages/TestPage/TestPage";
 /*
 * COMPONENTS IMPORT
@@ -37,13 +37,13 @@ const App = (props) => {
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
 
-                        <AccessRoute exact roles={[ROLE.ADMIN]} path={PATH.ADMIN}
+                        <AccessRoute exact roles={[ROLE.ADMIN]} path={PATHS.ADMIN}
                                      render={(props) => <AdminPage {...props}/>}/>
-                        <Route path={[PATH.LOGIN, PATH.SIGN_UP]}
+                        <Route path={[PATHS.LOGIN, PATHS.SIGN_UP]}
                                render={(props) => <AuthorizationPage {...props}/>}/>
-                        <Route path={PATH.TEST} render={(props) => <TestPage {...props}/>}/>
+                        <Route path={PATHS.TEST} render={(props) => <TestPage {...props}/>}/>
 
-                        <Route path={PATH.HOME} render={(props) => <HomePage {...props}/>}/>
+                        <Route path={PATHS.HOME} render={(props) => <HomePage {...props}/>}/>
                     </Switch>
                 </Suspense>
             </Router>

@@ -8,7 +8,7 @@ import store from '../../store';
 /*utils*/
 import history from '../../history';
 import {removeTokens} from '../../utils/localStorage'
-import {LOCAL_STORAGE_KEYS, PATH} from "../../constants";
+import {LOCAL_STORAGE_KEYS, PATHS} from "../../constants";
 import {authorizeUrl, baseURL} from "../baseURL";
 import ACTION_TYPES from '../../actions/actiontsTypes';
 
@@ -49,7 +49,7 @@ instance.interceptors.response.use(
             }
             case 401: {
                 removeTokens();
-                history.push(PATH.LOGIN);
+                history.push(PATHS.LOGIN);
                 return Promise.reject(err)
             }
 

@@ -21,11 +21,11 @@ import styles from './AuthorizationPage.module.scss';
 /*
 * UTILS
 * */
-import {PATH} from '../../constants'
+import {PATHS} from '../../constants'
 
 let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => {
-    if ((props.location.pathname === PATH.LOGIN && !isLoginMode) || (props.location.pathname === PATH.SIGN_UP && isLoginMode)) {
-        props.changeAuthorizationModeByLocation(props.location.pathname === PATH.LOGIN);
+    if ((props.location.pathname === PATHS.LOGIN && !isLoginMode) || (props.location.pathname === PATHS.SIGN_UP && isLoginMode)) {
+        props.changeAuthorizationModeByLocation(props.location.pathname === PATHS.LOGIN);
     }
 
 

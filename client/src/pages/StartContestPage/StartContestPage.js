@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import SelectTaskTypes from "./steps/SelectTaskTypes/SelectTaskTypes";
 import ProgressInfo from "../../components/ProgressInfo/ProgressInfo";
-import {COMPLEX_PATH} from "../../constants";
+import {PATHS} from "../../constants";
 import CreateContest from './steps/CreateContest/CreateContest'
 import CreateTask from "./steps/CreateTask/CreateTask";
 import queryString from 'query-string';
@@ -39,10 +39,10 @@ let StartContestPage = (props) => {
     return (
         <Fragment>
             <ProgressInfo/>
-            <Route path={COMPLEX_PATH.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
-            <Route path={COMPLEX_PATH.CREATE_CONTEST} component={CreateContest}/>
-            <Route path={COMPLEX_PATH.CREATE_TASK} component={CreateTask}/>
-            <Route path={COMPLEX_PATH.CONTEST_PAYMENT} component={ContestPayment}/>
+            <Route path={PATHS.SELECT_TASK_TYPE} component={SelectTaskTypes}/>
+            <Route path={PATHS.CREATE_CONTEST} component={CreateContest}/>
+            <Route path={PATHS.CREATE_TASK} component={CreateTask}/>
+            <Route path={PATHS.CONTEST_PAYMENT} component={ContestPayment}/>
         </Fragment>
     )
 };

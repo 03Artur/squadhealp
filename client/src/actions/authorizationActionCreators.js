@@ -1,5 +1,5 @@
 import ACTION_TYPES from './actiontsTypes';
-import {ROLE, PATH} from "../constants";
+import {ROLE, PATHS} from "../constants";
 import Link from "../utils/classes/Link";
 
 

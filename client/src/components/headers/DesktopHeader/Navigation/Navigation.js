@@ -20,7 +20,7 @@ import UserItem from "../../UserItem/UserItem";
 * Styles
 * */
 import styles from './Navigation.module.scss';
-import {PATH} from "../../../../constants";
+import {PATHS} from "../../../../constants";
 
 class Navigation extends Component {
 
@@ -39,8 +39,8 @@ class Navigation extends Component {
         } else {
             return (
                 <React.Fragment>
-                    <div className={styles.item}><Link to={PATH.LOGIN}>Login</Link></div>
-                    <div className={styles.item}><Link to={PATH.SIGN_UP}>Sign up</Link></div>
+                    <div className={styles.item}><Link to={PATHS.LOGIN}>Login</Link></div>
+                    <div className={styles.item}><Link to={PATHS.SIGN_UP}>Sign up</Link></div>
                 </React.Fragment>
             )
         }

@@ -13,7 +13,7 @@ import {connect} from 'react-redux';
 /*
 * UTILS
 * */
-import {PATH, ROLE} from '../../../constants'
+import {PATHS, ROLE} from '../../../constants'
 
 
 const AuthorizedRoute = ({redirectTo, user, ...props}) => {
@@ -40,7 +40,7 @@ AuthorizedRoute.propTypes = {
 
 };
 AuthorizedRoute.defaultProps = {
-    redirectTo: PATH.HOME,
+    redirectTo: PATHS.HOME,
 };
 
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import styles from './LinkButton.module.scss'
 import {Link} from 'react-router-dom';
-import {PATH} from '../../../constants'
+import {PATHS} from '../../../constants'
 
  function LinkButton({to,text,...props}) {
 
@@ -28,7 +28,7 @@ LinkButton.propTypes = {
 };
 
 LinkButton.defaultProps = {
-    to: PATH.HOME,
+    to: PATHS.HOME,
     children: 'Home'
 };
 

@@ -17,7 +17,7 @@ import Picture from './Picture/Picture';
 * Styles
 * */
 import styles from './UserItem.module.scss';
-import {ROLE, ROLE_STRING} from "../../../constants";
+import {ROLE} from "../../../constants";
 
 const UserItem = ({user, ...props}) => {
     const classNames = [styles.container, props.className];
@@ -40,7 +40,7 @@ const UserItem = ({user, ...props}) => {
                     user.email
                 }</div>
                 <div>{
-                    ROLE_STRING.get(`${user.role}`)
+                    user.role
                 }</div>
                 <div onClick={banClick} className={styles.banButton}>{
                     user.isBanned?'to unban':'to ban'

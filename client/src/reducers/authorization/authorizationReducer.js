@@ -1,5 +1,5 @@
 import ACTION_TYPES from '../../actions/actiontsTypes';
-import {COMPLEX_PATH, NAV_MAP, PATH, ROLE} from "../../constants";
+import { NAV_MAP, PATHS, ROLE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 
 

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Logo from '../../Logo/Logo'
 import LinkButton from "../../headers/LinkButtun/LinkButton";
 import styles from './HomeNavigation.module.scss';
-import {COMPLEX_PATH, PATH} from "../../../constants";
+import {PATHS, PATHS} from "../../../constants";
 
 
 
@@ -17,7 +17,7 @@ const HomeNavigation = (props) => {
     return (
         <nav className={combinedClassNamesString}>
             <Logo isColor={true}/>
-            <LinkButton className={styles.linkButton} to={COMPLEX_PATH.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+            <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
         </nav>
     )
 };

@@ -1,6 +1,6 @@
 import axios from './';
 import {loginURL, signUpURL, refreshTokensUrl, authorizeUrl, logoutURL} from "../baseURL";
-import {ACCESS_TOKEN_BEARER, LOCAL_STORAGE_KEYS, PATH} from "../../constants";
+import {ACCESS_TOKEN_BEARER, LOCAL_STORAGE_KEYS, PATHS} from "../../constants";
 import {removeTokens} from "../../utils/localStorage";
 import history from "../../history";
 
@@ -26,7 +26,7 @@ export const logoutUser = () => axios.delete(`${logoutURL}?tokenString=${localSt
 /*load user from DB by tokens from local storage*/
 export const getAuthorizedUser = () => axios.get(authorizeUrl).catch(error => {
     removeTokens();
-    history.push(PATH.HOME);
+    history.push(PATHS.HOME);
     return Promise.reject(error);
 });
 

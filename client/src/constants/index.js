@@ -24,7 +24,7 @@ export const CREATE_CONTEST_STEPS = {
     CREATE_TAGLINE_TASK: "CREATE_TAGLINE_TASK",
 };
 
-export const PATH = {
+export const PATHS = {
     HOME: '/',
     LOGIN: '/login',
     SIGN_UP: '/signup',
@@ -33,26 +33,23 @@ export const PATH = {
     USERS: '/users',
     CONTEST: '/contest',
     CONTESTS: '/contests',
+    ENTRIES: '/entries',
     BUSINESS: '/business',
+    AFFILIATE_DASHBOARD: '/affiliate-dashboard',
     DASHBOARD: '/dashboard',
     TASK: '/task',
     PAYMENT: '/payment',
     TYPE: '/type',
-    TEST: '/test'
-
+    TEST: '/test',
+    CREATE_CONTEST: `${PATHS.CONTEST}${PATHS.BUSINESS}`,
+    CREATE_TASK: `${PATHS.CONTEST}${PATHS.TASK}`,
+    CONTEST_PAYMENT: `${PATHS.CONTEST}${PATHS.PAYMENT}`,
+    SELECT_TASK_TYPE: `${PATHS.CONTEST}${PATHS.TYPE}`,
+    AFFILIATE_DASHBOARD_CONTESTS: `${PATHS.AFFILIATE_DASHBOARD}${PATHS.CONTESTS}`,
+    AFFILIATE_DASHBOARD_ENTRIES: `${PATHS.AFFILIATE_DASHBOARD}${PATHS.ENTRIES}`,
+    AFFILIATE_DASHBOARD_CONTEST: `${PATHS.AFFILIATE_DASHBOARD}${PATHS.CONTEST}`,
+    AFFILIATE_DASHBOARD_USERS: `${PATHS.AFFILIATE_DASHBOARD}${PATHS.USERS}`,
 };
-
-export const COMPLEX_PATH = {
-    CREATE_CONTEST: `${PATH.CONTEST}${PATH.BUSINESS}`,
-    CREATE_TASK: `${PATH.CONTEST}${PATH.TASK}`,
-    CONTEST_PAYMENT: `${PATH.CONTEST}${PATH.PAYMENT}`,
-    SELECT_TASK_TYPE: `${PATH.CONTEST}${PATH.TYPE}`,
-
-    DASHBOARD_CONTESTS: `${PATH.DASHBOARD}${PATH.CONTESTS}`,
-    DASHBOARD_CONTEST: `${PATH.DASHBOARD}${PATH.CONTEST}`,
-    DASHBOARD_USERS: `${PATH.DASHBOARD}${PATH.USERS}`,
-};
-
 
 export const TASK_TYPE = {
     NAME: 'Name',
@@ -70,7 +67,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.SELECT_TASK_TYPE, {
         queryKey: 'types',
         order: 0,
-        path: COMPLEX_PATH.SELECT_TASK_TYPE,
+        path: PATHS.SELECT_TASK_TYPE,
         title: 'Start a contest',
         initialValues: {},
         progressTip: 'Select Contest Type',
@@ -80,7 +77,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.CREATE_CONTEST, {
         queryKey: 'contestId',
         order: 1,
-        path: COMPLEX_PATH.CREATE_CONTEST,
+        path: PATHS.CREATE_CONTEST,
 
 
         initialValues: {},
@@ -93,7 +90,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.CREATE_NAME_TASK, {
         queryKey: 'Name',
         order: 2,
-        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        path: `${PATHS.CREATE_TASK}`,
         initialValues: {
             type: TASK_TYPE.NAME,
         },
@@ -105,7 +102,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.CREATE_LOGO_TASK, {
         queryKey: 'Logo',
         order: 3,
-        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        path: `${PATHS.CREATE_TASK}`,
         initialValues: {
             type: TASK_TYPE.LOGO,
         },
@@ -117,7 +114,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK, {
         queryKey: 'Tagline',
         order: 4,
-        path: `${COMPLEX_PATH.CREATE_TASK}`,
+        path: `${PATHS.CREATE_TASK}`,
         initialValues: {
             type: TASK_TYPE.TAGLINE,
         },
@@ -130,7 +127,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         queryKey: 'isPaid',
         order: 5,
         initialValues: {},
-        path: COMPLEX_PATH.CONTEST_PAYMENT,
+        path: PATHS.CONTEST_PAYMENT,
         title: 'Payment',
         progressTip: 'Select Contest Type',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores consequatur dolorem facilis inventore itaque mollitia nobis optio porro reiciendis. Aut cupiditate exercitationem minima porro voluptatum? A doloribus quas quis',
@@ -190,116 +187,7 @@ export const ROLE = {
     GUEST: 'GUEST',
 };
 
-export const ROLE_STRING = new Map([
-    [ROLE.ADMIN, 'admin'],
-    [ROLE.CREATIVE, 'creative'],
-    [ROLE.BUYER, 'buyer'],
-]);
 
 
-const HOME_NAV = [
-    new Menu('Name Ideas', [
-        [
-            new MenuItem('Beauty'),
-            new MenuItem('Consulting'),
-            new MenuItem('E-Commerce'),
-            new MenuItem('Fashion & Clothing'),
-            new MenuItem('Finance'),
-            new MenuItem('Real Estate'),
-            new MenuItem('Tech'),
-        ],
-        [
-            new MenuItem('More Categories'),
-        ],
-
-    ]),
-    new Menu('Contests', [
-        [
-            new MenuItem('How it work'),
-            new MenuItem('Pricing'),
-            new MenuItem('Agency Services'),
-        ],
-        [
-            new MenuItem('Active Contests'),
-            new MenuItem('Winners'),
-            new MenuItem('Leaderboard'),
-        ],
-        [
-            new MenuItem('Become A Creative'),
-        ],
-
-    ]),
-    new Menu('Our Work', [
-        [
-            new MenuItem('Names'),
-            new MenuItem('Taglines'),
-            new MenuItem('Logos'),
-        ],
-        [
-            new MenuItem('Testimonials'),
-        ],
-    ]),
-    new Menu('Names For Sale', [
-        [
-            new MenuItem('Popular Names'),
-            new MenuItem('Short Names'),
-            new MenuItem('Intriguing Names'),
-            new MenuItem('Names By Category'),
-            new MenuItem('Visual Name Generator'),
-        ],
-        [
-            new MenuItem('Sell Your Domains'),
-        ],
-    ]),
-    new Menu('Blog', [
-        [
-            new MenuItem('Ultimate Naming Guide'),
-            new MenuItem('Poetic Devices in Business Naming'),
-            new MenuItem('Crowded Bar Theory'),
-        ],
-        [
-            new MenuItem('All Articles'),
-        ],
-    ]),
-];
 
 
-export const NAV_MAP = new Map([
-    [
-        ROLE.ADMIN, {
-        home: HOME_NAV,
-        useItem: [
-            new MenuItem('view dashboard', PATH.DASHBOARD,),
-        ],
-        dashboard: [
-            new MenuItem('users', COMPLEX_PATH.DASHBOARD_USERS, 'users.svg'),
-
-        ],
-    }],
-    [
-        ROLE.BUYER, {
-        home: HOME_NAV,
-        userItem: [
-            new MenuItem("Dashboard", PATH.DASHBOARD,),
-            new MenuItem("My Account",),
-            new MenuItem("Messages",),
-        ],
-        dashboard: []
-    }],
-    [
-        ROLE.CREATIVE, {
-        home: HOME_NAV,
-        userItem: [
-            new MenuItem("Dashboard", PATH.DASHBOARD,),
-            new MenuItem("My Contests",),
-            new MenuItem("My Account",),
-            new MenuItem("Messages",),
-        ],
-        dashboard: [
-            new MenuItem()
-        ],
-    }],
-    [ROLE.GUEST, {
-        home: HOME_NAV,
-    }]
-]);
