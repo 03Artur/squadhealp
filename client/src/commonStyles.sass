@@ -29,9 +29,12 @@ $test: orange
 =container($maxWidth: 1200,$padding: 0 15px)
   display: inline-block
   max-width: $maxWidth
+  width: 100%
   box-sizing: border-box
   padding: $padding
-  width: 100%
+
+=row()
+  display: flex
 
 =col($flexValue: 1)
   flex: $flexValue

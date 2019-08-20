@@ -17,13 +17,14 @@ $grid-breakpoints: (
 
 .nav {
   @include container(1170px);
-  @include flex-container(flex-end, center);
 
   .logo {
     margin-right: auto;
   }
 }
-
+.row{
+  @include flex-container(flex-end, center);
+}
 
 .logoContainer {
   flex: 2;
@@ -38,9 +39,11 @@ $grid-breakpoints: (
 .menuContainer {
   flex: 7;
   text-align: right;
+
   @media screen and (min-width: $sm) {
     flex: 8;
   }
+
   @media screen and (min-width: $md) {
     flex: 8;
   }
@@ -49,9 +52,11 @@ $grid-breakpoints: (
 .buttonContainer {
   flex: 3;
   text-align: right;
+
   @media screen and (min-width: $sm) {
     flex: 2;
   }
+
   @media screen and (min-width: $md) {
     flex: 2;
   }
@@ -59,16 +64,28 @@ $grid-breakpoints: (
 
 
 .linkButton {
-  border-color: $appGreenColor;
-  color: $appGreenColor;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 14px 18px;
-  text-transform: uppercase;
+  word-break: keep-all;
+  border-color: $appGreenColor !important;
+  color: $appGreenColor !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  text-transform: capitalize !important;
+
 
   &:hover {
     background-color: $appGreenColor;
     color: white;
+  }
+
+  @media screen and (min-width: $sm) {
+
+  }
+
+  @media screen and (min-width: $md) {
+
+  }
+  @media screen and (min-width: $lg) {
+    text-transform: uppercase;
   }
 }
 
@@ -98,12 +115,17 @@ $grid-breakpoints: (
     }
   }
 
+  .chevron {
+    color: #ccc;
+    width: 10px;
+    padding-left: 5px;
+  }
 
   .menuTitle {
     text-transform: capitalize;
     font-size: 16px;
     text-decoration: none;
-
+    color: #495d8b;
     font-weight: 400;
 
     &:hover {
@@ -111,11 +133,7 @@ $grid-breakpoints: (
       cursor: pointer;
     }
 
-    .chevron {
-      color: #ccc;
-      width: 10px;
-      padding-left: 5px;
-    }
+
   }
 }
 
@@ -142,8 +160,6 @@ $grid-breakpoints: (
     text-decoration: none;
 
   }
-
-
 }
 
 .dropDownMenu {
@@ -157,7 +173,6 @@ $grid-breakpoints: (
   border: 1px solid #dadada;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px 0;
-
 
   &:after {
     content: '';
@@ -179,5 +194,6 @@ $grid-breakpoints: (
   margin: 9px 0;
   background-color: rgb(229, 229, 229);
   box-sizing: border-box;
+
 }
 

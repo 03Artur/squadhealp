@@ -10,12 +10,14 @@ import {PATHS} from '../../../constants'
 
 function LinkButton({to, text, ...props}) {
 
-    const combinedClassNamesString = [styles.container, styles.aReset, props.className].join(' ');
+    const combinedClassNamesString = [props.className, styles.content  ].join(' ');
     return (
-        <Link className={combinedClassNamesString} to={to}>
+        <Link  to={to}>
+            <div className={combinedClassNamesString}>
             {
                 props.children
             }
+            </div>
         </Link>
     )
 }

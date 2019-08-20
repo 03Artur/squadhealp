@@ -1,6 +1,12 @@
 .container{
-  border: 2px solid rgba(255,255,255,0.77);
   color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+.content{
+  text-decoration: none;
+  min-width: 110px;
+  border: 2px solid rgba(255,255,255,0.77);
   font-weight: 600;
   font-size: 18px;
   box-sizing: border-box;
@@ -9,12 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  min-width: 110px;
 }
 
-.aReset{
-  display: inline-block;
-  text-decoration: none;
-}
+
 

@@ -55,8 +55,8 @@ const renderMenu = (menu) => {
 
     return (
         <li key={menu.title} className={styles.dropDown}>
-            <Link className={styles.menuTitle} to='#'>
-                <span>
+            <Link  to='#'>
+                <span className={styles.menuTitle}>
                     {
                         menu.title
                     }
@@ -78,6 +78,7 @@ function HomeNav(props) {
     const {navigation} = props;
     return (
         <nav className={styles.nav}>
+            <div className={styles.row}>
             <div className={styles.logoContainer}>
                 <Logo className={styles.logo}/>
             </div>
@@ -89,12 +90,20 @@ function HomeNav(props) {
                 </ul>
             </div>
             <div className={styles.buttonContainer}>
-                <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+                <LinkButton  className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+            </div>
             </div>
         </nav>
     );
 }
 
+
+HomeNav.propTypes = {
+    className: PropTypes.string,
+};
+HomeNav.defaultProps = {
+    className: ''
+};
 
 function mapStateToProps(state) {
 

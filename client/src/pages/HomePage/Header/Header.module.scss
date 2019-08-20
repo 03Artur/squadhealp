@@ -1,0 +1,73 @@
+@import "../../../commonStyles";
+
+$topRowHeight: 40px;
+
+header {
+  min-width: 100vw;
+  text-align: center;
+}
+
+.topRow {
+
+  width: 100%;
+  height: $topRowHeight;
+  border-bottom: 1px solid #ebebeb;
+  box-sizing: border-box;
+  margin-bottom: 13px;
+
+  .container {
+    @include container(1170px);
+
+    .row{
+      display: flex;
+      height: $topRowHeight;
+
+      .col {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+
+
+        .contactPhone {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+          padding: 0 15px;
+          height:  $topRowHeight;
+          border-right: 1px solid #ebebeb;
+          border-left: 1px solid #ebebeb;
+
+          a{
+            color: rgb(51, 122, 183);
+            font-size: 14px;
+          }
+
+          .icon {
+            transform: scaleX(-1);
+            -moz-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            -ms-transform: scaleX(-1);
+            width: 11px;
+            margin-right: 10px;
+          }
+
+        }
+      }    }
+
+
+  }
+
+}
+
+.nav {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+
+  @media screen and (max-width: $md) {
+    display: none;
+
+  }
+}

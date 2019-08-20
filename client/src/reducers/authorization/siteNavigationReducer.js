@@ -149,12 +149,14 @@ function getNavByUser(user) {
                     ],
                 ]),
             ],
-            useItem: [
-                new MenuItem('view dashboard', PATHS.AFFILIATE_DASHBOARD,),
+            homeUser: [
+                new MenuItem("View Dashboard",),
+                new MenuItem("My Account",),
+                new MenuItem("Messages",),
+                new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
             ],
             dashboard: [
                 new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
-
             ],
         }],
 
@@ -230,9 +232,12 @@ function getNavByUser(user) {
                     ],
                 ]),
             ],
-            homeUser: [new MenuItem("Dashboard", PATHS.AFFILIATE_DASHBOARD,),
+            homeUser: [
+                new MenuItem("View Dashboard",),
                 new MenuItem("My Account",),
-                new MenuItem("Messages",),],
+                new MenuItem("Messages",),
+                new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
+            ],
             dashboard: [new MenuItem('My Contests', PATHS.AFFILIATE_DASHBOARD_CONTESTS,),
                 new MenuItem('Entries', PATHS.AFFILIATE_DASHBOARD_ENTRIES,)],
             dashboardUser: [],
