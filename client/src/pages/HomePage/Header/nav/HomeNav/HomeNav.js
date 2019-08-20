@@ -7,28 +7,27 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import Logo from "../../../../../components/Logo/Logo";
 import LinkButton from "../../../../../components/headers/LinkButtun/LinkButton";
+import {PATHS} from "../../../../../constants";
 
-const testMenuItemStyle = {border: '1px solid #ff6542'};
+const testMenuItemStyle = {
+    border: '4px solid #ff6542',
+};
 
 function testStyle(to) {
-    return to?testMenuItemStyle:null;
+    console.log(to);
+    return (to !== "#" ? testMenuItemStyle : null);
 }
 
-const MenuItem = (props) => {
-    const {item} = props;
+const renderMenuItem = (item) => {
     if (Array.isArray(item)) {
         return (
-            <React.Fragment>
-                <li className={styles.divider}/>
-                {
-                    item.map(elem => MenuItem(elem))
-                }
-            </React.Fragment>
+            item.map(elem => renderMenuItem(elem))
+
         )
     } else {
         return (
-            <li key={item.title} className={styles.menuItem}>
-                <Link className={styles.itemTitle} to={item.to} styles={testStyle(item.to)}>
+            <li key={item.title} className={styles.menuItem} style={testStyle(item.to)}>
+                <Link className={styles.itemTitle} to={item.to}>
                     {
                         item.title
                     }
@@ -38,66 +37,60 @@ const MenuItem = (props) => {
     }
 };
 
-MenuItem.propTypes = {
-    item: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            to: PropTypes.oneOfType(
-                [
-                    PropTypes.string,
-                    PropTypes.shape({
-                        pathname: PropTypes.string.isRequired,
-                        search: PropTypes.string,
-                    })
-                ]
-            ).isRequired,
-        }).isRequired,
-    ]),
-};
+const renderMenu = (menu) => {
 
 
-const Menu = (props) => {
-    const {title, items} = props;
+    const renderItems = () => menu.items.map(
+        (item, index) => (
+            <React.Fragment key={index}>
+                {
+                    index > 0 && <li key={index} className={styles.divider}/>
+                }
+                {
+                    renderMenuItem(item)
+                }
+            </React.Fragment>
+        )
+    );
 
     return (
-
-        <li key={title} className={styles.dropDown}>
-            <Link className={styles.menuTitle}>
+        <li key={menu.title} className={styles.dropDown}>
+            <Link className={styles.menuTitle} to='#'>
                 <span>
-                {
-                    title
-                }
+                    {
+                        menu.title
+                    }
                 </span>
                 <FontAwesomeIcon className={styles.chevron} icon={faChevronDown}/>
-
             </Link>
             <ul className={styles.dropDownMenu}>
-                <MenuItem item={items}/>
+                {
+                    renderItems()
+                }
             </ul>
         </li>
     );
-};
-
-Menu.propTypes = {
-    title: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired,
 };
 
 
 function HomeNav(props) {
 
     const {navigation} = props;
-
     return (
         <nav className={styles.nav}>
-            <Logo/>
-            <ul className={styles.menuContainer}>
-                {
-                    navigation.map(menu => <Menu {...menu}/>)
-                }
-            </ul>
-            <LinkButton/>
+            <div style={styles.logoContainer}>
+                <Logo className={styles.logo}/>
+            </div>
+            <div className={styles.menuContainer}>
+                <ul className={styles.navMenu}>
+                    {
+                        navigation.map(menu => renderMenu(menu))
+                    }
+                </ul>
+            </div>
+            <div className={styles.buttonContainer}>
+                <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+            </div>
         </nav>
     );
 }

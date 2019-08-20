@@ -19,8 +19,8 @@ export default function Logo(props) {
         };
 
     return (
-        <Link to='/'>
-            <img className={[settings.className, props.className].join(' ')} src={settings.logoSrc} alt="Logo"/>
+        <Link className={props.className} style={{display: 'inline-block'}} to='/'>
+            <img className={settings.className} src={settings.logoSrc} alt="Logo"/>
         </Link>
     )
 };

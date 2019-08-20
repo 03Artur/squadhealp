@@ -78,7 +78,77 @@ const initializeValue = {
 function getNavByUser(user) {
     const NAV_MAP = new Map([
         [ROLE.ADMIN, {
-            home: HOME_NAV,
+            home: [
+                new Menu('Name Ideas', [
+                    [
+                        new MenuItem('Beauty'),
+                        new MenuItem('Consulting'),
+                        new MenuItem('E-Commerce'),
+                        new MenuItem('Fashion & Clothing'),
+                        new MenuItem('Finance'),
+                        new MenuItem('Real Estate'),
+                        new MenuItem('Tech'),
+                    ],
+                    [
+                        new MenuItem('More Categories'),
+                    ],
+
+                ]),
+                new Menu('Contests', [
+                    [
+                        new MenuItem('How it work'),
+                        new MenuItem('Pricing'),
+                        new MenuItem('Agency Services'),
+                    ],
+                    [
+                        new MenuItem('Active Contests', {
+                                pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                                search: queryString.stringify(
+                                    {
+                                        isActive: true,
+                                    }
+                                )
+                            }
+                        ),
+                        new MenuItem('Winners'),
+                        new MenuItem('Leaderboard'),
+                    ],
+                    [new MenuItem('Become A Creative'),],
+
+                ]),
+                new Menu('Our Work', [
+                    [
+                        new MenuItem('Names'),
+                        new MenuItem('Taglines'),
+                        new MenuItem('Logos'),
+                    ],
+                    [
+                        new MenuItem('Testimonials'),
+                    ],
+                ]),
+                new Menu('Names For Sale', [
+                    [
+                        new MenuItem('Popular Names'),
+                        new MenuItem('Short Names'),
+                        new MenuItem('Intriguing Names'),
+                        new MenuItem('Names By Category'),
+                        new MenuItem('Visual Name Generator'),
+                    ],
+                    [
+                        new MenuItem('Sell Your Domains'),
+                    ],
+                ]),
+                new Menu('Blog', [
+                    [
+                        new MenuItem('Ultimate Naming Guide'),
+                        new MenuItem('Poetic Devices in Business Naming'),
+                        new MenuItem('Crowded Bar Theory'),
+                    ],
+                    [
+                        new MenuItem('All Articles'),
+                    ],
+                ]),
+            ],
             useItem: [
                 new MenuItem('view dashboard', PATHS.AFFILIATE_DASHBOARD,),
             ],
@@ -274,10 +344,12 @@ function getNavByUser(user) {
 }
 
 export default function (state = initializeValue, action) {
-    switch (action.types) {
+
+    switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
-
+            console.group("A-A-A-A-A-A-A-A-A-A!");
+            console.groupEnd();
             return getNavByUser(action.user);
 
 

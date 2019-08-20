@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import styles from '';
 
 function Header(props) {
 
@@ -8,7 +9,9 @@ function Header(props) {
 
     return (
         <React.Fragment>
-
+            <header>
+                <div className={styles.topRow}></div>
+            </header>
         </React.Fragment>
     );
 }

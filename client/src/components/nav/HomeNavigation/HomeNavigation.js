@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Logo from '../../Logo/Logo'
 import LinkButton from "../../headers/LinkButtun/LinkButton";
 import styles from './HomeNavigation.module.scss';
-import {PATHS, PATHS} from "../../../constants";
+import {PATHS,} from "../../../constants";
 
 
 

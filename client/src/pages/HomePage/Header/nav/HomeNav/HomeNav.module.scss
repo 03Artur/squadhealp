@@ -1,28 +1,79 @@
-.nav{
-  width: 100%;
+@import "../../../../../commonStyles";
+
+.nav {
+
+
+  @include container(1170px);
+  @include flex-container(flex-end,center);
+
+  .logo{
+    margin-right: auto;
+
+  }
+}
+
+.logoContainer{
+
+}
+.menuContainer{
+  flex: 4;
+  text-align: right;
+}
+
+.buttonContainer{
+  flex: 2;
+  text-align: right;
 }
 
 
 
 
-.menuContainer {
+.linkButton {
+  border-color: $appGreenColor;
+  color: $appGreenColor;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 14px 18px;
+  text-transform: uppercase;
 
-
+  &:hover {
+    background-color: $appGreenColor;
+    color: white;
+  }
 }
 
+.navMenu {
+  justify-self: end;
+  display: inline-block;
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  & li:not(:last-child) {
+    margin-right: 5px;
+  }
+
+}
 
 
 .dropDown {
   display: inline-block;
   position: relative;
   color: #495d8b;
+  padding: 15px 0;
+  box-sizing: border-box;
+
+  &:hover {
+    .dropDownMenu {
+      display: block;
+    }
+  }
+
 
   .menuTitle {
     text-transform: capitalize;
     font-size: 16px;
     text-decoration: none;
-    box-sizing: border-box;
-    padding: 15px 0;
+
     font-weight: 400;
 
     &:hover {
@@ -32,19 +83,25 @@
 
     .chevron {
       color: #ccc;
-      font-size: 17px;
+      width: 10px;
       padding-left: 5px;
     }
   }
 }
 
 
-
-
-
 .menuItem {
   display: block;
+  padding: 8px 15px;
+  text-align: left;
   width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: #f5f5f5;
+    border-color: #f5f5f5;
+    cursor: pointer;
+  }
 
   .itemTitle {
     text-transform: capitalize;
@@ -52,27 +109,25 @@
     font-size: 14px;
     color: #333;
     box-sizing: border-box;
-    padding: 8px 15px;
     text-decoration: none;
 
-
-    &:hover {
-      background-color: #f5f5f5;
-      cursor: pointer;
-    }
   }
 
 
 }
 
 .dropDownMenu {
+  background-color: white;
   position: absolute;
   top: 100%;
-  left: 0;
-  z-index: 10000;
   min-width: 160px;
+  white-space: nowrap;
+  z-index: 10000;
+  display: none;
   border: 1px solid #dadada;
+  box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px 0;
+
 
   &:after {
     content: '';
@@ -95,3 +150,4 @@
   background-color: rgb(229, 229, 229);
   box-sizing: border-box;
 }
+

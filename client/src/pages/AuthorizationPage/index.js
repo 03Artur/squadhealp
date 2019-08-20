@@ -69,7 +69,12 @@ let AuthorizationPage = ({isLoginMode, loginAction, signUpAction, ...props}) => 
         </div>
     );
 
-}
+};
+
+const mapStateToProps = state => {
+    const {isLoginMode} = state.authorizationMode;
+    return {isLoginMode};
+};
 
 const mapDispatchToProps = (dispatch) => ({
     loginAction: (data) => dispatch(loginActionCreator(data)),
@@ -78,10 +83,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-const mapStateToProps = state => {
-    const {isLoginMode} = state.authorizationModeReducer;
-    return {isLoginMode};
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);
 

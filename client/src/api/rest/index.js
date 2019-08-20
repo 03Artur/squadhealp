@@ -23,10 +23,8 @@ let count = 0;
 * REQUEST INTERCEPTOR
 * */
 instance.interceptors.request.use(config => {
-    const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);
-    if (config.headers.Authorization !== accessToken) {
-        config.headers.Authorization = accessToken
-    }
+
+    config.headers.Authorization = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);
     console.log(config);
     return config;
 }, err => {
