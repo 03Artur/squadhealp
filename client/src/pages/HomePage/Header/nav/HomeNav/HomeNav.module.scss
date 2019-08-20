@@ -1,0 +1,97 @@
+.nav{
+  width: 100%;
+}
+
+
+
+
+.menuContainer {
+
+
+}
+
+
+
+.dropDown {
+  display: inline-block;
+  position: relative;
+  color: #495d8b;
+
+  .menuTitle {
+    text-transform: capitalize;
+    font-size: 16px;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 15px 0;
+    font-weight: 400;
+
+    &:hover {
+      color: #f27e51;
+      cursor: pointer;
+    }
+
+    .chevron {
+      color: #ccc;
+      font-size: 17px;
+      padding-left: 5px;
+    }
+  }
+}
+
+
+
+
+
+.menuItem {
+  display: block;
+  width: 100%;
+
+  .itemTitle {
+    text-transform: capitalize;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    padding: 8px 15px;
+    text-decoration: none;
+
+
+    &:hover {
+      background-color: #f5f5f5;
+      cursor: pointer;
+    }
+  }
+
+
+}
+
+.dropDownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10000;
+  min-width: 160px;
+  border: 1px solid #dadada;
+  box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px 0;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    position: absolute;
+    top: -7px;
+    left: 30px
+  }
+}
+
+
+.divider {
+  width: 100%;
+  display: block;
+  height: 1px;
+  margin: 9px 0;
+  background-color: rgb(229, 229, 229);
+  box-sizing: border-box;
+}

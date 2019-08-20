@@ -77,8 +77,7 @@ const initializeValue = {
 
 function getNavByUser(user) {
     const NAV_MAP = new Map([
-        [
-            ROLE.ADMIN, {
+        [ROLE.ADMIN, {
             home: HOME_NAV,
             useItem: [
                 new MenuItem('view dashboard', PATHS.AFFILIATE_DASHBOARD,),
@@ -88,8 +87,8 @@ function getNavByUser(user) {
 
             ],
         }],
-        [
-            ROLE.BUYER, {
+
+        [ROLE.BUYER, {
             home: [
                 new Menu('Name Ideas', [
                     [
@@ -114,17 +113,18 @@ function getNavByUser(user) {
                     ],
                     [
                         new MenuItem('Active Contests', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                            search: queryString.stringify({
-                                isActive: true,
-                            })
-                        }),
+                                pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                                search: queryString.stringify(
+                                    {
+                                        isActive: true,
+                                    }
+                                )
+                            }
+                        ),
                         new MenuItem('Winners'),
                         new MenuItem('Leaderboard'),
                     ],
-                    [
-                        new MenuItem('Become A Creative'),
-                    ],
+                    [new MenuItem('Become A Creative'),],
 
                 ]),
                 new Menu('Our Work', [
@@ -160,15 +160,11 @@ function getNavByUser(user) {
                     ],
                 ]),
             ],
-            homeUser: [
-                new MenuItem("Dashboard", PATHS.AFFILIATE_DASHBOARD,),
+            homeUser: [new MenuItem("Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 new MenuItem("My Account",),
-                new MenuItem("Messages",),
-            ],
-            dashboard: [
-                new MenuItem('My Contests', PATHS.AFFILIATE_DASHBOARD_CONTESTS,),
-                new MenuItem('Entries', PATHS.AFFILIATE_DASHBOARD_ENTRIES,)
-            ],
+                new MenuItem("Messages",),],
+            dashboard: [new MenuItem('My Contests', PATHS.AFFILIATE_DASHBOARD_CONTESTS,),
+                new MenuItem('Entries', PATHS.AFFILIATE_DASHBOARD_ENTRIES,)],
             dashboardUser: [],
         }],
         [
@@ -210,8 +206,6 @@ function getNavByUser(user) {
                             type: TASK_TYPE.TAGLINE,
                         }),
                     }),
-
-
                 ]),
                 new Menu('explore', [
                     new MenuItem('names'),
@@ -226,7 +220,6 @@ function getNavByUser(user) {
                     new MenuItem('Learn More'),
                     new MenuItem('Help Articles'),
 
-
                 ]),
                 new Menu('winners', [
 
@@ -236,7 +229,6 @@ function getNavByUser(user) {
                     new MenuItem('Leaderboard (High Ratings)'),
                     new MenuItem('Leaderboard (Rising Stars)'),
                     new MenuItem('Leaderboard (Split Awards)'),
-
 
                 ]),
                 new Menu('help', [
@@ -261,19 +253,18 @@ function getNavByUser(user) {
                 new MenuItem("Messages",),
                 new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
             ],
-            dashboard: [
-                new MenuItem('Contests', {
-                    pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                    search: queryString.stringify({
-                        isActive:true,
+            dashboard: [new MenuItem('Contests', {
+                pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                search: queryString.stringify({
+                    isActive: true,
+                    winnerId: user.id,
 
-                    }),
-                },),
+                }),
+            },),
                 new MenuItem('My Entries', {
                     pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
-                    search: '',
-                },)
-            ],
+                    search: queryString.stringify({userId: user.id}),
+                },)],
             dashboardUser: [],
         }],
     ]);

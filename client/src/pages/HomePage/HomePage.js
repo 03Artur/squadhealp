@@ -10,6 +10,7 @@ import Header from "../../components/headers/DesktopHeader/DesktopHeader";
 import AccessRoute from "../../components/routes/AccessRoute/AccessRoute";
 import {PATHS, ROLE} from "../../constants";
 import HomeFooter from "../../components/footers/HomeFooter/HomeFooter";
+import HomeNav from "./Header/nav/HomeNav/HomeNav";
 
 const StartContestPage = lazy(() => import('../StartContestPage/StartContestPage'));
 const AdminPage = lazy(() => import('../AdminPage/AdminPage'));
@@ -23,6 +24,7 @@ function HomePage(props) {
         <div className={styles.pageContainer}>
             <DocumentTitle title="Home"/>
             <Header/>
+            <HomeNav/>
             <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATHS.CONTEST} render = {props => <StartContestPage {...props}/>}/>
             <HomeFooter/>
         </div>
