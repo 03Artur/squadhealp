@@ -20,7 +20,7 @@ export default function Logo(props) {
 
     return (
         <Link className={props.className} style={{display: 'inline-block'}} to='/'>
-            <img className={settings.className} src={settings.logoSrc} alt="Logo"/>
+            <img className={settings.className} src={settings.logoSrc} style={{maxWidth: '100%'}} alt="Logo"/>
         </Link>
     )
 };

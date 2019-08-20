@@ -78,7 +78,7 @@ function HomeNav(props) {
     const {navigation} = props;
     return (
         <nav className={styles.nav}>
-            <div style={styles.logoContainer}>
+            <div className={styles.logoContainer}>
                 <Logo className={styles.logo}/>
             </div>
             <div className={styles.menuContainer}>

@@ -1,31 +1,61 @@
 @import "../../../../../commonStyles";
 
+/*
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 576px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+);
+*/
+
 .nav {
-
-
   @include container(1170px);
-  @include flex-container(flex-end,center);
+  @include flex-container(flex-end, center);
 
-  .logo{
+  .logo {
     margin-right: auto;
-
   }
 }
 
-.logoContainer{
 
-}
-.menuContainer{
-  flex: 4;
-  text-align: right;
-}
-
-.buttonContainer{
+.logoContainer {
   flex: 2;
-  text-align: right;
+  @media screen and (min-width: $sm) {
+    flex: 2;
+  }
+  @media screen and (min-width: $md) {
+    flex: 2;
+  }
 }
 
+.menuContainer {
+  flex: 7;
+  text-align: right;
+  @media screen and (min-width: $sm) {
+    flex: 8;
+  }
+  @media screen and (min-width: $md) {
+    flex: 8;
+  }
+}
 
+.buttonContainer {
+  flex: 3;
+  text-align: right;
+  @media screen and (min-width: $sm) {
+    flex: 2;
+  }
+  @media screen and (min-width: $md) {
+    flex: 2;
+  }
+}
 
 
 .linkButton {

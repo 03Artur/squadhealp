@@ -8,22 +8,20 @@ import styles from './LinkButton.module.scss'
 import {Link} from 'react-router-dom';
 import {PATHS} from '../../../constants'
 
- function LinkButton({to,text,...props}) {
+function LinkButton({to, text, ...props}) {
 
-    const combinedClassNamesString= [styles.container, props.className].join(' ');
+    const combinedClassNamesString = [styles.container, styles.aReset, props.className].join(' ');
     return (
-        <Link className={styles.aReset} to={to}>
-            <div className={combinedClassNamesString}>
-                {
-                    props.children
-                }
-            </div>
+        <Link className={combinedClassNamesString} to={to}>
+            {
+                props.children
+            }
         </Link>
     )
 }
 
 LinkButton.propTypes = {
-  className: PropTypes.string,
+    className: PropTypes.string,
 
 };
 
