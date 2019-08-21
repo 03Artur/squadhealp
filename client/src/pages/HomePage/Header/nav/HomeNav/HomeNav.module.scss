@@ -22,7 +22,8 @@ $grid-breakpoints: (
     margin-right: auto;
   }
 }
-.row{
+
+.row {
   @include flex-container(flex-end, center);
 }
 
@@ -65,12 +66,19 @@ $grid-breakpoints: (
 
 .linkButton {
   word-break: keep-all;
-  border-color: $appGreenColor !important;
-  color: $appGreenColor !important;
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  text-transform: capitalize !important;
-
+  border: 2px solid $appGreenColor ;
+  color: $appGreenColor;
+  font-size: 14px;
+  font-weight: 400 ;
+  text-transform: capitalize;
+  text-decoration: none;
+  min-width: 110px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: $appGreenColor;
@@ -112,10 +120,25 @@ $grid-breakpoints: (
   &:hover {
     .dropDownMenu {
       display: block;
+
+    }
+  }
+
+  .menuTitleContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      .menuTitle{
+        color: #f27e51;
+      }
+
+
     }
   }
 
   .chevron {
+    align-self: flex-end;
     color: #ccc;
     width: 10px;
     padding-left: 5px;
@@ -127,11 +150,6 @@ $grid-breakpoints: (
     text-decoration: none;
     color: #495d8b;
     font-weight: 400;
-
-    &:hover {
-      color: #f27e51;
-      cursor: pointer;
-    }
 
 
   }
@@ -163,13 +181,14 @@ $grid-breakpoints: (
 }
 
 .dropDownMenu {
+  display: none;
+  overflow: hidden;
   background-color: white;
   position: absolute;
   top: 100%;
   min-width: 160px;
   white-space: nowrap;
   z-index: 10000;
-  display: none;
   border: 1px solid #dadada;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px 0;

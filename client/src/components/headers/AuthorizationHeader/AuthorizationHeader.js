@@ -24,12 +24,12 @@ import styles from './AuthorizationHeader.module.scss';
 function AuthorizationHeader({linkButton,...props}) {
 
     return (
-        <header className={styles.header}>
+        <div className={styles.header}>
             <div className={styles.headerRow}>
                 <Logo isColor={false}/>
                 <LinkButton to={linkButton.to}>{linkButton.text}</LinkButton>
             </div>
-        </header>
+        </div>
     );
 }
 

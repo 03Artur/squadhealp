@@ -76,6 +76,9 @@ const initializeValue = {
 
 
 function getNavByUser(user) {
+    if(!user){
+        return initializeValue;
+    }
     const NAV_MAP = new Map([
         [ROLE.ADMIN, {
             home: [
@@ -353,8 +356,6 @@ export default function (state = initializeValue, action) {
     switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
-            console.group("A-A-A-A-A-A-A-A-A-A!");
-            console.groupEnd();
             return getNavByUser(action.user);
 
 

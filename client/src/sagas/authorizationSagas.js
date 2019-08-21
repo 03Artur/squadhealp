@@ -24,14 +24,19 @@ export function* logoutUserSaga() {
 
     try {
         const {data} = yield logoutUser();
+        console.group(logoutUserSaga);
+        console.log(data);
+        console.groupEnd();
+
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: null});
 
     } catch (e) {
+        console.log(e);
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
-                status: e.response.status,
-                message: e.response.data,
-            },
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR,
+
+            user:null,
+
         });
     }
 }

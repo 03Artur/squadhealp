@@ -10,10 +10,9 @@ import {PATHS} from '../../../constants'
 
 function LinkButton({to, text, ...props}) {
 
-    const combinedClassNamesString = [props.className, styles.content  ].join(' ');
     return (
         <Link  to={to}>
-            <div className={combinedClassNamesString}>
+            <div className={props.className}>
             {
                 props.children
             }
@@ -29,7 +28,8 @@ LinkButton.propTypes = {
 
 LinkButton.defaultProps = {
     to: PATHS.HOME,
-    children: 'Home'
+    children: 'Home',
+    className: styles.content
 };
 
 export default LinkButton;

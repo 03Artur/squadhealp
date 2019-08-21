@@ -18,6 +18,7 @@ export const loginActionCreator = (data) => {
 };
 
 export const logoutActionCreator = () => {
+    console.group("logoutActionCreator");
     return {
         type: ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION,
     }

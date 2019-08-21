@@ -1,0 +1,28 @@
+@import "../../../../../commonStyles";
+
+
+.topRowNav {
+  position: relative;
+  box-sizing: border-box;
+  border-left: $topRowBorder;
+  height: $topRowHeight;
+  @include flex-container(center,center);
+
+  .link {
+    border-right: $topRowBorder;
+    padding: 0 15px;
+    font-weight: 500;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    color: rgb(113, 136, 136);
+
+
+    .chevron{
+      width: 8px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+  }
+
+}

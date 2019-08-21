@@ -1,18 +1,15 @@
 @import "../../../commonStyles";
-@import "../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../node_modules/bootstrap/scss/variables";
-@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .header {
-  max-width: 970px;
-  width: 100%;
+  @include container(970px);
   margin-top: 26px;
   padding: 0 45px;
   font-family: $fontFamilyNotoSansSC;
 }
 
 .headerRow{
-  @include make-row();
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 0;
 }

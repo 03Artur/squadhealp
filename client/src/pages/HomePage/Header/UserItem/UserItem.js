@@ -3,6 +3,7 @@
 * */
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
 /*
 * Redux & friends
@@ -13,73 +14,32 @@ import {connect} from 'react-redux';
 * Components
 * */
 import UserIcon from "./UserIcon/UserIcon";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronDown, faChevronUp} from "@fortawesome/free-solid-svg-icons";
 
 /*
 * Styles
 * */
 import styles from './UserItem.module.scss';
-import DropDownMenu from "./DropDownMenu/DropDownMenu";
-import {logoutActionCreator} from "../../../../actions/authorizationActionCreators";
 
-class UserItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.toggleContainer = React.createRef();
-        this.state = {
-            isMenuOpen: false,
-            chevron: faChevronDown,
-        }
-    }
+function UserItem(props) {
 
-    componentDidMount() {
-        window.addEventListener('click', this.onClickOutsideHandler)
-    }
+    const {user} = props;
 
-    componentWillUnmount() {
-        window.removeEventListener('click', this.onClickOutsideHandler)
-    }
 
-    onClickHandle = () => {
-        this.setState(currentState => ({
-            isMenuOpen: !currentState.isMenuOpen,
-            chevron: currentState.isMenuOpen ? faChevronDown : faChevronUp
-        }))
-    };
+    return (
 
-    onClickOutsideHandler = e => {
-        if (this.state.isMenuOpen && !this.toggleContainer.current.contains(e.target)) {
-            this.setState({isMenuOpen: false, chevron: faChevronDown});
-        }
-    };
-
-    renderMenu = () => {
-        if (this.state.isMenuOpen) {
-            return (
-                <DropDownMenu items={this.props.navigation}/>
-            )
-        }
-    };
-
-    render() {
-        return (
-
-            <div onClick={this.onClickHandle} style={{position:'relative'}} ref={this.toggleContainer}>
+        <div className={styles.container}>
+            <div className={styles.iconContainer}>
                 <UserIcon/>
-                <span className={styles.greeting}>
-                    {
-                        `Hi, ${this.props.user.firstName} `
-                    }
-                    <FontAwesomeIcon icon={this.state.chevron}/>
-                </span>
-                {
-                    this.renderMenu()
-                }
             </div>
+            <span className={styles.greeting}>
+                    {
+                        `Hi, ${user.firstName}`
+                    }
+                </span>
+        </div>
 
-        );
-    }
+    );
+
 }
 
 
@@ -87,13 +47,10 @@ UserItem.propTypes = {};
 
 UserItem.defaultPros = {};
 
-/*
-* React redux
-* */
+
 const mapStateToProps = store => {
     const {user} = store.authorization;
-    const {homeUser: navigation} = store.siteNavigation;
-    return {user, navigation};
+    return {user};
 };
 
 

@@ -2,15 +2,12 @@
 import axios from 'axios';
 import {refreshTokens} from './authorizationController'
 
-/*redux*/
-import store from '../../store';
 
 /*utils*/
 import history from '../../history';
 import {removeTokens} from '../../utils/localStorage'
 import {LOCAL_STORAGE_KEYS, PATHS} from "../../constants";
 import {authorizeUrl, baseURL} from "../baseURL";
-import ACTION_TYPES from '../../actions/actiontsTypes';
 
 
 const instance = axios.create({

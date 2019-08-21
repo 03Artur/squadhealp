@@ -55,7 +55,8 @@ const renderMenu = (menu) => {
 
     return (
         <li key={menu.title} className={styles.dropDown}>
-            <Link  to='#'>
+            <Link className={styles.menuTitleContainer} to='#'>
+
                 <span className={styles.menuTitle}>
                     {
                         menu.title
@@ -79,19 +80,19 @@ function HomeNav(props) {
     return (
         <nav className={styles.nav}>
             <div className={styles.row}>
-            <div className={styles.logoContainer}>
-                <Logo className={styles.logo}/>
-            </div>
-            <div className={styles.menuContainer}>
-                <ul className={styles.navMenu}>
-                    {
-                        navigation.map(menu => renderMenu(menu))
-                    }
-                </ul>
-            </div>
-            <div className={styles.buttonContainer}>
-                <LinkButton  className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
-            </div>
+                <div className={styles.logoContainer}>
+                    <Logo className={styles.logo}/>
+                </div>
+                <div className={styles.menuContainer}>
+                    <ul className={styles.navMenu}>
+                        {
+                            navigation.map(menu => renderMenu(menu))
+                        }
+                    </ul>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+                </div>
             </div>
         </nav>
     );

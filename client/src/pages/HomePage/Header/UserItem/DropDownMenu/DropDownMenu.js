@@ -25,7 +25,7 @@ const DropDownMenu = (props) => {
     const renderItems = () => {
         return props.items.map((item) => (
 
-            <li >
+            <li key={item.title}>
                 <Link className={styles.menuItem} to={item.to} key={item.title}>
                     {
                         item.title
@@ -40,10 +40,8 @@ const DropDownMenu = (props) => {
             {
                 renderItems()
             }
-            <li className={styles.menuItem}>
-
-                    Logout
-
+            <li className={styles.menuItem} onClick={props.logoutAction}>
+                Logout
             </li>
         </ul>
     )

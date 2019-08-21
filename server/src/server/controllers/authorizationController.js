@@ -141,6 +141,7 @@ export const deleteRefreshToken = async (req, res, next) => {
                 tokenString: req.query.tokenString,
             }
         });
+
         res.send({
             numberOfDestroyedRows: result,
         });

@@ -1,4 +1,4 @@
-import React, {Component, Fragment,useEffect,useState} from 'react';
+import React, {Component, Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import styles from './CreditCard.module.scss';
 
@@ -12,13 +12,11 @@ const CreditCard = (props) => {
         return value ? `${value}${format.slice(value.length)}` : format;
     };
 
-
     return (
         <div className={styles.card}>
-            <div style={props.flip?{
-
+            <div style={props.flip ? {
                 transform: 'rotateY(180deg)'
-            }:undefined} className={styles.frontSide}>
+            } : undefined} className={styles.frontSide}>
                 <div className={styles.numberContainer}>{
                     formatContent(number, '**** **** **** ****')
                 }</div>
@@ -26,13 +24,15 @@ const CreditCard = (props) => {
                     formatContent(expiry, '** / **')
                 }</div>
             </div>
-            <div style={props.flip?{
+            <div style={props.flip ? {
 
-                transform: 'rotateY(360deg)'}:{  }} className={styles.backSide}>
+                transform: 'rotateY(360deg)'
+            } : {}} className={styles.backSide}>
                 <span>
                     {
-                    `CVC: ${formatContent(cvc,'***')}`
-                }</span>
+                        `CVC: ${formatContent(cvc, '***')}`
+                    }
+                </span>
             </div>
         </div>
     )
