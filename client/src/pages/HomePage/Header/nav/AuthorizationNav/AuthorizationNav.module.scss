@@ -29,7 +29,7 @@
 
   .mdHidden {
     display: none;
-    @media screen and (min-width: $md) {
+    @include mediaBreakpointUp($md) {
       display: inline;
     }
   }

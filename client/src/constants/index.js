@@ -54,6 +54,12 @@ _PATHS.AFFILIATE_DASHBOARD_USERS = `${_PATHS.AFFILIATE_DASHBOARD}${_PATHS.USERS}
 
 export const PATHS = _PATHS;
 
+export const testMenuItemStyle = {
+    border: '2px solid #ff6542',
+    borderCollapse: 'collapse',
+    margin: '-1px 0'
+
+};
 export const TASK_TYPE = {
     NAME: 'Name',
     LOGO: "Logo",

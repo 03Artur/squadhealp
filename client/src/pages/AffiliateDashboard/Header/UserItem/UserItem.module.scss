@@ -1,6 +1,40 @@
+@import "../../../../commonStyles";
 
-
-.container{
+.container {
   display: flex;
   align-items: center;
+
+
+  .userInfo {
+    font-family: Nunito, sans-serif;
+    color: rgb(152, 166, 173);
+    margin-left: 8px;
+    display: none;
+
+    @include mediaBreakpointUp($md) {
+      display: block;
+    }
+
+    .userName {
+      width: 100%;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .userRole {
+      width: 100%;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: capitalize;
+      color: inherit;
+    }
+  }
+
 }
+
+
+

@@ -13,11 +13,13 @@ function Header(props) {
             <header className={styles.header}>
 
                 <div className={styles.menuIconContainer}>
-                    <FontAwesomeIcon icon={faBars}/>
+                    <FontAwesomeIcon className={styles.burgerIcon} icon={faBars}/>
                 </div>
+
                 <div className={styles.userItemContainer}>
                     <UserItem/>
                 </div>
+
             </header>
         </React.Fragment>
     );

@@ -3,27 +3,39 @@
 
 $dashBoardHeaderHeight: 70px;
 
-.header{
+.header {
   height: $dashBoardHeaderHeight;
   min-width: 100vw;
   display: flex;
   justify-content: space-between;
   background-color: white;
   box-shadow: rgba(154, 161, 171, 0.15) 0 0 35px 0;
+  padding-right: 10px;
+  box-sizing: border-box;
+
+  @include mediaBreakpointUp($md) {
+    padding-right: 30px;
+  }
+
 }
 
-.menuIconContainer{
 
+.menuIconContainer {
+  cursor: pointer;
   height: $dashBoardHeaderHeight;
   width: 60px;
   @include flex-container(center, center);
 
+  .burgerIcon {
+    width: 24px;
+  }
 }
 
-.userItemContainer{
+.userItemContainer {
   border: 1px solid #f1f3fa;
   height: $dashBoardHeaderHeight;
   background-color: #FAFBFD;
   padding: 0 20px;
+  margin-left: 10px;
   @include flex-container(center, center);
 }

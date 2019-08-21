@@ -15,7 +15,7 @@ header {
 .menuContainer {
   display: none;
 
-  @media screen and (min-width: $md) {
+  @include mediaBreakpointUp($md) {
     display: none !important;
   }
 }
@@ -29,7 +29,7 @@ header {
 .logoContainer {
   display: inline;
 
-  @media screen and (max-width: $md) {
+  @include mediaBreakpointDown($md) {
     max-width: 100px;
   }
 }
@@ -83,7 +83,7 @@ header {
   display: inline-block;
   text-align: center;
 
-  @media screen and (max-width: $md) {
+  @include mediaBreakpointDown($md) {
     display: none;
 
   }

@@ -5,10 +5,9 @@ import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import styles from "./HomeNavMenu.module.scss";
+import {testMenuItemStyle} from "../../../../../../constants";
 
-const testMenuItemStyle = {
-    border: '4px solid #ff6542',
-};
+
 
 function testStyle(to) {
     return (to !== "#" ? testMenuItemStyle : null);

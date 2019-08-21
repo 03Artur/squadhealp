@@ -12,16 +12,16 @@ function UserItem(props) {
 
     return (
         <div className={styles.container}>
-            <UserIcon src={`${userPicturesURL}/${user.profilePicture}`} size={40}/>
-            <div >
-                <div>
+            <UserIcon src={`${userPicturesURL}/${user.profilePicture}`} size={32}/>
+            <div className={styles.userInfo}>
+                <div className={styles.userName}>
                     {
                         `${user.firstName}`
                     }
                 </div>
-                <div>
+                <div className={styles.userRole}>
                     {
-                        `${user.role}`
+                        `${user.role.toLowerCase()}`
                     }
                 </div>
             </div>

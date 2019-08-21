@@ -41,6 +41,14 @@ $test: orange
   flex: $flexValue
 
 
+=mediaBreakpointDown($maxWidth)
+  @media screen and (max-width: $maxWidth)
+    @content
+
+=mediaBreakpointUp($minWidth)
+  @media screen and (min-width: $minWidth)
+    @content
+
 
 
 

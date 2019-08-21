@@ -29,10 +29,10 @@ $grid-breakpoints: (
 
 .logoContainer {
   flex: 2;
-  @media screen and (min-width: $sm) {
+  @include mediaBreakpointUp($sm) {
     flex: 2;
   }
-  @media screen and (min-width: $md) {
+  @include mediaBreakpointUp($md) {
     flex: 2;
   }
 }
@@ -42,11 +42,11 @@ $grid-breakpoints: (
   flex: 3;
   text-align: right;
 
-  @media screen and (min-width: $sm) {
+  @include mediaBreakpointUp($sm) {
     flex: 2;
   }
 
-  @media screen and (min-width: $md) {
+  @include mediaBreakpointUp($md) {
     flex: 2;
   }
 }
@@ -73,14 +73,14 @@ $grid-breakpoints: (
     color: white;
   }
 
-  @media screen and (min-width: $sm) {
+  @include mediaBreakpointUp($sm) {
 
   }
 
-  @media screen and (min-width: $md) {
+  @include mediaBreakpointUp($md) {
 
   }
-  @media screen and (min-width: $lg) {
+  @include mediaBreakpointUp($lg) {
     text-transform: uppercase;
   }
 }

@@ -19,14 +19,15 @@ import {Link} from 'react-router-dom';
 * */
 import styles from './DropDownMenu.module.scss';
 import {logoutActionCreator} from "../../../../../actions/authorizationActionCreators";
+import {PATHS, testMenuItemStyle} from "../../../../../constants";
 
 const DropDownMenu = (props) => {
 
     const renderItems = () => {
         return props.items.map((item) => (
 
-            <li key={item.title}>
-                <Link className={styles.menuItem} to={item.to} key={item.title}>
+            <li style={item.to!=='#'? testMenuItemStyle:undefined} key={item.title}>
+                <Link className={styles.menuItem} to={item.to} >
                     {
                         item.title
                     }
@@ -40,8 +41,11 @@ const DropDownMenu = (props) => {
             {
                 renderItems()
             }
-            <li className={styles.menuItem} onClick={props.logoutAction}>
-                Logout
+            <li style={testMenuItemStyle} onClick={props.logoutAction}>
+                <Link className={styles.menuItem} to='#'>
+                    Logout
+                </Link>
+
             </li>
         </ul>
     )
