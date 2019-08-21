@@ -1,3 +1,4 @@
+@import '../../../commonStyles';
 .container {
   margin: 10px;
   box-sizing: border-box;
@@ -32,7 +33,7 @@
   padding: 20px;
   border: 1px solid black;
 
-  @media (min-width: 768px){
+  @media (min-width: $md){
     &:hover{
       border-width: 2px;
 

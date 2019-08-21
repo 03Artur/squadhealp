@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Header from "./Header/Header";
 import Nav from "./Nav/Nav";
+import styles from './AffiliateDashboard.module.scss';
 
-
-function DashboardPage(props) {
+function AffiliateDashboard(props) {
 
 
     return (
-        <React.Fragment>
+        <div className={styles.pageContainer}>
             <Header/>
             <Nav/>
-        </React.Fragment>
+        </div>
     );
 }
 
@@ -26,5 +26,5 @@ function mapDispatchToProps(dispatch) {
     return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage)
+export default connect(mapStateToProps, mapDispatchToProps)(AffiliateDashboard)
 

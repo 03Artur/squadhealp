@@ -2,46 +2,47 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Header.module.scss';
 import HomeNav from "./nav/HomeNav/HomeNav";
-import {PATHS, PHONE_NUMBER} from "../../../constants";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPhone} from '@fortawesome/free-solid-svg-icons';
-import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
-import UserItem from "./UserItem/UserItem";
-import {Link} from 'react-router-dom';
 import AuthorizationNav from "./nav/AuthorizationNav/AuthorizationNav";
 import ContactPhone from "./nav/ContactPhone/ContactPhone";
+import Logo from "../../../components/Logo/Logo";
+import HomeNavMenu from "./nav/HomeNav/HomeNavMenu/HomeNavMenu";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 
-class Header extends React.Component {
+function Header(props) {
 
-
-
-
-    render() {
-        return (
-            <React.Fragment>
-                <header>
-                    <div className={styles.topRow}>
-                        <div className={styles.container}>
-                            <div className={styles.row}>
-                                <div className={styles.col}>
-                                    <div className={styles.contactPhoneContainer}>
-                                       <ContactPhone/>
-                                    </div>
+    return (
+        <React.Fragment>
+            <header>
+                <div className={styles.topRow}>
+                    <div className={styles.container}>
+                        <div className={styles.row}>
+                            <div className={styles.col}>
+                                <div className={styles.contactPhoneContainer}>
+                                    <ContactPhone/>
                                 </div>
-                                <div className={[styles.col, styles.leftCol].join(' ')}>
-                                    <AuthorizationNav/>
+                                <div className={styles.logoContainer}>
+                                    <Logo/>
                                 </div>
+                            </div>
+                            <div className={[styles.col, styles.leftCol].join(' ')}>
+                                <AuthorizationNav/>
+                                <label htmlFor={'menuBurger'} className={styles.burgerContainer}>
+                                    <FontAwesomeIcon icon={faBars}/>
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.nav}>
-                        <HomeNav/>
-                    </div>
-                </header>
-            </React.Fragment>
-        );
-    }
+                    <input id={'menuBurger'} type="checkbox" style={{display: 'none'}}/>
+                    <HomeNavMenu className={styles.menuContainer}/>
+                </div>
+                <div className={styles.nav}>
+                    <HomeNav/>
+                </div>
+            </header>
+        </React.Fragment>
+    );
 }
 
 

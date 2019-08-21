@@ -49,7 +49,7 @@ class AuthorizationNav extends React.Component {
                         <UserItem/>
                         <FontAwesomeIcon className={styles.chevron} icon={this.state.chevron}/>
                     </div>
-                    <div className={styles.link}>
+                    <div className={[styles.link,styles.mdHidden].join(' ') }>
                         <FontAwesomeIcon icon={faEnvelope}/>
                     </div>
                 </React.Fragment>

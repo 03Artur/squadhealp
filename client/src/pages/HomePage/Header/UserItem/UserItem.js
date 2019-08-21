@@ -19,6 +19,7 @@ import UserIcon from "./UserIcon/UserIcon";
 * Styles
 * */
 import styles from './UserItem.module.scss';
+import {userPicturesURL} from "../../../../api/baseURL";
 
 function UserItem(props) {
 
@@ -29,13 +30,13 @@ function UserItem(props) {
 
         <div className={styles.container}>
             <div className={styles.iconContainer}>
-                <UserIcon/>
+                <UserIcon src={`${userPicturesURL}/${user.profilePicture}` }/>
             </div>
             <span className={styles.greeting}>
-                    {
-                        `Hi, ${user.firstName}`
-                    }
-                </span>
+                {
+                    `Hi, ${user.firstName}`
+                }
+            </span>
         </div>
 
     );

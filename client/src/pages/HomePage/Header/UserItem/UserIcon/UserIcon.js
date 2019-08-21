@@ -10,23 +10,30 @@ import styles from './UserIcon.module.scss';
 import {defaultUserIcon, imagesURL, userPicturesURL, defaultUserIconMin} from "../../../../../api/baseURL";
 
 const UserIcon = (props) => {
-    const getSrc = () => {
-        return props.src? `${userPicturesURL}/${props.src}`:defaultUserIconMin
+
+
+    const containerSize = {
+        height: `${props.size}px`,
+        width: `${props.size}px`,
     };
-    const classNameCombineString = [styles.userIcon, props.className].join(' ');
+    const imgSize = {
+        width: `${props.size}px`,
+    };
     return (
-        <img src={getSrc()} alt={'(0_0)'} className={classNameCombineString}/>
+        <div style={containerSize} className={styles.container}>
+            <img style={imgSize} src={props.src} alt={'(0_0)'} className={styles.userIcon}/>
+        </div>
     )
 };
 
 UserIcon.propTypes = {
     src: PropTypes.string,
-    className: PropTypes.string,
+    size: PropTypes.number,
 };
 
-UserIcon.defaultPros = {
-    src: defaultUserIcon,
-
+UserIcon.defaultProps = {
+    src: defaultUserIconMin,
+    size: 20,
 };
 
 /*

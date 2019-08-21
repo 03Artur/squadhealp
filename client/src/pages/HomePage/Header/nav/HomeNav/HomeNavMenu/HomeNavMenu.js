@@ -73,13 +73,11 @@ function HomeNavMenu(props) {
     const {navigation} = props;
 
     return (
-        <div className={props.className}>
-            <ul className={styles.navMenu}>
+            <ul className={[styles.navMenu, props.className].join(' ')}>
                 {
                     navigation.map(menu => renderMenu(menu))
                 }
             </ul>
-        </div>
     )
 }
 

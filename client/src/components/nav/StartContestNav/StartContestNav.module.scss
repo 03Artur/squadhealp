@@ -9,7 +9,7 @@
     padding-top: 30px;
     padding-bottom: 30px;
 
-    @media screen and(max-width: 768px){
+    @media screen and(max-width: $md){
       p{
         display: none;
       }
@@ -25,7 +25,7 @@
     .col {
       flex: 1;
       &:first-child{
-        @media screen and(max-width: 768px){
+        @media screen and(max-width: $md){
             display: none;
           }
       }
@@ -33,7 +33,7 @@
 
     .buttonContainer {
       @include flex-container(flex-end);
-      @media screen and(max-width: 768px){
+      @media screen and(max-width: $md){
         justify-content: space-around;
       }
     }
@@ -44,7 +44,7 @@
 .nextButton {
   background-color: $appOrange !important;
   margin: 0 15px;
-  @media screen and(max-width: 768px){
+  @media screen and(max-width: $md){
     margin: 0;
   }
 }

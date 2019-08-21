@@ -1,10 +1,37 @@
 @import "../../../commonStyles";
 
-
-
 header {
   min-width: 100vw;
   text-align: center;
+}
+
+
+.topRow :checked ~ .menuContainer {
+
+  display: block;
+
+}
+
+.menuContainer {
+  display: none;
+
+  @media screen and (min-width: $md) {
+    display: none !important;
+  }
+}
+
+.burgerContainer {
+  display: inline;
+  margin-left: 14px;
+  margin-right: 17px;
+}
+
+.logoContainer {
+  display: inline;
+
+  @media screen and (max-width: $md) {
+    max-width: 100px;
+  }
 }
 
 .topRow {
@@ -13,49 +40,41 @@ header {
   border-bottom: $topRowBorder;
   box-sizing: border-box;
   margin-bottom: 13px;
+  position: relative;
+}
 
+.container {
+  @include container(1170px);
+}
 
+.row {
+  display: flex;
+  height: $topRowHeight;
+}
 
-  .container {
-    @include container(1170px);
+.col {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    .row {
-      display: flex;
-      height: $topRowHeight;
-
-
-
-      .col {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .contactPhoneContainer {
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-
-          box-sizing: border-box;
-          padding: 0 15px;
-          height: $topRowHeight;
-          border-right: 1px solid #ebebeb;
-          border-left: 1px solid #ebebeb;
-
-
-
-        }
-      }
-
-      .leftCol{
-        justify-content: flex-end;
-      }
+  .contactPhoneContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media screen and(max-width: $md) {
+      display: none;
     }
-
-
+    box-sizing: border-box;
+    padding: 0 15px;
+    height: $topRowHeight;
+    border-right: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
   }
+}
+
+.leftCol {
+  justify-content: flex-end;
 
 }
 
@@ -69,3 +88,16 @@ header {
 
   }
 }
+
+@media screen and(min-width: $md) {
+
+  .logoContainer {
+    display: none;
+  }
+
+  .burgerContainer {
+    display: none;
+  }
+
+}
+

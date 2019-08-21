@@ -6,7 +6,7 @@
   box-sizing: border-box;
   border-left: $topRowBorder;
   height: $topRowHeight;
-  @include flex-container(center,center);
+  @include flex-container(center, center);
 
   .link {
     border-right: $topRowBorder;
@@ -16,12 +16,21 @@
     font-size: 16px;
     font-family: 'Raleway', sans-serif;
     color: rgb(113, 136, 136);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 
-
-    .chevron{
+    .chevron {
       width: 8px;
       margin-left: 6px;
       vertical-align: middle;
+    }
+  }
+
+  .mdHidden {
+    display: none;
+    @media screen and (min-width: $md) {
+      display: inline;
     }
   }
 

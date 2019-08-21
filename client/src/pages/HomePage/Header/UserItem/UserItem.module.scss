@@ -1,3 +1,5 @@
+@import '../../../../commonStyles';
+
 * {
   color: inherit;
   font-family: inherit;
@@ -17,4 +19,9 @@
   font-size: 13.5px;
   color: rgb(113, 136, 136);
   margin-left: 3px;
+  display: none;
+
+  @media screen and (min-width: $md){
+    display: inline;
+  }
 }
