@@ -1,0 +1,21 @@
+@import "../../../../../commonStyles";
+
+.contactPhone {
+
+
+
+  a {
+    color: rgb(51, 122, 183);
+    font-size: 14px;
+  }
+
+  .icon {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    width: 11px;
+    margin-right: 10px;
+  }
+
+}

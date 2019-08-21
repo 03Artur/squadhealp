@@ -9,6 +9,7 @@ import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import UserItem from "./UserItem/UserItem";
 import {Link} from 'react-router-dom';
 import AuthorizationNav from "./nav/AuthorizationNav/AuthorizationNav";
+import ContactPhone from "./nav/ContactPhone/ContactPhone";
 
 
 class Header extends React.Component {
@@ -24,9 +25,8 @@ class Header extends React.Component {
                         <div className={styles.container}>
                             <div className={styles.row}>
                                 <div className={styles.col}>
-                                    <div className={styles.contactPhone}>
-                                        <FontAwesomeIcon className={styles.icon} icon={faPhone}/>
-                                        <a href={`tel:${PHONE_NUMBER}`}>{PHONE_NUMBER}</a>
+                                    <div className={styles.contactPhoneContainer}>
+                                       <ContactPhone/>
                                     </div>
                                 </div>
                                 <div className={[styles.col, styles.leftCol].join(' ')}>

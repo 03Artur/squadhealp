@@ -37,18 +37,6 @@ $grid-breakpoints: (
   }
 }
 
-.menuContainer {
-  flex: 7;
-  text-align: right;
-
-  @media screen and (min-width: $sm) {
-    flex: 8;
-  }
-
-  @media screen and (min-width: $md) {
-    flex: 8;
-  }
-}
 
 .buttonContainer {
   flex: 3;
@@ -97,122 +85,12 @@ $grid-breakpoints: (
   }
 }
 
-.navMenu {
-  justify-self: end;
-  display: inline-block;
-  padding: 0 15px;
-  box-sizing: border-box;
-
-  & li:not(:last-child) {
-    margin-right: 5px;
-  }
-
-}
 
 
-.dropDown {
-  display: inline-block;
-  position: relative;
-  color: #495d8b;
-  padding: 15px 0;
-  box-sizing: border-box;
-
-  &:hover {
-    .dropDownMenu {
-      display: block;
-
-    }
-  }
-
-  .menuTitleContainer {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    &:hover {
-      .menuTitle{
-        color: #f27e51;
-      }
 
 
-    }
-  }
-
-  .chevron {
-    align-self: flex-end;
-    color: #ccc;
-    width: 10px;
-    padding-left: 5px;
-  }
-
-  .menuTitle {
-    text-transform: capitalize;
-    font-size: 16px;
-    text-decoration: none;
-    color: #495d8b;
-    font-weight: 400;
 
 
-  }
-}
 
 
-.menuItem {
-  display: block;
-  padding: 8px 15px;
-  text-align: left;
-  width: 100%;
-  box-sizing: border-box;
-
-  &:hover {
-    background-color: #f5f5f5;
-    border-color: #f5f5f5;
-    cursor: pointer;
-  }
-
-  .itemTitle {
-    text-transform: capitalize;
-    width: 100%;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    text-decoration: none;
-
-  }
-}
-
-.dropDownMenu {
-  display: none;
-  overflow: hidden;
-  background-color: white;
-  position: absolute;
-  top: 100%;
-  min-width: 160px;
-  white-space: nowrap;
-  z-index: 10000;
-  border: 1px solid #dadada;
-  box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.176) 0 6px 12px 0;
-
-  &:after {
-    content: '';
-    display: inline-block;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 7px solid #ccc;
-    position: absolute;
-    top: -7px;
-    left: 30px
-  }
-}
-
-
-.divider {
-  width: 100%;
-  display: block;
-  height: 1px;
-  margin: 9px 0;
-  background-color: rgb(229, 229, 229);
-  box-sizing: border-box;
-
-}
 
