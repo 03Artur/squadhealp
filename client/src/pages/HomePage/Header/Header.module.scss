@@ -6,7 +6,7 @@ header {
 }
 
 
-.topRow :checked ~ .container {
+.topRow :checked ~ .containerMenu {
 
   display: block;
 
@@ -21,6 +21,7 @@ header {
 }
 
 .burgerContainer {
+  cursor: pointer;
   display: inline;
   margin-left: 14px;
   margin-right: 17px;
@@ -28,9 +29,9 @@ header {
 
 .logoContainer {
   display: inline;
-
-  @include mediaBreakpointDown($md) {
-    max-width: 100px;
+  max-width: 100px;
+  @include mediaBreakpointUp($md) {
+    max-width: 100%
   }
 }
 
@@ -59,11 +60,12 @@ header {
   align-items: center;
 
   .contactPhoneContainer {
-    display: flex;
+
     justify-content: center;
     align-items: center;
-    @media screen and(max-width: $md) {
-      display: none;
+    display: none;
+    @include mediaBreakpointUp($md){
+      display: flex;
     }
     box-sizing: border-box;
     padding: 0 15px;
@@ -80,16 +82,16 @@ header {
 
 .nav {
   width: 100%;
-  display: inline-block;
+  display: none;
   text-align: center;
 
-  @include mediaBreakpointDown($md) {
-    display: none;
+  @include mediaBreakpointUp($md) {
 
+    display: inline-block;
   }
 }
 
-@media screen and(min-width: $md) {
+@include mediaBreakpointUp($md) {
 
   .logoContainer {
     display: none;

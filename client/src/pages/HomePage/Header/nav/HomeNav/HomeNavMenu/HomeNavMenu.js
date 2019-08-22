@@ -13,7 +13,7 @@ function testStyle(to) {
     return (to !== "#" ? testMenuItemStyle : null);
 }
 
-const renderMenuItem = (item) => {
+const renderMenuItem = (item,index) => {
     if (Array.isArray(item)) {
         return (
             item.map(elem => renderMenuItem(elem))

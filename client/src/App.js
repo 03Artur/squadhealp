@@ -13,7 +13,6 @@ import history from './history';
 * CONSTANTS IMPORT
 * */
 import {PATHS, ROLE} from "./constants"
-import Test from "./pages/TestPage/TestPage";
 /*
 * COMPONENTS IMPORT
 * */

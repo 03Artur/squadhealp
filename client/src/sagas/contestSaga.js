@@ -8,7 +8,7 @@ export function* createContestSaga({isNameExist, contest}) {
     try {
 
         const {data} = yield contestController.createContest(isNameExist, contest);
-        console.log(data);
+
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_CREATE_CONTEST_RESPONSE,
             contest: data[0],
@@ -86,11 +86,11 @@ export function* getAllUserContestsSaga({id}) {
 export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPES.CONTEST_PAYMENT_REQUEST});
     try {
-        console.log( creditCard);
+
         const {data} = yield contestController.contestPaymentById(contestId, creditCard);
-        console.group('contestPaymentSaga');
-        console.log(data);
-        console.groupEnd();
+
+
+
 
        /* const {data: { Tasks: tasks, ...contest}} = data;
         yield put({

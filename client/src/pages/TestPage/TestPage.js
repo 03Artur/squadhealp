@@ -12,16 +12,16 @@ export default class Test extends Component {
     }
 
     onChange = (values) => {
-        console.group("onChange");
-        console.log(values);
-        console.groupEnd();
+
+
+
     };
 
 
     submit(values) {
-        console.group("onSubmit");
-        console.log(values);
-        console.groupEnd()
+
+
+
     };
 
     render() {

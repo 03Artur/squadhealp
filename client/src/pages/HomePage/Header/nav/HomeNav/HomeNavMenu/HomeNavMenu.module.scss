@@ -100,35 +100,42 @@ $grid-breakpoints: (
   display: inline-block;
   box-sizing: border-box;
 
+
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-top: 1px solid rgb(16,16,16);
+  border-bottom: 1px solid rgb(51,51,51);
+
   @include mediaBreakpointUp($md) {
     & li:not(:last-child) {
       margin-right: 5px;
     }
   }
 
-  @include mediaBreakpointDown($md) {
-    position: absolute;
-    top: calc(100% + 1px);
-    left: 0;
-    right: 0;
-    background-color: white;
-    border-top: 1px solid rgb(16,16,16);
-    border-bottom: 1px solid rgb(51,51,51);
+  @include mediaBreakpointUp($md) {
+    position: static;
+
+    background: none;
+    border: none;
+
 
   }
 }
 
 
 .dropDown {
-  display: inline-block;
   position: relative;
   color: #495d8b;
-  padding: 15px 0;
   box-sizing: border-box;
+  display: block;
+  padding: 15px;
+  @include mediaBreakpointUp($md) {
+    padding: 15px 0;
+    display: inline-block;
 
-  @include mediaBreakpointDown($md) {
-    display: block;
-    padding: 15px;
   }
 
   &:hover {
@@ -142,10 +149,11 @@ $grid-breakpoints: (
     display: flex;
     align-items: center;
     cursor: pointer;
-
-    @include mediaBreakpointDown($md) {
-      font-family: Gotham SSm A, Gotham SSm B, Halvetica, sans-serif;
-      color: #333 !important;
+    font-family: Gotham SSm A, Gotham SSm B, Halvetica, sans-serif;
+    color: #333 !important;
+    @include mediaBreakpointUp($md) {
+      font-family: inherit;
+      color: inherit;
     }
 
     @include mediaBreakpointUp($md) {

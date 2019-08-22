@@ -220,8 +220,11 @@ export default function (state = initialState, action) {
                         ],
                     ]),
                 ],],
-                [ROLE.CREATIVE, [
-                    new Menu('Active contests', [
+                [ROLE.CREATIVE,
+
+                    [
+                    new Menu('Active contests',
+                        [
 
                         new MenuItem('Assigned To Me', {
                             pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
@@ -288,7 +291,10 @@ export default function (state = initialState, action) {
                         new MenuItem('Testimonials'),
                         new MenuItem('Contact Us'),
                     ]),
-                ],],
+                ],
+
+
+                ],
             ]);
             const nav = navMap.get(action.user.role);
             return nav ? nav : state;

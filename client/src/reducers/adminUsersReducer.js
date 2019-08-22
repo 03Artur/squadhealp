@@ -1,8 +1,5 @@
 import ACTION_TYPES from '../actions/actiontsTypes';
 import _ from 'lodash';
-import history from '../history';
-import queryString from 'query-string';
-import {Map} from 'immutable';
 
 function getInitialState() {
 

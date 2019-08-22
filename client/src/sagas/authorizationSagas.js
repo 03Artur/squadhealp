@@ -1,9 +1,6 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
-import history from "../history";
-import {PATHS} from "../constants";
-import authorizationReducer from "../reducers/authorization/authorizationReducer";
 
 export function* loginUserSaga({data: user}) {
 
@@ -61,7 +58,6 @@ export function* signUpUserSaga({data: user}) {
 export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
-        alert('get MF');
         const {data} = yield getAuthorizedUser();
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
     } catch (e) {

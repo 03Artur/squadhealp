@@ -38,7 +38,7 @@ const ContestPayment = (props) => {
     const submit = (values) => {
         values.number = values.number.replace(/ /g,'');
         values.expiry = values.expiry.replace(/ /g,'');
-        console.log('contestId: ', props.contestId,"  credit card: ", values);
+
 
         props.contestPaymentAction(props.contestId, values);
     };

@@ -9,9 +9,9 @@ const initialState = {
 
 
 export default function (state = initialState, action) {
-    console.group("Authorization Reducer");
-    console.log(action);
-    console.groupEnd();
+
+
+
     switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {

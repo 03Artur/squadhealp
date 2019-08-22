@@ -1,6 +1,4 @@
 import ACTION_TYPES from './actiontsTypes';
-import {ROLE, PATHS} from "../constants";
-import Link from "../utils/classes/Link";
 
 
 export const signUpActionCreator = (data) => {
@@ -18,7 +16,7 @@ export const loginActionCreator = (data) => {
 };
 
 export const logoutActionCreator = () => {
-    console.group("logoutActionCreator");
+
     return {
         type: ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION,
     }

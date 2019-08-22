@@ -16,16 +16,16 @@ export const refreshTokens = () => axios.post(refreshTokensUrl, {refreshToken: l
 
 /*logout*/
 export const logoutUser = () => axios.delete(`${logoutURL}?tokenString=${localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN_KEY)}`).then(response => {
-    console.group('logoutUser then:');
-    console.log(response);
-    console.groupEnd();
+
+
+
     removeTokens();
 
     return Promise.resolve(response);
 }).catch(error => {
-    console.group('logoutUser error:');
-    console.log(error);
-    console.groupEnd();
+
+
+
     removeTokens();
     return  Promise.reject(error);
 });

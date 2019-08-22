@@ -45,7 +45,7 @@ const getInitialState = () => {
         if (queryObj[item.queryKey]) {
             query[item.queryKey] = queryObj[item.queryKey];
             currentStepIndex++;
-            console.log(currentStepIndex)
+
         }
     }
 

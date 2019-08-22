@@ -22,7 +22,7 @@ export default class MyList {
                     }
                 } else {
                     const value = current.value;
-                    console.log("Iterator next");
+
                     current = current.next;
                     return {
                         done: false,
