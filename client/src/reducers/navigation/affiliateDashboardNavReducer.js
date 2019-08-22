@@ -1,8 +1,9 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import {PATHS, ROLE, TASK_TYPE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
+import queryString from 'query-string';
 
-const initialState = null
+const initialState = null;
 
 export default function (state = initialState, action) {
 
@@ -17,16 +18,16 @@ export default function (state = initialState, action) {
                     new MenuItem('Entries', PATHS.AFFILIATE_DASHBOARD_ENTRIES,)],],
                 [ROLE.CREATIVE, [
                     new MenuItem('Contests', {
-                    pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                    search: queryString.stringify({
-                        isActive: true,
-                        winnerId: user.id,
+                        pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                        search: queryString.stringify({
+                            isActive: true,
+                            winnerId: action.user.id,
 
-                    }),
-                },),
+                        }),
+                    },),
                     new MenuItem('My Entries', {
                         pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
-                        search: queryString.stringify({userId: user.id}),
+                        search: queryString.stringify({userId: action.user.id}),
                     },)],],
             ]);
             const nav = navMap.get(action.user.role);

@@ -69,7 +69,6 @@ const HOME_NAV = [
     ]),
 ];
 
-
 const initializeValue = {
     home: HOME_NAV,
 };

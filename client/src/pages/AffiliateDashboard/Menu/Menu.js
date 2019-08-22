@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Menu.module.scss';
-
+import {connect} from 'react-redux';
 
 function Menu(props) {
 
-
+    const {isOpen} = props;
+    const getMenuContainerClasses = () => {
+        return [styles.menuContainer, isOpen ? styles.menuContainerOpen : ''].join(' ');
+    };
 
     return (
-        <div>
+        <div className={getMenuContainerClasses()}>
 
         </div>
     )
@@ -22,7 +25,14 @@ Menu.defaulProps = {
     isOpen: false,
 };
 
-export default Menu;
+function mapStateToProps(state) {
+
+    return state.affiliateDashboardMenu;
+
+
+}
+
+export default connect(mapStateToProps)(Menu);
 
 
 

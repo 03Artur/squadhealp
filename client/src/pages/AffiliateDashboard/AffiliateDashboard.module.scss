@@ -9,56 +9,9 @@
   background-color: #FAFBFE ;
 }
 
-.menuContainer{
-  position: fixed;
-  left: -250px;
-  top: 0;
-  bottom: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
-  background-image: linear-gradient(135deg, rgb(143, 117, 218) 0px, rgb(114, 124, 245) 60%);
-  min-width: 70px;
-
-
-  @include mediaBreakpointUp($md){
-    webkit-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-    width: 70px;
-    position: static;
-
-  }
-}
-
-.menuContainerOpen{
-  left: 0;
-  min-width: 250px;
-
-  @include mediaBreakpointUp($md){
-    position: static;
-  }
-
-}
-
 .contentContainer{
   flex: 1;
 }
 
-.menuIconContainer {
-  cursor: pointer;
-  height: $dashBoardHeaderHeight;
-  width: 60px;
-  @include flex-container(center, center);
 
-  .burgerIcon {
-    width: 24px;
-  }
-}
 
-.userItemContainer {
-  border: 1px solid #f1f3fa;
-  height: $dashBoardHeaderHeight;
-  background-color: #FAFBFD;
-  padding: 0 20px;
-  margin-left: 10px;
-  @include flex-container(center, center);
-}

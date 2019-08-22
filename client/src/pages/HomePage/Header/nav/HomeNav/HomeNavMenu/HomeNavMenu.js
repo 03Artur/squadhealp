@@ -90,10 +90,10 @@ HomeNavMenu.defaultProps ={
 
 function mapStateToProps(state) {
 
-    const {home: navigation} = state.siteNavigation;
+
 
     return {
-        navigation
+        navigation:  state.homeNav,
     };
 }
 

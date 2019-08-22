@@ -35,7 +35,7 @@ function Header(props) {
                         </div>
                     </div>
                     <input id={'menuBurger'} type="checkbox" style={{display: 'none'}}/>
-                    <HomeNavMenu className={styles.menuContainer}/>
+                    <HomeNavMenu className={styles.containerMenu}/>
                 </div>
                 <div className={styles.nav}>
                     <HomeNav/>
@@ -45,18 +45,4 @@ function Header(props) {
     );
 }
 
-
-function mapStateToProps(state) {
-    const {user} = state.authorization;
-
-    return {
-        user,
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-
-    return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header;

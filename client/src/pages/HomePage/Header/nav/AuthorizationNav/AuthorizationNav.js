@@ -88,9 +88,13 @@ class AuthorizationNav extends React.Component {
 
 
 function mapStateToProps(state) {
+
     const {user} = state.authorization;
-    const {homeUser:homeUserNav} = state.siteNavigation;
-    return {user, homeUserNav};
+
+    return {
+        homeUserNav: state.homeUserNav,
+        user,
+    };
 }
 
 export default connect(mapStateToProps)(AuthorizationNav)

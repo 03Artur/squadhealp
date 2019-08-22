@@ -12,7 +12,7 @@ header {
 
 }
 
-.container {
+.containerMenu {
   display: none;
 
   @include mediaBreakpointUp($md) {

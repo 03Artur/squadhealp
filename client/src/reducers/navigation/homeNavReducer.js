@@ -1,6 +1,7 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
 import {PATHS, ROLE, TASK_TYPE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
+import queryString from 'query-string';
 
 const initialState = [
     new Menu('Name Ideas', [
@@ -223,7 +224,7 @@ export default function (state = initialState, action) {
                             pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
                             search: queryString.stringify({
                                 isActive: true,
-                                winnerId: user.id,
+                                winnerId: action.user.id,
                             }),
                         }),
                         new MenuItem('all', {

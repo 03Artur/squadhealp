@@ -1,11 +1,7 @@
 @import "../../../commonStyles";
 
-
-
-
 .header {
   height: $dashBoardHeaderHeight;
-
   min-width: 100%;
   display: flex;
   justify-content: space-between;
@@ -19,5 +15,23 @@
   }
 }
 
+.userItemContainer {
+  border: 1px solid #f1f3fa;
+  height: $dashBoardHeaderHeight;
+  background-color: #FAFBFD;
+  padding: 0 20px;
+  margin-left: 10px;
+  @include flex-container(center, center);
+}
 
+.menuIconContainer {
+  cursor: pointer;
+  height: $dashBoardHeaderHeight;
+  width: 60px;
+  @include flex-container(center, center);
+
+  .burgerIcon {
+    width: 24px;
+  }
+}
 
