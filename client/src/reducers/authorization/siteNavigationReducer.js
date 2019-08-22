@@ -158,7 +158,8 @@ function getNavByUser(user) {
                 new MenuItem("Messages",),
                 new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
             ],
-            dashboard: [
+            dashboard:
+                [
                 new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
             ],
         }],

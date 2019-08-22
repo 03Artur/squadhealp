@@ -12,8 +12,6 @@ function Header(props) {
                 {
                     props.children
                 }
-
-
             </header>
         </React.Fragment>
     );

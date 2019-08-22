@@ -6,13 +6,13 @@ header {
 }
 
 
-.topRow :checked ~ .menuContainer {
+.topRow :checked ~ .container {
 
   display: block;
 
 }
 
-.menuContainer {
+.container {
   display: none;
 
   @include mediaBreakpointUp($md) {

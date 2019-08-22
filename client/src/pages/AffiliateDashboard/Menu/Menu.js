@@ -6,10 +6,9 @@ import styles from './Menu.module.scss';
 function Menu(props) {
 
 
-    const containerClasses = [styles.container, props.isOpen ? styles.containerOpen : ''].join(' ');
 
     return (
-        <div className={containerClasses}>
+        <div>
 
         </div>
     )
