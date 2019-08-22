@@ -2,7 +2,7 @@ import ACTION_TYPES from "../../actions/actiontsTypes";
 import {PATHS, ROLE, TASK_TYPE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 import queryString from 'query-string';
-
+import _ from 'lodash'
 const initialState = [
     new Menu('Name Ideas', [
         [
@@ -72,8 +72,11 @@ const initialState = [
 export default function (state = initialState, action) {
 
     switch (action.type) {
-        case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
 
+        case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
+            if (!action.user) {
+                return _.cloneDeep(initialState)
+            }
             const navMap = new Map([
                 [ROLE.ADMIN, [
                     new Menu('Name Ideas', [

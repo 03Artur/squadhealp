@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
             return _.cloneDeep({
                 ...state,
-                user:null,
+                user: null,
                 isFetching: false,
                 error: action.error,
             })

@@ -28,19 +28,16 @@ export function* logoutUserSaga() {
         const {data} = yield logoutUser();
         yield put({
             type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE,
-            user:null
-        });
-        console.group('logoutUserSaga');
-        console.log(data);
-        console.groupEnd();
+            user: null,
+        })
 
 
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR,
+            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE,
             user: null,
-            error: e.response.data,
-        });
+        })
+
     }
 }
 
@@ -64,6 +61,7 @@ export function* signUpUserSaga({data: user}) {
 export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
+        alert('get MF');
         const {data} = yield getAuthorizedUser();
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
     } catch (e) {
