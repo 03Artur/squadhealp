@@ -49,7 +49,7 @@ AccessRoute.defaultProps = {
 * React redux
 * */
 const mapStateToProps = store => {
-    const {user} = store.authorization;
+    const {user} = store.authorizationReducer;
     return {user}
 };
 

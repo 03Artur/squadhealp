@@ -2,7 +2,7 @@ import ACTION_TYPES from "../../actions/actiontsTypes";
 import {PATHS, ROLE, TASK_TYPE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 
-const initialState = null
+const initialState = []
 
 export default function (state = initialState, action) {
 
@@ -17,10 +17,10 @@ export default function (state = initialState, action) {
                 [ROLE.CREATIVE, [],],
             ]);
             const nav = navMap.get(action.user.role);
-            return nav ? nav : null;
+            return nav ? nav : [];
         }
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
-            return null;
+            return [];
         }
 
         default: {

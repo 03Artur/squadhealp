@@ -33,7 +33,6 @@ const UserLoader = (props) => {
         }
     }, []);
 
-
     const renderSpinner = () => (
         <div className={styles.spinnerContainer}>
             <Spinner/>
@@ -54,7 +53,7 @@ const UserLoader = (props) => {
 
 
 const mapStateToProps = store => {
-    return store.authorization;
+    return store.authorizationReducer;
 
 };
 const mapDispatchToProps = dispatch => ({

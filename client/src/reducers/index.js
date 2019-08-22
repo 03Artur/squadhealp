@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
-import authorization from './authorization/authorizationReducer';
+import authorizationReducer from './authorization/authorizationReducer';
 import authorizationMode from './authorization/authorizationModeReducer';
 import adminUsers from './adminUsersReducer';
 import contestCreation from "./contest/contestCreationReducer";
@@ -13,7 +13,7 @@ import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
 
 
 const appReducer = combineReducers({
-    authorization,
+    authorizationReducer,
     authorizationMode,
     adminUsers,
     contestCreation,

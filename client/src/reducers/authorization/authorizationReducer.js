@@ -1,5 +1,5 @@
 import ACTION_TYPES from '../../actions/actiontsTypes';
-
+import _ from 'lodash';
 
 const initialState = {
     user: null,
@@ -9,30 +9,34 @@ const initialState = {
 
 
 export default function (state = initialState, action) {
+    console.group("Authorization Reducer");
+    console.log(action);
+    console.groupEnd();
     switch (action.type) {
 
         case ACTION_TYPES.USER_AUTHORIZATION_REQUEST: {
-            return {
+            return _.cloneDeep({
                 ...state,
                 isFetching: true,
                 error: null,
-
-            }
+            })
         }
         case ACTION_TYPES.USER_AUTHORIZATION_RESPONSE: {
-            return {
+            return _.cloneDeep({
                 ...state,
                 isFetching: false,
                 user: action.user,
                 error: null,
-            }
+            })
         }
+
         case ACTION_TYPES.USER_AUTHORIZATION_ERROR: {
-            return {
+            return _.cloneDeep({
                 ...state,
+                user:null,
                 isFetching: false,
                 error: action.error,
-            }
+            })
         }
 
         default: {

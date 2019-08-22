@@ -11,7 +11,7 @@ function UserMenu(props) {
 
 
 function mapStateToProps(state) {
-    const {user} = state.authorization;
+    const {user} = state.authorizationReducer;
 
     return {
         user,

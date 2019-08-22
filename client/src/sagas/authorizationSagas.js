@@ -3,6 +3,7 @@ import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
 import history from "../history";
 import {PATHS} from "../constants";
+import authorizationReducer from "../reducers/authorization/authorizationReducer";
 
 export function* loginUserSaga({data: user}) {
 
@@ -23,20 +24,22 @@ export function* loginUserSaga({data: user}) {
 export function* logoutUserSaga() {
 
     try {
+
         const {data} = yield logoutUser();
-        console.group(logoutUserSaga);
+        yield put({
+            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE,
+            user:null
+        });
+        console.group('logoutUserSaga');
         console.log(data);
         console.groupEnd();
 
-        yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: null});
 
     } catch (e) {
-        console.log(e);
         yield put({
             type: ACTION_TYPE.USER_AUTHORIZATION_ERROR,
-
-            user:null,
-
+            user: null,
+            error: e.response.data,
         });
     }
 }

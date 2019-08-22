@@ -128,7 +128,7 @@ function AuthorizationForm(props) {
 }
 
 const mapStateToProps = state => {
-    const {isFetching} = state.authorization;
+    const {isFetching} = state.authorizationReducer;
     const {mode, form} = state.authorizationMode;
     return {isFetching, mode, ...form};
 };

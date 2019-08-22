@@ -86,7 +86,7 @@ const AuthorizationPage = (props) => {
 const mapStateToProps = store => {
 
     const {page, mode} = store.authorizationMode;
-    return {...store.authorization, mode, ...page};
+    return {...store.authorizationReducer, mode, ...page};
 };
 
 const mapDispatchToProps = (dispatch) => ({

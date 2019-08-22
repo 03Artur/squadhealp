@@ -50,7 +50,7 @@ UserItem.defaultPros = {};
 
 
 const mapStateToProps = store => {
-    const {user} = store.authorization;
+    const {user} = store.authorizationReducer;
     return {user};
 };
 

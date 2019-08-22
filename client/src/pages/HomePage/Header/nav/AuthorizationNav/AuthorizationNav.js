@@ -89,7 +89,7 @@ class AuthorizationNav extends React.Component {
 
 function mapStateToProps(state) {
 
-    const {user} = state.authorization;
+    const {user} = state.authorizationReducer;
 
     return {
         homeUserNav: state.homeUserNav,
