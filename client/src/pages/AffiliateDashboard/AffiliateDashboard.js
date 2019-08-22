@@ -13,9 +13,6 @@ function AffiliateDashboard(props) {
             </div>
         </div>
     );
-
 }
 
-
 export default (AffiliateDashboard)
-

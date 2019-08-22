@@ -1,9 +1,16 @@
 @import "../../../../commonStyles";
 
 .container {
+  cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
-
+  border: 1px solid #f1f3fa;
+  height: $dashBoardHeaderHeight;
+  background-color: #FAFBFD;
+  padding: 0 20px;
+  margin-left: 10px;
+  @include flex-container(center, center);
 
   .userInfo {
     font-family: Nunito, sans-serif;

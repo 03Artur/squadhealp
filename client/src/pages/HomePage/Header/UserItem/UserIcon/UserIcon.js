@@ -15,13 +15,16 @@ const UserIcon = (props) => {
     const containerSize = {
         height: `${props.size}px`,
         width: `${props.size}px`,
+        backgroundImage: `url(${props.src})`,
     };
     const imgSize = {
         width: `${props.size}px`,
     };
     return (
-        <div style={containerSize} className={styles.container}>
+        <div style={containerSize} className={styles.container} >
+{/*
             <img style={imgSize} src={props.src} alt={'(0_0)'} className={styles.userIcon}/>
+*/}
         </div>
     )
 };

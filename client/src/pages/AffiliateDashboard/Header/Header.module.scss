@@ -24,14 +24,5 @@
   @include flex-container(center, center);
 }
 
-.menuIconContainer {
-  cursor: pointer;
-  height: $dashBoardHeaderHeight;
-  width: 60px;
-  @include flex-container(center, center);
 
-  .burgerIcon {
-    width: 24px;
-  }
-}
 

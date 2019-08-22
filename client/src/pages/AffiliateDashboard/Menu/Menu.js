@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Menu.module.scss';
 import {connect} from 'react-redux';
+import {closeOpenAffiliateDashboardMenuActionCreator} from "../../../actions/actionCreators/menusActionCreators/menusActionCreators";
 
 function Menu(props) {
 
@@ -11,9 +12,13 @@ function Menu(props) {
     };
 
     return (
-        <div className={getMenuContainerClasses()}>
+        <React.Fragment>
+            <div className={getMenuContainerClasses()}>
 
-        </div>
+
+            </div>
+            <div onClick={props.closeMenuAction} className={isOpen ? styles.closeMobile : ''}/>
+        </React.Fragment>
     )
 }
 
@@ -26,13 +31,15 @@ Menu.defaulProps = {
 };
 
 function mapStateToProps(state) {
-
     return state.affiliateDashboardMenu;
-
-
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        closeMenuAction: () => dispatch(closeOpenAffiliateDashboardMenuActionCreator(false))
+    };
 }
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps,mapDispatchToProps)(Menu);
 
 
 
