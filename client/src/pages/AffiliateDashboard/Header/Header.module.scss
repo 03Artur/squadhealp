@@ -1,7 +1,7 @@
 @import "../../../commonStyles";
 
 
-$dashBoardHeaderHeight: 70px;
+
 
 .header {
   height: $dashBoardHeaderHeight;
@@ -16,26 +16,7 @@ $dashBoardHeaderHeight: 70px;
   @include mediaBreakpointUp($md) {
     padding-right: 30px;
   }
-
 }
 
 
-.menuIconContainer {
-  cursor: pointer;
-  height: $dashBoardHeaderHeight;
-  width: 60px;
-  @include flex-container(center, center);
 
-  .burgerIcon {
-    width: 24px;
-  }
-}
-
-.userItemContainer {
-  border: 1px solid #f1f3fa;
-  height: $dashBoardHeaderHeight;
-  background-color: #FAFBFD;
-  padding: 0 20px;
-  margin-left: 10px;
-  @include flex-container(center, center);
-}
