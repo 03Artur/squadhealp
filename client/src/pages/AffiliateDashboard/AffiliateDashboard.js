@@ -7,13 +7,8 @@ import Menu from "./Menu/Menu";
 import UserItem from "./Header/UserItem/UserItem";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars} from "@fortawesome/free-solid-svg-icons";
+import breackpoints from '../../styles/breackpoints.scss'
 
-const testStyle = {
-    width: '100px',
-    height: '120px',
-    backgroundColor: 'black',
-    color: 'white',
-};
 
 function AffiliateDashboard(props) {
 
@@ -28,15 +23,15 @@ function AffiliateDashboard(props) {
         setIsMenuOpen(false);
     };
     const onOutsideClick = (e) => {
-        if (isMenuOpen && (!menuRef.current.contains(e.target) || !menuButtonRef.current.contains(e.target))) {
+        if (!window.matchMedia(`(min-width: ${breackpoints.md})`).matches && isMenuOpen && (!menuRef.current.contains(e.target) || !menuButtonRef.current.contains(e.target))) {
             closeMenu();
         }
     };
     return (
-        <div className={styles.pageContainer} onClick={onOutsideClick} >
+        <div className={styles.pageContainer} onClick={onOutsideClick}>
 
-            <div ref={menuRef} >
-            <Menu isOpen={isMenuOpen}/>
+            <div ref={menuRef}>
+                <Menu isOpen={isMenuOpen}/>
             </div>
             <div className={styles.contentContainer}>
 
@@ -44,7 +39,6 @@ function AffiliateDashboard(props) {
                     <div ref={menuButtonRef} onClick={openMenu} className={styles.menuIconContainer}>
                         <FontAwesomeIcon className={styles.burgerIcon} icon={faBars}/>
                     </div>
-
                     <div className={styles.userItemContainer}>
                         <UserItem/>
                     </div>
