@@ -27,7 +27,7 @@ const Picture = (props) => {
 Picture.propTypes = {
     src: PropTypes.string,
 };
-Picture.defaultPros = {
+Picture.defaultProps = {
     src: null,
 };
 

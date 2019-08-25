@@ -39,7 +39,7 @@ FilterPanel.propTypes = {
 
 };
 
-FilterPanel.defaultPros = {
+FilterPanel.defaultProps = {
 
 };
 

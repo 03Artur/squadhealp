@@ -46,7 +46,7 @@ function UserItem(props) {
 
 UserItem.propTypes = {};
 
-UserItem.defaultPros = {};
+UserItem.defaultProps = {};
 
 
 const mapStateToProps = store => {

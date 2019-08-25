@@ -58,7 +58,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
 };
 
 const mapStateToProps = store => {
-    const {query: {types}} = store.contestCreation;
+    const {types} = store.contestCreationQuery;
     return {types};
 };
 

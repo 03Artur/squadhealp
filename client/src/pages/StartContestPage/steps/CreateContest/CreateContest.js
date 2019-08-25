@@ -4,7 +4,7 @@ import {submit} from 'redux-form';
 import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {connect} from 'react-redux';
 import {createContestActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
-import {FORM_NAMES, TASK_TYPE} from "../../../../constants";
+import {FORM_NAMES, NAME_TYPE, TASK_TYPE} from "../../../../constants";
 import {
     addParamToQueryActionCreator, nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
@@ -14,14 +14,15 @@ import styles from './CreateContest.module.scss';
 
 function CreateContest(props) {
 
-    const {contest, query: {types, contestId}} = props;
+    const {contest, types, contestId} = props;
 
     const submit = (values) => {
-        values.id = contestId;
-        if (contestId && _.isEqual(values, contest)) {
-            props.nextStepAction();
+        console.log('values: ', values);
+        if (contestId && _.isEqual(values, _.pick(contest, Object.keys(values)))) {
+            console.log("values & contest are equal");
+            return;
         } else {
-            props.createContestAction(types.includes(TASK_TYPE.NAME), values);
+            props.createContestAction(!types.includes(TASK_TYPE.NAME), values);
         }
     };
 
@@ -29,7 +30,8 @@ function CreateContest(props) {
         <React.Fragment>
             <div className={styles.formOuter}>
                 <div className={styles.formContainer}>
-                    <ContestForm initialValues={contest} onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
+                    <ContestForm initialValues={contest ? contest : {type: NAME_TYPE.COMPANY}}
+                                 onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
                 </div>
             </div>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
@@ -38,9 +40,11 @@ function CreateContest(props) {
 }
 
 const mapStateToProps = state => {
-    const {query, contest} = state.contestCreation;
+    const {contest} = state.contestCreation;
+
+
     return {
-        query,
+        ...state.contestCreationQuery,
         contest,
     }
 };

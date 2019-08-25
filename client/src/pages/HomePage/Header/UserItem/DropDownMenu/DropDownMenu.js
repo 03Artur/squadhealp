@@ -64,7 +64,7 @@ DropDownMenu.propTypes = {
     })),
 };
 
-DropDownMenu.defaultPros = {
+DropDownMenu.defaultProps = {
     items: [],
 };
 

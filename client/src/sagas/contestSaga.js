@@ -1,7 +1,7 @@
 import {put, all, call} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
-import {CONTEST_CREATION_ALL_STEPS, CREATE_CONTEST_STEPS, TASK_TYPE} from "../constants";
+import {CONTEST_CREATION_ALL_STEPS, CREATE_CONTEST_STEPS, PATHS, TASK_TYPE} from "../constants";
 import {addParamToQueryActionCreator} from "../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import history from "../history";
 import queryString from 'query-string';
@@ -32,18 +32,29 @@ const getSteps = (types) => {
 };
 
 
-export function* createContestSaga({isNameExist, contest}) {
+export function* createContestSaga({isNameExist, contest: values}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
     try {
 
-        const {data: [_contest]} = yield contestController.createContest(isNameExist, contest);
+        const {data: {Tasks: tasks, ...contest}} = yield contestController.createContest(isNameExist, values);
 
-        yield put({
-            type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
-            contest: _contest,
-        });
-        yield put(addParamToQueryActionCreator({contestId: _contest.id,}))
+        yield all([
+            put({
+                type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
+                contest,
+                tasks,
+            }),
+            put({
+                type: ACTION_TYPES.CONTEST_CREATION_ADD_PARAM_TO_QUERY,
+                query: {
+                    contestId: contest.id,
+                },
+            })
+        ]);
+
+        yield put(addParamToQueryActionCreator({contestId: contest.id,}))
     } catch (e) {
+
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_ERROR,
             error: {
@@ -58,7 +69,7 @@ export function* getContestInDrawSaga() {
 
 
     try {
-        const query = queryString.stringify(history.location.search);
+        const query = queryString.parse(history.location.search);
         let stepIndex = 0;
 
         if (query.types) {
@@ -67,24 +78,29 @@ export function* getContestInDrawSaga() {
                 types: Array.isArray(query.types) ? query.types : [query.types],
             });
             stepIndex++;
-
             if (query.contestId) {
                 yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
                 const {data: {Tasks: tasks, ...contest}} = yield contestController.getContestById(query.contestId);
-                stepIndex += tasks.length;
-                yield all([
-                        put({
-                            type: ACTION_TYPES.CONTEST_CREATION_GET_CONTEST_IN_DRAW_RESPONSE,
-                            contest,
-                            tasks,
-                        }),
-                        put({
-                            type: ACTION_TYPES.SET_CURRENT_STEP_ACTION,
-                            index: stepIndex++,
-                        })
-                    ]
-                )
+                stepIndex += (tasks.length + 1);
+                yield  put({
+                    type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
+                    contest: contest,
+                    tasks: tasks,
+                });
             }
+            yield all([
+                put({
+                    type: ACTION_TYPES.SET_CURRENT_STEP_ACTION,
+                    index: stepIndex,
+                }),
+                put({
+                    type: ACTION_TYPES.CONTEST_CREATION_SET_QUERY,
+                    query: {
+                        types: query.types,
+                        contestId: query.contestId,
+                    }
+                })
+            ]);
         }
     } catch (e) {
         yield put({
@@ -143,13 +159,15 @@ export function* getAllUserContestsSaga({id}) {
 
 export function* addTaskStepsToContestCreationSteps({types}) {
 
+    const steps = yield getSteps(types);
+
     yield all([
         put({
             type: ACTION_TYPES.INSERT_TASK_STEPS_TO_STEPS_ACTION,
-            steps: yield getSteps(types),
+            steps,
         }),
         put({
-            types: ACTION_TYPES.CONTEST_CREATION_ADD_PARAM_TO_QUERY,
+            type: ACTION_TYPES.CONTEST_CREATION_ADD_PARAM_TO_QUERY,
             query: {
                 types,
             }
@@ -168,7 +186,6 @@ export function* contestPaymentSaga({contestId, creditCard}) {
             contest,
             tasks,
         });
-
     } catch (e) {
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_ERROR,

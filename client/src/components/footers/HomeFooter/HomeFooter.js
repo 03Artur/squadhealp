@@ -36,7 +36,7 @@ const HomeFooter = (props) => (
 
 HomeFooter.propTypes = {};
 
-HomeFooter.defaultPros = {};
+HomeFooter.defaultProps = {};
 
 
 export default HomeFooter;

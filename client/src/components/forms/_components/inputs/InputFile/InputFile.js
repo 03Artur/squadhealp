@@ -11,12 +11,11 @@ const InputFile = ({input: {value: omitValue, onChange, onBlur, ...inputProps,},
 
     const renderFileList = () => {
         if (omitValue) {
-
             const fileNameList = [];
-            for (let i = 0; i < 3 && i < omitValue.length; i++) {
+            for (let i = 0; i < 2 && i < omitValue.length; i++) {
                 fileNameList.push(<li key={omitValue[i].name}>{omitValue[i].name}</li>)
             }
-            if (omitValue.length > 3) {
+            if (omitValue.length > 2) {
                 fileNameList.push(<li key={"more"}>...</li>)
             }
             return fileNameList;

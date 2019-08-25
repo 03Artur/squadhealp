@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
-import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES,TASK_TYPES_COMBINATION} from "../../../../constants";
 
 import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
 
 
-let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
+let TaskTypeForm = ({handleSubmit, dispatch, ...props}) => {
 
     const onCardClick = async (value) => {
         await dispatch(change(FORM_NAMES.TASK_TYPE_FORM, 'types', value));
@@ -26,12 +26,12 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
         }));
 
     const renderSingleTypes = () => {
-        const combinations = typesCombinations.filter(item => item.length === 1);
+        const combinations = TASK_TYPES_COMBINATION.filter(item => item.length === 1);
         return renderTypeCards(combinations, styles.singleCard);
     };
 
     const renderGroupTypes = () => {
-        const combinations = typesCombinations.filter(item => item.length > 1);
+        const combinations = TASK_TYPES_COMBINATION.filter(item => item.length > 1);
         return renderTypeCards(combinations);
     };
 
@@ -66,14 +66,11 @@ let TaskTypeForm = ({typesCombinations, handleSubmit, dispatch, ...props}) => {
     )
 };
 
-const mapStateToProps = state => {
-    const {typesCombinations} = state.contestCreation;
-    return {typesCombinations};
-};
 
-export default connect(mapStateToProps)(reduxForm({
+
+export default reduxForm({
     form: FORM_NAMES.TASK_TYPE_FORM,
-})(TaskTypeForm));
+})(TaskTypeForm);
 
 
 

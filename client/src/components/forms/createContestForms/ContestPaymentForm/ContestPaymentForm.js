@@ -64,25 +64,45 @@ const ContestPaymentForm = (props) => {
 
     const {handleSubmit} = props;
 
+    const renderField = (name, title,normalize,maxLength) => {
+        return (
+            <label>
+                <div>
+                    {
+                        title
+                    }
+                </div>
+                <Field  normalize={normalize} maxLength ={maxLength} component={'input'}/>
+            </label>
+        )
+    };
+
+    const renderFields = () => {
+
+
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <label className={styles.label}>
-                Card number
+                <span>Card number</span>
                 <br/>
                 <Field normalize={normalizeCardNumber} pattern={/\d*/} name={'number'} component={'input'}
                        maxLength={'19'}
                        type='tel' placeholder={'Card Number'}/>
             </label>
-            <label htmlFor="">
-                * Expires
+            <label className={styles.label} htmlFor="">
+                <span>* Expires</span>
                 <br/>
                 <Field normalize={normalizeExpiry} pattern={/\d*/} name={'expiry'} component={'input'} maxLength={'7'}
                        type='tel' placeholder={'MM / YY'}/>
             </label>
-            <label htmlFor="">
-                * Security Code
-                <br/><Field onBlur = {props.onCvcBlur} onFocus ={props.onCvcFocus} normalize={normalizeCVC} pattern={/\d*/} name={'cvc'} component={'input'} maxLength={'3'}
-                            type='tel' placeholder={'CVC'}/>
+            <label className={styles.label} htmlFor="">
+                <span>* Security Code</span>
+                <br/>
+                <Field onBlur={props.onCvcBlur} onFocus={props.onCvcFocus} normalize={normalizeCVC} pattern={/\d*/}
+                       name={'cvc'} component={'input'} maxLength={'3'}
+                       type='tel' placeholder={'CVC'}/>
             </label>
         </form>
     )
@@ -93,7 +113,7 @@ ContestPaymentForm.propTypes = {
     onCvcFocus: PropTypes.func,
 };
 
-ContestPaymentForm.defaultPros = {
+ContestPaymentForm.defaultProps = {
     onCvcBlur: (e) => {
 
     },

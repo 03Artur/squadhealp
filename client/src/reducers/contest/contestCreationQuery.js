@@ -8,12 +8,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ACTION_TYPES.SELECT_TASK_TYPES_ACTION:{
-            return _.cloneDeep({
-                ...state,
-                types: action.types,
-            })
-        }
+
         case ACTION_TYPES.CONTEST_CREATION_SET_QUERY:{
             return action.query;
         }

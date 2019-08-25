@@ -59,7 +59,7 @@ LabelInput.propTypes = {
 
 };
 
-LabelInput.defaultPros = {};
+LabelInput.defaultProps = {};
 
 /*
 * React redux

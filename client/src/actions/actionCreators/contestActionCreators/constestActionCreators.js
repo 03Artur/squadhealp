@@ -7,10 +7,10 @@ export const getAllContestsActionCreator = () => {
     }
 };
 
-export const getContestInDrawActionCreator = (contestId) => {
+export const getContestInDrawActionCreator = () => {
     return {
         type: ACTION_TYPES.GET_CONTEST_IN_DRAW_ACTION,
-        contestId,
+
     }
 };
 
@@ -35,18 +35,6 @@ export const removeSelectedTypesActionCreator = () => {
     }
 };
 
-export const insertTaskStepsToStepsActionCreator = (types) => {
-    const mapSteps = new Map([
-        [TASK_TYPE.NAME, CREATE_CONTEST_STEPS.CREATE_NAME_TASK],
-        [TASK_TYPE.LOGO, CREATE_CONTEST_STEPS.CREATE_LOGO_TASK],
-        [TASK_TYPE.TAGLINE, CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK],
-    ]);
-    const tasksSteps = types.map(item => CONTEST_CREATION_ALL_STEPS.get(mapSteps.get(item)));
-    return {
-        type: ACTION_TYPES.INSERT_TASK_STEPS_TO_STEPS_ACTION,
-        tasksSteps: tasksSteps,
-    }
-};
 
 export const createContestActionCreator = (isNameExist, contest) => {
     return {

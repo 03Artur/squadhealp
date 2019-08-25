@@ -85,7 +85,7 @@ Step.propTypes = {
 
 };
 
-Step.defaultPros = {
+Step.defaultProps = {
     title: "title",
     isDone: false,
     isCurrent: true,

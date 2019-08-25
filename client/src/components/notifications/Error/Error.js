@@ -41,7 +41,7 @@ Error.propTypes = {
 
 };
 
-Error.defaultPros = {
+Error.defaultProps = {
     message: 'Error: something went wrong!',
     className: "",
     onClick: function () {

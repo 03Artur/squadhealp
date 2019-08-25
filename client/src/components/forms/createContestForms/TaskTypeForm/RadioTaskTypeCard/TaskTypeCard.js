@@ -74,7 +74,7 @@ TaskTypeCard.propTypes = {
     title: PropTypes.string,
 };
 
-TaskTypeCard.defaultPros = {
+TaskTypeCard.defaultProps = {
     onClick: function () {
 
     },

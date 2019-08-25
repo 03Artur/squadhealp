@@ -60,7 +60,7 @@ StartContestNav.defaultProps = {
     e.preventDefault()
 };
 
-StartContestNav.defaultPros = {
+StartContestNav.defaultProps = {
     onNextClick: defaultOnClick,
     onPrevClick: defaultOnClick,
 };*/

@@ -8,31 +8,39 @@ import CreateContest from './steps/CreateContest/CreateContest'
 import CreateTask from "./steps/CreateTask/CreateTask";
 import queryString from 'query-string';
 import {
-    getContestInDrawActionCreator, insertTaskStepsToStepsActionCreator,
+    getContestInDrawActionCreator,
 } from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import {nextContestCreationStepActionCreator} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import ContestPayment from "./steps/ContestPayment/ContestPayment";
 import styles from './StartContestPage.module.scss';
+import _ from 'lodash';
+import history from "../../history";
+
 
 let StartContestPage = (props) => {
 
-    const {query, steps, currentStepIndex, contest, tasks} = props;
-
-
-    useEffect(() => {
-
-
-    }, [props.error]);
+    const {query, steps, currentStepIndex, contest, tasks,history,} = props;
 
     useEffect(() => {
-        if (query.contestId && !contest) {
-            props.loadContestInDrawAction(query.contestId);
+
+        if(contest && contest.isPaid){
+            history.push(PATHS.AFFILIATE_DASHBOARD)
         }
-    }, [query.contestId]);
+
+    }, [contest]);
 
 
     useEffect(() => {
-            props.history.push(`${steps[currentStepIndex].path}?${queryString.stringify(query)}`);
+
+
+        if(query&&!currentStepIndex){
+                props.loadContestInDrawAction();
+        }
+
+    },[]);
+
+    useEffect(() => {
+        history.push(`${steps[currentStepIndex].path}?${queryString.stringify(query)}`);
     }, [currentStepIndex, query]);
 
 
@@ -49,13 +57,12 @@ let StartContestPage = (props) => {
 
 const mapStateToProps = store => ({
     ...store.contestCreation,
-    ...store.contestCreationQuery,
+    query: store.contestCreationQuery,
     ...store.contestCreationSteps,
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadContestInDrawAction: contestId => dispatch(getContestInDrawActionCreator(contestId)),
-    insertTaskStepsToStepsAction: types => dispatch(insertTaskStepsToStepsActionCreator(types)),
+    loadContestInDrawAction: () => dispatch(getContestInDrawActionCreator()),
     nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
 });
 

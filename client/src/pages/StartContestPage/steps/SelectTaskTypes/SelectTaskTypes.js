@@ -4,13 +4,12 @@ import TaskTypeForm from "../../../../components/forms/createContestForms/TaskTy
 import {
     addParamToQueryActionCreator, nextContestCreationStepActionCreator,
 } from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
+import ACTION_TYPES from "../../../../actions/actiontsTypes";
 
 const SelectTaskTypes = (props) => {
 
     const submit = (values) => {
-        props.addParamToQueryAction({
-                types: values.types,
-            });
+        props.selectTaskTypesAction(values.types);
     };
 
     return (
@@ -19,7 +18,7 @@ const SelectTaskTypes = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    addParamToQueryAction: query => dispatch(addParamToQueryActionCreator(query)),
+    selectTaskTypesAction: types => dispatch({type: ACTION_TYPES.SELECT_TASK_TYPES_ACTION, types}),
     nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
 });
 

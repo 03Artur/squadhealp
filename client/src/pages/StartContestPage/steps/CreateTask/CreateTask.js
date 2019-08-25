@@ -9,23 +9,38 @@ import {
     nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
 } from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
-
+import _ from 'lodash';
 
 function CreateTask(props) {
 
+    const {
+        steps,
+        currentStepIndex,
+        contestId,
+        tasks,
+    } = props;
+
+    const getTaskByType = (type) =>  tasks.find(taskItem => taskItem.type === type);
 
     const submit = (values) => {
-        const {files, ...task} = values;
-        const formData = new FormData();
-        console.group("Files")
-        console.log('Files: ',files);
-        console.groupEnd();
-        for(let file of files){
-            formData.append("files", file);
-        }
-        formData.append('task', JSON.stringify(task));
+            const {files, ...rest} = values;
+            const formData = new FormData();
+            if (files) {
+                for (let file of files) {
+                    formData.append("files", file);
+                }
+            } else {
+                const task = getTaskByType(values.type);
+                if (_.isEqual(values, _.pick(task, Object.keys(values)))) {
+                    console.log("task & values equal");
+                    return;
+                }
+            }
+            formData.append('task', JSON.stringify(rest));
 
-        props.createTaskAction(props.contestId, formData);
+            props.createTaskAction(props.contestId, formData);
+
+
     };
 
     const submitSuccess = () => {
@@ -34,17 +49,11 @@ function CreateTask(props) {
     };
 
     const getInitialValues = () => {
-        const {type} = props.steps[props.currentStepIndex].initialValues;
-        if (type) {
-            const task = props.tasks.find(item => item.type === type);
-            if (task){
-                console.log("taskForm initialValues: ",task);
-                return task;
-            }
-        }
-        console.log("taskForm initialValues: ",type);
 
-        return {type};
+        const task = getTaskByType(steps[currentStepIndex].initialValues.type);
+        const init= task ? _.omit(task, ['files']) : steps[currentStepIndex].initialValues;
+        console.log(init);
+        return init;
     };
 
     return (
@@ -57,7 +66,9 @@ function CreateTask(props) {
 
 const mapStateToProps = (state) => {
 
-    const {steps, currentStepIndex, query: {contestId}, tasks} = state.contestCreation;
+    const {tasks} = state.contestCreation;
+    const {steps, currentStepIndex,} = state.contestCreationSteps;
+    const {contestId} = state.contestCreationQuery;
     return {
         steps,
         currentStepIndex,

@@ -42,7 +42,7 @@ const ProgressInfo = ({steps, currentStepIndex, ...props}) => {
 
 
 const mapStateToProps = store => {
-    const {steps, currentStepIndex} = store.contestCreation;
+    const {steps, currentStepIndex} = store.contestCreationSteps;
     return {
         steps,
         currentStepIndex,
