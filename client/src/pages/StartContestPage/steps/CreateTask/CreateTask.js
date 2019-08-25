@@ -29,7 +29,7 @@ function CreateTask(props) {
     };
 
     const submitSuccess = () => {
-       /* props.nextStepAction();*/
+        props.nextStepAction();
         reset(FORM_NAMES.TASKS_FORM);
     };
 

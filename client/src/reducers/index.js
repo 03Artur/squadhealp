@@ -10,7 +10,7 @@ import homeUserNavReducer from './navigation/homeUserNavReducer';
 import homeNavReducer from './navigation/homeNavReducer';
 import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavReduce';
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
-
+import contestCreationSteps from "./contest/contestCreationSteps";
 
 const appReducer = combineReducers({
     authorizationReducer,
@@ -24,6 +24,7 @@ const appReducer = combineReducers({
     homeUserNav: homeUserNavReducer,
     homeNav:  homeNavReducer,
     affiliateDashboardMenu,
+    contestCreationSteps,
 /*
     siteNavigation: siteNavigationReducer,
 */

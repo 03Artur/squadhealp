@@ -6,9 +6,12 @@ export const upsertContest = async (req, res, next) => {
 
     try {
 
-        req.body.userId = req.accessTokenPayload.id;
-        const contest = (await Contests.upsert(req.body, {
+        req.body.userId = req.body.userId ? req.body.userId : req.accessTokenPayload.id;
+        const [contest] = (await Contests.upsert(req.body, {
             returning: true,
+            include: [{
+                model: Tasks,
+            }]
         }));
         if (!contest) {
             return next(new appError.BadRequestError())
@@ -36,16 +39,15 @@ export const updateContest = async (req, res, next) => {
 
 export const createTask = async (req, res, next) => {
     try {
+        const {contest} = req;
 
-        const contest = await Contests.findByPk(req.params.id);
-        if (!contest) {
-            return next(new appError.NotFoundError());
-        }
         const newTask = await contest.createTask(req.body);
+
         if (!newTask) {
             return next(new appError.BadRequestError());
         }
-        res.send(newTask);
+        await contest.reload();
+        res.send(contest);
     } catch (e) {
         next(e);
     }
@@ -60,34 +62,15 @@ export const payContestById = async (req, res, next) => {
     }
 };
 
-export const activateNextContestTask = async (req, res, next) => {
+export const paymentContestTask = async (req, res, next) => {
 
     try {
-
-        req.contest = await req.contest.update({isPaid: true}, {
-            transaction: req.transaction,
+        let {contest, transaction} = req;
+        contest = await contest.update({isPaid: true}, {
+            transaction: transaction,
         });
-
-        const result = await Tasks.update({isActive: true}, {
-            where: {
-                contestId: req.contest.id,
-                isActive: false,
-            },
-            limit: 1,
-            order: [["priority", "DESC"]],
-            transaction: req.transaction,
-
-        });
-
-
-        const contest = await req.contest.reload({
-            transaction: req.transaction
-        });
-
-        await req.transaction.commit();
-
+        await transaction.commit();
         res.send(contest);
-
     } catch (e) {
         next(e)
     }
@@ -117,9 +100,7 @@ export const getContestById = async (req, res, next) => {
             },
             include: [{
                 model: Tasks,
-
             }]
-
         });
 
         if (contest) {

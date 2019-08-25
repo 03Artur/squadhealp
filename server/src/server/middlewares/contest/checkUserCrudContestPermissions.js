@@ -1,26 +1,29 @@
-import {Contests} from '../../models';
+import {Contests, Tasks} from '../../models';
 import appError from '../../errors';
 import {ACTION} from '../../constants';
 
-export default async function checkUserCrudContestPermissions(req, res, next) {
+
+
+export default async (req, res, next) => {
     try {
 
-        let contest = null;
-        if (req.method === ACTION.POST) {
+        const contest = req.params.id ? await Contests.findByPk(parseInt(req.params.id), {
+            include: [{
+                model: Tasks,
+            }]
+        }) : req.body;
 
-            contest = req.body;
 
-        } else {
-            contest = await Contests.findByPk(parseInt(req.param.id));
-            if (!contest) {
-                return next(appError.NotFoundError())
-            }
+        if (!contest) {
+            return next(appError.NotFoundError())
         }
 
         if (Contests.checkPermission(req.method, req.accessTokenPayload, contest)) {
+
+            req.contest = contest;
             return next();
         } else {
-            return next(new appError.ForbiddenError());
+            return next(new appError.ForbiddenError("here"));
         }
 
 

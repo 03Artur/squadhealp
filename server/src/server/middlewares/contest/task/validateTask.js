@@ -4,6 +4,7 @@ import {createTaskSchema, updateTaskSchema} from '../../../utils/yupSchemas/cont
 export async function validateTaskOnCreate(req, res, next) {
     try {
         if (await createTaskSchema.isValid(req.body)) {
+
             return next();
         } else {
             return next(new BadRequestError());

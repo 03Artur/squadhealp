@@ -28,22 +28,16 @@ router.post('/contest',
     contestController.upsertContest
 );
 
-router.post('/task',
-    contestMW.checkUserCrudTaskPermissions,
-    contestMW.validateTaskOnCreate,
-    contestMW.addCostToTask,
-    contestMW.addPriorityToTask,
-    contestController.createTask
-);
+
 
 router.put('/contest/:id',
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnUpdate,
-    contestController.updateContest);
+    contestController.upsertContest);
 
 router.post('/contest/:id/task',
+    contestMW.checkUserCrudContestPermissions,
     upload.array('files', 8),
-
     (req, res, next) => {
         try {
 
@@ -55,8 +49,6 @@ router.post('/contest/:id/task',
             next(e);
         }
     },
-
-    contestMW.checkUserCrudContestPermissions,
     contestMW.validateTaskOnCreate,
     contestMW.addCostToTask,
     contestMW.addPriorityToTask,

@@ -21,6 +21,7 @@ module.exports =  class Rule {
 
     checkPermission(role, isOwner = false) {
         if (isOwner) {
+
             return this.canActOwner;
         } else {
             return this.canActRoles.includes(role);

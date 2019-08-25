@@ -41,7 +41,7 @@ const ENTRY_ACTION_RULES = new ActionRules(
 
 const CONTEST_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST, new Rule([ROLE.ADMIN, ROLE.BUYER])],
+        [ACTION.POST, new Rule([ROLE.ADMIN, ROLE.BUYER],true)],
         [ACTION.GET, new Rule([ROLE.ADMIN, ROLE.BUYER, ROLE.CREATIVE], true)],
         [ACTION.PUT, new Rule([ROLE.ADMIN,], true)],
         [ACTION.DELETE, new Rule([ROLE.ADMIN,], true)],

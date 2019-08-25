@@ -48,11 +48,6 @@ module.exports = {
                 allowNull: false,
 
             },
-            isActive: {
-                type: Sequelize.BOOLEAN,
-                defaultValue: false,
-                allowNull: false,
-            },
             files: {
                 type: Sequelize.ARRAY(Sequelize.STRING),
                 allowNull: true,

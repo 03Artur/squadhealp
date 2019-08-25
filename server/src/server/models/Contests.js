@@ -1,8 +1,7 @@
-import {CONTEST_ACTION_RULES} from "../constants";
 
 const Rule = require('../utils/permissions/classes/Rule');
 const ActionRules = require('../utils/permissions/classes/ActionRules');
-const {ROLE, ACTION} = require("../constants");
+const {ROLE, ACTION,CONTEST_ACTION_RULES} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
     const Contests = sequelize.define('Contests', {
@@ -79,7 +78,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
     Contests.checkPermission = (action, actor, contest) => {
-        return Contests.actionRules.checkPermission(action, actor.role, actor.id === contest.userId)
+        return Contests.actionRules.checkPermission(action, actor.role, actor.id == contest.userId)
     };
 
     Contests.prototype.checkPermission = (action, actor) => {

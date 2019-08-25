@@ -4,7 +4,7 @@ import * as contestController from '../controllers/contestController'
 import bankMW from '../middlewares/bank';
 import findTaskById from "../middlewares/contest/task/findTaskById";
 import findContestById from "../middlewares/contest/findContestById";
-import {activateNextContestTask} from "../controllers/contestController";
+import {paymentContestTask} from "../controllers/contestController";
 
 const router = express.Router();
 
@@ -16,11 +16,8 @@ router.post('/payment/contest/:id',
     bankMW.checkSolvency,
     bankMW.debitFromCard,
     bankMW.transferFundsToSite,
-    activateNextContestTask,
-    );
-
-
-
+    paymentContestTask,
+);
 
 
 export default router;
