@@ -2,12 +2,7 @@ import ACTION_TYPES from "../../actiontsTypes";
 
 
 
-export const selectTaskTypesActionCreator = types => {
-    return {
-        type: ACTION_TYPES.SELECT_TASK_TYPES_ACTION,
-        types: types,
-    }
-};
+
 
 
 export const nextContestCreationStepActionCreator = () => {
@@ -33,7 +28,7 @@ export const createContestRemoveQueryStringCreator = () => ({
 
 });
 
-export const contestCreationAddParamToQueryParamsObjCreator = (query) => ({
+export const addParamToQueryActionCreator = (query) => ({
     type: ACTION_TYPES.CONTEST_CREATION_ADD_PARAM_TO_QUERY,
     query,
 

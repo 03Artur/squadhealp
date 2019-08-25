@@ -75,7 +75,6 @@ export const NAME_TYPE = {
 
 export const CONTEST_CREATION_ALL_STEPS = new Map([
     [CREATE_CONTEST_STEPS.SELECT_TASK_TYPE, {
-        queryKey: 'types',
         order: 0,
         path: PATHS.SELECT_TASK_TYPE,
         title: 'Start a contest',
@@ -85,7 +84,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
     [CREATE_CONTEST_STEPS.CREATE_CONTEST, {
-        queryKey: 'contestId',
         order: 1,
         path: PATHS.CREATE_CONTEST,
 
@@ -98,7 +96,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
     [CREATE_CONTEST_STEPS.CREATE_NAME_TASK, {
-        queryKey: 'Name',
         order: 2,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
@@ -110,7 +107,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
     [CREATE_CONTEST_STEPS.CREATE_LOGO_TASK, {
-        queryKey: 'Logo',
         order: 3,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
@@ -122,7 +118,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
     [CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK, {
-        queryKey: 'Tagline',
         order: 4,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
@@ -134,7 +129,6 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
 
     }],
     [CREATE_CONTEST_STEPS.CONTEST_PAYMENT, {
-        queryKey: 'isPaid',
         order: 5,
         initialValues: {},
         path: PATHS.CONTEST_PAYMENT,

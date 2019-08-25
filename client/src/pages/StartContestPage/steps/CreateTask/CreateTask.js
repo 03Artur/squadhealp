@@ -37,9 +37,13 @@ function CreateTask(props) {
         const {type} = props.steps[props.currentStepIndex].initialValues;
         if (type) {
             const task = props.tasks.find(item => item.type === type);
-            if (task)
+            if (task){
+                console.log("taskForm initialValues: ",task);
                 return task;
+            }
         }
+        console.log("taskForm initialValues: ",type);
+
         return {type};
     };
 

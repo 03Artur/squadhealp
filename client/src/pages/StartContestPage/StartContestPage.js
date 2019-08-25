@@ -25,7 +25,7 @@ let StartContestPage = (props) => {
     }, [props.error]);
 
     useEffect(() => {
-        if (query.contestId && !props.contest) {
+        if (query.contestId && !contest) {
             props.loadContestInDrawAction(query.contestId);
         }
     }, [query.contestId]);
@@ -49,6 +49,8 @@ let StartContestPage = (props) => {
 
 const mapStateToProps = store => ({
     ...store.contestCreation,
+    ...store.contestCreationQuery,
+    ...store.contestCreationSteps,
 });
 
 const mapDispatchToProps = dispatch => ({

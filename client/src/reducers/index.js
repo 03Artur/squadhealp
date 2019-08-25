@@ -3,7 +3,7 @@ import {reducer as formReducer} from 'redux-form';
 import authorizationReducer from './authorization/authorizationReducer';
 import authorizationMode from './authorization/authorizationModeReducer';
 import adminUsers from './adminUsersReducer';
-import contestCreation from "./contest/contestCreationReducer";
+import contestCreation from "./contest/contestCreation";
 import getContests from './contest/getContestsReducer';
 import affiliateDashboardNav from './navigation/affiliateDashboardNavReducer';
 import homeUserNavReducer from './navigation/homeUserNavReducer';
@@ -11,12 +11,13 @@ import homeNavReducer from './navigation/homeNavReducer';
 import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavReduce';
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
 import contestCreationSteps from "./contest/contestCreationSteps";
+import contestCreationQuery from "./contest/contestCreationQuery";
+
 
 const appReducer = combineReducers({
     authorizationReducer,
     authorizationMode,
     adminUsers,
-    contestCreation,
     form: formReducer,
     getContests,
     affiliateDashboardUserNav,
@@ -24,10 +25,12 @@ const appReducer = combineReducers({
     homeUserNav: homeUserNavReducer,
     homeNav:  homeNavReducer,
     affiliateDashboardMenu,
+
+    contestCreation,
     contestCreationSteps,
-/*
-    siteNavigation: siteNavigationReducer,
-*/
+    contestCreationQuery,
+
+
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

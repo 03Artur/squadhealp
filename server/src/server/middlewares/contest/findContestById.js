@@ -13,6 +13,9 @@ export default async function findContestById(req, res, next) {
         });
 
         if(contest){
+            if(contest.isPaid){
+                return next(new appError.BadRequestError("contest has already been paid"))
+            }
             req.contest = contest;
 
             return next();

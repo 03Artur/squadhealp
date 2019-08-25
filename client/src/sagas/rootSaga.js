@@ -31,8 +31,9 @@ function* rootSaga() {
     * CONTEST SAGA MW
     *
     * */
-    yield takeLatest(ACTION_TYPES.CREATE_CONTEST_ACTION, contestSaga.createContestSaga);
     yield takeLatest(ACTION_TYPES.GET_ALL_USER_CONTESTS_ACTION, contestSaga.getAllUserContestsSaga);
+
+    yield takeLatest(ACTION_TYPES.CREATE_CONTEST_ACTION, contestSaga.createContestSaga);
     yield takeEvery(ACTION_TYPES.CREATE_TASK_ACTION, contestSaga.createTaskSaga);
     yield takeLatest(ACTION_TYPES.CONTEST_PAYMENT_ACTION, contestSaga.contestPaymentSaga);
     yield takeLatest(ACTION_TYPES.GET_CONTEST_IN_DRAW_ACTION, contestSaga.getContestInDrawSaga);

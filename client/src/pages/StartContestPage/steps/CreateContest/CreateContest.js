@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {createContestActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import {FORM_NAMES, TASK_TYPE} from "../../../../constants";
 import {
-    contestCreationAddParamToQueryParamsObjCreator, nextContestCreationStepActionCreator,
+    addParamToQueryActionCreator, nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
 } from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import _ from 'lodash';
@@ -46,11 +46,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addParamsToQueryAction: param => dispatch(contestCreationAddParamToQueryParamsObjCreator(param)),
+
     createContestAction: (isNameExist, contest) => dispatch(createContestActionCreator(isNameExist, contest)),
-    prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
     submitFormAction: () => dispatch(submit(FORM_NAMES.CONTEST_FORM)),
+    //NAV
     nextStepAction: () => dispatch(nextContestCreationStepActionCreator()),
+    prevStepAction: () => dispatch(prevCreateContestStepActionCreate()),
 
 });
 

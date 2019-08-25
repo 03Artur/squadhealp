@@ -16,10 +16,16 @@ const initialState = {
 
 export default function (state=initialState,action) {
     switch (action.type) {
+        case ACTION_TYPES.SET_CURRENT_STEP_ACTION:{
+            return _.cloneDeep({
+                ...state,
+                currentStepIndex: action.index,
+            })
+        }
         case ACTION_TYPES.INSERT_TASK_STEPS_TO_STEPS_ACTION:{
             return _.cloneDeep({
                 ...state,
-                steps: [...initialState.steps,...action.steps].sort((a,b) => a.order-b.order),
+                steps: action.steps,
 
             });
         }
@@ -42,7 +48,6 @@ export default function (state=initialState,action) {
                 return {
                     ...newState,
                     currentStepIndex: (currentStepIndex - 1),
-
                 };
             } else {
                 return newState;
