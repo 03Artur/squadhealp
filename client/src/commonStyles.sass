@@ -1,0 +1,55 @@
+$xs: 0
+$sm: 576px
+$md: 768px
+$lg: 992px
+$xl: 1200px
+
+
+
+
+$appGrey: #9ca8b7
+$appOrange: #f3875d
+$authorizationPageBackgroundColor: #3ea9f5
+$fontFamilyAlegreyaSC: 'Alegreya SC', serif
+$fontFamilyNotoSansSC: 'Noto Sans SC', sans-serif
+$fontFamilyIBMPlexSans: 'IBM Plex Sans', sans-serif
+$topRowHeight: 40px
+
+$mainHeaderHeight: 40px
+$dashBoardHeaderHeight: 70px
+$mainHeaderBorder: 1px solid rgb(235, 235, 235)
+$topRowBorder: 1px solid #ebebeb
+$mainHeaderColor: #718888
+$appGreenColor: #28d2d0
+$appCheckedColor: #8aca6b
+$test: orange
+//MIXIN
+
+=flex-container($justify-content: flex-start, $align-items: flex-start)
+  display: flex
+  justify-content: $justify-content
+  align-items: $align-items
+
+=container($maxWidth: 1200px,$padding: 0 15px)
+  display: inline-block
+  max-width: $maxWidth
+  width: 100%
+  box-sizing: border-box
+  padding: $padding
+
+=row()
+  display: flex
+
+=col($flexValue: 1)
+  flex: $flexValue
+
+
+=mediaBreakpointDown($maxWidth)
+  @media screen and (max-width: $maxWidth)
+    @content
+
+=mediaBreakpointUp($minWidth)
+  @media screen and (min-width: $minWidth)
+    @content
+
+

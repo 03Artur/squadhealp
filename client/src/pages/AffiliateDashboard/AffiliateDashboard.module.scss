@@ -1,0 +1,17 @@
+@import "../../commonStyles";
+
+.pageContainer{
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+
+  background-color: #FAFBFE ;
+}
+
+.contentContainer{
+  flex: 1;
+}
+
+
+

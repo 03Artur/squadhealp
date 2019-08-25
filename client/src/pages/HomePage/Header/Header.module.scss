@@ -1,0 +1,105 @@
+@import "../../../commonStyles";
+
+header {
+  min-width: 100vw;
+  text-align: center;
+}
+
+
+.topRow :checked ~ .containerMenu {
+
+  display: block;
+
+}
+
+.containerMenu {
+  display: none;
+
+  @include mediaBreakpointUp($md) {
+    display: none !important;
+  }
+}
+
+.burgerContainer {
+  cursor: pointer;
+  display: inline;
+  margin-left: 14px;
+  margin-right: 17px;
+}
+
+.logoContainer {
+  display: inline;
+  max-width: 100px;
+  @include mediaBreakpointUp($md) {
+    max-width: 100%
+  }
+}
+
+.topRow {
+  width: 100%;
+  height: $topRowHeight;
+  border-bottom: $topRowBorder;
+  box-sizing: border-box;
+  margin-bottom: 13px;
+  position: relative;
+}
+
+.container {
+  @include container(1170px);
+}
+
+.row {
+  display: flex;
+  height: $topRowHeight;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .contactPhoneContainer {
+
+    justify-content: center;
+    align-items: center;
+    display: none;
+    @include mediaBreakpointUp($md){
+      display: flex;
+    }
+    box-sizing: border-box;
+    padding: 0 15px;
+    height: $topRowHeight;
+    border-right: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
+  }
+}
+
+.leftCol {
+  justify-content: flex-end;
+
+}
+
+.nav {
+  width: 100%;
+  display: none;
+  text-align: center;
+
+  @include mediaBreakpointUp($md) {
+
+    display: inline-block;
+  }
+}
+
+@include mediaBreakpointUp($md) {
+
+  .logoContainer {
+    display: none;
+  }
+
+  .burgerContainer {
+    display: none;
+  }
+
+}
+

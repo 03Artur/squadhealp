@@ -1,0 +1,15 @@
+
+.active {
+
+  .arrow {
+    transition: transform 1s;
+    transform: rotate(90deg);
+  }
+}
+
+$arrowIconSize: 17px;
+
+.arrow {
+  width: $arrowIconSize;
+  height: $arrowIconSize;
+}

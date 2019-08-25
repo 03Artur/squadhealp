@@ -1,0 +1,50 @@
+@import "../../../../../commonStyles";
+
+
+
+
+.container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  width: 100%;
+  max-width: 320px;
+  background: white;
+  text-align: left;
+  box-sizing: border-box;
+  border: 1px solid #eee;
+  z-index: 100000000;
+  white-space: nowrap;
+}
+
+.menuItem {
+  box-sizing: border-box;
+  padding: 6px 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  color: rgb(113, 136, 136);
+  font-size: 13.5px;
+  text-transform: capitalize;
+  font-weight: 500;
+
+
+  &:hover {
+    background-color: #f5f5f5;
+    color: #262626;
+    cursor: pointer;
+  }
+
+}
+
+.itemTitle {
+  width: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+
+}
+

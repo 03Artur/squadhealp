@@ -1,0 +1,57 @@
+@import "../../../commonStyles";
+
+
+.nav {
+  .container {
+    @include container();
+    box-sizing: border-box;
+    border-color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    @media screen and(max-width: $md){
+      p{
+        display: none;
+      }
+
+    }
+    .row {
+      @include flex-container(space-between, center);
+
+    }
+    p{
+      text-align: left;
+    }
+    .col {
+      flex: 1;
+
+      &:first-child{
+        @media screen and(max-width: $md){
+            display: none;
+          }
+      }
+    }
+
+    .buttonContainer {
+      @include flex-container(flex-end,center);
+      @media screen and(max-width: $md){
+        justify-content: space-around;
+      }
+    }
+
+  }
+}
+
+.nextButton {
+  background-color: $appOrange !important;
+  margin: 0 0 0 15px;
+  @include mediaBreakpointUp($md){
+
+    margin: 0 15px;
+    padding: 15px 45px !important;
+    width: 275px;
+    font-size: 19px;
+    border-radius: 10px;
+    @include flex-container(center,center);
+  }
+}

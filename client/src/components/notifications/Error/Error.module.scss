@@ -1,0 +1,43 @@
+@import "../../../commonStyles";
+
+
+.errorContainer {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  @include flex-container(center, center);
+  flex-direction: column;
+
+
+
+  & * {
+    z-index: 9999;
+  }
+}
+
+.container{
+  @include flex-container(center, center);
+  flex-direction: column;
+  max-width: 720px;
+  min-width: 260px;
+  padding: 20px 20px 10px;
+  box-sizing: border-box;
+  border: 2px solid white;
+  color: white;
+  border-radius: 4px;
+  background: red;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+
+  .closeIcon {
+    margin-top: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+
+  }
+}

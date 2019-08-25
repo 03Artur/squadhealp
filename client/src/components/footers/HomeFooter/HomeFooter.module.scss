@@ -1,0 +1,81 @@
+@import '../../../commonStyles';
+
+
+.footer {
+  background-color: #232828;
+  padding: 40px 0 25px;
+  text-align: center;
+  margin-top: auto;
+  width: 100%;
+
+  .container {
+    @include container();
+
+    .row {
+      @include flex-container(flex-start, center);
+      padding: 0 15px;
+      @include mediaBreakpointDown($md) {
+        flex-direction: column;
+
+        .contacts {
+          margin-left: 0;
+        }
+      }
+
+      .logo {
+        @include mediaBreakpointDown($md) {
+
+          order: 2;
+        }
+      }
+
+      .copyRight {
+        justify-self: flex-start;
+        padding: 10px 30px;
+        margin-bottom: 5px;
+        margin-left: 33px;
+        color: #666868;
+        border-left: 1px solid #3d4141;
+
+        @include mediaBreakpointDown($md) {
+          margin: 0;
+          border: none;
+          order: 3;
+        }
+      }
+
+      .contacts {
+        @include flex-container(space-between, center);
+        margin-left: auto;
+        width: 170px;
+
+        @include mediaBreakpointDown($md) {
+          margin-left: 0;
+          order: 1;
+          margin-bottom: 30px;
+        }
+
+        .contactItem {
+          @include flex-container(flex-end, flex-end);
+          display: inline-block;
+          color: white;
+          border: 1px solid white;
+          border-radius: 50px;
+          height: 39px;
+          width: 38px;
+          position: relative;
+
+          & > * {
+            position: absolute;
+            right: 6px;
+            bottom: 8px;
+          }
+        }
+      }
+
+
+    }
+  }
+}
+
+

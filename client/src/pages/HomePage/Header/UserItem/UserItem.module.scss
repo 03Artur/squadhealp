@@ -1,0 +1,27 @@
+@import '../../../../commonStyles';
+
+* {
+  color: inherit;
+  font-family: inherit;
+}
+
+.iconContainer{
+  float: left;
+}
+
+.container{
+  display: inline-block;
+}
+
+.greeting {
+  font-family: Raleway, sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  color: rgb(113, 136, 136);
+  margin-left: 3px;
+  display: none;
+
+  @include mediaBreakpointUp($md){
+    display: inline;
+  }
+}

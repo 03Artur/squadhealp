@@ -1,0 +1,10 @@
+@import '../../../../commonStyles';
+
+
+.container{
+  @include container();
+}
+
+.checkoutContainer{
+    width: 100%;
+}
