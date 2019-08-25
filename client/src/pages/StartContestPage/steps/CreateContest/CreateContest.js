@@ -10,6 +10,7 @@ import {
     prevCreateContestStepActionCreate
 } from "../../../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import _ from 'lodash';
+import styles from './CreateContest.module.scss';
 
 function CreateContest(props) {
 
@@ -26,7 +27,11 @@ function CreateContest(props) {
 
     return (
         <React.Fragment>
-            <ContestForm initialValues={contest} onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
+            <div className={styles.formOuter}>
+                <div className={styles.formContainer}>
+                    <ContestForm initialValues={contest} onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
+                </div>
+            </div>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )

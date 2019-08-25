@@ -3,10 +3,10 @@
 .outer {
   text-align: center;
   font-family: Raleway, sans-serif;
-
+  padding: 35px 0;
   .container {
-    @include container();
-    padding: 35px;
+    @include container(1170px);
+    padding: 0 15px;
 
     .row {
       @include flex-container();
@@ -22,7 +22,6 @@
       flex: 1;
       display: flex;
       justify-content: flex-end;
-      padding: 0 15px;
 
     }
 

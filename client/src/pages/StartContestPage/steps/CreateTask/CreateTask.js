@@ -17,14 +17,19 @@ function CreateTask(props) {
     const submit = (values) => {
         const {files, ...task} = values;
         const formData = new FormData();
-        formData.append("files", files);
+        console.group("Files")
+        console.log('Files: ',files);
+        console.groupEnd();
+        for(let file of files){
+            formData.append("files", file);
+        }
         formData.append('task', JSON.stringify(task));
 
         props.createTaskAction(props.contestId, formData);
     };
 
     const submitSuccess = () => {
-        props.nextStepAction();
+       /* props.nextStepAction();*/
         reset(FORM_NAMES.TASKS_FORM);
     };
 

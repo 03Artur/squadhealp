@@ -27,6 +27,7 @@ export const CREATE_CONTEST_STEPS = {
 const _PATHS = {
     HOME: '/',
     LOGIN: '/login',
+    LOGOUT: '/logout',
     SIGN_UP: '/signup',
     AUTHORIZATION: '/authorization',
     ADMIN: '/admin',

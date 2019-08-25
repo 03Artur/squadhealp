@@ -21,7 +21,9 @@ let ContestForm = ({handleSubmit, ...props}) => {
                     <Field validate={[notEmptyStringValidation]} name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
                            label='Name of the company / business?'
                            component={LabelInput} type="text"/>
-                    <Field validate={[notEmptyStringValidation]} name="type" options={Object.values(NAME_TYPE)} label={"Type of business"} component={Select}
+                    <Field validate={[notEmptyStringValidation]} name="type"
+                           options={Object.values(NAME_TYPE)} label={"Type of business"}
+                           component={Select}
                            type="text"/>
                 </Fragment>
             )
@@ -44,8 +46,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
     };
 
     return (
-        <div className={styles.formContainer}>
-            <form onSubmit={handleSubmit} className={styles.container} encType={"multipart/form-data"}>
+            <form  className={styles.fieldContainer} onSubmit={handleSubmit} encType={"multipart/form-data"}>
                 {
                     renderNamesFields()
                 }
@@ -53,7 +54,6 @@ let ContestForm = ({handleSubmit, ...props}) => {
                     renderFields()
                 }
             </form>
-        </div>
     )
 };
 

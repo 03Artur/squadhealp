@@ -41,7 +41,7 @@ const TaskForm = (props) => {
 
     return (
         <div className={styles.formContainer}>
-            <form className={styles.container} onSubmit={handleSubmit} enctype="multipart/form-data">
+            <form className={styles.container} onSubmit={handleSubmit} encType="multipart/form-data">
                 <Field name="title" label={`Title of your ${props.initialValues.type} contest`}
                        placeholder="e.g. Need for Social Networking website"
                        component={LabelInput}/>

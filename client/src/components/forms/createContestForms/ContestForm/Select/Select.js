@@ -47,7 +47,7 @@ const Select = ({options, input, meta, label, ...props}) => {
                 renderTip()
             }
             <select placeholder={'test'} {...input} className={styles.input}>
-                <option/>
+                <option value={''} disabled selected>Select your business type</option>
                 {
                     renderOptions()
                 }

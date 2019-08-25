@@ -1,5 +1,5 @@
 .idea/
 ./client/node_modules
 ./server/node_modules
-./server/public/taskFiles/*
+./server/public/taskFiles/**
 

@@ -30,7 +30,6 @@ const ProgressInfo = ({steps, currentStepIndex, ...props}) => {
                             renderInfo()
                         }
                     </div>
-
                     <div className={[styles.col, styles.progressBarContainer].join(' ')}>
                         <ProgressBar steps = {steps} currentStepIndex = {currentStepIndex}/>
                     </div>

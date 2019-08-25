@@ -3,6 +3,7 @@ import {PATHS, ROLE, TASK_TYPE} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 import queryString from 'query-string';
 import _ from 'lodash';
+import {mdiAccountCircle,mdiDatabaseCheck,mdiAccountEdit,mdiFormatListBulleted,mdiEmail,mdiLogout} from '@mdi/js';
 
 const initialState = [];
 

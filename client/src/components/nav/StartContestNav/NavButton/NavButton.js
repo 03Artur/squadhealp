@@ -43,9 +43,11 @@ const NavButton = (props) => {
     const classNames = getClassName();
     return (
         <div onClick={checkClick} className={classNames}>
+            <span>
             {
                 props.text
             }
+            </span>
         </div>
     )
 };
