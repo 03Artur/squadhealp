@@ -10,17 +10,15 @@ export default function Logo(props) {
     const settings = props.isColor ?
         {
             logoSrc: `${imagesURL}/logo/logoColor.jpg`,
-            className: styles.colorLogo,
         }
         :
         {
             logoSrc: `${imagesURL}/logo/logo.png`,
-            className: '',
         };
 
     return (
-        <Link className={props.className} style={{display: 'inline-block'}} to='/'>
-            <img className={settings.className} src={settings.logoSrc} style={{maxWidth: '100%'}} alt="Logo"/>
+        <Link className={props.className} style={{display: 'inline-block', maxWidth:'100%',}} to='/'>
+            <img src={settings.logoSrc} style={{maxWidth: '100%'}} alt="Logo"/>
         </Link>
     )
 };

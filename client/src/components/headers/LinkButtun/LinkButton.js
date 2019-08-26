@@ -12,7 +12,7 @@ function LinkButton({to, text, ...props}) {
 
     return (
         <Link  to={to}>
-            <div className={props.className}>
+            <div className={ [styles.content, props.className].join(' ')}>
             {
                 props.children
             }
@@ -29,7 +29,7 @@ LinkButton.propTypes = {
 LinkButton.defaultProps = {
     to: PATHS.HOME,
     children: 'Home',
-    className: styles.content
+    className: ''
 };
 
 export default LinkButton;

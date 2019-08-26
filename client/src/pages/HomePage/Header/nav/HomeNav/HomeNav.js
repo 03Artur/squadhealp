@@ -14,7 +14,9 @@ function HomeNav(props) {
                 <div className={styles.logoContainer}>
                     <Logo className={styles.logo}/>
                 </div>
-                <HomeNavMenu/>
+                <div className={styles.menuContainer}>
+                    <HomeNavMenu/>
+                </div>
                 <div className={styles.buttonContainer}>
                     <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
                 </div>

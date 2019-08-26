@@ -20,6 +20,8 @@ $grid-breakpoints: (
 
   .logo {
     margin-right: auto;
+    max-width: 165px;
+    width: 100%;
   }
 }
 
@@ -28,6 +30,8 @@ $grid-breakpoints: (
 }
 
 .logoContainer {
+  display: flex;
+  justify-content: flex-start;
   flex: 2;
   @include mediaBreakpointUp($sm) {
     flex: 2;
@@ -40,7 +44,8 @@ $grid-breakpoints: (
 
 .buttonContainer {
   flex: 3;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 
   @include mediaBreakpointUp($sm) {
     flex: 2;
@@ -50,38 +55,52 @@ $grid-breakpoints: (
     flex: 2;
   }
 }
+.menuContainer{
+  display: flex;
+  justify-content: flex-end;
+
+  flex: 7;
+
+  @include mediaBreakpointUp($sm) {
+    flex: 8;
+  }
+
+  @include mediaBreakpointUp($md) {
+    flex: 8;
+  }
 
 
-.linkButton {
+}
+
+div.linkButton {
   word-break: keep-all;
-  border: 2px solid $appGreenColor ;
+  border: 2px solid $appGreenColor;
   color: $appGreenColor;
   font-size: 14px;
-  font-weight: 400 ;
+  padding: 14px 16px ;
+  font-weight: 400;
   text-transform: capitalize;
   text-decoration: none;
   min-width: 110px;
   box-sizing: border-box;
-  padding: 10px 15px;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include mediaBreakpointUp($md){
+  }
 
   &:hover {
     background-color: $appGreenColor;
     color: white;
   }
 
-  @include mediaBreakpointUp($sm) {
 
-  }
-
-  @include mediaBreakpointUp($md) {
-
-  }
   @include mediaBreakpointUp($lg) {
     text-transform: uppercase;
+    padding: 14px 18px ;
+
   }
 }
 
