@@ -4,13 +4,31 @@
   margin-top: 15px;
   width: 100%;
   position: relative;
+  font-family: 'Raleway', sans-serif;
+
 }
+
+.errorTipContainer{
+  font-family: inherit;
+  position: absolute;
+  top: calc(100% + 15px);
+
+  background-color: white;
+  border: 1px solid $errorColor;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  text-align: left;
+  word-break: break-word;
+  color: #3d4141;
+  border-radius: 6px;
+
+}
+
+
   .tip {
-    @media screen {
-
-    }
-
-    display: none;
+    display: block;
+    opacity: 0;
     border-radius: 6px;
     $backgroundColor: #f8f8f8;
     position: absolute;
@@ -50,9 +68,13 @@
       top: calc(50% - 11px);
     }
   }
-
+  .tipVisible{
+    transition: all 0.4s;
+    opacity: 1;
+  }
 
   .input {
+    display: inline-block;
     font-size: 16px;
     font-weight: 400;
     height: 48px;
@@ -75,7 +97,11 @@
 
 
 .label {
-  float: left;
+  position: relative;
+  box-sizing: border-box;
+}
+.title{
+  display: inline-block;
   font-size: 19px;
   color: #585859;
   font-weight: 700;

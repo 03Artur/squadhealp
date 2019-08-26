@@ -18,7 +18,6 @@ async function checkRefreshTokensLimit(req, res, next) {
         if (count >= DEVICES_COUNT) {
             const numbersOfDestroyedRows = await RefreshTokens.destroy(options)
             if(numbersOfDestroyedRows === count){
-                console.log('Very good =)')
             }
         }
         return next();

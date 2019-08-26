@@ -4,7 +4,7 @@ import {submit, reset} from 'redux-form';
 import TasksForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
-import {FORM_NAMES,} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPE,} from "../../../../constants";
 import {
     nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
@@ -18,11 +18,11 @@ function CreateTask(props) {
         currentStepIndex,
         contestId,
         tasks,
+        createTaskAction
     } = props;
 
-    const getTaskByType = (type) =>  tasks.find(taskItem => taskItem.type === type);
 
-    const submit = (values) => {
+    const submit = (values,dis,formProps) => {
             const {files, ...rest} = values;
             const formData = new FormData();
             if (files) {
@@ -30,35 +30,28 @@ function CreateTask(props) {
                     formData.append("files", file);
                 }
             } else {
-                const task = getTaskByType(values.type);
-                if (_.isEqual(values, _.pick(task, Object.keys(values)))) {
-                    console.log("task & values equal");
+
+                if (_.isEqual(values, formProps.initialValues)) {
                     return;
                 }
             }
             formData.append('task', JSON.stringify(rest));
-
-            props.createTaskAction(props.contestId, formData);
-
-
+            createTaskAction(contestId, formData);
     };
 
     const submitSuccess = () => {
-        props.nextStepAction();
         reset(FORM_NAMES.TASKS_FORM);
+        props.nextStepAction();
     };
 
     const getInitialValues = () => {
-
-        const task = getTaskByType(steps[currentStepIndex].initialValues.type);
-        const init= task ? _.omit(task, ['files']) : steps[currentStepIndex].initialValues;
-        console.log(init);
-        return init;
+        const task = tasks.find(taskItem => taskItem.type === steps[currentStepIndex].initialValues.type);
+        return  task ? _.pick(task, ['title', 'type', 'style']) : steps[currentStepIndex].initialValues;
     };
 
     return (
         <React.Fragment>
-            <TasksForm onSubmitSuccess={submitSuccess} initialValues={getInitialValues()} onSubmit={submit}/>
+            <TasksForm initialValues={getInitialValues()} onSubmitSuccess={submitSuccess} onSubmit={submit}/>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )

@@ -17,9 +17,7 @@ function CreateContest(props) {
     const {contest, types, contestId} = props;
 
     const submit = (values) => {
-        console.log('values: ', values);
         if (contestId && _.isEqual(values, _.pick(contest, Object.keys(values)))) {
-            console.log("values & contest are equal");
             return;
         } else {
             props.createContestAction(!types.includes(TASK_TYPE.NAME), values);

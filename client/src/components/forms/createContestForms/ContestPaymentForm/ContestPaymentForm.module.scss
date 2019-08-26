@@ -1,3 +1,47 @@
-.label{
+@import "../../../../commonStyles";
+
+.label {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 15px;
+  margin-bottom: 25px;
   display: block;
+  text-align: left;
+
+  .inputTitle {
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: rgb(51, 51, 51);
+  }
+}
+
+.row{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @include mediaBreakpointUp($sm){
+    flex-direction: row;
+  }
+}
+.col{
+  flex: 1;
+
+
+
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  color: rgb(85, 85, 85);
+  font-size: 14px;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.inputError {
+  border-color: $errorColor;
 }

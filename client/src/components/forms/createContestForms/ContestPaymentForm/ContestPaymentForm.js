@@ -20,6 +20,7 @@ import {reduxForm, Field} from 'redux-form';
 import styles from './ContestPaymentForm.module.scss';
 import {FORM_NAMES} from "../../../../constants";
 import {contestPaymentActionCreator} from "../../../../actions/payment/contestPaymentActionCreator";
+import {creditCardCVC, creditCardExpiry, creditCardNumber, isRequired} from "../../../../utils/reduxForm/validateValue";
 
 /*
 * UTILS
@@ -60,22 +61,23 @@ const normalizeCVC = value => {
     return value.replace(/[^\d]/g, '');
 };
 
+
+const Input = ({input, title, meta, ...props}) => {
+
+    return (
+        <label className={styles.label}>
+            <div className={styles.inputTitle}>{title}</div>
+            <input  {...props} {...input}
+                    className={[styles.input, meta.error && meta.touched ? styles.inputError : undefined].join(' ')}/>
+        </label>
+    )
+};
+
+
 const ContestPaymentForm = (props) => {
 
     const {handleSubmit} = props;
 
-    const renderField = (name, title,normalize,maxLength) => {
-        return (
-            <label>
-                <div>
-                    {
-                        title
-                    }
-                </div>
-                <Field  normalize={normalize} maxLength ={maxLength} component={'input'}/>
-            </label>
-        )
-    };
 
     const renderFields = () => {
 
@@ -84,26 +86,28 @@ const ContestPaymentForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label className={styles.label}>
-                <span>Card number</span>
-                <br/>
-                <Field normalize={normalizeCardNumber} pattern={/\d*/} name={'number'} component={'input'}
-                       maxLength={'19'}
-                       type='tel' placeholder={'Card Number'}/>
-            </label>
-            <label className={styles.label} htmlFor="">
-                <span>* Expires</span>
-                <br/>
-                <Field normalize={normalizeExpiry} pattern={/\d*/} name={'expiry'} component={'input'} maxLength={'7'}
-                       type='tel' placeholder={'MM / YY'}/>
-            </label>
-            <label className={styles.label} htmlFor="">
-                <span>* Security Code</span>
-                <br/>
-                <Field onBlur={props.onCvcBlur} onFocus={props.onCvcFocus} normalize={normalizeCVC} pattern={/\d*/}
-                       name={'cvc'} component={'input'} maxLength={'3'}
-                       type='tel' placeholder={'CVC'}/>
-            </label>
+            <Field title={"Card Number"} normalize={normalizeCardNumber} pattern={/\d*/} name={'number'}
+                   component={Input}
+                   maxLength={'19'}
+                   validate={[isRequired, creditCardNumber]}
+                   type='tel' placeholder={'Card Number'}/>
+            <div className={styles.row}>
+                <div className={styles.col}>
+                    <Field title={"Expires"} normalize={normalizeExpiry} pattern={/\d*!/} name={'expiry'}
+                           component={Input}
+                           maxLength={'7'}
+                           validate={[isRequired, creditCardExpiry]}
+                           type='tel' placeholder={'MM / YY'}/>
+                </div>
+                <div className={styles.col}>
+
+                    <Field title={"CVC"} onBlur={props.onCvcBlur} onFocus={props.onCvcFocus} normalize={normalizeCVC}
+                           validate={[isRequired, creditCardCVC]}
+                           pattern={/\d*!/}
+                           name={'cvc'} component={Input} maxLength={'3'}
+                           type='tel' placeholder={'CVC'}/>
+                </div>
+            </div>
         </form>
     )
 };

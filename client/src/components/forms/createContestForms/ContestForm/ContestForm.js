@@ -10,18 +10,27 @@ import Select from "./Select/Select";
 import {NAME_TYPE, TASK_TYPE} from "../../../../constants";
 
 import {FORM_NAMES} from "../../../../constants";
-import {notEmptyStringValidation} from "../../../../utils/reduxForm/validateValue";
+import {
+    isRequired,
+    maxLength,
+    notEmpty, notEmptySpaceOnly,
+    notEmptyStringValidation,
+    oneOf
+} from "../../../../utils/reduxForm/validateValue";
 
 let ContestForm = ({handleSubmit, ...props}) => {
+
+
 
     const renderNamesFields = () => {
         if (props.types && !props.types.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    <Field validate={[notEmptyStringValidation]} name="name" placeholder={"e.g. Marketing Platform for Small Businesses"}
+                    <Field validate={[isRequired,notEmpty,]} name="name"
+                           placeholder={"e.g. Marketing Platform for Small Businesses"}
                            label='Name of the company / business?'
                            component={LabelInput} type="text"/>
-                    <Field validate={[notEmptyStringValidation]} name="type"
+                    <Field validate={[isRequired,notEmpty, ]} name="type"
                            options={Object.values(NAME_TYPE)} label={"Type of business"}
                            component={Select}
                            type="text"/>
@@ -33,27 +42,31 @@ let ContestForm = ({handleSubmit, ...props}) => {
     const renderFields = () => {
         return (
             <Fragment>
-                <Field validate={[notEmptyStringValidation]} name="typeOfIndustry" placeholder={"Input Your Industry"} label='Type of Industry'
+                <Field validate={[isRequired,notEmpty, ]} name="typeOfIndustry"
+                       placeholder={"Input Your Industry"}
+                       label='Type of Industry'
                        component={LabelInput} type="text"/>
-                <Field validate={[notEmptyStringValidation]} name="targetCustomers" placeholder={"i.e. designers, developers"}
+                <Field validate={[isRequired,notEmpty,]} name="targetCustomers"
+                       placeholder={"i.e. designers, developers"}
                        label='Who are your target customers?'
                        component={LabelInput} type="text"/>
-                <Field validate={[notEmptyStringValidation]} name="description" placeholder={"e.g. Smith & Forest"}
+                <Field validate={[isRequired,notEmpty,]} name="description"
+                       placeholder={"e.g. Smith & Forest"}
                        label='What does your company or business do?'
-                       component={LabelInput} type="text"/>
+                       component={LabelInput} type="textarea"/>
             </Fragment>
         )
     };
 
     return (
-            <form  className={styles.fieldContainer} onSubmit={handleSubmit} encType={"multipart/form-data"}>
-                {
-                    renderNamesFields()
-                }
-                {
-                    renderFields()
-                }
-            </form>
+        <form className={styles.fieldContainer} onSubmit={handleSubmit} encType={"multipart/form-data"}>
+            {
+                renderNamesFields()
+            }
+            {
+                renderFields()
+            }
+        </form>
     )
 };
 

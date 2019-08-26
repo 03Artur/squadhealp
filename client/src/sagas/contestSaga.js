@@ -71,9 +71,7 @@ export function* getContestInDrawSaga() {
     try {
         const query = queryString.parse(history.location.search);
         let stepIndex = 0;
-
         if (query.types) {
-
             yield call(addTaskStepsToContestCreationSteps, {
                 types: Array.isArray(query.types) ? query.types : [query.types],
             });

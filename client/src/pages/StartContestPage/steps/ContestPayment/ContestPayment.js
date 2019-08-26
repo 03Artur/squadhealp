@@ -1,22 +1,12 @@
-/*
-* React
-* */
+
 import React, {Component, Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
-/*
-* Redux & friends
-* */
+
 import {connect} from 'react-redux';
 import {submit, formValueSelector} from 'redux-form';
-/*
-* Components
-* */
+import _ from 'lodash';
 
-
-/*
-* styles
-* */
 import styles from './ContestPayment.module.scss';
 import ContestPaymentForm from "../../../../components/forms/createContestForms/ContestPaymentForm/ContestPaymentForm";
 import CreditCard from "../../../../components/CreditCard/CreditCard";
@@ -35,21 +25,67 @@ import {FORM_NAMES} from "../../../../constants";
 
 const ContestPayment = (props) => {
 
+    const [flipCard, setFlipCard] = useState(false);
+
+    const {tasks} = props;
+
     const submit = (values) => {
-        props.contestPaymentAction(props.contestId, values);
+        const creditCard = _.clone(values);
+        creditCard.number = creditCard.number.replace(/ /g,'');
+        creditCard.expiry = creditCard.expiry.replace(/ /g,'');
+        console.log(creditCard);
+        props.contestPaymentAction(props.contestId, creditCard);
 
     };
-    const [flipCard, setFlipCard] = useState(false);
+
+    const renderOrderSummaryItem = () => {
+        return (
+            tasks.map(item => (
+                <li key={item.id} className={styles.billItem}>
+                    <span>{`${item.type} contest: `}</span>
+                    <span className={styles.price}>{item.cost}</span>
+                </li>
+            ))
+        )
+    };
+
+    const renderOrderSummary = () => {
+        return (
+            <div className={styles.billContainer}>
+                <h2>Order summary</h2>
+                <ul className={styles.billList}>
+                    {
+                        renderOrderSummaryItem()
+                    }
+                </ul>
+                <div className={styles.totalContainer}>
+                    <h3>Total: </h3>
+                    <span className={styles.price}>{tasks.reduce((total, item) => (total + item.cost), 0)}</span>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className={styles.container}>
-            <h3>Checkout</h3>
             <div className={styles.checkoutContainer}>
-                <CreditCard flip={flipCard} {...props.cardValues}/>
-                <ContestPaymentForm onCvcBlur={() => setFlipCard(false)} onCvcFocus={() => setFlipCard(true)}  onSubmitSuccess={() => {
-                }} onSubmit={submit}/>
+                <div className={styles.row}>
+                    <div className={styles.col}>
+                        <CreditCard flip={flipCard} {...props.cardValues}/>
+                        <div className={styles.formContainer}>
+                        <ContestPaymentForm onCvcBlur={() => setFlipCard(false)} onCvcFocus={() => setFlipCard(true)}
+                                            onSubmitSuccess={() => {
+                                            }} onSubmit={submit}/>
+                        </div>
+                    </div>
+                    {
+                        renderOrderSummary()
+                    }
+                </div>
+
             </div>
-            <StartContestNav nextButtonText={"Pay Now"} onPrevClick={props.prevStepAction} onNextClick={props.submitContestPaymentFormAction}/>
+            <StartContestNav nextButtonText={"Pay Now"} onPrevClick={props.prevStepAction}
+                             onNextClick={props.submitContestPaymentFormAction}/>
         </div>
     )
 };
@@ -61,11 +97,13 @@ ContestPayment.defaultProps = {};
 
 const mapStateToProps = store => {
     const {contestId} = store.contestCreationQuery;
+    const {tasks} = store.contestCreation;
     const selector = formValueSelector(FORM_NAMES.PAYMENT_FORM);
 
     const cardValues = selector(store, 'number', 'cvc', 'expiry');
 
     return {
+        tasks,
         contestId,
         cardValues,
     };

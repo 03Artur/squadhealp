@@ -12,18 +12,15 @@ import {
 } from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import {nextContestCreationStepActionCreator} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import ContestPayment from "./steps/ContestPayment/ContestPayment";
-import styles from './StartContestPage.module.scss';
-import _ from 'lodash';
-import history from "../../history";
 
 
 let StartContestPage = (props) => {
 
-    const {query, steps, currentStepIndex, contest, tasks,history,} = props;
+    const {query, steps, currentStepIndex, contest, tasks, history,} = props;
 
     useEffect(() => {
 
-        if(contest && contest.isPaid){
+        if (contest && contest.isPaid) {
             history.push(PATHS.AFFILIATE_DASHBOARD)
         }
 
@@ -32,12 +29,11 @@ let StartContestPage = (props) => {
 
     useEffect(() => {
 
-
-        if(query&&!currentStepIndex){
-                props.loadContestInDrawAction();
+        if (query) {
+            props.loadContestInDrawAction();
         }
 
-    },[]);
+    }, []);
 
     useEffect(() => {
         history.push(`${steps[currentStepIndex].path}?${queryString.stringify(query)}`);

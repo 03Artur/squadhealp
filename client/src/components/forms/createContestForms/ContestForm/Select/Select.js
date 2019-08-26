@@ -40,7 +40,7 @@ const Select = ({options, input, meta, label, ...props}) => {
 
     return (
         <div className={styles.container}>
-            <label className={[styles.label].join(' ')}>
+            <label className={[styles.title].join(' ')}>
                 {label}
             </label>
             {

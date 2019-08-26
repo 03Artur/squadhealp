@@ -24,15 +24,25 @@ import styles from './LabelInput.module.scss';
 * */
 
 
-const LabelInput = ({input,meta,placeholder, ...props}) => {
+const LabelInput = ({input, meta, placeholder, tip, ...props}) => {
 
     const renderTip = () => {
-        if(meta.active){
+        return (
+            <div className={[styles.tip, meta.active ? styles.tipVisible : undefined].join(' ')}>
+                <h3>{tip.title}</h3>
+                <div className={styles.tipText}>{tip.text}</div>
+                <div className={styles.arrow}/>
+            </div>
+        );
+    };
+
+    const renderErrorTip = () => {
+        if (meta.touched && meta.error) {
             return (
-                <div className={styles.tip}>
-                    <h3>Tip Title</h3>
-                    <div className={styles.tipText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-                    <div className={styles.arrow}/>
+                <div className={styles.errorTipContainer}>
+                    {
+                        meta.error
+                    }
                 </div>
             );
         }
@@ -43,12 +53,19 @@ const LabelInput = ({input,meta,placeholder, ...props}) => {
             {
                 renderTip()
             }
-            <label className={styles.label} >{
-                props.label
-            }
 
+            <label className={styles.label}>
+                <span className={styles.title}>
+                {
+                    props.label
+                }
+                </span>
+                <br/>
+                <input placeholder={placeholder} {...input} className={styles.input}/>
+                {
+                    renderErrorTip()
+                }
             </label>
-            <input placeholder={placeholder} {...input} className={styles.input}/>
         </div>
     )
 };
@@ -56,10 +73,18 @@ const LabelInput = ({input,meta,placeholder, ...props}) => {
 LabelInput.propTypes = {
     label: PropTypes.string,
     placeholder: PropTypes.string,
-
+    tip: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+    })
 };
 
-LabelInput.defaultProps = {};
+LabelInput.defaultProps = {
+    tip: {
+        title: 'Tip Title',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    }
+};
 
 /*
 * React redux

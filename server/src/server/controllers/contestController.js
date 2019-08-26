@@ -40,8 +40,8 @@ export const updateContest = async (req, res, next) => {
 export const createTask = async (req, res, next) => {
     try {
         const {contest} = req;
-
-        const newTask = await contest.createTask(req.body);
+        req.body.contestId = contest.id;
+        const newTask = await Tasks.upsert(req.body);
 
         if (!newTask) {
             return next(new appError.BadRequestError());
