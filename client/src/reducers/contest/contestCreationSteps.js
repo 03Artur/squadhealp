@@ -44,7 +44,7 @@ export default function (state=initialState,action) {
         case ACTION_TYPES.PREV_CREATE_CONTEST_STEP_ACTION: {
             const newState = _.cloneDeep(state);
             let {currentStepIndex,} = newState;
-            if (currentStepIndex > 1) {
+            if (currentStepIndex > 0) {
                 return {
                     ...newState,
                     currentStepIndex: (currentStepIndex - 1),

@@ -1,10 +1,19 @@
-import {Menu, MenuItem} from "../utils/classes/Link";
+
 
 export const LOCAL_STORAGE_KEYS = {
     ACCESS_TOKEN_KEY: 'ACCESS_TOKEN_KEY',
     REFRESH_TOKEN_KEY: 'REFRESH_TOKEN_KEY',
-
 };
+
+export const SOCKET_EVENTS = {
+    CHAT_MESSAGE: 'CHAT_MESSAGE',
+    RECEIVED_MESSAGE: "RECEIVED_MESSAGE",
+    TYPING: "TYPING",
+    NOTIFY_TYPING: "NOTIFY_TYPING",
+    NOTIFY_STOP_TYPING: "NOTIFY_STOP_TYPING",
+    STOP_TYPING: "STOP_TYPING",
+};
+
 
 export const PHONE_NUMBER = '(877)\u00A0355-3585';
 

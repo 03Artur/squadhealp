@@ -8,8 +8,11 @@ const fs = require('fs'),
     configPath = env === 'production' ? path.join(__dirname, '..', '..', '..', 'src/server/config/config.json') : path.join(__dirname, '..', 'config/config.json'),
     config = require(configPath)[env],
     db = {};
-
-mongoose.connect(config.mongoDbUrl, {useNewUrlParser: true}, error => {
+mongoose.connect(config.mongoDbUrl, {
+    user: config.mongoUsername,
+    pass: config.mongoPassword,
+    dbName: config.mongoDBName,
+}, error => {
     if (error) {
         process.exit(1);
     } else {

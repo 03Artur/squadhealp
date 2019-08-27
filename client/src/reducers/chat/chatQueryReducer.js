@@ -2,25 +2,26 @@ import ACTION_TYPES from "../../actions/actiontsTypes";
 import _ from 'lodash';
 
 const initialState = {
-
+    limit: 20,
+    offset: 0,
 };
 
-
 export default function (state = initialState, action) {
+
     switch (action.type) {
 
-        case ACTION_TYPES.CONTEST_CREATION_SET_QUERY:{
-            return _.cloneDeep(action.query);
-        }
-        case ACTION_TYPES.CONTEST_CREATION_ADD_PARAM_TO_QUERY: {
+        case ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
             return _.cloneDeep({
-                ...state,
-                ...action.query,
-            })
+                offset: state.offset + action.messages.length,
+            });
         }
+
+
         default: {
             return state;
         }
+
     }
+
 }
 

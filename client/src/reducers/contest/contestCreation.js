@@ -15,7 +15,6 @@ export default function contestCreation(state = initialState, action) {
             return new Map({
                 ...state,
                 isFetching: true,
-
             }).toJS();
 
         case ACTION_TYPES.CONTEST_CREATION_RESPONSE :

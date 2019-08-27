@@ -12,7 +12,7 @@ import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavRed
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
-
+import allChatsReducer from "./chat/allChatsReducer";
 
 const appReducer = combineReducers({
     authorizationReducer,
@@ -25,7 +25,7 @@ const appReducer = combineReducers({
     homeUserNav: homeUserNavReducer,
     homeNav:  homeNavReducer,
     affiliateDashboardMenu,
-
+    allChatsReducer,
     contestCreation,
     contestCreationSteps,
     contestCreationQuery,

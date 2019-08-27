@@ -4,7 +4,10 @@
     "password": "password",
     "database": "todo-dev",
     "host": "db-dev",
-    "mongoDbUrl": "mongodb://mongo:27017",
+    "mongoDbUrl": "mongodb://mongodb:27017",
+    "mongoUsername": "admin",
+    "mongoDBName": "chat-dev",
+    "mongoPassword": "password",
     "dialect": "postgres",
     "operatorsAliases": "Op"
   },
@@ -13,7 +16,10 @@
     "password": "password",
     "database": "todo-test",
     "host": "db-dev",
-    "mongoDbUrl": "mongodb://mongo:27017",
+    "mongoDbUrl": "mongodb://mongodb:27017",
+    "mongoUsername": "admin",
+    "mongoDBName": "chat-dev",
+    "mongoPassword": "password",
     "dialect": "postgres",
     "operatorsAliases": "Op"
   },
@@ -22,7 +28,10 @@
     "password": "password",
     "database": "todo-prod",
     "host": "db-dev",
-    "mongoDbUrl": "mongodb://mongo:27017",
+    "mongoDbUrl": "mongodb://mongodb:27017",
+    "mongoUsername": "admin",
+    "mongoDBName": "chat-dev",
+    "mongoPassword": "password",
     "dialect": "postgres",
     "operatorsAliases": "Op"
   }

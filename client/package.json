@@ -10,7 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@mdi/js": "^4.1.95",
     "@mdi/react": "^1.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-react-app": "^3.0.7",
     "eslint-plugin-jest": "^22.3.0",
@@ -28,7 +28,8 @@
     "react-transition-group": "^4.2.2",
     "redux": "^4.0.1",
     "redux-form": "^8.2.4",
-    "redux-saga": "^1.0.2"
+    "redux-saga": "^1.0.2",
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.1.9",

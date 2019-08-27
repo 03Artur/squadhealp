@@ -26,7 +26,7 @@ services:
       - "3000:3000"
     depends_on:
       - db-dev
-      - db-chat
+      - mongodb
     volumes:
       - ./var/www/html/images:/var/www/html/images
       - ./server:/server
@@ -41,15 +41,14 @@ services:
     ports:
       - "5432:5432"
 
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
+  mongodb:
+    image: mongo:latest
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-
-
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - ENV MONGO_INITDB_DATABASE=chat-dev
+    ports:
+      - "27018:27018"
 
 volumes:
   server-dev:

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Shema;
+const Schema = mongoose.Schema;
 
 const chatSchema = new Schema(
     {
@@ -17,8 +17,10 @@ const chatSchema = new Schema(
             type: Number,
             required: true,
         },
-        timestamp: true
-
+    },
+    {
+        autoIndex: true,
+        timestamps: true
     }
 );
 
