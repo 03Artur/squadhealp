@@ -16,7 +16,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
                 validate:{
-                    is:["^[0-1][0-9]\/[0-9]{2}$"],
+                    is:["^(?:0[1-9])|(?:1[1-2])\/[0-9]{2}$"],
                 },
             },
             cvc:{

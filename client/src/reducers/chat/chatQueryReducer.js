@@ -1,4 +1,5 @@
-import ACTION_TYPES from "../../actions/actiontsTypes";
+
+import CHAT_ACTION_TYPES from "../../actions/actionTypes/chatActionTypes";
 import _ from 'lodash';
 
 const initialState = {
@@ -6,11 +7,11 @@ const initialState = {
     offset: 0,
 };
 
-export default function (state = initialState, action) {
+function chatQueryReducer(state = initialState, action) {
 
     switch (action.type) {
 
-        case ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
             return _.cloneDeep({
                 offset: state.offset + action.messages.length,
             });
@@ -22,6 +23,6 @@ export default function (state = initialState, action) {
         }
 
     }
-
 }
 
+export default chatQueryReducer;

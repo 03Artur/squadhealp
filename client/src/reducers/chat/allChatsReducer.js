@@ -1,4 +1,4 @@
-import ACTION_TYPES from "../../actions/actiontsTypes";
+import CHAT_ACTION_TYPES from "../../actions/actionTypes/chatActionTypes";
 import _ from 'lodash';
 
 const initialState = {
@@ -10,20 +10,20 @@ const initialState = {
 export default function (state = initialState, action) {
 
     switch (action.type) {
-        case ACTION_TYPES.GET_USER_CHATS_REQUEST:{
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_REQUEST:{
 
             return _.cloneDeep({
                 ...state,
                 isFetching: true,
             });
         }
-        case ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
             return _.cloneDeep({
                 ...state,
                 chats: action.chats,
             });
         }
-        case ACTION_TYPES.GET_USER_CHATS_ERROR: {
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_ERROR: {
             return _.cloneDeep({
                 ...state,
                 error: action.error

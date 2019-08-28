@@ -1,0 +1,33 @@
+@import "../../commonStyles";
+
+.chatPageContainer {
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100%;
+  background-color: #0E1621;
+}
+
+.pageContent {
+  width: 100%;
+
+}
+
+
+.emptyContentContainer {
+  display: flex;
+  width: 100%;
+  @include flex-container(center, center);
+}
+
+.contentMessage {
+  vertical-align: middle;
+  background-color: #1D2C3A;
+  color: white;
+  box-sizing: border-box;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  height: 20px;
+  border-radius: 10px;
+  @include flex-container(center, center);
+}
