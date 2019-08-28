@@ -1,56 +1,17 @@
-/*
-* React
-* */
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-/*
-* Redux & friends
-* */
-import {connect} from 'react-redux';
-
-/*
-* Components
-* */
-
-
-/*
-* styles
-* */
 import styles from './ChatHeader.module.scss';
-
-/*
-* UTILS
-* */
-
+import Logo from "../../../components/Logo/Logo";
 
 
 const ChatHeader = (props) => {
 
 
     return (
-        <Fragment>
-
-        </Fragment>
+        <div className={styles.header}>
+            <Logo isColor={false}/>
+        </div>
     )
 };
-
-ChatHeader.propTypes = {
-
-};
-
-ChatHeader.defaultProps = {
-
-};
-
-/*
-* React redux
-* */
-const mapStateToProps = store => ({
-
-});
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatHeader)
+export default ChatHeader;

@@ -1,8 +1,10 @@
 import {takeLatest, takeEvery} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
+import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
 import * as authorizationSagas from './authorizationSagas';
 import * as userSagas from './crudUserSaga';
 import * as contestSaga from './contestSaga';
+import * as chatSaga from './chatSagas'
 
 function* rootSaga() {
     /*
@@ -38,6 +40,16 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.CONTEST_PAYMENT_ACTION, contestSaga.contestPaymentSaga);
     yield takeLatest(ACTION_TYPES.GET_CONTEST_IN_DRAW_ACTION, contestSaga.getContestInDrawSaga);
     yield takeLatest(ACTION_TYPES.SELECT_TASK_TYPES_ACTION, contestSaga.addTaskStepsToContestCreationSteps);
+
+
+
+    /*
+    *
+    * CHAT
+    *
+    * */
+    yield takeLatest(CHAT_ACTION_TYPES.SELECT_CHAT_ROOM_ACTION, chatSaga.selectChatRoomSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION, chatSaga.sendMessageSaga)
 }
 
 export default rootSaga;

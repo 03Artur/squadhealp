@@ -179,6 +179,7 @@ export const FORM_NAMES = {
     AUTHORIZATION_FORM: 'authorizationForm',
     TEST_FORM: 'testForm',
     MESSAGE_FORM: 'messageForm',
+    CHAT_SEARCH_FORM: 'chatSearchForm',
 };
 
 export const TASK_TYPE_IMAGES = new Map([

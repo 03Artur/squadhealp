@@ -16,7 +16,7 @@ import {FORM_NAMES} from "../../../../constants";
 export const MessageInput = ({input, meta, ...props}) => {
 
 
-    return <textarea {input}/>
+    return <textarea {...input}/>
 };
 
 export const MessageButton = (props) => {

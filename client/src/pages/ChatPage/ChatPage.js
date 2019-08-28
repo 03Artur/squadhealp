@@ -11,9 +11,9 @@ const EmptyContent = (props) => {
 
     return (
 
-    <div className={styles.emptyContentContainer}>
-        <span className={styles.contentMessage}>Please select a chat to start messaging</span>
-    </div>
+        <div className={styles.emptyContentContainer}>
+            <span className={styles.contentMessage}>Please select a chat to start messaging</span>
+        </div>
 
     )
 };
@@ -21,16 +21,14 @@ const EmptyContent = (props) => {
 function ChatPage(props) {
 
 
-
     return (
         <div className={styles.chatPageContainer}>
-            <ChatMenu/>
             <ChatHeader/>
-
+            <div className={styles.contentContainer}>
+                <ChatMenu/>
                 <Route path={`${PATHS.MESSAGES_CHAT}/:id`} component={Chat}/>
                 <Route path={PATHS.MESSAGES} component={EmptyContent}/>
-
-
+            </div>
         </div>
     )
 }

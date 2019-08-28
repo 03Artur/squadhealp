@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 const initialState = {
     messages: null,
+    room: null,
     isFetching: false,
     error: null,
 };
@@ -20,6 +21,7 @@ const initialState = {
         case CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
             return _.cloneDeep({
                 ...state,
+                room: action.room,
                 messages: action.messages,
             });
         }

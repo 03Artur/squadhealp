@@ -18,25 +18,35 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './ChatList.module.scss';
+import ChatItem from "./ChatItem/ChatItem";
 
 /*
 * UTILS
 * */
 
 
-
 const ChatList = (props) => {
 
+    const {chats} = props;
+
+
+    const renderChatItems = () => {
+        if (chats) {
+            return chats.map(chat => <ChatItem key={chat.room} {...chat}/>)
+        }
+    };
 
     return (
-        <ul className={styles.list}>
-
+        <ul className={[styles.list,props.className].join(' ')}>
+            {
+                renderChatItems()
+            }
         </ul>
     )
 };
 
 ChatList.propTypes = {
-
+    className: PropTypes.string
 };
 
 ChatList.defaultProps = {
@@ -49,8 +59,6 @@ ChatList.defaultProps = {
 const mapStateToProps = store => {
     return store.allChats;
 };
-const mapDispatchToProps = dispatch => ({
-
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList)

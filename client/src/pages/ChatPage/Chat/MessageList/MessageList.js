@@ -30,7 +30,9 @@ const MessageList = (props) => {
     const {messages} = props;
 
     const renderMessages = () => {
-        return messages.map(message => <MessageItem key={message.timestamp} {...message}/>)
+        if(messages){
+            return messages.map(message => <MessageItem key={message.timestamp} {...message}/>)
+        }
     };
 
     return (

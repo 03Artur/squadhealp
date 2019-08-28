@@ -25,18 +25,28 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
         )
     };
 
-    const renderContent = async () => {
+    const renderContent = () => {
 
         try {
-            return await loadImage(`${userPicturesURL}/${src}`);
+            loadImage(`${userPicturesURL}/${src}`).then(data => {
+                    return data;
+                }
+            ).catch(err => {
+                return renderInitials()
+            });
+
         } catch (e) {
             return renderInitials();
         }
     };
     return (
-        <div className={styles.container}>
+        <div style={{
+            height: `${props.size}px`,
+            width: `${props.size}px`,
+
+        }} className={styles.container}>
             {
-                renderContent()
+                renderInitials()
             }
         </div>
     )
@@ -46,9 +56,12 @@ AuthorIcon.propTypes = {
     src: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
+    size: PropTypes.number,
 };
 
-AuthorIcon.defaultProps = {};
+AuthorIcon.defaultProps = {
+    size: 42,
+};
 
 
 export default AuthorIcon

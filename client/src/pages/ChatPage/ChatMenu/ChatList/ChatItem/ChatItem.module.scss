@@ -1,0 +1,74 @@
+@import "../../../../../commonStyles";
+
+.chatItem {
+  color: white;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  @include flex-container(space-between, center);
+
+  @include mediaBreakpointUp($sm) {
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.info{
+  flex: 1;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
+  & > * {
+    max-width: 100%;
+  }
+}
+
+.timeStamp{
+
+}
+
+.messagesInfo{
+  display: flex;
+}
+
+.message{
+  flex: 1;
+  color: white;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.infoRow{
+  @include flex-container(space-between,center);
+  span{
+    color: white;
+  }
+}
+
+.authorFullName{
+  color: white;
+}
+
+.newMessagesCount{
+  background-color: #3E546A;
+  @include flex-container(center, center);
+
+  height: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0 5px;
+  span{
+    min-width: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+}
+

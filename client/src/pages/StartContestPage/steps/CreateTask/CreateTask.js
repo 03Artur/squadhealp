@@ -23,7 +23,9 @@ function CreateTask(props) {
 
 
     const submit = (values,dis,formProps) => {
+
             const {files, ...rest} = values;
+
             const formData = new FormData();
             if (files) {
                 for (let file of files) {

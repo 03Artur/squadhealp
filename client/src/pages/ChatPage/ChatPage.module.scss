@@ -4,7 +4,15 @@
   min-height: 100vh;
   min-width: 100vw;
   width: 100%;
-  background-color: #0E1621;
+  position: relative;
+  //background-color: #0E1621;
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .pageContent {
@@ -14,9 +22,17 @@
 
 
 .emptyContentContainer {
-  display: flex;
   width: 100%;
   @include flex-container(center, center);
+  background-color: yellow;
+}
+
+.contentContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+  background-color: red;
+  flex: 1;
 }
 
 .contentMessage {
@@ -24,10 +40,10 @@
   background-color: #1D2C3A;
   color: white;
   box-sizing: border-box;
-  padding: 4px;
+  padding: 0 15px;
   font-size: 13px;
   font-weight: 500;
-  height: 20px;
-  border-radius: 10px;
+  height: 26px;
+  border-radius: 13px;
   @include flex-container(center, center);
 }

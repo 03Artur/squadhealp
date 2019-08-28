@@ -18,24 +18,27 @@ export default function (state = initialState, action) {
                 return _.cloneDeep(initialState)
             }
             const navMap = new Map([
-                [ROLE.ADMIN, [
+                [
+                    ROLE.ADMIN, [
                     new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
                 ],],
-                [ROLE.BUYER, [new MenuItem('My Contests', PATHS.AFFILIATE_DASHBOARD_CONTESTS,),
+                [
+                    ROLE.BUYER, [new MenuItem('My Contests', PATHS.AFFILIATE_DASHBOARD_CONTESTS,),
                     new MenuItem('Entries', PATHS.AFFILIATE_DASHBOARD_ENTRIES,)],],
-                [ROLE.CREATIVE, [
+                [
+                    ROLE.CREATIVE, [
                     new MenuItem('Contests', {
                         pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
                         search: queryString.stringify({
                             isActive: true,
                             winnerId: action.user.id,
-
                         }),
                     },),
                     new MenuItem('My Entries', {
                         pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
                         search: queryString.stringify({userId: action.user.id}),
-                    },)],],
+                    },)],
+                ],
             ]);
             const nav = navMap.get(action.user.role);
             return nav ? nav : [];

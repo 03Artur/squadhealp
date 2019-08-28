@@ -34,11 +34,11 @@ const MessageItem = ({author,value,timestamp}) => {
 MessageItem.propTypes = {
 
     author: PropTypes.shape({
-        firstName: PropTypes.string.isRequred,
-        lastName: PropTypes.string.isRequred,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
         profilePicture: PropTypes.string,
     }),
-    value: PropTypes.string.isRequred,
+    value: PropTypes.string.isRequired,
     timestamp: PropTypes.string,
 };
 

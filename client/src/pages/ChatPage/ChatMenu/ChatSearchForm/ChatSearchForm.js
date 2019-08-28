@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 * Redux & friends
 * */
 import {connect} from 'react-redux';
-
+import {reduxForm} from 'redux-form';
 /*
 * Components
 * */
@@ -17,40 +17,40 @@ import {connect} from 'react-redux';
 /*
 * styles
 * */
-import styles from './ChatSearchForm.scss';
+import styles from './ChatSearchForm.module.scss';
+import {FORM_NAMES} from "../../../../constants";
 
 /*
 * UTILS
 * */
 
 
-
 const ChatSearchForm = (props) => {
 
 
-    return (
-        <Fragment>
+    const onSearchInputChange = (e) => {
 
-        </Fragment>
+    };
+
+    return (
+        <div className={styles.container}>
+            <input placeholder={'Search'} onChange={onSearchInputChange} type={"text"} className={styles.searchInput}/>
+        </div>
     )
 };
 
-ChatSearchForm.propTypes = {
+ChatSearchForm.propTypes = {};
 
-};
-
-ChatSearchForm.defaultProps = {
-
-};
+ChatSearchForm.defaultProps = {};
 
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
+const mapStateToProps = store => ({});
+const mapDispatchToProps = dispatch => ({});
 
-});
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatSearchForm)
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+        form: FORM_NAMES.CHAT_SEARCH_FORM,
+    })(ChatSearchForm)
+)

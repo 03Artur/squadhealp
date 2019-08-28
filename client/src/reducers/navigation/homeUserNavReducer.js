@@ -16,13 +16,13 @@ export default function (state = initialState, action) {
                 [ROLE.ADMIN, [
                     new MenuItem("View Dashboard",),
                     new MenuItem("My Account",),
-                    new MenuItem("Messages",),
+                    new MenuItem("Messages",PATHS.MESSAGES),
                     new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 ],],
                 [ROLE.BUYER, [
                     new MenuItem("View Dashboard",),
                     new MenuItem("My Account",),
-                    new MenuItem("Messages",),
+                    new MenuItem("Messages",PATHS.MESSAGES),
                     new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 ],],
                 [ROLE.CREATIVE, [
@@ -36,7 +36,7 @@ export default function (state = initialState, action) {
                     }),
                     new MenuItem("My Account",),
                     new MenuItem("My Activity Feed",),
-                    new MenuItem("Messages",),
+                    new MenuItem("Messages",PATHS.MESSAGES),
                     new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 ],],
             ]);

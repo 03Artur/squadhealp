@@ -1,0 +1,9 @@
+@import "../../../commonStyles";
+
+.header{
+  min-width: 100vw;
+  min-height: 40px;
+  @include flex-container(space-between,center);
+  background-color: #17212B;
+  background-color: darkgoldenrod;
+}

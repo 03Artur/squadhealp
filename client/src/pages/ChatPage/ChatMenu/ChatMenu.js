@@ -31,10 +31,10 @@ const ChatMenu = (props) => {
 
 
     return (
-        <section>
-            <ChatSearchForm/>
-            <ChatList/>
-        </section>
+        <div className={styles.menuContainer}>
+            <ChatSearchForm />
+            <ChatList className={styles.chatList}/>
+        </div>
     )
 };
 

@@ -23,7 +23,6 @@ const stylesMap = new Map([
         'Minimal',
         'Brick & Mortar',
         'Photo-based',
-
     ]],
     [TASK_TYPE.TAGLINE, [
         'Classic',
@@ -46,7 +45,6 @@ const TaskForm = (props) => {
                        placeholder="e.g. Need for Social Networking website"
                        component={LabelInput}/>
                 <Field name="style"
-
                        options={stylesMap.get(props.initialValues.type)}
                        label={`Choose style of ${props.initialValues.type}`}
                        component={Select}/>
