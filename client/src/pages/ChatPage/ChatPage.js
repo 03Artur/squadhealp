@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ChatHeader from "./ChatHeader/ChatHeader";
 import Chat from "./Chat/Chat";
 import ChatMenu from "./ChatMenu/ChatMenu";
@@ -20,6 +20,13 @@ const EmptyContent = (props) => {
 
 function ChatPage(props) {
 
+    useEffect(() => {
+
+        props.history.push(
+            props.room?PATHS.MESSAGES:`${PATHS.MESSAGES_CHAT}/${props.room}`
+        )
+
+    },[props.room]);
 
     return (
         <div className={styles.chatPageContainer}>
@@ -31,6 +38,19 @@ function ChatPage(props) {
             </div>
         </div>
     )
+}
+
+function mapStateToProps(state) {
+    const {room} = state.chat;
+    return {
+        room
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+
+    }
 }
 
 export default ChatPage;

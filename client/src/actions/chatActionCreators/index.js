@@ -1,11 +1,10 @@
 import CHAT_ACTION_TYPES from "../actionTypes/chatActionTypes";
 
-export function sendMessageActionCreator({room,message,user}){
+export function sendMessageActionCreator({room,data}){
     return {
         type: CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION,
         room,
-        message,
-        user,
+        data
     }
 }
 
