@@ -22,9 +22,7 @@ export const MessageInput = ({input, meta, ...props}) => {
     return <input className={styles.messageInput} {...input}/>
 };
 
-MessageInput.propTypes = {
-
-};
+MessageInput.propTypes = {};
 
 export const MessageButton = (props) => {
 
@@ -57,11 +55,11 @@ const MessageForm = (props) => {
             timestamp: '12:21',
         })
     };
-
+    const submit = handleSubmit(onSubmit);
     return (
-        <form onSubmit={handleSubmit} className={styles.container}>
+        <form onSubmit={submit} className={styles.container}>
             <Field name={'message'} validate={[notEmpty, isRequired]} component={MessageInput}/>
-            <MessageButton onClick={handleSubmit}/>
+            <MessageButton onClick={submit}/>
         </form>
     )
 };
@@ -82,6 +80,8 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default reduxForm({
-    form: FORM_NAMES.MESSAGE_FORM,
-})(MessageForm);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+        form: FORM_NAMES.MESSAGE_FORM,
+    })(MessageForm)
+);

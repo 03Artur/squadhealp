@@ -60,7 +60,13 @@ io.on("connection", socket => {
 
     socket.on(SOCKET_EVENTS.CHAT_MESSAGE, function (room, data) {
 
-        socket.broadcast.to(room).emit(SOCKET_EVENTS.RECEIVED_MESSAGE, data);
+        console.log("ROOM: ",room);
+        console.log("DATA: ",data);
+
+        io.in(room).emit(SOCKET_EVENTS.RECEIVED_MESSAGE, {
+            room,
+            message: data,
+        });
 
 
     });

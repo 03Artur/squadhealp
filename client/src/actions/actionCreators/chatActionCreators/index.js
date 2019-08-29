@@ -1,6 +1,6 @@
 import CHAT_ACTION_TYPES from "../../actionTypes/chatActionTypes";
 
-export function sendMessageActionCreator({room,data}){
+export function sendMessageActionCreator(room, data) {
     return {
         type: CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION,
         room,
@@ -21,8 +21,15 @@ export function selectChatRoomActionCreator(room) {
 export function searchChatRoomActionCreator(searchValue) {
     console.group("searchChatRoomActionCreator");
     console.log(searchValue);
-    console.groupEnd();    return {
+    console.groupEnd();
+    return {
         type: CHAT_ACTION_TYPES.SEARCH_CHAT_ROOM_ACTION,
         searchValue,
+    }
+}
+
+export function cancelSearchChatRoomActionCreator() {
+    return {
+        type: CHAT_ACTION_TYPES.CANCEL_SEARCH_CHAT_ROOM_ACTION,
     }
 }

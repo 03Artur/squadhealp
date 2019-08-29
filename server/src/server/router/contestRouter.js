@@ -1,7 +1,6 @@
 import express from 'express';
 import contestMW from '../middlewares/contest'
 import * as contestController from '../controllers/contestController'
-import checkAccessToken from "../middlewares/token/checkAccessToken";
 import path from 'path'
 import multer from 'multer';
 import moment from 'moment';

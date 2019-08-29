@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {Component, Fragment, useEffect} from 'react';
+import React, {Component, Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 
@@ -10,12 +10,38 @@ import {userPicturesURL} from "../../../../../../api/baseURL";
 import {stringToHslColor} from "../../../../../../utils/color";
 import {loadImage} from "../../../../../../utils/image";
 
+/*const f = async () => {
+    try{
+        let result = await loadImage(`${userPicturesURL}/${src}`);
+        setImg(result);
+    }
+    catch (e) {
 
+    }
+
+}*/
 const AuthorIcon = ({firstName, lastName, src, ...props}) => {
 
+    const [img, setImg] = useState(null);
+    useEffect(() => {
+        if (src) {
+            loadImage(`${userPicturesURL}/${src}`).then(result => {
+                console.group();
+                console.log('height', result.height);
+                console.log('width', result.width);
+                console.groupEnd();
+                console.log(result);
+                setImg(result);
+            }).catch(error => {
+
+            });
+        }
+    }, []);
+
     const renderInitials = () => {
+        const backgroundColor = stringToHslColor(`${firstName} ${lastName}`);
         return (
-            <div style={{backgroundColor: stringToHslColor(`${firstName} ${lastName}`)}} className={styles.altContent}>
+            <div style={{backgroundColor,}} className={styles.altContent}>
                 <span>
                     {
                         firstName[0] + lastName[0]
@@ -30,19 +56,19 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
             width: props.size + 'px',
             borderRadius: '100%',
             overflow: 'hidden',
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
         }
     };
     const renderContent = () => {
-
-        try {
-            loadImage(`${userPicturesURL}/${src}`).then(data => {
-                    return data;
-                }
-            ).catch(err => {
-                return renderInitials()
-            });
-
-        } catch (e) {
+        if (img) {
+            const imgStyle = {
+                [`${img.height > img.width ? 'width' : 'height'}`]: props.size + 'px',
+            };
+            return <img src={img.src} style={imgStyle} alt={`${firstName} ${lastName}`}/>;
+        } else {
             return renderInitials();
         }
     };
@@ -50,7 +76,7 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
         <div>
             <div style={getContainerStyle()}>
                 {
-                    renderInitials()
+                    renderContent()
                 }
             </div>
         </div>

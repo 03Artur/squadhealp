@@ -4,7 +4,11 @@ import {loginUser} from "../api/rest/authorizationController";
 import * as chatController from '../api/socket/chatController'
 
 
-
+export function* messageReceiveSaga({data}) {
+    console.group('MESSAGE');
+    console.log(data);
+    console.groupEnd();
+}
 
 export function* sendMessageSaga({room, data}) {
 
@@ -35,7 +39,7 @@ export function* selectChatRoomSaga({room}) {
                     id: 2,
                     firstName: "React",
                     lastName: "Telegramovich",
-                    profilePicture: 'user2.jpg',
+                    profilePicture: 'user1.jpeg',
                 },
             ],
             messages: [

@@ -17,7 +17,7 @@ const chats = [
                 id: 2,
                 firstName: "React",
                 lastName: "Telegramovich",
-                profilePicture: 'user2.jpg',
+                profilePicture: 'user1.jpeg',
             },
         ],
         messages: [

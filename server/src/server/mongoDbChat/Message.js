@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const chatSchema = new Schema(
+const messageSchema = new Schema(
     {
         message: {
             type: String,
@@ -9,23 +9,22 @@ const chatSchema = new Schema(
             minLength: 1,
             maxLength: 512,
         },
-        senderId: {
+        authorId: {
             type: Number,
             required: true,
         },
-        addresseeId: {
-            type: Number,
-            required: true,
-        },
+        chatId: {type: Schema.Types.ObjectId, ref: 'Chat'}
     },
     {
         autoIndex: true,
-        timestamps: true
+        timestamps: true,
     }
 );
 
-let Chat = mongoose.model("Chat", chatSchema);
-module.exports = Chat;
+module.exports = {
+    name: 'Message',
+    schema: messageSchema
+};
 
 
 

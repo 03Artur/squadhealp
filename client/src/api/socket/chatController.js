@@ -6,11 +6,19 @@ import CHAT_ACTION_TYPES from "../../actions/actionTypes/chatActionTypes";
 const socket = io('http://localhost:3000');
 
 
+
+export const joinMeToMyRooms = (user) => socket.emit(SOCKET_EVENTS.JOIN_ME_TO_ROOMS,user);
+
+socket.on(SOCKET_EVENTS.JOIN_ME_TO_ROOMS, data => store.dispatch({
+    type: CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE,
+    data
+}));
+
 export const sendMessage = (room, data) => socket.emit(SOCKET_EVENTS.CHAT_MESSAGE,room, data);
 
 socket.on(SOCKET_EVENTS.RECEIVED_MESSAGE, data => store.dispatch({
     type: CHAT_ACTION_TYPES.MESSAGE_RECEIVED_ACTION,
-    message: data
+    data,
 }));
 
 export const sendTypingMessage = user => socket.emit(SOCKET_EVENTS.TYPING, user);

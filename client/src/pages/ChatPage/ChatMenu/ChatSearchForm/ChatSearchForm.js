@@ -18,10 +18,9 @@ let ChatSearchForm = (props) => {
     )
 };
 
-const mapStateToProps = store => ({});
 const mapDispatchToProps = dispatch => ({
     searchChatAction: searchValue => dispatch(searchChatRoomActionCreator(searchValue)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatSearchForm)
+export default connect(null, mapDispatchToProps)(ChatSearchForm)
 
