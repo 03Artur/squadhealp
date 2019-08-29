@@ -13,7 +13,6 @@ export const signUpURL = `/signup`;
 export const authorizeUrl = `/authorize`;
 export const refreshTokensUrl = `/refresh`;
 
-
 /*
 * CRUD CONTEST & TASK URL
 * */
@@ -35,6 +34,5 @@ export const usersUrl = `/users`;
 export const imagesURL = `${baseURL}/images`;
 export const ICON_IMAGES_URL = `${imagesURL}/icons`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
-
 export const defaultUserIcon = `${imagesURL}/icons/user.svg`;
 export const defaultUserIconMin = `${imagesURL}/icons/anonumous-min.png`;

@@ -35,8 +35,6 @@ export const SOCKET_EVENTS = {
     STOP_TYPING: "STOP_TYPING",
 };
 
-
-
 io.on("connection", socket => {
     socket.join('test');
     socket.join('alone');

@@ -24,7 +24,6 @@
 .emptyContentContainer {
   width: 100%;
   @include flex-container(center, center);
-  background-color: yellow;
 }
 
 .contentContainer {

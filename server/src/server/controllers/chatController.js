@@ -15,25 +15,36 @@ export async function createChat(req, res, next) {
     }
 }
 
-export async function createMessage(req,res,next) {
-    try{
+export async function createMessage(req, res, next) {
+    try {
+
+
+        const chat = await Chat.findById(req.params.chatId);
+
+
+
         req.body.authorId = req.accessTokenPayload.id;
-        const chat = Chat.findById(req.params.id);
+        req.body.chatId = chat._id;
 
-        const message = new Message(req.body);
-
-        message.save(err => {
-            chat.message.push(message);
+        let message = new Message(req.body);
+        await message.save(err => {
+            if (err) {
+                return next(err);
+            }
+            chat.messages.push(message);
             chat.save(err => {
-
+                if (err) {
+                    return next(err);
+                }
             })
         });
-        if(message){
+
+        if (message) {
             res.send(message);
         }
         return next(new appError.BadRequestError())
 
-    }catch (e) {
+    } catch (e) {
         next(e);
     }
 }
