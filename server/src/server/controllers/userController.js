@@ -15,6 +15,25 @@ export const createUser = async (req, res, next) => {
     }
 };
 
+export const getUsersIn = async (re,res,next) => {
+
+    try {
+
+
+
+        res.send(await Users.findAll({
+            where: {
+                id: [1,2,3]
+            }
+        }))
+
+    }catch (e) {
+        next(e)
+    }
+
+}
+
+
 export const findAndCountAllUsers = async (req, res, next) => {
     try {
 

@@ -4,7 +4,7 @@ import {
     deleteUserById,
     getUserById,
     updateUserById,
-    findAndCountAllUsers, banUser
+    findAndCountAllUsers, banUser, getUsersIn
 } from '../controllers/userController'
 import hashPassword from '../middlewares/password/hashPassword'
 import {validateDataOnCreateUser, validateDataOnUpdateUser} from '../middlewares/user/validateUser'
@@ -21,6 +21,7 @@ import appError from '../errors'
 const router = express.Router();
 
 router.get('/users', isItAdmin, findAndCountAllUsers);
+router.get('/usersin', getUsersIn);
 router.put('/ban/:id', checkBanPermission,banUser);
 router.post('/user', checkUserCrudPermission, validateDataOnCreateUser, hashPassword, createUser);
 router.get('/user/:id', checkUserCrudPermission, getUserById);
