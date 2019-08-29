@@ -8,7 +8,7 @@ const fs = require('fs'),
     configPath = env === 'production' ? path.join(__dirname, '..', '..', '..', 'src/server/config/config.json') : path.join(__dirname, '..', 'config/config.json'),
     config = require(configPath)[env],
     db = {};
-const connection = mongoose.connect(config.mongoDbUrl, {
+const connection = mongoose.createConnection(config.mongoDbUrl, {
     user: config.mongoUsername,
     pass: config.mongoPassword,
     dbName: config.mongoDBName,
