@@ -10,7 +10,7 @@ module.exports = {
                 type: "Logo",
                 priority: 2,
                 cost: 200.32,
-                isActive: false,
+                
             },
             {
                 contestId: 1,
@@ -19,7 +19,7 @@ module.exports = {
                 type: "Tagline",
                 priority: 1,
                 cost: 200.32,
-                isActive: false,
+                
             },{
                 contestId: 2,
                 title: "Test task title",
@@ -27,7 +27,7 @@ module.exports = {
                 type: "Logo",
                 priority: 2,
                 cost: 200.32,
-                isActive: false,
+                
             },
             {
                 contestId: 2,
@@ -36,7 +36,7 @@ module.exports = {
                 type: "Tagline",
                 priority: 1,
                 cost: 200.32,
-                isActive: false,
+                
             },{
                 contestId: 3,
                 title: "Test task title",
@@ -44,7 +44,7 @@ module.exports = {
                 type: "Tagline",
                 priority: 1,
                 cost: 200.32,
-                isActive: false,
+                
             },
 
         ], {});
