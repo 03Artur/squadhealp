@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import ChatHeader from "./ChatHeader/ChatHeader";
 import Chat from "./Chat/Chat";
 import ChatMenu from "./ChatMenu/ChatMenu";
@@ -22,19 +23,22 @@ function ChatPage(props) {
 
     useEffect(() => {
 
-        props.history.push(
-            props.room?PATHS.MESSAGES:`${PATHS.MESSAGES_CHAT}/${props.room}`
-        )
+        console.group('chat page on room change effect ');
+        console.log('props', props);
+        const path = props.room ? `${PATHS.MESSAGES_CHAT}/${props.room}`:PATHS.MESSAGES;
+        console.log('path: ',path);
+        console.groupEnd();
+        props.history.push(path);
 
-    },[props.room]);
+    }, [props.room]);
 
     return (
         <div className={styles.chatPageContainer}>
             <ChatHeader/>
             <div className={styles.contentContainer}>
                 <ChatMenu/>
+                <Route exact path={PATHS.MESSAGES} component={EmptyContent}/>
                 <Route path={`${PATHS.MESSAGES_CHAT}/:id`} component={Chat}/>
-                <Route path={PATHS.MESSAGES} component={EmptyContent}/>
             </div>
         </div>
     )
@@ -43,14 +47,12 @@ function ChatPage(props) {
 function mapStateToProps(state) {
     const {room} = state.chat;
     return {
-        room
+        room,
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-
-    }
+    return {}
 }
 
-export default ChatPage;
+export default connect(mapStateToProps, mapDispatchToProps)(ChatPage);

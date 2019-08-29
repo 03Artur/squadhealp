@@ -22,24 +22,28 @@ import AuthorIcon from "./AuthorIcon/AuthorIcon";
 * UTILS
 * */
 
-const MessageItem = ({author,value,timestamp}) => {
-
+const MessageItem = (props) => {
+    const {message: {authorId,value}, members,  user} = props;
+    const author = members.find(user => user.id === authorId);
     return (
         <li className={styles.container}>
             <AuthorIcon firstName={author.firstName} lastName={author.lastName} src={author.profilePicture}/>
+            <div className={[styles.valueContainer, authorId === user.id ? styles.myMessage : undefined].join(' ')}>
+                {
+                    value
+                }
+            </div>
         </li>
     )
 };
 
 MessageItem.propTypes = {
 
-    author: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        profilePicture: PropTypes.string,
-    }),
-    value: PropTypes.string.isRequired,
-    timestamp: PropTypes.string,
+    message: PropTypes.shape({
+        authorId: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
+    }).isRequired,
+
 };
 
 MessageItem.defaultProps = {};
@@ -47,7 +51,14 @@ MessageItem.defaultProps = {};
 /*
 * React redux
 * */
-const mapStateToProps = store => ({});
+const mapStateToProps = store => {
+    const {members} = store.chat;
+    const {user} = store.authorizationReducer;
+    return {
+        members,
+        user,
+    }
+};
 const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageItem)

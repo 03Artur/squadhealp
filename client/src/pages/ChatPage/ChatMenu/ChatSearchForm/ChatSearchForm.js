@@ -1,56 +1,27 @@
-/*
-* React
-* */
-import React, {Component, Fragment} from 'react';
-import PropTypes from 'prop-types';
-
-/*
-* Redux & friends
-* */
+import React from 'react';
 import {connect} from 'react-redux';
-import {reduxForm} from 'redux-form';
-/*
-* Components
-* */
-
-
-/*
-* styles
-* */
 import styles from './ChatSearchForm.module.scss';
-import {FORM_NAMES} from "../../../../constants";
+import {searchChatRoomActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
 
-/*
-* UTILS
-* */
+let ChatSearchForm = (props) => {
 
-
-const ChatSearchForm = (props) => {
-
-
-    const onSearchInputChange = (e) => {
-
+    const onChange = (e) => {
+        const value = e.target.value;
+        if (value)
+            props.searchChatAction(value)
     };
 
     return (
         <div className={styles.container}>
-            <input placeholder={'Search'} onChange={onSearchInputChange} type={"text"} className={styles.searchInput}/>
+            <input onChange={onChange} placeholder={'Search'} type={"text"} className={styles.searchInput}/>
         </div>
     )
 };
 
-ChatSearchForm.propTypes = {};
-
-ChatSearchForm.defaultProps = {};
-
-/*
-* React redux
-* */
 const mapStateToProps = store => ({});
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    searchChatAction: searchValue => dispatch(searchChatRoomActionCreator(searchValue)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    reduxForm({
-        form: FORM_NAMES.CHAT_SEARCH_FORM,
-    })(ChatSearchForm)
-)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatSearchForm)
+

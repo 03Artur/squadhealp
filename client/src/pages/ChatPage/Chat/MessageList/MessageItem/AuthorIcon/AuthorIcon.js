@@ -24,7 +24,14 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
             </div>
         )
     };
-
+    const getContainerStyle = () => {
+        return {
+            height: props.size + 'px',
+            width: props.size + 'px',
+            borderRadius: '100%',
+            overflow: 'hidden',
+        }
+    };
     const renderContent = () => {
 
         try {
@@ -40,14 +47,12 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
         }
     };
     return (
-        <div style={{
-            height: `${props.size}px`,
-            width: `${props.size}px`,
-
-        }} className={styles.container}>
-            {
-                renderInitials()
-            }
+        <div>
+            <div style={getContainerStyle()}>
+                {
+                    renderInitials()
+                }
+            </div>
         </div>
     )
 };

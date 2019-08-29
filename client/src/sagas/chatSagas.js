@@ -21,7 +21,7 @@ export function* sendMessageSaga({room, data}) {
 export function* selectChatRoomSaga({room}) {
     try {
         yield put({
-            type: CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE,
+            type: CHAT_ACTION_TYPES.GET_CHAT_DATA_RESPONSE,
             room: room,
             members: [
 
@@ -31,32 +31,38 @@ export function* selectChatRoomSaga({room}) {
                     lastName: "Surname",
                     profilePicture: null,
                 },
+                {
+                    id: 2,
+                    firstName: "React",
+                    lastName: "Telegramovich",
+                    profilePicture: 'user2.jpg',
+                },
             ],
             messages: [
                 {
                     authorId: 1,
-                    value: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
+                    value: "1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
                     timestamp: '15:17',
                 },
                 {
                     authorId: 1,
-                    value: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '15:17',
+                    value: "2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
+                    timestamp: '14:17',
+                },
+                {
+                    authorId: 2,
+                    value: "3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
+                    timestamp: '13:17',
                 },
                 {
                     authorId: 1,
-                    value: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '15:17',
+                    value: "4. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
+                    timestamp: '12:17',
                 },
                 {
                     authorId: 1,
-                    value: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '15:17',
-                },
-                {
-                    authorId: 1,
-                    value: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '15:17',
+                    value: "5. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
+                    timestamp: '11:17',
                 },
             ]
         })

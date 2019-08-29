@@ -31,8 +31,8 @@ const Chat = (props) => {
 
 
     return (
-        <div>
-            <MessageList/>
+        <div className={styles.chatContainer}>
+            <MessageList className = {styles.messageList}/>
             <MessageForm/>
         </div>
     )

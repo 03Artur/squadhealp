@@ -19,7 +19,7 @@ import {connect} from 'react-redux';
 * */
 import styles from './ChatItem.module.scss';
 import AuthorIcon from "../../../Chat/MessageList/MessageItem/AuthorIcon/AuthorIcon";
-import {selectChatRoomActionCreator} from "../../../../../actions/chatActionCreators";
+import {selectChatRoomActionCreator} from "../../../../../actions/actionCreators/chatActionCreators";
 
 /*
 * UTILS
@@ -27,9 +27,9 @@ import {selectChatRoomActionCreator} from "../../../../../actions/chatActionCrea
 
 
 const ChatItem = (props) => {
-
+    console.log(props);
     const {messages, room, members} = props;
-    const lastMessage = messages[messages.length - 1];
+    const lastMessage = messages[0];
     const author = members.find(item => item.id === lastMessage.authorId);
 
 
@@ -113,7 +113,9 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => ({
+
     selectRoomAction: (room) => dispatch(selectChatRoomActionCreator(room)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatItem)

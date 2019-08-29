@@ -30,13 +30,14 @@ const MessageList = (props) => {
     const {messages} = props;
 
     const renderMessages = () => {
-        if(messages){
-            return messages.map(message => <MessageItem key={message.timestamp} {...message}/>)
+
+        if (messages) {
+            return messages.map(message => <MessageItem key={message.timestamp} message={message}/>)
         }
     };
 
     return (
-        <ul className={styles.container}>
+        <ul className={[props.className, styles.container].join(' ')}>
             {
                 renderMessages()
             }
@@ -44,7 +45,9 @@ const MessageList = (props) => {
     )
 };
 
-MessageList.propTypes = {};
+MessageList.propTypes = {
+    className: PropTypes.string,
+};
 
 MessageList.defaultProps = {};
 
@@ -52,7 +55,7 @@ MessageList.defaultProps = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {messages} = store.chat;
+    const {messages, members} = store.chat;
     return {
         messages,
     }

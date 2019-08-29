@@ -1,0 +1,24 @@
+@import "../../../thems";
+@import "../../../../../commonStyles";
+
+.container{
+  color: white;
+  @include flex-container(flex-start,center);
+  width: 50%;
+  margin: 2px 0;
+
+}
+
+.valueContainer{
+  box-sizing: border-box;
+  padding: 10px 15px;
+  background-color: $backgroundColorMessage;
+  color: white;
+  border-radius: 10px;
+}
+
+
+.myMessage{
+  background-color: $backgroundColorMyMessageB;
+}
+

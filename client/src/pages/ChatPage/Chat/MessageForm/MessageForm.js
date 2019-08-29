@@ -11,7 +11,7 @@ import {mdiSend} from '@mdi/js';
 
 import styles from './MessageForm.module.scss';
 import {FORM_NAMES} from "../../../../constants";
-import {sendMessageActionCreator} from "../../../../actions/chatActionCreators";
+import {sendMessageActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
 import {isRequired, notEmpty} from "../../../../utils/reduxForm/validateValue";
 import authorizationReducer from "../../../../reducers/authorization/authorizationReducer";
 
@@ -19,13 +19,19 @@ import authorizationReducer from "../../../../reducers/authorization/authorizati
 export const MessageInput = ({input, meta, ...props}) => {
 
 
-    return <input {...input}/>
+    return <input className={styles.messageInput} {...input}/>
+};
+
+MessageInput.propTypes = {
+
 };
 
 export const MessageButton = (props) => {
 
     return (
-        <Icon onClick={props.onClick} path={mdiSend}/>
+        <div className={styles.messageButton}>
+            <Icon onClick={props.onClick} size={'30px'} color={'#fff'} path={mdiSend}/>
+        </div>
     );
 };
 MessageButton.propTypes = {

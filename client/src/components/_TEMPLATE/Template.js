@@ -36,7 +36,7 @@ const Template = (props) => {
 };
 
 Template.propTypes = {
-
+    className: PropTypes.string,
 };
 
 Template.defaultProps = {
