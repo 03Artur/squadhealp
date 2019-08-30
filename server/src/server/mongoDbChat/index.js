@@ -12,6 +12,7 @@ const connection = mongoose.createConnection(config.mongoDbUrl, {
     user: config.mongoUsername,
     pass: config.mongoPassword,
     dbName: config.mongoDBName,
+    useNewUrlParser: true,
 }, error => {
     if (error) {
         process.exit(1);

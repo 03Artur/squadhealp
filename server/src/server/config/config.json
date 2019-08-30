@@ -20,6 +20,7 @@
     "mongoUsername": "admin",
     "mongoDBName": "chat-dev",
     "mongoPassword": "password",
+
     "dialect": "postgres",
     "operatorsAliases": "Op"
   },
@@ -32,6 +33,7 @@
     "mongoUsername": "admin",
     "mongoDBName": "chat-dev",
     "mongoPassword": "password",
+
     "dialect": "postgres",
     "operatorsAliases": "Op"
   }
