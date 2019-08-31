@@ -1,5 +1,5 @@
 'use strict';
-const ROLE= {
+const ROLES= {
     BUYER: "BUYER",
         CREATIVE: "CREATIVE",
         ADMIN: "ADMIN",
@@ -40,10 +40,10 @@ module.exports = {
             role: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: ROLE.BUYER,
+                defaultValue: ROLES.BUYER,
                 validate: {
                     allowNull: false,
-                    isIn: [Object.values(ROLE)],
+                    isIn: [Object.values(ROLES)],
                 }
             },
             balance: {

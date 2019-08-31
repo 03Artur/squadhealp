@@ -11,7 +11,9 @@ module.exports = class ActionRules {
         this.rules.set(action, rule);
         return this;
     }
-
+    getRule(action){
+        return this.rules.get(action);
+    }
     checkPermission(action, role, isOwner = false) {
         const rule = this.rules.get(action);
         if (rule) {

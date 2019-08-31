@@ -1,14 +1,14 @@
 const {Users, Contests} = require('../../models');
-const {ROLE} = require("../../constants");
+const {ROLES} = require("../../constants");
 
 
 const userActor = {
     id: 1,
-    role: ROLE.ADMIN,
+    role: ROLES.ADMIN,
 };
 const userObject = {
     id: 2,
-    role: ROLE.ADMIN,
+    role: ROLES.ADMIN,
 };
 
 const businessInfoObject = {

@@ -1,6 +1,6 @@
 import {ForbiddenError, NotFoundError} from '../../errors';
 import {Users} from './../../models';
-import {ROLE, ACTION, USERS_ACTION_RULES} from "../../constants";
+import {ROLES, ACTION, USERS_ACTION_RULES} from "../../constants";
 import appError from "../../errors";
 
 
@@ -8,7 +8,7 @@ export function isItAdmin(req, res, next) {
 
     try {
         const {role} = req.accessTokenPayload;
-        if (role === ROLE.ADMIN) {
+        if (role === ROLES.ADMIN) {
             return next();
         } else {
             return next(new ForbiddenError());

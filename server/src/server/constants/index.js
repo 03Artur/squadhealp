@@ -1,4 +1,5 @@
 import Rule from '../utils/permissions/classes/Rule';
+import {ChatRule,MessageRule} from '../utils/permissions/classes/ChatRule';
 import ActionRules from '../utils/permissions/classes/ActionRules';
 
 export const TASK_TYPE = {
@@ -7,7 +8,14 @@ export const TASK_TYPE = {
     LOGO: "Logo",
 };
 
-
+ const SOCKET_EVENTS = {
+    CHAT_MESSAGE: 'CHAT_MESSAGE',
+    RECEIVED_MESSAGE: "RECEIVED_MESSAGE",
+    TYPING: "TYPING",
+    NOTIFY_TYPING: "NOTIFY_TYPING",
+    NOTIFY_STOP_TYPING: "NOTIFY_STOP_TYPING",
+    STOP_TYPING: "STOP_TYPING",
+};
 
 const ACTION = {
     POST: "POST",
@@ -21,19 +29,39 @@ const ACTION = {
  *
  * @enum {string}
  */
-const ROLE = {
+const ROLES = {
     BUYER: "BUYER",
     CREATIVE: "CREATIVE",
     ADMIN: "ADMIN",
 
 };
 
+const CHAT_ACTION_RULES = new ActionRules(
+    [
+        [ACTION.POST,new ChatRule([ROLES.ADMIN,ROLES.BUYER,ROLES.CREATIVE])],
+        [ACTION.GET,new ChatRule([],true,true)],
+        [ACTION.PUT,new ChatRule([],true)],
+        [ACTION.DELETE,new ChatRule([ROLES.ADMIN,],true,)],
+
+    ]
+);
+
+const MESSAGE_ACTION_RULES = new ActionRules(
+    [
+        [ACTION.POST, new MessageRule([],true,true)],
+        [ACTION.GET, new MessageRule([],true,true)],
+        [ACTION.PUT, new MessageRule([],true,)],
+        [ACTION.DELETE, new MessageRule([ROLES.ADMIN],true)],
+    ]
+);
+
+
 const ENTRY_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST, new Rule([ROLE.CREATIVE])],
-        [ACTION.GET, new Rule([ROLE.ADMIN, ROLE.BUYER, ROLE.CREATIVE], true)],
-        [ACTION.PUT, new Rule([ROLE.ADMIN,], true)],
-        [ACTION.DELETE, new Rule([ROLE.ADMIN,], true)],
+        [ACTION.POST, new Rule([ROLES.CREATIVE])],
+        [ACTION.GET, new Rule([ROLES.ADMIN, ROLES.BUYER, ROLES.CREATIVE], true)],
+        [ACTION.PUT, new Rule([ROLES.ADMIN,], true)],
+        [ACTION.DELETE, new Rule([ROLES.ADMIN,], true)],
     ]
 );
 
@@ -41,41 +69,41 @@ const ENTRY_ACTION_RULES = new ActionRules(
 
 const CONTEST_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST, new Rule([ROLE.ADMIN, ROLE.BUYER],true)],
-        [ACTION.GET, new Rule([ROLE.ADMIN, ROLE.BUYER, ROLE.CREATIVE], true)],
-        [ACTION.PUT, new Rule([ROLE.ADMIN,], true)],
-        [ACTION.DELETE, new Rule([ROLE.ADMIN,], true)],
+        [ACTION.POST, new Rule([ROLES.ADMIN, ROLES.BUYER],true)],
+        [ACTION.GET, new Rule([ROLES.ADMIN, ROLES.BUYER, ROLES.CREATIVE], true)],
+        [ACTION.PUT, new Rule([ROLES.ADMIN,], true)],
+        [ACTION.DELETE, new Rule([ROLES.ADMIN,], true)],
     ]
 );
 
 const USERS_ACTION_RULES = new Map([
     [
-        ROLE.ADMIN,
+        ROLES.ADMIN,
         new ActionRules(
             [
-                [ACTION.POST, new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN])],
-                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE, ROLE.ADMIN], true)],
-                [ACTION.PUT, new Rule([ROLE.BUYER, ROLE.CREATIVE], true)],
-                [ACTION.DELETE, new Rule([ROLE.BUYER, ROLE.CREATIVE])],
-                [ACTION.BAN, new Rule([ROLE.CREATIVE, ROLE.BUYER, ROLE.ADMIN])],
+                [ACTION.POST, new Rule([ROLES.BUYER, ROLES.CREATIVE, ROLES.ADMIN])],
+                [ACTION.GET, new Rule([ROLES.BUYER, ROLES.CREATIVE, ROLES.ADMIN], true)],
+                [ACTION.PUT, new Rule([ROLES.BUYER, ROLES.CREATIVE], true)],
+                [ACTION.DELETE, new Rule([ROLES.BUYER, ROLES.CREATIVE])],
+                [ACTION.BAN, new Rule([ROLES.CREATIVE, ROLES.BUYER, ROLES.ADMIN])],
 
             ]
         )
     ],
     [
-        ROLE.BUYER,
+        ROLES.BUYER,
         new ActionRules(
             [
-                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE,], true)],
+                [ACTION.GET, new Rule([ROLES.BUYER, ROLES.CREATIVE,], true)],
                 [ACTION.PUT, new Rule([], true)],
             ]
         )
     ],
     [
-        ROLE.CREATIVE,
+        ROLES.CREATIVE,
         new ActionRules(
             [
-                [ACTION.GET, new Rule([ROLE.BUYER, ROLE.CREATIVE,], true)],
+                [ACTION.GET, new Rule([ROLES.BUYER, ROLES.CREATIVE,], true)],
                 [ACTION.PUT, new Rule([], true)],
             ]
         ),
@@ -86,7 +114,10 @@ module.exports = {
     USERS_ACTION_RULES,
     CONTEST_ACTION_RULES,
     ENTRY_ACTION_RULES,
-    ROLE,
+    CHAT_ACTION_RULES,
+    MESSAGE_ACTION_RULES,
+    ROLES: ROLES,
+    SOCKET_EVENTS,
     SQUAD_HELP_BANK_CARD: {
         number: '0000111122223333',
         expiry: "12/99",
@@ -113,4 +144,7 @@ module.exports = {
     ACCESS_TOKEN_EXPIRES_IN: 60 * 60 * 24,
     REFRESH_TOKEN_EXPIRES_IN: (60 * 60 * 24 * 30),
 };
+
+
+
 

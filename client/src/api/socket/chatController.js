@@ -3,9 +3,13 @@ import {SOCKET_EVENTS} from "../../constants";
 import store from "../../store";
 import CHAT_ACTION_TYPES from "../../actions/actionTypes/chatActionTypes";
 
+
+
+
+
 const socket = io('http://localhost:3000');
 
-
+export const authorizeUser = (userId) => socket.emit(SOCKET_EVENTS.AUTHORIZE_USER,userId);
 
 export const joinMeToMyRooms = (user) => socket.emit(SOCKET_EVENTS.JOIN_ME_TO_ROOMS,user);
 

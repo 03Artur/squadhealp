@@ -1,6 +1,7 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
+import {authorizeUser, joinMeToMyRooms} from "../api/socket/chatController";
 
 export function* loginUserSaga({data: user}) {
 
@@ -17,10 +18,6 @@ export function* loginUserSaga({data: user}) {
         });
     }
 }
-
-
-
-
 export function* logoutUserSaga() {
 
     try {
@@ -40,7 +37,6 @@ export function* logoutUserSaga() {
 
     }
 }
-
 export function* signUpUserSaga({data: user}) {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
@@ -57,7 +53,6 @@ export function* signUpUserSaga({data: user}) {
         });
     }
 }
-
 export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
@@ -70,6 +65,15 @@ export function* getAuthorizedUserSaga() {
                 message: e.response.data,
             },
         });
+    }
+}
+
+export function* joinToRoomsSaga({user}) {
+    try{
+        yield authorizeUser(user.id);
+    }
+    catch (e) {
+
     }
 }
 

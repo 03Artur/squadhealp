@@ -5,23 +5,31 @@ import {Chat, Message} from '../mongoDbChat';
 import * as appError from "../errors";
 
 import array from 'lodash/array';
+import socketHelper from "../socketHelper/socketHelper";
 
-
-export async function getMessageById(req, res, next) {
+/*
+*
+* AUTHORS
+* */
+export async function getAuthors(req, res, next) {
     try {
-        const message = await Message.findById(req.params.id);
+        const ids = req.query.authorsIds;
+        const authors = await Users.findAll({
+            id: ids,
+        });
 
-        if (message) {
-            res.send(message);
+        if (authors) {
+            res.send(authors);
         }
 
-        return next(new appError.BadRequestError());
+        return next(new appError.NotFoundError());
+
     } catch (e) {
         next(e);
     }
 }
 
-export async function getMessageAuthorById(req, res, next) {
+export async function getAuthorById(req, res, next) {
     try {
 
         const author = await Users.findByPk(req.params.id, {
@@ -40,6 +48,83 @@ export async function getMessageAuthorById(req, res, next) {
         next(e)
     }
 }
+
+/*
+*
+* MESSAGES
+* */
+export function sendMessage(req, res, next) {
+    try {
+        res.send(req.message);
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function getMessageById(req, res, next) {
+    try {
+        const message = await Message.findById(req.params.id);
+
+        if (message) {
+            res.send(message);
+        }
+
+        return next(new appError.NotFoundError());
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function updateMessage(req, res, next) {
+    try {
+        const {message} = req;
+
+        message.message = req.body.message;
+        const newMessage = await message.save();
+
+        res.send(newMessage);
+
+
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function postMessage(req, res, next) {
+    try {
+
+        let {chat, body: data, accessTokenPayload: {id: authorId}} = req;
+        data.authorId = authorId;
+        data.chatId = chat._id;
+
+        let message = await Message.create(data);
+        chat.messages.push(message);
+        chat = await chat.save();
+
+        if (message && chat) {
+            res.send(message);
+        }
+
+        return next(new appError.BadRequestError());
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function getChatMessages(req, res, next) {
+    try {
+        const messages = Message.find()
+
+    } catch (e) {
+        next(e);
+    }
+}
+
+/*
+*
+* CHATS
+* */
+
 
 export async function createChat(req, res, next) {
     try {
@@ -77,31 +162,15 @@ export async function createChat(req, res, next) {
     }
 }
 
-export async function createMessage(req, res, next) {
-    try {
 
-        let {chat, body: data, accessTokenPayload: {id: authorId}} = req;
-
-        if (chat.participants.includes(authorId)) {
-            data.authorId = authorId;
-            data.chatId = chat._id;
-            let message = await Message.create(data);
-            chat.messages.push(message);
-            chat = await chat.save();
-            if (message && chat) {
-                res.send(message);
-            }
-        } else {
-            return next(new appError.ForbiddenError(''))
-        }
-
-
-        return next(new appError.BadRequestError())
-
-    } catch (e) {
-        next(e);
+const reducer = (accumulator, chat) => {
+    if (chat.messages.length) {
+        return accumulator.authorsIds.push(chat.messages[0].authorId)
     }
-}
+    accumulator.rooms.push(chat._id);
+    return accumulator;
+};
+
 
 export async function getAllUserChats(req, res, next) {
     try {
@@ -123,12 +192,11 @@ export async function getAllUserChats(req, res, next) {
             }
         });
 
-        const authorsIds = chats.reduce((ids, chat) => {
-            if (chat.messages.length) {
-                return ids.concat(chat.messages[0].authorId)
-            }
-            return ids;
-        }, []);
+        const result = chats.reduce(reducer, {
+            authorsIds: [],
+            rooms: [],
+        });
+        res.send(result);
         const authors = await Users.findAll({
             where: {
                 id: authorsIds

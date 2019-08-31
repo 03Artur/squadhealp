@@ -1,6 +1,6 @@
 import {USERS_ACTION_RULES} from "../constants";
 
-const {ROLE, ACTION} = require("../constants");
+const {ROLES, ACTION} = require("../constants");
 const Rule = require('../utils/permissions/classes/Rule');
 const ActionRules = require('../utils/permissions/classes/ActionRules');
 
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0,
             validate: {
-                isIn: [Object.values(ROLE)],
+                isIn: [Object.values(ROLES)],
             },
         },
         balance: {

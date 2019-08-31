@@ -1,7 +1,7 @@
 
 const Rule = require('../utils/permissions/classes/Rule');
 const ActionRules = require('../utils/permissions/classes/ActionRules');
-const {ROLE, ACTION,CONTEST_ACTION_RULES} = require("../constants");
+const {ROLES, ACTION,CONTEST_ACTION_RULES} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
     const Contests = sequelize.define('Contests', {

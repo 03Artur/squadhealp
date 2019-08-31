@@ -3,7 +3,7 @@ const {ROLE, ACTION} = require("../../../constants/index");
 module.exports =  class Rule {
     /**
      *
-     * @param {Array.<ROLE>} canActRoles
+     * @param {Array.<ROLES>} canActRoles
      * @param canOwnerAct
      */
     constructor(canActRoles, canOwnerAct = false) {

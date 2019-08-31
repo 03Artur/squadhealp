@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const userSocketSchema = new Schema(
+
+const userToSocketSchema = new Schema(
     {
         userId: Number,
         socketId: String,
     },
+
     {
         autoIndex: true,
     },
@@ -12,8 +14,8 @@ const userSocketSchema = new Schema(
 
 
 module.exports = {
-    name: 'UserSocket',
-    schema: userSocketSchema
+    name: 'UserToSocket',
+    schema: userToSocketSchema
 };
 
 
