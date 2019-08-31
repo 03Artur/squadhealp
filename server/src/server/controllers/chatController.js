@@ -4,13 +4,72 @@ import {Chat, Message} from '../mongoDbChat';
 
 import * as appError from "../errors";
 
+import array from 'lodash/array';
+
+
+export async function getMessageById(req, res, next) {
+    try {
+        const message = await Message.findById(req.params.id);
+
+        if (message) {
+            res.send(message);
+        }
+
+        return next(new appError.BadRequestError());
+    } catch (e) {
+        next(e);
+    }
+}
+
+export async function getMessageAuthorById(req, res, next) {
+    try {
+
+        const author = await Users.findByPk(req.params.id, {
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'password', 'email', 'balance', 'isBanned',],
+            }
+        });
+
+        if (author) {
+            res.send(author);
+        }
+
+        return next(new appError.NotFoundError('author not found'));
+
+    } catch (e) {
+        next(e)
+    }
+}
+
 export async function createChat(req, res, next) {
     try {
-        req.body.ownerId = req.accessTokenPayload.id;
-        const chat = await Chat.create(req.body);
+        const {body: data} = req;
+        data.ownerId = req.accessTokenPayload.id;
+        data.participants.push(req.accessTokenPayload.id);
+        data.participants = array.uniq(data.participants);
+
+        const chat = await Chat.create(data);
         if (chat) {
-            res.send(chat);
+            res.send(chat)
+            /*const participants = await Users.findAll({
+                where: {
+                    id: data.participants,
+                },
+                attributes: {
+                    exclude: ['createdAt','updatedAt','password','email','balance','isBanned',]
+                }
+            });
+
+            if (participants) {
+                res.send({
+                    chat,
+                    participants,
+                });
+
+            }*/
         }
+
+
         return next(new appError.BadRequestError())
 
     } catch (e) {
@@ -20,16 +79,22 @@ export async function createChat(req, res, next) {
 
 export async function createMessage(req, res, next) {
     try {
-        const chat = await Chat.findById(req.params.chatId);
-        req.body.authorId = req.accessTokenPayload.id;
-        req.body.chatId = chat._id;
-        let message = await Message.create(req.body);
-        chat.messages.push(message);
-        await chat.save();
-        res.send(chat);
-        if (message) {
-            res.send(message);
+
+        let {chat, body: data, accessTokenPayload: {id: authorId}} = req;
+
+        if (chat.participants.includes(authorId)) {
+            data.authorId = authorId;
+            data.chatId = chat._id;
+            let message = await Message.create(data);
+            chat.messages.push(message);
+            chat = await chat.save();
+            if (message && chat) {
+                res.send(message);
+            }
+        } else {
+            return next(new appError.ForbiddenError(''))
         }
+
 
         return next(new appError.BadRequestError())
 
@@ -59,7 +124,7 @@ export async function getAllUserChats(req, res, next) {
         });
 
         const authorsIds = chats.reduce((ids, chat) => {
-            if(chat.messages.length){
+            if (chat.messages.length) {
                 return ids.concat(chat.messages[0].authorId)
             }
             return ids;

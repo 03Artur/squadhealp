@@ -12,6 +12,7 @@ const initialState = {
  function chatReducer(state = initialState, action) {
 
     switch (action.type) {
+        case CHAT_ACTION_TYPES.START_CHAT_REQUEST:
         case CHAT_ACTION_TYPES.GET_CHAT_DATA_REQUEST:{
 
             return _.cloneDeep({
@@ -19,6 +20,7 @@ const initialState = {
                 isFetching: true,
             });
         }
+        case CHAT_ACTION_TYPES.START_CHAT_RESPONSE:
         case CHAT_ACTION_TYPES.GET_CHAT_DATA_RESPONSE:{
             return _.cloneDeep({
                 ...state,

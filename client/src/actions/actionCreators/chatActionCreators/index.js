@@ -33,3 +33,12 @@ export function cancelSearchChatRoomActionCreator() {
         type: CHAT_ACTION_TYPES.CANCEL_SEARCH_CHAT_ROOM_ACTION,
     }
 }
+
+export function startChatActionCreator(participants) {
+    return {
+        type: CHAT_ACTION_TYPES.START_CHAT_ACTION,
+        participants,
+    }
+}
+
+

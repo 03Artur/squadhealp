@@ -48,6 +48,7 @@ function* rootSaga() {
     * CHAT
     *
     * */
+    yield takeLatest(CHAT_ACTION_TYPES.START_CHAT_ACTION, chatSaga.startChatSaga)
     yield takeLatest(CHAT_ACTION_TYPES.SELECT_CHAT_ROOM_ACTION, chatSaga.selectChatRoomSaga);
     yield takeLatest(CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION, chatSaga.sendMessageSaga);
     yield takeLatest(CHAT_ACTION_TYPES.MESSAGE_RECEIVED_ACTION, chatSaga.messageReceiveSaga);

@@ -1,23 +1,59 @@
 import {put, all, call} from 'redux-saga/effects';
 import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
 import {loginUser} from "../api/rest/authorizationController";
-import * as chatController from '../api/socket/chatController'
+import {createChat} from "../../../server/src/server/controllers/chatController";
+
+export function* startChatSaga({participants: members}) {
+    try {
+        yield put({
+            type: CHAT_ACTION_TYPES.START_CHAT_REQUEST,
+        });
+        const {data:chat} =yield createChat(members);
+        const participantsMap = new Map();
+/*
+        participants.forEach(user => participants.set(user.id,user));
+*/
+        yield put({
+            type: CHAT_ACTION_TYPES.START_CHAT_RESPONSE,
+            room: chat.id,
+            members: participantsMap,
+            messages: [],
+        })
+    }
+    catch (e) {
+            yield put({
+                type: CHAT_ACTION_TYPES.START_CHAT_ERROR,
+                error: e.response.data,
+            })
+    }
+}
 
 
-export function* messageReceiveSaga({data}) {
+
+
+export function* getMessageSaga({data}) {
+
+    try {
+
+    }
+    catch (e) {
+
+    }
     console.group('MESSAGE');
     console.log(data);
     console.groupEnd();
 }
 
-export function* sendMessageSaga({room, data}) {
+export function* sendMessageSaga({chatId, message}) {
 
     try {
-        yield chatController.sendMessage(room, data);
+
+
+
     } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.SEND_MESSAGE_ERROR,
-            error: {}
+            error: e.response.data,
         })
     }
 }

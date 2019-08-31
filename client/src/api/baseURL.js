@@ -29,6 +29,14 @@ export const userUrl = `/user`;
 export const usersUrl = `/users`;
 
 /*
+* CHAT
+* */
+export const chatUrl = '/chat';
+export const messageUrl = '/message';
+export const authorUrl ='/author';
+
+
+/*
 * Static paths
 * */
 export const imagesURL = `${baseURL}/images`;
