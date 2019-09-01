@@ -1,5 +1,5 @@
 import Rule from '../utils/permissions/classes/Rule';
-import {ChatRule,MessageRule} from '../utils/permissions/classes/ChatRule';
+import {ChatRule, MessageRule} from '../utils/permissions/classes/ChatRule';
 import ActionRules from '../utils/permissions/classes/ActionRules';
 
 export const TASK_TYPE = {
@@ -8,13 +8,16 @@ export const TASK_TYPE = {
     LOGO: "Logo",
 };
 
- const SOCKET_EVENTS = {
+const SOCKET_EVENTS = {
     CHAT_MESSAGE: 'CHAT_MESSAGE',
     RECEIVED_MESSAGE: "RECEIVED_MESSAGE",
     TYPING: "TYPING",
     NOTIFY_TYPING: "NOTIFY_TYPING",
     NOTIFY_STOP_TYPING: "NOTIFY_STOP_TYPING",
     STOP_TYPING: "STOP_TYPING",
+    LOGIN_USER: "LOGIN_USER",
+    NOTIFY_GET_CHAT: "NOTIFY_GET_CHAT",
+
 };
 
 const ACTION = {
@@ -38,20 +41,20 @@ const ROLES = {
 
 const CHAT_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST,new ChatRule([ROLES.ADMIN,ROLES.BUYER,ROLES.CREATIVE])],
-        [ACTION.GET,new ChatRule([],true,true)],
-        [ACTION.PUT,new ChatRule([],true)],
-        [ACTION.DELETE,new ChatRule([ROLES.ADMIN,],true,)],
+        [ACTION.POST, new ChatRule([ROLES.ADMIN, ROLES.BUYER, ROLES.CREATIVE])],
+        [ACTION.GET, new ChatRule([], true, true)],
+        [ACTION.PUT, new ChatRule([], true)],
+        [ACTION.DELETE, new ChatRule([ROLES.ADMIN,], true,)],
 
     ]
 );
 
 const MESSAGE_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST, new MessageRule([],true,true)],
-        [ACTION.GET, new MessageRule([],true,true)],
-        [ACTION.PUT, new MessageRule([],true,)],
-        [ACTION.DELETE, new MessageRule([ROLES.ADMIN],true)],
+        [ACTION.POST, new MessageRule([], true, true)],
+        [ACTION.GET, new MessageRule([], true, true)],
+        [ACTION.PUT, new MessageRule([], true,)],
+        [ACTION.DELETE, new MessageRule([ROLES.ADMIN], true)],
     ]
 );
 
@@ -66,10 +69,9 @@ const ENTRY_ACTION_RULES = new ActionRules(
 );
 
 
-
 const CONTEST_ACTION_RULES = new ActionRules(
     [
-        [ACTION.POST, new Rule([ROLES.ADMIN, ROLES.BUYER],true)],
+        [ACTION.POST, new Rule([ROLES.ADMIN, ROLES.BUYER], true)],
         [ACTION.GET, new Rule([ROLES.ADMIN, ROLES.BUYER, ROLES.CREATIVE], true)],
         [ACTION.PUT, new Rule([ROLES.ADMIN,], true)],
         [ACTION.DELETE, new Rule([ROLES.ADMIN,], true)],
@@ -131,10 +133,10 @@ module.exports = {
         [TASK_TYPE.NAME, 10],
     ]),
     TASK_COST: new Map([
-            [TASK_TYPE.TAGLINE, 72.15],
-            [TASK_TYPE.LOGO, 91.43],
-            [TASK_TYPE.NAME, 100.0],
-        ]),
+        [TASK_TYPE.TAGLINE, 72.15],
+        [TASK_TYPE.LOGO, 91.43],
+        [TASK_TYPE.NAME, 100.0],
+    ]),
     MULTER_TIME_FORMAT: 'YYMMDDHHmmss',
 
     DEVICES_COUNT: 3,

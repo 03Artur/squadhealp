@@ -1,7 +1,5 @@
-
 import {SOCKET_EVENTS} from "../constants";
 import {UserToSocket} from '../mongoDbChat'
-
 
 
 /*io.on("connection", socket => {
@@ -38,7 +36,7 @@ import {UserToSocket} from '../mongoDbChat'
 });*/
 
 
-class SocketHelper{
+class SocketHelper {
 
     constructor() {
 
@@ -46,20 +44,74 @@ class SocketHelper{
 
     }
 
-    joinUserToRooms(userId,rooms){
+
+    joinUserToRooms(userId, rooms) {
 
     }
 
-    get io(){
+    async addParticipantsToChatRoom(room, participants) {
+        const userToSockets = await UserToSocket.find({
+            userId: participants,
+        });
+        userToSockets.forEach(item => {
+            const socket = this.io.sockets.connected[item.socketId];
+            socket.join(room, () => {
+                socket.emit(SOCKET_EVENTS.NOTIFY_GET_CHAT, {
+                    chatId: room
+                })
+            });
+
+        })
+    }
+
+    addChatEvents(socket) {
+        socket.on(SOCKET_EVENTS.TYPING, (room, data) => {
+            socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_TYPING, {
+                user: data.user,
+                message: data.message
+            });
+        });
+
+        socket.on(SOCKET_EVENTS.STOP_TYPING, (room, data) => {
+            socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_STOP_TYPING, data);
+        });
+
+        socket.on(SOCKET_EVENTS.CHAT_MESSAGE, function (room, data) {
+
+            console.log("ROOM: ", room);
+            console.log("DATA: ", data);
+
+            io.in(room).emit(SOCKET_EVENTS.RECEIVED_MESSAGE, {
+                room,
+                message: data,
+            });
+        });
+
+        socket.on(SOCKET_EVENTS.LOGIN_USER, async (userId) => {
+            await UserToSocket.create({
+                userId,
+                socketId: socket.id,
+            });
+        })
+
+
+    }
+
+    get io() {
         return this._io;
     }
-    set io(ioInstance){
+
+    set io(ioInstance) {
         this._io = ioInstance;
         this._io.on('connection', socket => {
 
-            socket.on("disconnect",async function () {
-
+            socket.on("disconnect", async function () {
+                await UserToSocket.deleteOne({
+                    socketId: socket.id,
+                })
             });
+
+            this.addChatEvents(socket);
         })
     }
 

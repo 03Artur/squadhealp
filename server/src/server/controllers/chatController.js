@@ -126,6 +126,15 @@ export async function getChatMessages(req, res, next) {
 * */
 
 
+export async function sendChat(req, res, next) {
+    try {
+        res.send(req.chat);
+    } catch (e) {
+        next(e);
+    }
+}
+
+
 export async function createChat(req, res, next) {
     try {
         const {body: data} = req;
@@ -135,26 +144,9 @@ export async function createChat(req, res, next) {
 
         const chat = await Chat.create(data);
         if (chat) {
-            res.send(chat)
-            /*const participants = await Users.findAll({
-                where: {
-                    id: data.participants,
-                },
-                attributes: {
-                    exclude: ['createdAt','updatedAt','password','email','balance','isBanned',]
-                }
-            });
-
-            if (participants) {
-                res.send({
-                    chat,
-                    participants,
-                });
-
-            }*/
+            await socketHelper.addParticipantsToChatRoom(chat._id, chat.participants);
+            res.send(chat);
         }
-
-
         return next(new appError.BadRequestError())
 
     } catch (e) {
@@ -208,9 +200,8 @@ export async function getAllUserChats(req, res, next) {
                 chats,
                 authors: authors
             });
-        } else {
-            res.send({f: 'asdasd'})
         }
+        return next(new appError.BadRequestError());
 
     } catch (e) {
         next(e);

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const userToSocketSchema = new Schema(
     {
-        userId: Number,
-        socketId: String,
+        userId: Schema.Types.Mixed,
+        socketId: Schema.Types.Mixed,
     },
 
     {

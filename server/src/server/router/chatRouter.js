@@ -5,7 +5,7 @@ import {
     getAllUserChats, getAuthors,
     getAuthorById,
     getMessageById,
-    sendMessage, updateMessage,
+    sendMessage, updateMessage, sendChat,
 } from "../controllers/chatController";
 import {validateChat, validateMessage} from "../middlewares/chat/validation";
 import {findChatById, findMessageById} from "../middlewares/chat/findChatById";
@@ -20,9 +20,7 @@ router.get('/authors', getAuthors);
 
 
 router.post('/chat', checkPermission, validateChat, createChat);
-router.get('/chat/:chatId', findChatById, checkPermission, (req, res, next) => {
-    res.send(req.chat);
-});
+router.get('/chat/:chatId', findChatById, checkPermission, sendChat);
 
 router.post('/chat/:chatId/message', validateMessage, findChatById, checkMessagePermission, postMessage);
 router.get('/chat/:chatId/message/:id', findChatById, findMessageById, checkMessagePermission, sendMessage);
