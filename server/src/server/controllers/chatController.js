@@ -1,9 +1,6 @@
 import {Users} from './../models';
-
 import {Chat, Message} from '../mongoDbChat';
-
 import * as appError from "../errors";
-
 import array from 'lodash/array';
 import socketHelper from "../socketHelper/socketHelper";
 
@@ -120,12 +117,11 @@ export async function getChatMessages(req, res, next) {
     }
 }
 
+
 /*
 *
 * CHATS
 * */
-
-
 export async function sendChat(req, res, next) {
     try {
         res.send(req.chat);
@@ -133,7 +129,6 @@ export async function sendChat(req, res, next) {
         next(e);
     }
 }
-
 
 export async function createChat(req, res, next) {
     try {
@@ -153,16 +148,6 @@ export async function createChat(req, res, next) {
         next(e);
     }
 }
-
-
-const reducer = (accumulator, chat) => {
-    if (chat.messages.length) {
-        return accumulator.authorsIds.push(chat.messages[0].authorId)
-    }
-    accumulator.rooms.push(chat._id);
-    return accumulator;
-};
-
 
 export async function getAllUserChats(req, res, next) {
     try {
@@ -208,3 +193,14 @@ export async function getAllUserChats(req, res, next) {
     }
 }
 
+/*
+* UTILS
+* */
+
+const reducer = (accumulator, chat) => {
+    if (chat.messages.length) {
+        return accumulator.authorsIds.push(chat.messages[0].authorId)
+    }
+    accumulator.rooms.push(chat._id);
+    return accumulator;
+};
