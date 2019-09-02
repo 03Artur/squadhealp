@@ -13,7 +13,6 @@ export default function (state = initialState, action) {
 
     switch (action.type) {
 
-
         case CHAT_ACTION_TYPES.GET_CHATS_REQUEST:
         case CHAT_ACTION_TYPES.GET_CHAT_REQUEST: {
             return {
@@ -46,7 +45,6 @@ export default function (state = initialState, action) {
                 error: action.error
             })
         }
-
 
         default: {
             return state;

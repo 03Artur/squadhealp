@@ -14,7 +14,7 @@ import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
 import chats from "./chat/chatsReducer";
 import chatMenu from "./menu/chatMenuReducer";
-import chatQuery from "./chat/chatQueryReducer";
+import chatQuery from "./chat/chatsQueryReducer";
 import chatsParticipants from "./chat/chatsParticipantsReducer";
 
 
