@@ -39,6 +39,7 @@ export function* getUserChatsSaga() {
         })
     }
 }
+
 //CREATE CHAT
 export function* createChatSaga({chat}) {
     try {
@@ -61,6 +62,7 @@ export function* createChatSaga({chat}) {
         })
     }
 }
+
 //SELECT CHAT
 
 //GET CHAT
@@ -136,6 +138,29 @@ export function* getParticipantSaga({id}) {
 
 }
 
+//POST MESSAGE
+export function* postMessageSaga({chatId, message}) {
+    try {
+        yield put({
+            type: CHAT_ACTION_TYPES.POST_MESSAGE_REQUEST,
+        });
+
+        const {data} = yield chatController.postMessage(chatId, message);
+
+        yield put({
+            type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
+            message: data,
+        })
+
+
+    } catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.POST_MESSAGE_ERROR,
+            error: e.response.data,
+        });
+
+    }
+}
 
 /*
 *

@@ -60,6 +60,7 @@ function* rootSaga() {
     //MESSAGE
     yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGES_ACTION, chatSaga.getMessagesSaga);
     yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGE_ACTION, chatSaga.getMessageSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.POST_MESSAGE_ACTION, chatSaga.);
     /*
     * PARTICIPANT
     * */

@@ -59,12 +59,12 @@ const mapStateToProps = store => {
     const {chats} = store.chatsReducer;
     const {messages} = store.chatsMessagesReducer;
     const {participants} = store.chatsParticipantsReducer;
+
     const chatsWithLastMessage = chats.map(chat => {
         const chatMessages = messages.get(chat._id);
         const lastMessage = chatMessages[chatMessages.length - 1];
         if (lastMessage) {
             lastMessage.author = participants.get(lastMessage.authorId);
-
         }
         return {
             chat,
