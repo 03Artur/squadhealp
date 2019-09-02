@@ -10,7 +10,9 @@ export default function (state = initialState, action) {
 
     switch (action.type) {
 
-        case CHAT_ACTION_TYPES.GET_AUTHORS_REQUEST: {
+        //LOADING
+        case CHAT_ACTION_TYPES.GET_PARTICIPANT_REQUEST:
+        case CHAT_ACTION_TYPES.GET_PARTICIPANTS_REQUEST: {
 
             return {
                 ...state,
@@ -18,33 +20,46 @@ export default function (state = initialState, action) {
             }
         }
 
-        case CHAT_ACTION_TYPES.GET_AUTHORS_RESPONSE: {
+        //ADDING PARTICIPANTS
+        case CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE: {
+
+            const participants = _.cloneDeep(state.participants);
+            action.participants.forEach(item => {
+                participants.set(item.id, item);
+
+            });
+            return _.cloneDeep({
+                ...state,
+                participants,
+                isFetching: false,
+            });
+        }
+
+        //ADDING ONE PARTICIPANT
+        case CHAT_ACTION_TYPES.GET_PARTICIPANT_RESPONSE: {
 
             const clonedState = _.cloneDeep(state);
-            action.participants.forEach(item => {
-                clonedState.participants.set(item.id, item);
-            });
+            clonedState.participants.set(action.participant.id, action.participant);
+            clonedState.isFetching = false;
+            return clonedState;
+        }
+
+        //REQUEST ERRORS
+        case CHAT_ACTION_TYPES.GET_PARTICIPANTS_ERROR:
+        case CHAT_ACTION_TYPES.GET_PARTICIPANT_ERROR: {
+
 
             return _.cloneDeep({
                 ...state,
-                participants
+                error: action.error,
+               isFetching: false,
+
             })
         }
 
-        case CHAT_ACTION_TYPES.GET_AUTHORS_ERROR: {
-
-            const clonedState = _.cloneDeep(state);
-
-            return {
-                ...clonedState,
-                error: action.error,
-            }
-        }
         default: {
             return state;
         }
-
     }
-
 }
 

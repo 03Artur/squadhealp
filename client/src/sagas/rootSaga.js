@@ -50,14 +50,16 @@ function* rootSaga() {
     *
     * */
     //CHAT
-    yield takeLatest(CHAT_ACTION_TYPES.GET_USER_CHATS_ACTION, chatSaga.getUserChatsSaga);
-    yield takeLatest(CHAT_ACTION_TYPES.CREATE_CHAT_ACTION, chatSaga.createChatSaga);
+    yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE, chatSaga.getUserChatsSaga);
     yield takeLatest(CHAT_ACTION_TYPES.GET_CHAT_ACTION, chatSaga.getChatSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.CREATE_CHAT_ACTION, chatSaga.createChatSaga);
 
     //PARTICIPANT
     yield takeLatest(CHAT_ACTION_TYPES.GET_PARTICIPANTS_ACTION, chatSaga.getParticipantsSaga);
 
     //MESSAGE
+    yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGES_ACTION, chatSaga.getMessagesSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGE_ACTION, chatSaga.getMessageSaga);
     /*
     * PARTICIPANT
     * */

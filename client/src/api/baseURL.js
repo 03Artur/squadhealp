@@ -33,10 +33,12 @@ export const usersUrl = `/users`;
 * */
 export const chatUrl = '/chat';
 export const chatsUrl = '/chats';
+
 export const messageUrl = '/message';
+export const messagesUrl = '/messages';
+
 export const participantUrl ='/participant';
 export const participantsUrl ='/participants';
-
 
 /*
 * Static paths

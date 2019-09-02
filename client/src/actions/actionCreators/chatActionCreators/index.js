@@ -16,9 +16,24 @@ export function getChatActionCreator(chatId) {
         chatId,
     }
 }
+
 export function getUserChatsActionCreate() {
     return {
-        type: CHAT_ACTION_TYPES.GET_USER_CHATS_ACTION,
+        type: CHAT_ACTION_TYPES.GET_CHATS_ACTION,
+    }
+}
+
+
+export function selectChatActionCreator(chatId) {
+    return {
+        type: CHAT_ACTION_TYPES.SELECT_CHAT_ACTION,
+        chatId,
+    }
+}
+
+export function unselectChatActionCreator() {
+    return {
+        type: CHAT_ACTION_TYPES.UNSELECT_CHAT_ACTION,
     }
 }
 
@@ -30,11 +45,21 @@ export function getUserChatsActionCreate() {
 * MESSAGE
 * */
 
+export function getMessagesActionCreator(chatId, query) {
+    return {
+        type: CHAT_ACTION_TYPES.GET_MESSAGES_ACTION,
+        chatId,
+        query,
+    }
+}
 
-
-
-
-
+export function getMessageActionCreator(chatId, messageId) {
+    return {
+        type: CHAT_ACTION_TYPES.GET_MESSAGE_ACTION,
+        chatId,
+        messageId,
+    }
+}
 
 
 //================================================

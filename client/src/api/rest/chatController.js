@@ -1,5 +1,5 @@
 import axios from './';
-import { participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl} from "../baseURL";
+import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messagesUrl} from "../baseURL";
 import queryString from 'query-string';
 
 
@@ -16,6 +16,12 @@ export const getChat = chatId => axios.get(`${chatsUrl}${chatId}`);
 export const getParticipants = (queryString) => axios.get(`${participantsUrl}${queryString}`);
 export const getParticipant = id => axios.get(`${participantUrl}/${id}`);
 
-//==================================
+/*
+* MESSAGES
+* */
 export const postMessage = (chatId, message) => axios.post(`${chatUrl}/${chatId}${messageUrl}`, message);
-export const getMessage = (messageId) => axios.get();
+
+export const getMessages = (chatId, queryString) => axios.get(`${chatUrl}/${chatId}/${messagesUrl}/${queryString}`);
+export const getMessage = (chatId, messageId) => axios.get(`${chatUrl}/${chatId}${messageUrl}/${messageId}`);
+
+//==================================

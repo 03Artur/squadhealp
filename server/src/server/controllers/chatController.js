@@ -108,8 +108,28 @@ export async function postMessage(req, res, next) {
 }
 
 export async function getChatMessages(req, res, next) {
+
     try {
-        const messages = Message.find()
+        const {chat, query} = req;
+        const messages = await Message.find(
+            {
+                chatId: chat._id,
+            },
+            null,
+            {
+                limit: parseInt(query.limit),
+
+                skip: parseInt(query.skip),
+                sort: {
+                    updatedAt: -1,
+                },
+            }
+        );
+
+        if (messages) {
+            res.send(messages)
+        }
+        return next(new appError.NotFoundError());
 
     } catch (e) {
         next(e);
@@ -157,11 +177,9 @@ export async function getAllUserChats(req, res, next) {
     try {
 
         const {id: userId} = req.accessTokenPayload;
-        const chats = await Chat.find(
-            {
-                participants: userId,
-            }
-        ).populate({
+        const chats = await Chat.find({
+            participants: userId,
+        }).populate({
             path: 'messages',
             options: {
                 limit: 1,
@@ -177,9 +195,13 @@ export async function getAllUserChats(req, res, next) {
             participantsId: [],
             rooms: [],
         });
+
         const participants = await Users.findAll({
             where: {
-                id: result.participantsId
+                id: result.participantsId,
+            },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'password', 'email', 'balance', 'isBanned',],
             }
         });
 
@@ -201,8 +223,9 @@ export async function getAllUserChats(req, res, next) {
 * */
 
 const reducer = (accumulator, chat) => {
+
     if (chat.messages.length) {
-        return accumulator.participantsId.push(chat.messages[0].authorId)
+        accumulator.participantsId.push(chat.messages[0].authorId)
     }
     accumulator.rooms.push(chat._id);
     return accumulator;

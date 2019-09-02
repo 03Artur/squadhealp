@@ -6,6 +6,7 @@ export async function findChatById(req, res, next) {
     try {
         const chat = await Chat.findById(req.params.chatId);
         if (chat) {
+
             req.chat = chat;
             return next();
         }
@@ -17,7 +18,7 @@ export async function findChatById(req, res, next) {
 
 export async function findMessageById(req, res, next) {
     try {
-        const message = await Message.findById(req.params.id);
+        const message = await Message.findById(req.params.messageId);
         if (message) {
             req.message = message;
             return next();

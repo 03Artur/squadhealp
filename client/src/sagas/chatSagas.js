@@ -1,7 +1,8 @@
-import {put, all, call} from 'redux-saga/effects';
+import {put, all, call, select} from 'redux-saga/effects';
 import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
 import * as chatController from '../api/rest/chatController';
 import queryString from 'queryString';
+import _ from 'lodash';
 
 /*
 * CHAT
@@ -53,7 +54,7 @@ export function* createChatSaga({chat}) {
         })
 
 
-    }catch (e) {
+    } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.CREATE_CHAT_ERROR,
             error: e.response.data,
@@ -64,18 +65,18 @@ export function* createChatSaga({chat}) {
 
 //GET CHAT
 export function* getChatSaga({chatId}) {
-    try{
+    try {
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
         });
-        const {data} = yield chatController.getChat(chatId);
+        const {data: chat} = yield chatController.getChat(chatId);
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
-            chat: data,
+            chat,
         })
 
-    }catch (e) {
+    } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_ERROR,
             error: e.response.data,
@@ -84,14 +85,15 @@ export function* getChatSaga({chatId}) {
 }
 
 
-
 /*
 * PARTICIPANTS
 * */
+
+//GET PARTICIPANTS
 export function* getParticipantsSaga({query}) {
     try {
         yield put({
-           type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_REQUEST,
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_REQUEST,
         });
 
         const {data} = yield chatController.getParticipants(queryString.stringify(query));
@@ -110,118 +112,106 @@ export function* getParticipantsSaga({query}) {
     }
 }
 
+//GET PARTICIPANT
+export function* getParticipantSaga({id}) {
+
+    try {
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANT_REQUEST,
+        });
+
+        const {data: participant} = yield chatController.getParticipant(id);
+
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANT_RESPONSE,
+            participant,
+        })
+
+    } catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANT_ERROR,
+            error: e.response.data,
+        })
+    }
+
+}
+
 
 /*
 *
 * MESSAGE
 * */
 
-export function* getMessageSaga({data}) {
+export function* getMessagesSaga({chatId, query}) {
+
+    yield put({
+        type: CHAT_ACTION_TYPES.GET_MESSAGES_REQUEST,
+    });
 
     try {
+        const {data: messages} = yield chatController.getMessages(chatId, queryString.stringify(query));
+        const effects = [
+            put({
+                type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
+                messages,
+            }),
+        ];
+
+        const {participants} = yield select(getParticipants);
+        const missingParticipantsIds = _.difference(messages.map(message => message.authorId), [...participants.keys()]);
+
+        if (missingParticipantsIds.length) {
+            effects.push(call(getParticipantsSaga, {
+                query: {
+                    id: missingParticipantsIds,
+                }
+            }))
+        }
+
+        yield all(effects);
 
     } catch (e) {
-
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_MESSAGES_ERROR,
+            error: e.response.data,
+        })
     }
-    console.group('MESSAGE');
-    console.log(data);
-    console.groupEnd();
 }
 
-/*
-* =================================================================
-* */
-export function* startChatSaga({participants: members}) {
+export function* getMessageSaga({chatId, messageId}) {
     try {
         yield put({
-            type: CHAT_ACTION_TYPES.START_CHAT_REQUEST,
+            type: CHAT_ACTION_TYPES.GET_MESSAGE_REQUEST,
         });
-        const {data: chat} = yield createChat(members);
-        const participantsMap = new Map();
-        /*
-                participants.forEach(user => participants.set(user.id,user));
-        */
-        yield put({
-            type: CHAT_ACTION_TYPES.START_CHAT_RESPONSE,
-            room: chat.id,
-            members: participantsMap,
-            messages: [],
-        })
+
+        const {data: message} = yield chatController.getMessage(chatId, messageId);
+
+        const effects = [
+            put({
+                type: CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE,
+                message: message,
+            })
+        ];
+        const {participants} = yield select(getParticipants);
+        const author = participants.get(message.authorId);
+        if (!author) {
+            effects.push(
+                call(getParticipantSaga, {id: message.authorId})
+            )
+        }
+
+        yield all(effects);
+
     } catch (e) {
         yield put({
-            type: CHAT_ACTION_TYPES.START_CHAT_ERROR,
+            type: CHAT_ACTION_TYPES.GET_MESSAGE_ERROR,
             error: e.response.data,
-        })
+        });
     }
 }
 
 
+//UTILS
+const getParticipants = state => state.chatsParticipants;
 
-
-export function* sendMessageSaga({chatId, message}) {
-
-    try {
-
-
-    } catch (e) {
-        yield put({
-            type: CHAT_ACTION_TYPES.SEND_MESSAGE_ERROR,
-            error: e.response.data,
-        })
-    }
-}
-
-
-export function* selectChatRoomSaga({room}) {
-    try {
-        yield put({
-            type: CHAT_ACTION_TYPES.GET_CHAT_DATA_RESPONSE,
-            room: room,
-            members: [
-
-                {
-                    id: 1,
-                    firstName: "Name",
-                    lastName: "Surname",
-                    profilePicture: null,
-                },
-                {
-                    id: 2,
-                    firstName: "React",
-                    lastName: "Telegramovich",
-                    profilePicture: 'user1.jpeg',
-                },
-            ],
-            messages: [
-                {
-                    authorId: 1,
-                    value: "1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '15:17',
-                },
-                {
-                    authorId: 1,
-                    value: "2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '14:17',
-                },
-                {
-                    authorId: 2,
-                    value: "3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '13:17',
-                },
-                {
-                    authorId: 1,
-                    value: "4. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '12:17',
-                },
-                {
-                    authorId: 1,
-                    value: "5. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis distinctio dolore dolores Expedita.",
-                    timestamp: '11:17',
-                },
-            ]
-        })
-    } catch (e) {
-
-    }
-}
 
