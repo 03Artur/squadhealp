@@ -15,7 +15,6 @@ import contestCreationQuery from "./contest/contestCreationQuery";
 import chats from "./chat/chatsReducer";
 import chatMenu from "./menu/chatMenuReducer";
 import chatQuery from "./chat/chatQueryReducer";
-import chat from "./chat/chatReducer";
 import chatsParticipants from "./chat/chatsParticipantsReducer";
 
 
@@ -35,7 +34,6 @@ const appReducer = combineReducers({
     contestCreationSteps,
     contestCreationQuery,
 
-    chat,
     chats,
     chatsParticipants,
     chatQuery,

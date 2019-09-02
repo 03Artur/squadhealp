@@ -6,6 +6,7 @@ const initialState = {
     chats: new Map(),
     isFetching: false,
     error: null,
+
 };
 
 export default function (state = initialState, action) {
@@ -15,22 +16,26 @@ export default function (state = initialState, action) {
 
         case CHAT_ACTION_TYPES.GET_CHATS_REQUEST:
         case CHAT_ACTION_TYPES.GET_CHAT_REQUEST: {
-            const clonedState = _.cloneDeep(state);
-            clonedState.isFetching = true;
-            return clonedState;
+            return {
+                ...state,
+                isFetching: true,
+            };
         }
+
         case CHAT_ACTION_TYPES.GET_CHATS_RESPONSE: {
             const chats = new Map();
-            action.chats.forEach(chat => chats.set(chat._id, chat));
-            return _.cloneDeep({
-                ...state,
-                chats: chats,
+            action.chats.forEach((messages, ...chat) => chats.set(chat._id, chat));
+            const clonedState = _.cloneDeep(state);
+            clonedState.chats = chats;
+            return ({
+                ...clonedState,
                 isFetching: true,
             });
         }
-        case CHAT_ACTION_TYPES.GET_CHAT_RESPONSE: {
+        case CHAT_ACTION_TYPES.GET_CHAT_RESPONSE : {
             const clonedState = _.cloneDeep(state);
-            clonedState.chats.set(action.chat._id, action.chat);
+            const {messages, ...chat} = action.chat;
+            clonedState.chats.set(chat._id, chat);
             clonedState.isFetching = false;
             return clonedState;
         }

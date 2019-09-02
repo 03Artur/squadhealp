@@ -146,6 +146,7 @@ export function* getMessagesSaga({chatId, query}) {
 
     yield put({
         type: CHAT_ACTION_TYPES.GET_MESSAGES_REQUEST,
+        chatId,
     });
 
     try {
@@ -154,6 +155,7 @@ export function* getMessagesSaga({chatId, query}) {
             put({
                 type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
                 messages,
+                chatId,
             }),
         ];
 
@@ -182,6 +184,7 @@ export function* getMessageSaga({chatId, messageId}) {
     try {
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGE_REQUEST,
+            chatId,
         });
 
         const {data: message} = yield chatController.getMessage(chatId, messageId);
