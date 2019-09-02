@@ -1,24 +1,24 @@
 import {Users} from './../models';
-import {Chat, Message} from '../mongoDbChat';
+import {Chat, Message} from '../mongoModels';
 import * as appError from "../errors";
 import array from 'lodash/array';
 import socketHelper from "../socketHelper/socketHelper";
 
 /*
-*
 * AUTHORS
 * */
-export async function getAuthors(req, res, next) {
-    try {
-        const ids = req.query.authorsIds;
-        const authors = await Users.findAll({
-            id: ids,
-        });
 
+
+export async function getParticipants(req, res, next) {
+    try {
+        let {query: {id}} = req;
+        id = array.uniq(id);
+        const authors = await Users.findAll({
+            id: id,
+        });
         if (authors) {
             res.send(authors);
         }
-
         return next(new appError.NotFoundError());
 
     } catch (e) {
@@ -26,7 +26,7 @@ export async function getAuthors(req, res, next) {
     }
 }
 
-export async function getAuthorById(req, res, next) {
+export async function getParticipantById(req, res, next) {
     try {
 
         const author = await Users.findByPk(req.params.id, {
@@ -47,7 +47,6 @@ export async function getAuthorById(req, res, next) {
 }
 
 /*
-*
 * MESSAGES
 * */
 export function sendMessage(req, res, next) {
@@ -119,11 +118,11 @@ export async function getChatMessages(req, res, next) {
 
 
 /*
-*
 * CHATS
 * */
 export async function sendChat(req, res, next) {
     try {
+
         res.send(req.chat);
     } catch (e) {
         next(e);
@@ -132,15 +131,20 @@ export async function sendChat(req, res, next) {
 
 export async function createChat(req, res, next) {
     try {
-        const {body: data} = req;
-        data.ownerId = req.accessTokenPayload.id;
-        data.participants.push(req.accessTokenPayload.id);
+        const {body: data, accessTokenPayload: {id: ownerId}} = req;
+
+        data.ownerId = ownerId;
+        data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
 
-        const chat = await Chat.create(data);
-        if (chat) {
-            await socketHelper.addParticipantsToChatRoom(chat._id, chat.participants);
-            res.send(chat);
+        const chatOwner = await Users.findByPk(ownerId);
+
+        if (chatOwner) {
+            const chat = await Chat.create(data);
+            if (chat) {
+                await socketHelper.addParticipantsToChat(chat, chat.participants);
+                res.send(chat);
+            }
         }
         return next(new appError.BadRequestError())
 
@@ -170,20 +174,19 @@ export async function getAllUserChats(req, res, next) {
         });
 
         const result = chats.reduce(reducer, {
-            authorsIds: [],
+            participantsId: [],
             rooms: [],
         });
-        res.send(result);
-        const authors = await Users.findAll({
+        const participants = await Users.findAll({
             where: {
-                id: authorsIds
+                id: result.participantsId
             }
         });
 
-        if (authors) {
+        if (participants) {
             res.send({
                 chats,
-                authors: authors
+                participants,
             });
         }
         return next(new appError.BadRequestError());
@@ -199,7 +202,7 @@ export async function getAllUserChats(req, res, next) {
 
 const reducer = (accumulator, chat) => {
     if (chat.messages.length) {
-        return accumulator.authorsIds.push(chat.messages[0].authorId)
+        return accumulator.participantsId.push(chat.messages[0].authorId)
     }
     accumulator.rooms.push(chat._id);
     return accumulator;

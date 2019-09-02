@@ -1,5 +1,43 @@
 import CHAT_ACTION_TYPES from "../../actionTypes/chatActionTypes";
 
+/*
+* CHAT
+* */
+export function createChatActionCreator(chat) {
+    return {
+        type: CHAT_ACTION_TYPES.CREATE_CHAT_ACTION,
+        chat,
+    }
+}
+
+export function getChatActionCreator(chatId) {
+    return {
+        type: CHAT_ACTION_TYPES.GET_CHAT_ACTION,
+        chatId,
+    }
+}
+export function getUserChatsActionCreate() {
+    return {
+        type: CHAT_ACTION_TYPES.GET_USER_CHATS_ACTION,
+    }
+}
+
+/*
+* PARTICIPANTS
+* */
+
+/*
+* MESSAGE
+* */
+
+
+
+
+
+
+
+
+//================================================
 export function sendMessageActionCreator(room, data) {
     return {
         type: CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION,
@@ -34,11 +72,8 @@ export function cancelSearchChatRoomActionCreator() {
     }
 }
 
-export function startChatActionCreator(participants) {
-    return {
-        type: CHAT_ACTION_TYPES.START_CHAT_ACTION,
-        participants,
-    }
-}
+
+
+
 
 

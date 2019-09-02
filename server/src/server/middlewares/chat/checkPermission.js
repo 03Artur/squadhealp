@@ -1,5 +1,5 @@
 import * as appError from "../../errors";
-import {Chat, Message} from '../../mongoDbChat'
+import {Chat, Message} from '../../mongoModels'
 
 export async function checkPermission(req, res, next) {
     try {

@@ -14,9 +14,9 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, authorizationSagas.loginUserSaga);
     yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, authorizationSagas.signUpUserSaga);
     yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, authorizationSagas.getAuthorizedUserSaga,);
-/*
-    yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE,authorizationSagas.)
-*/
+    /*
+        yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE,authorizationSagas.)
+    */
     /*
     * CRUD USERS SAGAS MIDDLEWARE
     * */
@@ -44,17 +44,23 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.SELECT_TASK_TYPES_ACTION, contestSaga.addTaskStepsToContestCreationSteps);
 
 
-
     /*
     *
-    * CHAT
+    * CHAT SAGA MW
     *
     * */
-    yield takeLatest(CHAT_ACTION_TYPES.START_CHAT_ACTION, chatSaga.startChatSaga)
-    yield takeLatest(CHAT_ACTION_TYPES.SELECT_CHAT_ROOM_ACTION, chatSaga.selectChatRoomSaga);
-    yield takeLatest(CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION, chatSaga.sendMessageSaga);
-    yield takeLatest(CHAT_ACTION_TYPES.MESSAGE_RECEIVED_ACTION, chatSaga.messageReceiveSaga);
+    //CHAT
+    yield takeLatest(CHAT_ACTION_TYPES.GET_USER_CHATS_ACTION, chatSaga.getUserChatsSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.CREATE_CHAT_ACTION, chatSaga.createChatSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.GET_CHAT_ACTION, chatSaga.getChatSaga);
 
+    //PARTICIPANT
+    yield takeLatest(CHAT_ACTION_TYPES.GET_PARTICIPANTS_ACTION, chatSaga.getParticipantsSaga);
+
+    //MESSAGE
+    /*
+    * PARTICIPANT
+    * */
 }
 
 export default rootSaga;

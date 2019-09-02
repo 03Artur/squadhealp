@@ -32,8 +32,10 @@ export const usersUrl = `/users`;
 * CHAT
 * */
 export const chatUrl = '/chat';
+export const chatsUrl = '/chats';
 export const messageUrl = '/message';
-export const authorUrl ='/author';
+export const participantUrl ='/participant';
+export const participantsUrl ='/participants';
 
 
 /*

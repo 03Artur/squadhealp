@@ -1,5 +1,5 @@
 import {SOCKET_EVENTS} from "../constants";
-import {UserToSocket} from '../mongoDbChat'
+import {UserToSocket} from '../mongoModels'
 
 
 /*io.on("connection", socket => {
@@ -41,7 +41,6 @@ class SocketHelper {
     constructor() {
 
         this._io = null;
-
     }
 
 
@@ -49,18 +48,15 @@ class SocketHelper {
 
     }
 
-    async addParticipantsToChatRoom(room, participants) {
+    async addParticipantsToChat(chat, participants) {
         const userToSockets = await UserToSocket.find({
             userId: participants,
         });
         userToSockets.forEach(item => {
             const socket = this.io.sockets.connected[item.socketId];
-            socket.join(room, () => {
-                socket.emit(SOCKET_EVENTS.NOTIFY_GET_CHAT, {
-                    chatId: room
-                })
+            socket.join(chat._id, () => {
+                socket.emit(SOCKET_EVENTS.RECEIVED_CHAT, chat)
             });
-
         })
     }
 

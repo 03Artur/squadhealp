@@ -11,7 +11,7 @@ function chatQueryReducer(state = initialState, action) {
 
     switch (action.type) {
 
-        case CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE:{
+        case CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE:{
             return _.cloneDeep({
                 offset: state.offset + action.messages.length,
             });

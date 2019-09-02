@@ -12,11 +12,11 @@ import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavRed
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
-import allChats from "./chat/allChatsReducer";
-import chatMenu from "./chat/chatMenuReducer";
+import chats from "./chat/chatsReducer";
+import chatMenu from "./menu/chatMenuReducer";
 import chatQuery from "./chat/chatQueryReducer";
 import chat from "./chat/chatReducer";
-
+import chatsParticipants from "./chat/chatsParticipantsReducer";
 
 
 const appReducer = combineReducers({
@@ -30,12 +30,14 @@ const appReducer = combineReducers({
     homeUserNav: homeUserNavReducer,
     homeNav:  homeNavReducer,
     affiliateDashboardMenu,
-    allChats,
+
     contestCreation,
     contestCreationSteps,
     contestCreationQuery,
 
     chat,
+    chats,
+    chatsParticipants,
     chatQuery,
     chatMenu
 

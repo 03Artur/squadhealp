@@ -51,7 +51,7 @@ const mapStateToProps = store => ({
 
 });
 const mapDispatchToProps = dispatch => ({
-    startChatAction: (participants) => dispatch(startChatActionCreator(participants)),
+    startChatAction: (participants) => dispatch(createChatActionCreator(participants)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartChatButton)

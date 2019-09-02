@@ -1,33 +1,32 @@
 import CHAT_ACTION_TYPES from "../../actions/actionTypes/chatActionTypes";
 import _ from 'lodash';
 
-const initialState = {
-    messages: [],
-    owner: null,
 
+
+
+const initialState = {
+    chats: [],
     isFetching: false,
     error: null,
 };
 
- function chatReducer(state = initialState, action) {
+export default function (state = initialState, action) {
 
     switch (action.type) {
-        case CHAT_ACTION_TYPES.START_CHAT_REQUEST:
-        case CHAT_ACTION_TYPES.GET_CHAT_DATA_REQUEST:{
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_REQUEST: {
 
             return _.cloneDeep({
                 ...state,
                 isFetching: true,
             });
         }
-        case CHAT_ACTION_TYPES.START_CHAT_RESPONSE:
-        case CHAT_ACTION_TYPES.GET_CHAT_DATA_RESPONSE:{
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_RESPONSE: {
             return _.cloneDeep({
                 ...state,
-                room: action.room,
+                chats: action.chats,
             });
         }
-        case CHAT_ACTION_TYPES.GET_CHAT_DATA_ERROR: {
+        case CHAT_ACTION_TYPES.GET_USER_CHATS_ERROR: {
             return _.cloneDeep({
                 ...state,
                 error: action.error
@@ -37,7 +36,8 @@ const initialState = {
         default: {
             return state;
         }
+
     }
+
 }
 
-export default chatReducer;

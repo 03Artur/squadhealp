@@ -48,7 +48,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
       - MONGO_INITDB_DATABASE=chat-dev
     ports:
-      - "27017:27017"
+      - "27018:27018"
     volumes:
       - ./mongodb:/data/db
 

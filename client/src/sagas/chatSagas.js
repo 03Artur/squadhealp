@@ -1,42 +1,126 @@
 import {put, all, call} from 'redux-saga/effects';
 import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
-import {loginUser} from "../api/rest/authorizationController";
-import {createChat} from "../../../server/src/server/controllers/chatController";
+import * as chatController from '../api/rest/chatController';
+import queryString from 'queryString';
 
-export function* startChatSaga({participants: members}) {
+/*
+* CHAT
+* */
+
+//GET USER CHATS
+export function* getUserChatsSaga() {
     try {
         yield put({
-            type: CHAT_ACTION_TYPES.START_CHAT_REQUEST,
+            type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
         });
-        const {data:chat} =yield createChat(members);
-        const participantsMap = new Map();
-/*
-        participants.forEach(user => participants.set(user.id,user));
-*/
+
+        const {data: {chats, participants}} = yield chatController.getUserChats();
+
+
+        yield all([
+
+            put({
+                type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
+                chats,
+            }),
+            put({
+                type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
+                participants,
+            })
+
+        ])
+
+
+    } catch (e) {
         yield put({
-            type: CHAT_ACTION_TYPES.START_CHAT_RESPONSE,
-            room: chat.id,
-            members: participantsMap,
-            messages: [],
+            type: CHAT_ACTION_TYPES.GET_CHATS_ERROR,
+            error: e.response.error,
         })
     }
-    catch (e) {
-            yield put({
-                type: CHAT_ACTION_TYPES.START_CHAT_ERROR,
-                error: e.response.data,
-            })
+}
+//CREATE CHAT
+export function* createChatSaga({chat}) {
+    try {
+        yield put({
+            type: CHAT_ACTION_TYPES.CREATE_CHAT_REQUEST,
+        });
+
+        const {data} = yield chatController.postChat(chat);
+
+        yield put({
+            type: CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE,
+            chat: data,
+        })
+
+
+    }catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.CREATE_CHAT_ERROR,
+            error: e.response.data,
+        })
+    }
+}
+//SELECT CHAT
+
+//GET CHAT
+export function* getChatSaga({chatId}) {
+    try{
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
+        });
+        const {data} = yield chatController.getChat(chatId);
+
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
+            chat: data,
+        })
+
+    }catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_CHAT_ERROR,
+            error: e.response.data,
+        })
     }
 }
 
 
 
+/*
+* PARTICIPANTS
+* */
+export function* getParticipantsSaga({query}) {
+    try {
+        yield put({
+           type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_REQUEST,
+        });
+
+        const {data} = yield chatController.getParticipants(queryString.stringify(query));
+
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
+            participants: data,
+        })
+
+
+    } catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_ERROR,
+            error: e.response.data,
+        })
+    }
+}
+
+
+/*
+*
+* MESSAGE
+* */
 
 export function* getMessageSaga({data}) {
 
     try {
 
-    }
-    catch (e) {
+    } catch (e) {
 
     }
     console.group('MESSAGE');
@@ -44,10 +128,39 @@ export function* getMessageSaga({data}) {
     console.groupEnd();
 }
 
+/*
+* =================================================================
+* */
+export function* startChatSaga({participants: members}) {
+    try {
+        yield put({
+            type: CHAT_ACTION_TYPES.START_CHAT_REQUEST,
+        });
+        const {data: chat} = yield createChat(members);
+        const participantsMap = new Map();
+        /*
+                participants.forEach(user => participants.set(user.id,user));
+        */
+        yield put({
+            type: CHAT_ACTION_TYPES.START_CHAT_RESPONSE,
+            room: chat.id,
+            members: participantsMap,
+            messages: [],
+        })
+    } catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.START_CHAT_ERROR,
+            error: e.response.data,
+        })
+    }
+}
+
+
+
+
 export function* sendMessageSaga({chatId, message}) {
 
     try {
-
 
 
     } catch (e) {
@@ -57,6 +170,7 @@ export function* sendMessageSaga({chatId, message}) {
         })
     }
 }
+
 
 export function* selectChatRoomSaga({room}) {
     try {
@@ -106,7 +220,7 @@ export function* selectChatRoomSaga({room}) {
                 },
             ]
         })
-    }catch (e) {
+    } catch (e) {
 
     }
 }

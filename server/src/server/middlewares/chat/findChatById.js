@@ -1,4 +1,4 @@
-import {Chat, Message} from '../../mongoDbChat';
+import {Chat, Message} from '../../mongoModels';
 import * as appError from "../../errors";
 
 
