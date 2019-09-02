@@ -27,11 +27,9 @@ import {selectChatRoomActionCreator} from "../../../../../actions/actionCreators
 
 
 const ChatItem = (props) => {
-    console.log(props);
-    const {messages, room, members} = props;
-    const lastMessage = messages[0];
-    const author = members.find(item => item.id === lastMessage.authorId);
 
+    const {chat, messages,participants} = props;
+    const lastMessage = messages.get(chat._id)
 
 
 
@@ -88,28 +86,25 @@ const ChatItem = (props) => {
 };
 
 ChatItem.propTypes = {
+    chat: PropTypes.object.isRequired,
+    lastMessage: PropTypes.object,
 
-    messages: PropTypes.arrayOf(PropTypes.shape({
-        author: PropTypes.shape({
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-            profilePicture: PropTypes.string,
-        }),
-        value: PropTypes.string.isRequired,
-        timestamp: PropTypes.string,
-    }),),
-    room: PropTypes.string.isRequired,
+
 };
 
-ChatItem.defaultProps = {};
+ChatItem.defaultProps = {
+};
 
 const mapStateToProps = store => {
 
-    const {room: currentRoom} = store.chat;
+    const {messages} = store.chatsMessagesReducer;
+    const {participants} = store.chatsParticipantsReducer;
 
     return {
-        currentRoom,
+        messages,
+        participants,
     }
+
 };
 
 const mapDispatchToProps = dispatch => ({

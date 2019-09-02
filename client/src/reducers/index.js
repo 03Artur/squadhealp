@@ -12,10 +12,14 @@ import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavRed
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
-import chats from "./chat/chatsReducer";
 import chatMenu from "./menu/chatMenuReducer";
-import chatQuery from "./chat/chatsQueryReducer";
-import chatsParticipants from "./chat/chatsParticipantsReducer";
+
+//CHAT
+import chatsQueryReducer from "./chat/chatsQueryReducer";
+import chatReducer from "./chat/chatReducer";
+import chatsParticipantsReducer from "./chat/chatsParticipantsReducer";
+import chatsMessagesReducer from "./chat/chatsMessagesReducer";
+import chatsReducer from "./chat/chatsReducer";
 
 
 const appReducer = combineReducers({
@@ -27,19 +31,20 @@ const appReducer = combineReducers({
     affiliateDashboardUserNav,
     affiliateDashboardNav,
     homeUserNav: homeUserNavReducer,
-    homeNav:  homeNavReducer,
+    homeNav: homeNavReducer,
     affiliateDashboardMenu,
 
     contestCreation,
     contestCreationSteps,
     contestCreationQuery,
 
-    chats,
-    chatsParticipants,
-    chatQuery,
-    chatMenu
 
-
+    chatMenu,
+    chatReducer,
+    chatsQueryReducer,
+    chatsMessagesReducer,
+    chatsReducer,
+    chatsParticipantsReducer,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

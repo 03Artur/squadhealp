@@ -3,13 +3,13 @@ import _ from 'lodash';
 
 
 const initialState = {
-    chats: new Map(),
+    chats: [],
     isFetching: false,
     error: null,
 
 };
 
-export default function (state = initialState, action) {
+function chatsReducer(state = initialState, action) {
 
     switch (action.type) {
 
@@ -22,21 +22,22 @@ export default function (state = initialState, action) {
         }
 
         case CHAT_ACTION_TYPES.GET_CHATS_RESPONSE: {
-            const chats = new Map();
-            action.chats.forEach((messages, ...chat) => chats.set(chat._id, chat));
-            const clonedState = _.cloneDeep(state);
-            clonedState.chats = chats;
+
+            const chats = [];
+            action.chats.forEach((messages, ...chat) => chats.push(chat));
             return ({
-                ...clonedState,
+                ...state,
+                chats,
                 isFetching: true,
             });
         }
         case CHAT_ACTION_TYPES.GET_CHAT_RESPONSE : {
-            const clonedState = _.cloneDeep(state);
             const {messages, ...chat} = action.chat;
-            clonedState.chats.set(chat._id, chat);
-            clonedState.isFetching = false;
-            return clonedState;
+            return ({
+                ...state,
+                chats: state.chats.concat(chat),
+                isFetching: true,
+            });
         }
         case CHAT_ACTION_TYPES.GET_CHATS_ERROR:
         case CHAT_ACTION_TYPES.GET_CHAT_ERROR: {
@@ -52,3 +53,4 @@ export default function (state = initialState, action) {
     }
 }
 
+export default chatsReducer;

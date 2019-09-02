@@ -32,12 +32,12 @@ const ChatList = (props) => {
 
     const renderChatItems = () => {
         if (chats) {
-            return chats.map(chat => <ChatItem key={chat.room} {...chat}/>)
+            return chats.map(item => <ChatItem key={item.chat._id} lastMessage={item.lastMessage} chat={item.chat}/>)
         }
     };
 
     return (
-        <ul className={[styles.list,props.className].join(' ')}>
+        <ul className={[styles.list, props.className].join(' ')}>
             {
                 renderChatItems()
             }
@@ -49,15 +49,32 @@ ChatList.propTypes = {
     className: PropTypes.string
 };
 
-ChatList.defaultProps = {
-
-};
+ChatList.defaultProps = {};
 
 /*
 * React redux
 * */
 const mapStateToProps = store => {
-    return store.allChats;
+
+    const {chats} = store.chatsReducer;
+    const {messages} = store.chatsMessagesReducer;
+    const {participants} = store.chatsParticipantsReducer;
+    const chatsWithLastMessage = chats.map(chat => {
+        const chatMessages = messages.get(chat._id);
+        const lastMessage = chatMessages[chatMessages.length - 1];
+        if (lastMessage) {
+            lastMessage.author = participants.get(lastMessage.authorId);
+
+        }
+        return {
+            chat,
+            lastMessage,
+        }
+    });
+
+    return {
+        chats: chatsWithLastMessage,
+    }
 };
 const mapDispatchToProps = dispatch => ({});
 
