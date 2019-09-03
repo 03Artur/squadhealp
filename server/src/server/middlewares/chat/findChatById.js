@@ -21,6 +21,7 @@ export async function findMessageById(req, res, next) {
         const message = await Message.findById(req.params.messageId);
         if (message) {
             req.message = message;
+            req.params.chatId = message.chatId;
             return next();
         }
         return next(new appError.NotFoundError('message not found'))

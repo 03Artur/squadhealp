@@ -46,7 +46,8 @@ export function unselectChatActionCreator() {
 
 export function postMessageActionCreator(message) {
     return {
-        type: CHAT_ACTION_TYPES.
+        type: CHAT_ACTION_TYPES.POST_MESSAGE_ACTION,
+        message,
     }
 }
 
@@ -59,10 +60,9 @@ export function getMessagesActionCreator(chatId, query) {
     }
 }
 
-export function getMessageActionCreator(chatId, messageId) {
+export function getMessageActionCreator(messageId) {
     return {
         type: CHAT_ACTION_TYPES.GET_MESSAGE_ACTION,
-        chatId,
         messageId,
     }
 }

@@ -32,8 +32,8 @@ router.get('/participants', getParticipants);
 * */
 router.post('/chat/:chatId/message', validateMessage, findChatById, checkMessagePermission, postMessage);
 router.get('/chat/:chatId/messages', findChatById, checkPermission,getChatMessages);
-router.get('/chat/:chatId/message/:messageId', findChatById, findMessageById, checkMessagePermission, sendMessage);
-router.put('/chat/message/:id', validateMessage, findMessageById, checkMessagePermission, updateMessage);
+router.get('/message/:messageId', findMessageById, findChatById, checkMessagePermission, sendMessage);
+router.put('/message/:id', validateMessage, findMessageById, checkMessagePermission, updateMessage);
 
 
 export default router;

@@ -22,6 +22,6 @@ export const getParticipant = id => axios.get(`${participantUrl}/${id}`);
 export const postMessage = (chatId, message) => axios.post(`${chatUrl}/${chatId}${messageUrl}`, message);
 
 export const getMessages = (chatId, queryString) => axios.get(`${chatUrl}/${chatId}/${messagesUrl}/${queryString}`);
-export const getMessage = (chatId, messageId) => axios.get(`${chatUrl}/${chatId}${messageUrl}/${messageId}`);
+export const getMessage = (messageId) => axios.get(`${messageUrl}/${messageId}`);
 
 //==================================
