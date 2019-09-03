@@ -26,11 +26,6 @@ const AuthorIcon = ({firstName, lastName, src, ...props}) => {
     useEffect(() => {
         if (src) {
             loadImage(`${userPicturesURL}/${src}`).then(result => {
-                console.group();
-                console.log('height', result.height);
-                console.log('width', result.width);
-                console.groupEnd();
-                console.log(result);
                 setImg(result);
             }).catch(error => {
 

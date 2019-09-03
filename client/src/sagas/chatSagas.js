@@ -1,27 +1,28 @@
 import {put, all, call, select} from 'redux-saga/effects';
 import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
 import * as chatController from '../api/rest/chatController';
-import queryString from 'queryString';
+import queryString from 'query-string';
 import _ from 'lodash';
+import * as socketController from "../api/socket/chatController";
 
 /*
 * CHAT
 * */
 
+
 //GET USER CHATS
-export function* getUserChatsSaga() {
+export function* getUserChatsSaga({user}) {
     try {
+        yield socketController.openSocket();
+        yield socketController.authorizeUser(user.id);
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
         });
-
         const {data: {chats, participants}} = yield chatController.getUserChats();
-
-
         yield all([
 
             put({
-                type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
+                type: CHAT_ACTION_TYPES.GET_CHATS_RESPONSE,
                 chats,
             }),
             put({
@@ -31,11 +32,10 @@ export function* getUserChatsSaga() {
 
         ])
 
-
     } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHATS_ERROR,
-            error: e.response.error,
+            error: e.response.data,
         })
     }
 }
@@ -48,7 +48,7 @@ export function* createChatSaga({chat}) {
         });
 
         const {data} = yield chatController.postChat(chat);
-
+        yield socketController.postChat(data._id);
         yield put({
             type: CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE,
             chat: data,
@@ -68,6 +68,11 @@ export function* createChatSaga({chat}) {
 //GET CHAT
 export function* getChatSaga({chatId}) {
     try {
+
+        console.group('getChatSaga');
+        console.log(chatId);
+        console.groupEnd();
+
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
         });
@@ -146,7 +151,7 @@ export function* postMessageSaga({chatId, message}) {
         });
 
         const {data} = yield chatController.postMessage(chatId, message);
-
+        yield socketController.postMessage(chatId, data._id);
         yield put({
             type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
             message: data,

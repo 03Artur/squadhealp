@@ -1,40 +1,58 @@
-/*
-* React
-* */
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-
-/*
-* Redux & friends
-* */
+import _ from 'lodash';
 import {connect} from 'react-redux';
 
-/*
-* Components
-* */
-
-
-/*
-* styles
-* */
 import styles from './ChatList.module.scss';
 import ChatItem from "./ChatItem/ChatItem";
+import {selectChatActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
+import chatReducer from "../../../../reducers/chat/chatReducer";
 
 /*
 * UTILS
 * */
 
-
 const ChatList = (props) => {
 
-    const {chats} = props;
+    const {chats, messages, selectedChat, participants, user} = props;
 
+
+    const renderChat = (chat) => {
+        const chatMessages = messages.get(chat._id);
+        const chatOwner = participants.get(chat.ownerId);
+        let lastMessage = null;
+        let author = null;
+        if (chatMessages.length) {
+            lastMessage = _.last(chatMessages);
+            author = participants.get(lastMessage.authorId);
+        } else {
+            lastMessage = {
+                value: `${user.id === chat.ownerId ? 'You' : chatOwner.firstName} started conversation`,
+                createdAt:
+                chat.createdAt,
+            };
+            author = chatOwner;
+        }
+
+
+        return (
+            <ChatItem key={chat._id}
+                      isSelected={selectedChat === chat._id}
+                      lastMessage={lastMessage}
+                      onClick={() => {
+                          props.selectChatAction(chat._id)
+                      }}
+                      author={author}
+            />
+        );
+    };
 
     const renderChatItems = () => {
         if (chats) {
-            return chats.map(item => <ChatItem key={item.chat._id} lastMessage={item.lastMessage} chat={item.chat}/>)
+            return chats.map(renderChat);
         }
     };
+
 
     return (
         <ul className={[styles.list, props.className].join(' ')}>
@@ -45,37 +63,32 @@ const ChatList = (props) => {
     )
 };
 
+
 ChatList.propTypes = {
     className: PropTypes.string
 };
 
 ChatList.defaultProps = {};
 
-/*
-* React redux
-* */
+
 const mapStateToProps = store => {
 
     const {chats} = store.chatsReducer;
     const {messages} = store.chatsMessagesReducer;
     const {participants} = store.chatsParticipantsReducer;
-
-    const chatsWithLastMessage = chats.map(chat => {
-        const chatMessages = messages.get(chat._id);
-        const lastMessage = chatMessages[chatMessages.length - 1];
-        if (lastMessage) {
-            lastMessage.author = participants.get(lastMessage.authorId);
-        }
-        return {
-            chat,
-            lastMessage,
-        }
-    });
-
+    const {chatId} = store.chatReducer;
+    const {user} = store.authorizationReducer;
     return {
-        chats: chatsWithLastMessage,
+        user,
+        chats,
+        messages,
+        participants,
+        selectedChat: chatId,
     }
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+
+    selectChatAction: chatId => dispatch(selectChatActionCreator(chatId))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList)

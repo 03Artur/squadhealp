@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
             const messages = new Map();
 
             action.chats.forEach(chat => {
-                messages.set(chat._id, chat.message);
+                messages.set(chat._id, chat.messages);
             });
 
             return {
@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
 
             const clonedState = _.cloneDeep(state);
 
-            clonedState.messages.set(chat._id, action.chat.messages);
+            clonedState.messages.set(action.chat._id, action.chat.messages);
 
             return clonedState;
         }

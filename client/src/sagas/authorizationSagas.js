@@ -1,7 +1,7 @@
 import {put} from 'redux-saga/effects';
 import ACTION_TYPE from '../actions/actiontsTypes';
 import {signUpUser, loginUser, getAuthorizedUser, logoutUser} from '../api/rest/authorizationController';
-import {authorizeUser, joinMeToMyRooms} from "../api/socket/chatController";
+
 
 export function* loginUserSaga({data: user}) {
 
@@ -65,15 +65,6 @@ export function* getAuthorizedUserSaga() {
                 message: e.response.data,
             },
         });
-    }
-}
-
-export function* joinToRoomsSaga({user}) {
-    try{
-        yield authorizeUser(user.id);
-    }
-    catch (e) {
-
     }
 }
 

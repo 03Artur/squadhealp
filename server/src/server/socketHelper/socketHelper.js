@@ -44,50 +44,45 @@ class SocketHelper {
     }
 
 
-    joinUserToRooms(userId, rooms) {
-
+    async joinUserToRooms(userId, chats) {
+        const userSockets = await UserToSocket.find({
+            userId: userId,
+        });
+        userSockets.forEach(userSocket => {
+            const socket = this._io.sockets.connected[userSocket.socketId];
+            chats.forEach(chat => {
+                    socket.join(chat._id)
+                }
+            );
+        });
     }
 
     async addParticipantsToChat(chat, participants) {
         const userToSockets = await UserToSocket.find({
             userId: participants,
         });
-        userToSockets.forEach(item => {
-            const socket = this.io.sockets.connected[item.socketId];
-            socket.join(chat._id, () => {
-                socket.emit(SOCKET_EVENTS.RECEIVED_CHAT, chat)
-            });
-        })
+        userToSockets.forEach(participantSocket => {
+            const socket = this._io.sockets.connected[participantSocket.socketId];
+            socket.join(chat._id);
+        });
     }
 
     addChatEvents(socket) {
-        socket.on(SOCKET_EVENTS.TYPING, (room, data) => {
-            socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_TYPING, {
-                user: data.user,
-                message: data.message
-            });
-        });
-
-        socket.on(SOCKET_EVENTS.STOP_TYPING, (room, data) => {
-            socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_STOP_TYPING, data);
-        });
-
-        socket.on(SOCKET_EVENTS.CHAT_MESSAGE, function (room, data) {
-
-            console.log("ROOM: ", room);
-            console.log("DATA: ", data);
-
-            io.in(room).emit(SOCKET_EVENTS.RECEIVED_MESSAGE, {
-                room,
-                message: data,
-            });
-        });
-
-        socket.on(SOCKET_EVENTS.LOGIN_USER, async (userId) => {
-            await UserToSocket.create({
+        socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
+           const stou = await UserToSocket.create({
                 userId,
-                socketId: socket.id,
-            });
+                socketId: socket.id
+            })
+            console.log("socker to user: ", stou);
+        });
+
+        socket.on(SOCKET_EVENTS.POST_CHAT, chatId => {
+            console.log('chat id', chatId);
+            socket.to(chatId).emit(SOCKET_EVENTS.GET_CHAT, chatId);
+
+        });
+        socket.on(SOCKET_EVENTS.POST_MESSAGE, ({chatId, messageId}) => {
+            socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
         })
 
 
@@ -100,6 +95,7 @@ class SocketHelper {
     set io(ioInstance) {
         this._io = ioInstance;
         this._io.on('connection', socket => {
+
 
             socket.on("disconnect", async function () {
                 await UserToSocket.deleteOne({

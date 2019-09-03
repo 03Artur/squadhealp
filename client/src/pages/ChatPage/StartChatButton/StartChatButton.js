@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -18,40 +18,49 @@ import {connect} from 'react-redux';
 * styles
 * */
 import styles from './StartChatButton.module.scss';
+import {createChatActionCreator} from "../../../actions/actionCreators/chatActionCreators";
 
 /*
 * UTILS
 * */
 
 
-
 const StartChatButton = (props) => {
 
+    const [enable, setEnable] = useState(true);
+    const onClick = () => {
+        if (enable) {
+            setEnable(false)
+            props.createChatAction({
+                participants: [props.userId]
+            });
+        }
+
+
+    };
 
     return (
-        <Fragment>
-
-        </Fragment>
+        <div onClick={onClick} className={[styles.container, enable ? undefined : styles.disable].join(' ')}>
+            {
+                `start chat with user ${props.userId}`
+            }
+        </div>
     )
 };
 
 StartChatButton.propTypes = {
     className: PropTypes.string,
-
+    userId: PropTypes.number,
 };
 
-StartChatButton.defaultProps = {
-
-};
+StartChatButton.defaultProps = {};
 
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
-
-});
+const mapStateToProps = store => ({});
 const mapDispatchToProps = dispatch => ({
-    startChatAction: (participants) => dispatch(createChatActionCreator(participants)),
+    createChatAction: (chat) => dispatch(createChatActionCreator(chat)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartChatButton)

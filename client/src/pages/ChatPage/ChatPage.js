@@ -23,14 +23,10 @@ function ChatPage(props) {
 
     useEffect(() => {
 
-        console.group('chat page on room change effect ');
-        console.log('props', props);
-        const path = props.room ? `${PATHS.MESSAGES_CHAT}/${props.room}`:PATHS.MESSAGES;
-        console.log('path: ',path);
-        console.groupEnd();
+        const path = props.chatId ? `${PATHS.MESSAGES_CHAT}/${props.chatId}`:PATHS.MESSAGES;
         props.history.push(path);
 
-    }, [props.room]);
+    }, [props.chatId]);
 
     return (
         <div className={styles.chatPageContainer}>
@@ -45,9 +41,9 @@ function ChatPage(props) {
 }
 
 function mapStateToProps(state) {
-    const {room} = state.chat;
+    const {chatId} = state.chatReducer;
     return {
-        room,
+        chatId,
     }
 }
 

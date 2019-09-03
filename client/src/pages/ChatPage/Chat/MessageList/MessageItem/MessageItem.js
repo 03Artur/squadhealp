@@ -23,8 +23,8 @@ import AuthorIcon from "./AuthorIcon/AuthorIcon";
 * */
 
 const MessageItem = (props) => {
-    const {message: {authorId,value}, members,  user} = props;
-    const author = members.find(user => user.id === authorId);
+    const {message: {authorId,value}, participants,  user} = props;
+    const author = participants.get(authorId);
     return (
         <li className={styles.container}>
             <AuthorIcon firstName={author.firstName} lastName={author.lastName} src={author.profilePicture}/>
@@ -52,10 +52,10 @@ MessageItem.defaultProps = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {members} = store.chat;
+    const {participants} = store.chatsParticipantsReducer;
     const {user} = store.authorizationReducer;
     return {
-        members,
+        participants,
         user,
     }
 };

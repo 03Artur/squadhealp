@@ -5,7 +5,7 @@ import array from 'lodash/array';
 import socketHelper from "../socketHelper/socketHelper";
 
 /*
-* AUTHORS
+* PARTICIPANT
 * */
 
 
@@ -47,7 +47,7 @@ export async function getParticipantById(req, res, next) {
 }
 
 /*
-* MESSAGES
+* MESSAGE
 * */
 export function sendMessage(req, res, next) {
     try {
@@ -138,7 +138,7 @@ export async function getChatMessages(req, res, next) {
 
 
 /*
-* CHATS
+* CHAT
 * */
 export async function sendChat(req, res, next) {
     try {
@@ -157,15 +157,14 @@ export async function createChat(req, res, next) {
         data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
 
-        const chatOwner = await Users.findByPk(ownerId);
 
-        if (chatOwner) {
-            const chat = await Chat.create(data);
-            if (chat) {
-                await socketHelper.addParticipantsToChat(chat, chat.participants);
-                res.send(chat);
-            }
+        const chat = await Chat.create(data);
+        if (chat) {
+            res.send(chat);
+            console.log('=============================================');
+            await socketHelper.addParticipantsToChat(chat.participants)
         }
+
         return next(new appError.BadRequestError())
 
     } catch (e) {
@@ -193,6 +192,7 @@ export async function getAllUserChats(req, res, next) {
 
         const result = chats.reduce(reducer, {
             participantsId: [],
+
             rooms: [],
         });
 
@@ -210,6 +210,7 @@ export async function getAllUserChats(req, res, next) {
                 chats,
                 participants,
             });
+            await socketHelper.joinUserToRooms(userId,chats)
         }
         return next(new appError.BadRequestError());
 
@@ -222,11 +223,14 @@ export async function getAllUserChats(req, res, next) {
 * UTILS
 * */
 
-const reducer = (accumulator, chat) => {
+const reducer =  (accumulator, chat) => {
 
     if (chat.messages.length) {
-        accumulator.participantsId.push(chat.messages[0].authorId)
+        accumulator.participantsId.push(chat.messages[0].authorId);
     }
+    accumulator.participantsId.push(chat.ownerId);
+
+
     accumulator.rooms.push(chat._id);
     return accumulator;
 };

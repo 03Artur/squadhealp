@@ -32,7 +32,7 @@ const MessageList = (props) => {
     const renderMessages = () => {
 
         if (messages) {
-            return messages.map(message => <MessageItem key={message.timestamp} message={message}/>)
+            return messages.map(message => <MessageItem key={message.createdAt} message={message}/>)
         }
     };
 
@@ -55,9 +55,10 @@ MessageList.defaultProps = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {messages, members} = store.chat;
+    const {messages} = store.chatsMessagesReducer;
+    const {chatId} = store.chatReducer;
     return {
-        messages,
+        messages: messages.get(chatId),
     }
 };
 const mapDispatchToProps = dispatch => ({});

@@ -11,9 +11,8 @@ import {mdiSend} from '@mdi/js';
 
 import styles from './MessageForm.module.scss';
 import {FORM_NAMES} from "../../../../constants";
-import {sendMessageActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
 import {isRequired, notEmpty} from "../../../../utils/reduxForm/validateValue";
-import authorizationReducer from "../../../../reducers/authorization/authorizationReducer";
+import {postMessageActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
 
 
 export const MessageInput = ({input, meta, ...props}) => {
@@ -49,10 +48,8 @@ const MessageForm = (props) => {
 
     const onSubmit = (values) => {
 
-        props.sendMessageAction(props.room, {
+        props.sendMessageAction(props.chatId, {
             value: values.message,
-            authorId: props.user.id,
-            timestamp: '12:21',
         })
     };
     const submit = handleSubmit(onSubmit);
@@ -66,17 +63,17 @@ const MessageForm = (props) => {
 
 
 function mapStateToProps(state) {
-    const {room,} = state.chat;
+    const {chatId} = state.chatReducer;
     const {user} = state.authorizationReducer;
     return {
-        room,
+        chatId,
         user,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        sendMessageAction: (room, data) => dispatch(sendMessageActionCreator(room, data))
+        sendMessageAction: (chatId, message) => dispatch(postMessageActionCreator(chatId,message))
     }
 }
 

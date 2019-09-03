@@ -24,7 +24,7 @@ function chatsReducer(state = initialState, action) {
         case CHAT_ACTION_TYPES.GET_CHATS_RESPONSE: {
 
             const chats = [];
-            action.chats.forEach((messages, ...chat) => chats.push(chat));
+            action.chats.forEach(({messages, ...chat}) => chats.push(chat));
             return ({
                 ...state,
                 chats,

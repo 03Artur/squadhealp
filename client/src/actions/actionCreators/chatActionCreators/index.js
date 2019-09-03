@@ -9,13 +9,18 @@ export function createChatActionCreator(chat) {
         chat,
     }
 }
+
 export function selectChatActionCreator(chatId) {
     return {
         type: CHAT_ACTION_TYPES.SELECT_CHAT_ACTION,
         chatId,
     }
 }
+
 export function getChatActionCreator(chatId) {
+    console.group();
+    console.log('getChatActionCreator');
+    console.groupEnd();
     return {
         type: CHAT_ACTION_TYPES.GET_CHAT_ACTION,
         chatId,
@@ -27,7 +32,6 @@ export function getUserChatsActionCreate() {
         type: CHAT_ACTION_TYPES.GET_CHATS_ACTION,
     }
 }
-
 
 
 export function unselectChatActionCreator() {
@@ -44,10 +48,11 @@ export function unselectChatActionCreator() {
 * MESSAGE
 * */
 
-export function postMessageActionCreator(message) {
+export function postMessageActionCreator(chatId,message) {
     return {
         type: CHAT_ACTION_TYPES.POST_MESSAGE_ACTION,
         message,
+        chatId,
     }
 }
 
@@ -69,23 +74,9 @@ export function getMessageActionCreator(messageId) {
 
 
 //================================================
-export function sendMessageActionCreator(room, data) {
-    return {
-        type: CHAT_ACTION_TYPES.SEND_MESSAGE_ACTION,
-        room,
-        data
-    }
-}
 
-export function selectChatRoomActionCreator(room) {
-    console.group("selectChatRoomActionCreator");
-    console.log(room);
-    console.groupEnd();
-    return {
-        type: CHAT_ACTION_TYPES.SELECT_CHAT_ROOM_ACTION,
-        room,
-    }
-}
+
+
 
 export function searchChatRoomActionCreator(searchValue) {
     console.group("searchChatRoomActionCreator");
