@@ -61,6 +61,7 @@ class SocketHelper {
         const userToSockets = await UserToSocket.find({
             userId: participants,
         });
+        const ids = userToSockets.map(s => s.id);
         userToSockets.forEach(participantSocket => {
             const socket = this._io.sockets.connected[participantSocket.socketId];
             socket.join(chat._id);
@@ -94,8 +95,11 @@ class SocketHelper {
 
     set io(ioInstance) {
         this._io = ioInstance;
-        this._io.on('connection', socket => {
+        this._io.on('connection',async socket => {
 
+            await UserToSocket.deleteOne({
+                socketId: socket.id,
+            });
 
             socket.on("disconnect", async function () {
                 await UserToSocket.deleteOne({

@@ -2,7 +2,6 @@ import {Users} from './../models';
 import {Chat, Message} from '../mongoModels';
 import * as appError from "../errors";
 import array from 'lodash/array';
-import socketHelper from "../socketHelper/socketHelper";
 
 /*
 * PARTICIPANT
@@ -161,8 +160,6 @@ export async function createChat(req, res, next) {
         const chat = await Chat.create(data);
         if (chat) {
             res.send(chat);
-            console.log('=============================================');
-            await socketHelper.addParticipantsToChat(chat.participants)
         }
 
         return next(new appError.BadRequestError())
@@ -210,7 +207,6 @@ export async function getAllUserChats(req, res, next) {
                 chats,
                 participants,
             });
-            await socketHelper.joinUserToRooms(userId,chats)
         }
         return next(new appError.BadRequestError());
 

@@ -11,7 +11,7 @@ const userToSocketSchema = new Schema(
         autoIndex: true,
     },
 );
-
+userToSocketSchema.index({ userId: 1, socketId: 1 }, { unique: true });
 
 module.exports = {
     name: 'UserToSocket',
