@@ -4,66 +4,71 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('Tasks',
             {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-
-            contestId: {
-                type: Sequelize.INTEGER,
-                onDelete: 'CASCADE',
-                onUpdate: "CASCADE",
-                references: {
-                    model: 'Contests',
-                    key: 'id'
-                },
-                allowNull: false,
-            },
-            title: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
+                id: {
+                    allowNull: false,
+                    autoIncrement: true,
+                    primaryKey: true,
+                    type: Sequelize.INTEGER
                 },
 
-            },
-            style: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
+                contestId: {
+                    type: Sequelize.INTEGER,
+                    onDelete: 'CASCADE',
+                    onUpdate: "CASCADE",
+                    references: {
+                        model: 'Contests',
+                        key: 'id'
+                    },
+                    allowNull: false,
                 },
-            },
-            type: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    isIn: ["Name", "Tagline", 'Logo'],
+                endedAt: {
+                    type: Sequelize.DATE,
+                    allowNull: true,
+
                 },
-            },
-            priority: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
+                title: {
+                    type: Sequelize.STRING,
+                    allowNull: false,
+                    validate: {
+                        notEmpty: true,
+                    },
 
-            },
-            files: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
-                allowNull: true,
+                },
+                style: {
+                    type: Sequelize.STRING,
+                    allowNull: false,
+                    validate: {
+                        notEmpty: true,
+                    },
+                },
+                type: {
+                    type: Sequelize.STRING,
+                    allowNull: false,
+                    validate: {
+                        isIn: ["Name", "Tagline", 'Logo'],
+                    },
+                },
+                priority: {
+                    type: Sequelize.INTEGER,
+                    allowNull: false,
 
-            },
-            cost: {
-                type: Sequelize.REAL,
-                allowNull: false,
-                validate: {
-                    min: 0,
-                }
+                },
+                files: {
+                    type: Sequelize.ARRAY(Sequelize.STRING),
+                    allowNull: true,
 
-            },
-            createdAt: Sequelize.DATE,
-            updatedAt: Sequelize.DATE,
-        }
+                },
+                cost: {
+                    type: Sequelize.REAL,
+                    allowNull: false,
+                    validate: {
+                        min: 0,
+                    }
+
+                },
+                createdAt: Sequelize.DATE,
+                updatedAt: Sequelize.DATE,
+            }
         );
     },
     down: (queryInterface, Sequelize) => {

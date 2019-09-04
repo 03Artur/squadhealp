@@ -39,14 +39,34 @@ import {UserToSocket} from '../mongoModels'
 class SocketHelper {
 
     constructor() {
-
         this._io = null;
     }
 
+    get io() {
+        return this._io;
+    }
+    set io(ioInstance) {
+        this._io = ioInstance;
+        this._io.on('connection', socket => {
+            socket.on("disconnect", async function () {
+                await UserToSocket.deleteOne({
+                    socketId: socket.id,
+                })
+            });
+            this.addChatEvents(socket);
+        })
+    }
+
+    static async addUserSocket(userId, socketId) {
+        await UserToSocket.create({
+            userId,
+            socketId,
+        })
+    }
 
     async joinUserToRooms(userId, chats) {
         const userSockets = await UserToSocket.find({
-            userId: userId,
+            userId,
         });
         userSockets.forEach(userSocket => {
             const socket = this._io.sockets.connected[userSocket.socketId];
@@ -58,22 +78,20 @@ class SocketHelper {
     }
 
     async addParticipantsToChat(chat, participants) {
-        const userToSockets = await UserToSocket.find({
+        const usersToSockets = await UserToSocket.find({
             userId: participants,
         });
-        userToSockets.forEach(participantSocket => {
-            const socket = this._io.sockets.connected[participantSocket.socketId];
-            socket.join(chat._id);
+        usersToSockets.forEach(userToSocket => {
+            const participantSocket = this._io.sockets.connected[userToSocket.socketId];
+            if(participantSocket){
+                participantSocket.join(chat._id);
+            }
         });
     }
 
     addChatEvents(socket) {
         socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
-           const stou = await UserToSocket.create({
-                userId,
-                socketId: socket.id
-            })
-            console.log("socker to user: ", stou);
+            await SocketHelper.addUserSocket(userId, socket.id);
         });
 
         socket.on(SOCKET_EVENTS.POST_CHAT, chatId => {
@@ -84,29 +102,7 @@ class SocketHelper {
         socket.on(SOCKET_EVENTS.POST_MESSAGE, ({chatId, messageId}) => {
             socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
         })
-
-
     }
-
-    get io() {
-        return this._io;
-    }
-
-    set io(ioInstance) {
-        this._io = ioInstance;
-        this._io.on('connection', socket => {
-
-
-            socket.on("disconnect", async function () {
-                await UserToSocket.deleteOne({
-                    socketId: socket.id,
-                })
-            });
-
-            this.addChatEvents(socket);
-        })
-    }
-
 }
 
 const socketHelper = new SocketHelper();

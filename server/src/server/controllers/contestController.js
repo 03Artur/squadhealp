@@ -1,6 +1,38 @@
 import {sequelize, Users, Contests, Tasks} from '../models';
 import appError, {NotFoundError} from '../errors';
+import _ from 'lodash';
 
+export const getContests = async (req, res, next) => {
+    try {
+
+        let {query} = req;
+        const contestFilterProps = ['isPaid', 'createdAt', 'name', 'userId', 'type', 'typeOfIndustry'];
+        const taskFilterProps = ['isActive', 'cost', 'style', 'type', 'winnerId',];
+
+        const contestFilter = _.pick(query, contestFilterProps);
+        const taskFilter = _.pick(query, taskFilterProps);
+
+        const orderProps = _.pick(query, ['orderBy', 'order']);
+        const order = taskFilterProps.includes(orderProps.orderBy) ?
+            [Tasks, orderProps.orderBy, orderProps.order] :
+            [orderProps.orderBy, orderProps.order];
+
+        const contests = await Contests.findAndCountAll({
+            where: contestFilter,
+            order: [order],
+            include: [{
+                model: Tasks,
+                where: taskFilter,
+            }]
+        });
+        if (contests) {
+            res.send(contests)
+        }
+        return next(new appError.NotFoundError());
+    } catch (e) {
+        next(e);
+    }
+};
 
 export const upsertContest = async (req, res, next) => {
 

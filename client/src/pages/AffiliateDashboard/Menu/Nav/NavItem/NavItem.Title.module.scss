@@ -1,0 +1,57 @@
+@import '../../../../../commonStyles';
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+
+}
+.iconContainer{
+  margin: 0 10px 0 3px;
+}
+//desk
+.iconContainerClose {
+  padding: 15px 0;
+  text-align: center;
+  @extend .container;
+  min-width: 70px;
+
+}
+.color{
+  color: #cedce4;
+}
+
+.activeColor{
+  color: white;
+}
+
+.titleContainer {
+  @extend .container;
+  padding: 15px 30px;
+  @include flex-container(flex-start, center);
+  width: 100%;
+}
+
+.arrowContainer{
+  margin-left: auto;
+
+}
+
+.submenuContainer{
+
+}
+
+
+
+
+
+.submenuTitle{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+}
+
+//mobile
+

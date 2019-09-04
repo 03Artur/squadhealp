@@ -160,9 +160,9 @@ export async function createChat(req, res, next) {
 
         const chat = await Chat.create(data);
         if (chat) {
-            res.send(chat);
-            console.log('=============================================');
             await socketHelper.addParticipantsToChat(chat.participants)
+
+            res.send(chat);
         }
 
         return next(new appError.BadRequestError())

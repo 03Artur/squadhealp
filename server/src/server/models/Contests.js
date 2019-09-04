@@ -1,7 +1,6 @@
-
 const Rule = require('../utils/permissions/classes/Rule');
 const ActionRules = require('../utils/permissions/classes/ActionRules');
-const {ROLES, ACTION,CONTEST_ACTION_RULES} = require("../constants");
+const {ROLES, ACTION, CONTEST_ACTION_RULES} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
     const Contests = sequelize.define('Contests', {
@@ -28,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
 
         },
         isPaid: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
         },
         typeOfIndustry: {
             type: DataTypes.STRING,
@@ -72,8 +71,6 @@ module.exports = (sequelize, DataTypes) => {
         )
     };
 
-
-
     Contests.actionRules = CONTEST_ACTION_RULES;
 
 
@@ -84,8 +81,6 @@ module.exports = (sequelize, DataTypes) => {
     Contests.prototype.checkPermission = (action, actor) => {
         return Contests.checkPermission(action, actor, this)
     };
-
-
 
     return Contests;
 };

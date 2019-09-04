@@ -10,16 +10,16 @@ module.exports = {
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
-                isPaid: false,
+                isPaid: true,
             },
             {
                 userId: 1,
                 name: "Test contest name",
-                type: "Project",
+                type: "Tagline",
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
-                isPaid: false,
+                isPaid: true,
             },{
                 userId: 1,
                 name: "Test contest name",
@@ -27,7 +27,21 @@ module.exports = {
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
-                isPaid: false,
+                isPaid: true,
+            },{
+                userId: 2,
+                typeOfIndustry: "test type of industry",
+                targetCustomers: "test target customers",
+                description: "test description",
+                isPaid: true,
+            },{
+                userId: 2,
+                name: "Contest of the dream",
+                type: "Logo",
+                typeOfIndustry: "test type of industry",
+                targetCustomers: "test target customers",
+                description: "test description",
+                isPaid: true,
             },
 
         ], {});

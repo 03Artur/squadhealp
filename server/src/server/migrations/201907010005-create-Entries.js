@@ -8,7 +8,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            userId:{
+            userId: {
                 type: Sequelize.INTEGER,
                 onDelete: 'SET NULL',
                 onUpdate: 'CASCADE',
@@ -30,13 +30,25 @@ module.exports = {
                 allowNull: false,
 
             },
+            title: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: true,
+                },
+            },
+            isRejected: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,
+            },
             files: {
                 type: Sequelize.ARRAY(Sequelize.STRING),
                 allowNull: true,
 
             },
             createdAt: Sequelize.DATE,
-            updatedAt:Sequelize.DATE,
+            updatedAt: Sequelize.DATE,
 
         });
     },

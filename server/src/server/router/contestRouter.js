@@ -5,17 +5,14 @@ import path from 'path'
 import multer from 'multer';
 import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
+import {namingFile} from "../middlewares/multer";
 
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../../../public/taskFiles/'))
     },
-    filename: function (req, file, cb) {
-        const {originalname} = file;
-        cb(null, `${moment().format(MULTER_TIME_FORMAT)}_${originalname}`);
-
-    }
+    filename: namingFile
 });
 
 const upload = multer({storage: storage});
@@ -69,6 +66,7 @@ router.get('/contest/:id',
     contestController.getContestById
 );
 
+router.get('/contests', contestController.getContests);
 
 export default router;
 

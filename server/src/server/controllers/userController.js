@@ -15,19 +15,18 @@ export const createUser = async (req, res, next) => {
     }
 };
 
-export const getUsersIn = async (re,res,next) => {
+export const getUsersIn = async (re, res, next) => {
 
     try {
 
 
-
         res.send(await Users.findAll({
             where: {
-                id: [1,2,3]
+                id: [1, 2, 3]
             }
         }))
 
-    }catch (e) {
+    } catch (e) {
         next(e)
     }
 
@@ -39,28 +38,27 @@ export const findAndCountAllUsers = async (req, res, next) => {
 
 
         const query = req.query;
-        const result = await Users.findAndCountAll({
+        const users = await Users.findAndCountAll({
             order: [['id', 'ASC']],
             attributes: {exclude: ['password']},
             limit: query.limit,
             offset: query.offset,
 
         });
-        if (!result) {
-            return next(new NotFoundError("Users not found"));
-
+        if (users) {
+            return  res.send(users);
         }
-        res.send(result);
+        return next(new NotFoundError("Users not found"));
+
     } catch (e) {
         next(new BadRequestError())
     }
 };
 
 
-
 export const banUser = async (req, res, next) => {
     try {
-       const user = await req.user.update({
+        const user = await req.user.update({
             isBanned: true
         }, {
             returning: true,
@@ -99,7 +97,7 @@ export const updateUserById = async (req, res, next) => {
             return next(new NotFoundError);
 
         }
-        const result = await user.update(req.body,{
+        const result = await user.update(req.body, {
             returning: true,
         });
         res.send(result);
