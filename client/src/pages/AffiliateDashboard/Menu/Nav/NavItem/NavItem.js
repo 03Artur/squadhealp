@@ -22,6 +22,7 @@ const getColor = (isActive) => {
     return isActive ? 'white' : '#cedce4';
 };
 
+
 const NavItem = (props) => {
     const {title, icon, subMenu, className, isActive, isMenuOpen} = props;
 
@@ -44,57 +45,26 @@ const NavItem = (props) => {
     };
     const renderTitle = () => {
 
-        if (isMenuOpen) {
-            return (
-                <div className={classNames(titleStyles.titleContainer, getColorClass(isActive))}>
-                    {renderIcon()}
 
+        return (
+            <div className={titleStyles.titleContainer}>
+                {renderIcon()}
+                <div className={classNames(titleStyles.submenuTitle, getColorClass(isActive))}>
                     {title}
                     {renderArrow()}
+                    <SubMenu/>
                 </div>
-            )
-        } else {
-            return (
-                <div>
-                    {
-                        renderIcon()
+            </div>
+        )
 
-                    }
-                </div>
-            )
-        }
     };
 
-    const renderSubmenu = () => {
-
-        if (isActive) {
-            if (isMenuOpen) {
-                return (
-                    <div>
-
-                    </div>
-                );
-            } else {
-                return (
-                    <div className={titleStyles.submenuTitle}>
-                        {
-                            renderTitle
-                        }
-                    </div>
-
-                );
-            }
-        }
-    };
 
     return (
         <li onClick={props.onClick} onMouseOver={props.onMouseOver}
             className={classNames({[styles.navItem]: !isMenuOpen})}>
             {
                 renderTitle()
-            }
-            {
-                renderSubmenu()
             }
         </li>
     )

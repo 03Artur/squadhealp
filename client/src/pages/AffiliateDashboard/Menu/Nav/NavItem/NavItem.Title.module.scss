@@ -3,6 +3,7 @@
 .container {
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 
 }
 .iconContainer{
@@ -12,10 +13,12 @@
 .iconContainerClose {
   padding: 15px 0;
   text-align: center;
-  @extend .container;
   min-width: 70px;
-
+  left: 0;
+  position: relative;
+  margin-left: -30px;
 }
+
 .color{
   color: #cedce4;
 }
@@ -29,6 +32,7 @@
   padding: 15px 30px;
   @include flex-container(flex-start, center);
   width: 100%;
+
 }
 
 .arrowContainer{
@@ -45,11 +49,9 @@
 
 
 .submenuTitle{
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  position: relative;
+  flex: 1;
+  @include flex-container(space-between, center);
 
 }
 
