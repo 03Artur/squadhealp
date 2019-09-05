@@ -1,0 +1,60 @@
+@import "../../../../../../commonStyles";
+.submenuContainerMenuOpen{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 40px;
+}
+
+
+
+.itemStyle{
+  width: 100%;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: inherit;
+  text-align: left;
+}
+
+.to{
+  box-sizing: border-box;
+  border: 1px solid #f27e51;
+}
+//link
+.linkStyle{
+  text-decoration: none;
+  color: #cedce4;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Nunito, sans-serif;
+  width: 100%;
+  text-align: left;
+  text-transform: capitalize;
+  &:hover{
+    color: white;
+  }
+}
+.linkActiveStile{
+  color: white;
+}
+//==============
+
+//menuClosed
+
+.submenuContainerMenuClose{
+ @include mediaBreakpointUp($md){
+   display: block;
+   position: absolute;
+   left: 70px;
+   right: 0;
+   height: auto;
+   top: 100%;
+   box-sizing: border-box;
+   padding: 5px 0;
+    white-space: nowrap;
+   background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
+   background-origin: padding-box;
+
+ };
+}

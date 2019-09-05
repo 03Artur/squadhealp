@@ -159,11 +159,6 @@ export async function createChat(req, res, next) {
 
         const chat = await Chat.create(data);
         if (chat) {
-<<<<<<< HEAD
-            await socketHelper.addParticipantsToChat(chat.participants)
-
-=======
->>>>>>> 259f66eed7cbdd0ca3e1c4dad72902706a5b107d
             res.send(chat);
         }
 

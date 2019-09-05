@@ -81,20 +81,13 @@ class SocketHelper {
         const usersToSockets = await UserToSocket.find({
             userId: participants,
         });
-<<<<<<< HEAD
-        usersToSockets.forEach(userToSocket => {
-            const participantSocket = this._io.sockets.connected[userToSocket.socketId];
-            if(participantSocket){
-                participantSocket.join(chat._id);
-            }
-=======
-        const ids = userToSockets.map(s => s.id);
-        userToSockets.forEach(participantSocket => {
+
+        usersToSockets.forEach(participantSocket => {
             const socket = this._io.sockets.connected[participantSocket.socketId];
             socket.join(chat._id);
->>>>>>> 259f66eed7cbdd0ca3e1c4dad72902706a5b107d
         });
     }
+
 
     addChatEvents(socket) {
         socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
@@ -109,8 +102,6 @@ class SocketHelper {
         socket.on(SOCKET_EVENTS.POST_MESSAGE, ({chatId, messageId}) => {
             socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
         })
-<<<<<<< HEAD
-=======
 
 
     }
@@ -135,7 +126,6 @@ class SocketHelper {
 
             this.addChatEvents(socket);
         })
->>>>>>> 259f66eed7cbdd0ca3e1c4dad72902706a5b107d
     }
 }
 

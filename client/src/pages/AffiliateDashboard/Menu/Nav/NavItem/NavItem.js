@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 import styles from './NavItem.module.scss';
 import titleStyles from './NavItem.Title.module.scss';
-import SubMenu from "./SubMenu/SubMenu";
+import Submenu from "./Submenu/Submenu";
 
 const getColorClass = (isActive) => {
     return classNames({
@@ -24,50 +24,79 @@ const getColor = (isActive) => {
 
 
 const NavItem = (props) => {
-    const {title, icon, subMenu, className, isActive, isMenuOpen} = props;
+        const {title, icon, submenu, className, isActive, isMenuOpen} = props;
 
 
-    const renderIcon = () => {
-        return (
-            <div className={isMenuOpen ? titleStyles.iconContainer : titleStyles.iconContainerClose}>
-                <Icon path={icon} color={getColor(isActive)} size={'20px'}/>
-            </div>
-        )
-
-    };
-    const renderArrow = () => {
-        return (
-            <div className={titleStyles.arrowContainer}>
-                <Icon path={mdiChevronRight} color={getColor(isActive)} size={'24px'} rotate={isActive ? 90 : 0}/>
-            </div>
-        )
-
-    };
-    const renderTitle = () => {
-
-        return (
-            <div className={titleStyles.titleContainer}>
-                {renderIcon()}
-                <div className={classNames(titleStyles.submenuTitle, getColorClass(isActive))}>
-                    {title}
-                    {renderArrow()}
-                    <SubMenu/>
+        const renderIcon = () => {
+            return (
+                <div className={isMenuOpen ? titleStyles.iconContainer : titleStyles.iconContainerClose}>
+                    <Icon path={icon} color={getColor(isActive)} size={'20px'}/>
                 </div>
-            </div>
-        )
+            )
 
-    };
+        };
+        const renderArrow = () => {
+            return (
+                <div className={titleStyles.arrowContainer}>
+                    <Icon path={mdiChevronRight} color={getColor(isActive)} size={'24px'} rotate={isActive ? 90 : 0}/>
+                </div>
+            )
+
+        };
+        const renderTitle = () => {
 
 
-    return (
-        <li onClick={props.onClick} onMouseOver={props.onMouseOver}
-            className={classNames({[styles.navItem]: !isMenuOpen})}>
-            {
-                renderTitle()
+            if (isMenuOpen) {
+                return (
+                    <Fragment>
+                        <div
+                            className={classNames(titleStyles.menuOpenTitleContainer, {[titleStyles.menuOpenTitleContainerActive]: isActive})}>
+                            <Icon path={icon} size={'20px'}/>
+                            <span>{title}</span>
+                            <Icon path={mdiChevronRight} size={'24px'} rotate={isActive ? 90 : 0}/>
+                        </div>
+                        {isActive && <Submenu submenu={submenu}/>}
+                    </Fragment>
+                )
             }
-        </li>
-    )
-};
+            if (isActive) {
+                return (
+                    <div className={titleStyles.menuCloseTitleIcon}>
+                        <Icon path={icon} color={getColor(isActive)} size={'20px'}/>
+
+                        <div
+                            className={titleStyles.menuCloseTitleContainerActive}>
+                            <div>
+                                <Icon path={icon} color={getColor(isActive)} size={'20px'}/>
+                            </div>
+                            <span>{title}</span>
+                            <Submenu submenu={submenu}/>
+                        </div>
+
+                    </div>
+                );
+            }
+            return (
+
+                <div className={titleStyles.menuCloseTitleIcon}>
+                    <Icon path={icon} color={getColor(isActive)} size={'20px'}/>
+                </div>
+
+            )
+
+        };
+
+
+        return (
+            <li onClick={props.onClick} onMouseOver={props.onMouseOver}
+                className={classNames({[styles.navItem]: !isMenuOpen})}>
+                {
+                    renderTitle()
+                }
+            </li>
+        )
+    }
+;
 
 NavItem.propTypes = {
     className: PropTypes.string,

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {connect} from 'react-redux';
 
 import styles from './Nav.module.scss'
@@ -8,7 +8,7 @@ function Nav(props) {
 
     const {navItems, isMenuOpen} = props;
     const [openMenuItemIndex, setOpenMenuItemIndex] = useState(null);
-
+    const navEl = useRef(null)
     useEffect(() => {
 
 
@@ -29,6 +29,7 @@ function Nav(props) {
             }
         };
 
+
         return (
             <NavItem key={index} onClick={onClick}
                       onMouseOver={onMouseOver}
@@ -37,13 +38,28 @@ function Nav(props) {
         )
 
     };
+    const onOutsideMouseOverHandler = (event) => {
 
+        if ( !navEl.current.contains(event.target)) {
+
+            setOpenMenuItemIndex(null)
+        }
+    };
     const renderNavItems = () => {
         return navItems.map(renderNavItem)
     };
 
+
+
+    useEffect(() => {
+
+        window.addEventListener('mouseover',onOutsideMouseOverHandler);
+        return () => {
+            window.removeEventListener('mouseover',onOutsideMouseOverHandler);
+        }
+    },[]);
     return (
-        <nav className={styles.navContainer}>
+        <nav  ref={navEl} className={styles.navContainer} >
             {
                 renderNavItems()
             }
