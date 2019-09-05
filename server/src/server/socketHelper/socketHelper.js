@@ -81,11 +81,18 @@ class SocketHelper {
         const usersToSockets = await UserToSocket.find({
             userId: participants,
         });
+<<<<<<< HEAD
         usersToSockets.forEach(userToSocket => {
             const participantSocket = this._io.sockets.connected[userToSocket.socketId];
             if(participantSocket){
                 participantSocket.join(chat._id);
             }
+=======
+        const ids = userToSockets.map(s => s.id);
+        userToSockets.forEach(participantSocket => {
+            const socket = this._io.sockets.connected[participantSocket.socketId];
+            socket.join(chat._id);
+>>>>>>> 259f66eed7cbdd0ca3e1c4dad72902706a5b107d
         });
     }
 
@@ -102,6 +109,33 @@ class SocketHelper {
         socket.on(SOCKET_EVENTS.POST_MESSAGE, ({chatId, messageId}) => {
             socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
         })
+<<<<<<< HEAD
+=======
+
+
+    }
+
+    get io() {
+        return this._io;
+    }
+
+    set io(ioInstance) {
+        this._io = ioInstance;
+        this._io.on('connection',async socket => {
+
+            await UserToSocket.deleteOne({
+                socketId: socket.id,
+            });
+
+            socket.on("disconnect", async function () {
+                await UserToSocket.deleteOne({
+                    socketId: socket.id,
+                })
+            });
+
+            this.addChatEvents(socket);
+        })
+>>>>>>> 259f66eed7cbdd0ca3e1c4dad72902706a5b107d
     }
 }
 
