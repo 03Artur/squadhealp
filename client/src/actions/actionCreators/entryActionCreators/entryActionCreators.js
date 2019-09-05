@@ -1,5 +1,13 @@
 import ENTRY_ACTION_TYPES from "../../actionTypes/entryActionTypes";
 
+export function getEntryActionCreator(entryId) {
+    return {
+        type: ENTRY_ACTION_TYPES.GET_ENTRY_ACTION,
+        entryId,
+    }
+}
+
+
 export function getEntriesActionCreator(queryString) {
     return {
         type: ENTRY_ACTION_TYPES.GET_ENTRIES_ACTION,
@@ -7,10 +15,11 @@ export function getEntriesActionCreator(queryString) {
     }
 }
 
-export function postEntryActionCreator(entry) {
+export function postEntryActionCreator(taskId,entry) {
     return {
         type: ENTRY_ACTION_TYPES.POST_ENTRY_ACTION,
         entry,
+        taskId,
     }
 }
 

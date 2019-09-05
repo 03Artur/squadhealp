@@ -17,7 +17,7 @@ const upload = multer({storage: storage});
 
 const router = express.Router();
 
-router.post('/task/:taskId/entry',upload.array('files', 8),(req, res, next) => {
+router.post('task/:taskId/entry',upload.array('files', 8),(req, res, next) => {
     try{
         req.body = JSON.parse(req.body.entry);
         req.body.files = req.files.map(item => item.filename);
@@ -29,13 +29,11 @@ router.post('/task/:taskId/entry',upload.array('files', 8),(req, res, next) => {
 
 
 }, entryMW.checkCRUDPermission,postEntry);
-
-
 router.get('/entries', entryMW.checkCRUDPermission,getEntries);
 router.put('/entry/:id', entryMW.findEntryByPk, entryMW.checkCRUDPermission, updateEntry);
 router.put('/contest/:contestId/task/:taskId/reject/:id', entryMW.checkRejectPermission,rejectEntry);
-router.post('/task/:taskId/entry/:id', );
 
+router.post('/entry/:id/win',);
 
 
 
