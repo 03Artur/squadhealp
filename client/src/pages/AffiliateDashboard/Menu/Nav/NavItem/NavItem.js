@@ -45,7 +45,6 @@ const NavItem = (props) => {
     };
     const renderTitle = () => {
 
-
         return (
             <div className={titleStyles.titleContainer}>
                 {renderIcon()}
