@@ -1,4 +1,4 @@
-import {sequelize, Users, Contests, Tasks, FavoriteTasks} from '../models';
+import {sequelize,Sequelize, Users, Contests, Tasks, FavoriteTasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
 
