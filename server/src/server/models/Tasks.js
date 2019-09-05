@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 import {ENTRY_ACTION_RULES} from "../constants";
 
 module.exports = (sequelize, DataTypes) => {
@@ -55,27 +54,11 @@ module.exports = (sequelize, DataTypes) => {
 
     });
     Tasks.associate = function (models) {
-        Tasks.hasMany(
-            models.Entries,
-            {
-                foreignKey: 'taskId',
-                targetKey: 'id',
-            }
-        );
-        Tasks.belongsTo(
-            models.Contests,
-            {
-                foreignKey: 'contestId',
-                targetKey: 'id',
-            }
-        );
-        Tasks.belongsTo(
-            models.Entries,
-            {
-                foreignKey: 'winnerId',
-                targetKey: 'id',
-            }
-        )
+        Tasks.hasMany(models.Entries, {foreignKey: 'taskId', targetKey: 'id',});
+        Tasks.belongsToMany(models.Users,  {through: 'FavoriteTasks', foreignKey: 'userId', as: 'like'});
+        Tasks.belongsTo(models.Contests, {foreignKey: 'contestId', targetKey: 'id',});
+        Tasks.belongsTo(models.Entries, {foreignKey: 'winnerId', targetKey: 'id',});
+
     };
 
 

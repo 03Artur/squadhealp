@@ -1,23 +1,39 @@
-import {sequelize, Users, Contests, Tasks} from '../models';
+import {sequelize, Users, Contests, Tasks, FavoriteTasks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
 
 export const getContests = async (req, res, next) => {
     try {
-        const {query: {limit, offset}} = req;
+        const {query: {limit, offset}, accessTokenPayload: {id: userId}} = req;
 
         const {contestFilter, taskFilter, order} = req;
-        const result = await Tasks.findAndCountAll({
-            where: taskFilter,
+        const result = await Tasks.findAll({
+            /*where: taskFilter,
             order: order,
             limit,
-            offset,
-            include: [{
+            offset,*/
+            /*include: [{
                 model: Contests,
                 where: contestFilter,
+            },{
+                model: Users,
+                through:{attributes: ['id']}
+            }
+            ]*/
+            include: [{
+                model: Users,
+                required: false,
+                through: {
+                    model: FavoriteTasks,
+                    attributes: []
+                }
             }]
         });
-
+        res.send({
+            result: {
+                result,
+            }
+        })
         if (result) {
             res.send(result)
         }

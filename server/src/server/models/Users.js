@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
         await Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id'});
         await Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id'});
         await Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id'});
-
+        await Users.belongsToMany(models.Tasks,  {through: 'FavoriteTasks', foreignKey: 'taskId',})
     };
     return Users;
 };
