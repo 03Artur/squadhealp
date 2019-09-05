@@ -2,13 +2,8 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
 
-        return queryInterface.createTable('FavoriteContests', {
-                /*id: {
-                    allowNull: false,
-                    autoIncrement: true,
-                    primaryKey: true,
-                    type: Sequelize.INTEGER
-                },*/
+        return queryInterface.createTable('FavoriteTasks', {
+
                 userId: {
                     type: Sequelize.INTEGER,
                     onDelete: 'SET NULL',
@@ -35,6 +30,6 @@ module.exports = {
 
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('FavoriteContests');
+        return queryInterface.dropTable('FavoriteTasks');
     }
 };
