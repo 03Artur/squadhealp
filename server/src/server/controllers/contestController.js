@@ -24,8 +24,11 @@ export const getContests = async (req, res, next) => {
                 model: Users,
                 as: 'fans',
                 required: false,
+                attributes: ['id'],
+                through: { attributes: [] },
                 where: {
                     id: userId,
+
                 }
 
             }
