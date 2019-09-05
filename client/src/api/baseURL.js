@@ -20,7 +20,11 @@ export const contestUrl = `/contest`;
 export const contestsUrl = `/contests`;
 export const taskUrl = `/contest/task`;
 export const contestPaymentUrl = '/payment/contest';
-
+/*
+* ENTRY
+* */
+export const entryUrl = '/entry';
+export const entriesUrl = '/entries';
 /*
 * ADMIN
 * */

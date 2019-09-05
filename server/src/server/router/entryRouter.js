@@ -4,7 +4,7 @@ import multer from 'multer';
 import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
 import * as entryMW from '../middlewares/entry'
-import {getTaskEntries, postEntry, rejectEntry, updateEntry} from "../controllers/entryController";
+import {getEntries, postEntry, rejectEntry, updateEntry} from "../controllers/entryController";
 import {namingFile} from "../middlewares/multer";
 
 const storage = multer.diskStorage({
@@ -29,10 +29,13 @@ router.post('/task/:taskId/entry',upload.array('files', 8),(req, res, next) => {
 
 
 }, entryMW.checkCRUDPermission,postEntry);
-router.get('/task/:taskId/entry', entryMW.checkCRUDPermission,getTaskEntries);
+
+
+router.get('/entries', entryMW.checkCRUDPermission,getEntries);
 router.put('/entry/:id', entryMW.findEntryByPk, entryMW.checkCRUDPermission, updateEntry);
 router.put('/contest/:contestId/task/:taskId/reject/:id', entryMW.checkRejectPermission,rejectEntry);
 router.post('/task/:taskId/entry/:id', );
+
 
 
 

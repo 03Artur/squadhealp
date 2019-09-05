@@ -2,10 +2,10 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import styles from './Filter.module.scss';
+import styles from './ContestFilter.module.scss';
 
 
-const Filter = (props) => {
+const ContestFilter = (props) => {
 
 
     return (
@@ -15,11 +15,11 @@ const Filter = (props) => {
     )
 };
 
-Filter.propTypes = {
+ContestFilter.propTypes = {
     className: PropTypes.string,
 };
 
-Filter.defaultProps = {
+ContestFilter.defaultProps = {
 
 };
 
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(ContestFilter)

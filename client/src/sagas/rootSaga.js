@@ -5,6 +5,8 @@ import * as authorizationSagas from './authorizationSagas';
 import * as userSagas from './crudUserSaga';
 import * as contestSaga from './contestSaga';
 import * as chatSaga from './chatSagas'
+import * as entrySaga from './entrySaga';
+import ENTRY_ACTION_TYPES from "../actions/actionTypes/entryActionTypes";
 
 function* rootSaga() {
     /*
@@ -61,6 +63,11 @@ function* rootSaga() {
     /*
     * ========================================================================================
     * */
+    //ENTRY
+    yield takeLatest(ENTRY_ACTION_TYPES.POST_ENTRY_ACTION, entrySaga.postEntrySaga);
+    yield takeLatest(ENTRY_ACTION_TYPES.GET_ENTRIES_ACTION, entrySaga.getEntriesSaga);
+    yield takeLatest(ENTRY_ACTION_TYPES.SET_WINNING_ENTRY_ACTION, entrySaga.setWinningEntrySaga);
+    yield takeLatest(ENTRY_ACTION_TYPES.REJECT_ENTRY_ACTION, entrySaga.rejectEntrySaga);
 
 }
 

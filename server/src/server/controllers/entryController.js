@@ -3,14 +3,12 @@ import * as appError from "../errors";
 import _ from 'lodash'
 
 
-export async function getTaskEntries(req, res, next) {
+export async function getEntries(req, res, next) {
     try {
-        const {params: {taskId}} = req;
 
+        const {query} = req;
         const entries = await Entries.findAll({
-            where: {
-                taskId,
-            },
+            where: query,
             include: [{
                 model: Users,
                 attributes: {
