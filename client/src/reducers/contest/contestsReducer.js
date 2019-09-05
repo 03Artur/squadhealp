@@ -4,20 +4,15 @@ import queryString from 'query-string';
 import _ from 'lodash';
 
 function getInitialState() {
-
-
     return {
-
         query: queryString.parse(history.location.search),
         contests: [],
         isFetching: false
-
     }
-
 }
 
 
-export default function getContestsReducer(state = getInitialState(), action) {
+export default function contestsReducer(state = getInitialState(), action) {
     switch (action.type) {
         case ACTION_TYPES.GET_ALL_CONTESTS_REQUEST: {
             return {
@@ -26,11 +21,19 @@ export default function getContestsReducer(state = getInitialState(), action) {
             };
         }
         case ACTION_TYPES.GET_ALL_CONTESTS_RESPONSE: {
-
+            const {count, contests} = action;
             return {
                 ..._.cloneDeep(state),
-                contests: action.contests,
+                count,
+                contests,
                 isFetching: false,
+            };
+        }
+        case ACTION_TYPES.GET_ALL_CONTESTS_ERROR: {
+            return {
+                ..._.cloneDeep(state),
+                isFetching: false,
+                error: action.error,
             };
         }
         default: {

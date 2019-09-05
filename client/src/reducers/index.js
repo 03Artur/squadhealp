@@ -4,7 +4,7 @@ import authorizationReducer from './authorization/authorizationReducer';
 import authorizationMode from './authorization/authorizationModeReducer';
 import adminUsers from './adminUsersReducer';
 import contestCreation from "./contest/contestCreation";
-import getContests from './contest/getContestsReducer';
+import getContests from './contest/contestsReducer';
 import affiliateDashboardNav from './navigation/affiliateDashboardNavReducer';
 import homeUserNavReducer from './navigation/homeUserNavReducer';
 import homeNavReducer from './navigation/homeNavReducer';

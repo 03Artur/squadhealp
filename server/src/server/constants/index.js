@@ -144,7 +144,9 @@ module.exports = {
         [TASK_TYPE.NAME, 100.0],
     ]),
     MULTER_TIME_FORMAT: 'YYMMDDHHmmss',
-
+    CONTEST_FILTER_PROPS: ['isPaid', 'createdAt', 'name', 'userId', 'typeOfIndustry'],
+    TASK_FILTER_PROPS: ['isActive', 'cost', 'style', 'type', 'winnerId',],
+    ORDER_PROPS: ['orderBy', 'order'],
     DEVICES_COUNT: 3,
     SALT_ROUND: 10,
     AUTHORIZATION_BEARER: 'Bearer ',

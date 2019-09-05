@@ -2,10 +2,10 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import styles from './Template.module.scss';
+import styles from './Filter.module.scss';
 
 
-const Template = (props) => {
+const Filter = (props) => {
 
 
     return (
@@ -15,11 +15,11 @@ const Template = (props) => {
     )
 };
 
-Template.propTypes = {
+Filter.propTypes = {
     className: PropTypes.string,
 };
 
-Template.defaultProps = {
+Filter.defaultProps = {
 
 };
 
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Template)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

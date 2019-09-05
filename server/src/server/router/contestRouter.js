@@ -6,6 +6,7 @@ import multer from 'multer';
 import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
 import {namingFile} from "../middlewares/multer";
+import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
 
 
 const storage = multer.diskStorage({
@@ -66,7 +67,7 @@ router.get('/contest/:id',
     contestController.getContestById
 );
 
-router.get('/contests', contestController.getContests);
+router.get('/contests',pickContestFilter,pickTaskFilter,pickOrder,getContestTaskOrder, contestController.getContests);
 
 export default router;
 

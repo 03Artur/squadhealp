@@ -31,6 +31,28 @@ const getSteps = (types) => {
     });
 };
 
+export function* getAllContestSaga({queryString}) {
+    try {
+        yield put({
+            type: ACTION_TYPES.GET_ALL_CONTESTS_REQUEST,
+        });
+
+        const {data: {count,rows: contests}} = yield contestController.getAllContests(queryString);
+
+        yield put({
+            type: ACTION_TYPES.GET_ALL_CONTESTS_RESPONSE,
+            contests,
+            count
+        })
+
+
+    } catch (e) {
+        yield put({
+            type: ACTION_TYPES.GET_ALL_CONTESTS_ERROR,
+            error: e.response.data,
+        })
+    }
+}
 
 export function* createContestSaga({isNameExist, contest: values}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
