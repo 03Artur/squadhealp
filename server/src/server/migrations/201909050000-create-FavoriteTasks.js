@@ -3,7 +3,12 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
 
         return queryInterface.createTable('FavoriteTasks', {
-
+                id: {
+                    allowNull: false,
+                    autoIncrement: true,
+                    primaryKey: true,
+                    type: Sequelize.INTEGER
+                },
                 userId: {
                     type: Sequelize.INTEGER,
                     onDelete: 'SET NULL',
@@ -24,6 +29,8 @@ module.exports = {
                     },
                     allowNull: false,
                 },
+                createdAt: Sequelize.DATE,
+                updatedAt: Sequelize.DATE,
             }
         );
     },

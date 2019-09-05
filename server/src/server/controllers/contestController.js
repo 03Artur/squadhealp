@@ -20,14 +20,15 @@ export const getContests = async (req, res, next) => {
                 through:{attributes: ['id']}
             }
             ]*/
-            include: [{
+            include: {
                 model: Users,
+                as: 'fans',
                 required: false,
-                through: {
-                    model: FavoriteTasks,
-                    attributes: []
+                where: {
+                    id: userId,
                 }
-            }]
+
+            }
         });
         res.send({
             result: {

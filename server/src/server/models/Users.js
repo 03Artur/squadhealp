@@ -88,11 +88,12 @@ module.exports = (sequelize, DataTypes) => {
         return Users.checkPermission(action, this, object);
     };
 
-    Users.associate = async function (models) {
-        await Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id'});
-        await Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id'});
-        await Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id'});
-        await Users.belongsToMany(models.Tasks,  {through: 'FavoriteTasks', foreignKey: 'taskId',})
+    Users.associate = function (models) {
+         Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id'});
+         Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id'});
+         Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id'});
+         Users.belongsToMany(models.Tasks,  {through: models.FavoriteTasks, foreignKey: 'userId', as: 'likedTasks'});
+
     };
     return Users;
 };

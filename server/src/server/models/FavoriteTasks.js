@@ -2,6 +2,12 @@ const {ENTRY_ACTION_RULES} = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
     const FavoriteTasks = sequelize.define('FavoriteTasks', {
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
+        },
         userId: {
             type: DataTypes.INTEGER,
             references: {
@@ -18,12 +24,11 @@ module.exports = (sequelize, DataTypes) => {
             },
             allowNull: false,
         },
+    },{
+        timestamps:true
     });
 
 
-    FavoriteTasks.associate = function (models) {
-        FavoriteTasks.belongsTo(models.Tasks, {foreignKey: 'taskId', targetKey: 'id'});
-        FavoriteTasks.belongsTo(models.Users, {foreignKey: 'userId', targetKey: 'id'});
-    };
+
     return FavoriteTasks;
 };
