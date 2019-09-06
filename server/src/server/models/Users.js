@@ -89,10 +89,11 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     Users.associate = function (models) {
-         Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id'});
-         Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id'});
-         Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id'});
-         Users.belongsToMany(models.Tasks,  {through: models.FavoriteTasks, foreignKey: 'userId', as: 'likedTasks'});
+         Users.hasMany(models.Entries, {foreignKey: 'userId', targetKey: 'id', as: 'entries'});
+         Users.hasMany(models.FavoriteTasks, {foreignKey: 'userId', targetKey: 'id', as: 'favoriteT'});
+         Users.hasMany(models.RefreshTokens, {foreignKey: 'userId', targetKey: 'id', as: 'refreshTokens'});
+         Users.hasMany(models.Contests, {foreignKey: 'userId', targetKey: 'id', as: 'contests'});
+         Users.belongsToMany(models.Tasks,  {through: models.FavoriteTasks, foreignKey: 'userId', as: 'favoriteTasks'});
 
     };
     return Users;

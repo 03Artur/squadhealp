@@ -28,7 +28,7 @@ function CreateContest(props) {
         <React.Fragment>
             <div className={styles.formOuter}>
                 <div className={styles.formContainer}>
-                    <ContestForm initialValues={contest ? contest : {type: NAME_TYPE.COMPANY}}
+                    <ContestForm initialValues={contest ? contest : {nameOf: NAME_TYPE.COMPANY}}
                                  onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
                 </div>
             </div>

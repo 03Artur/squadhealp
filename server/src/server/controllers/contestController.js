@@ -1,43 +1,40 @@
-import {sequelize,Sequelize, Users, Contests, Tasks, FavoriteTasks} from '../models';
+import {sequelize, Sequelize, Users, Contests, Tasks, FavoriteTasks,Banks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
 
 export const getContests = async (req, res, next) => {
     try {
-        const {query: {limit, offset}, accessTokenPayload: {id: userId}} = req;
+        const {query: {limit, offset, isFavorite}, accessTokenPayload: {id: userId}, contestFilter, taskFilter, order} = req;
 
-        const {contestFilter, taskFilter, order} = req;
+
+        // const test= await sequelize.query('SELECT COUNT(*) FROM "FavoriteTasks" JOIN "Tasks" "T" on "FavoriteTasks"."taskId" = "T"."id" JOIN "Users" "U" on "FavoriteTasks"."userId" = "U"."id"',{ type: Sequelize.QueryTypes.SELECT });
+    //     const test= await sequelize.query(`SELECT "T".*, "C".* , (select count(*) from "FavoriteTasks" as FT join "Users" as U on U.id=FT."userId" and U.id=${userId} where FT."taskId"="T".id) as "isFavorite" from "Tasks" as "T"
+    // join "Contests" as "C" on "T"."contestId" = "C".id`,{ type: Sequelize.QueryTypes.SELECT });
+    //         res.send(test);
+
         const result = await Tasks.findAll({
-            /*where: taskFilter,
-            order: order,
-            limit,
-            offset,*/
-            /*include: [{
+
+/*
+            attributes: ["id","title",[sequelize.literal(`CASE WHEN (select count(*) FROM "FavoriteTasks" as FT JOIN "Users" as U on U.id = FT."userId" and U.id = ${userId} where FT."taskId" = "Tasks".id) = 0 THEN false ELSE true END`),"isFavorite"]],
+*/
+            attributes: ["id","title",[sequelize.literal(`CASE when count("likes") = 0 then false else true end`),"isFavorite"]],
+            include: [{
                 model: Contests,
+                as: 'contest',
                 where: contestFilter,
-            },{
-                model: Users,
-                through:{attributes: ['id']}
-            }
-            ]*/
-            include: {
-                model: Users,
-                as: 'fans',
-                required: false,
-                attributes: ['id'],
-                through: { attributes: [] },
+            }, {
+                model: FavoriteTasks,
+                as: 'likes',
+                attributes: [],
                 where: {
-                    id: userId,
+                    userId,
+                },
+                required: isFavorite === 'true',
+            }],
 
-                }
+            group: ['"Tasks"."id"','"contest"."id"']
 
-            }
         });
-        res.send({
-            result: {
-                result,
-            }
-        })
         if (result) {
             res.send(result)
         }
@@ -56,6 +53,7 @@ export const upsertContest = async (req, res, next) => {
             returning: true,
             include: [{
                 model: Tasks,
+                as: 'tasks'
             }]
         }));
         if (!contest) {
@@ -145,6 +143,7 @@ export const getContestById = async (req, res, next) => {
             },
             include: [{
                 model: Tasks,
+                as: 'tasks'
             }]
         });
 

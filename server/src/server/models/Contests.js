@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: true,
             },
         },
-        type: {
+        nameOf: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
@@ -60,6 +60,7 @@ module.exports = (sequelize, DataTypes) => {
             {
                 foreignKey: 'contestId',
                 targetKey: 'id',
+                as: 'tasks',
             }
         );
         Contests.belongsTo(
@@ -67,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
             {
                 foreignKey: 'userId',
                 targetKey: 'id',
+                as: 'user',
             }
         )
     };

@@ -8,6 +8,12 @@ const chatSchema = new Schema(
             type: Schema.Types.Number,
             required: true,
         },
+        name: {
+            type: Schema.Types.String,
+            required: true,
+            minLength: 1,
+            maxLength: 512,
+        },
         banList: [
             {
                 type: Schema.Types.Number,

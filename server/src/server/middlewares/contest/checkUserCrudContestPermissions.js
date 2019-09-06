@@ -10,6 +10,7 @@ export default async (req, res, next) => {
         const contest = req.params.id ? await Contests.findByPk(parseInt(req.params.id), {
             include: [{
                 model: Tasks,
+                as: 'tasks',
             }]
         }) : req.body;
 

@@ -30,7 +30,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
                            placeholder={"e.g. Marketing Platform for Small Businesses"}
                            label='Name of the company / business?'
                            component={LabelInput} type="text"/>
-                    <Field validate={[isRequired,notEmpty, ]} name="type"
+                    <Field validate={[isRequired,notEmpty, ]} name="nameOf"
                            options={Object.values(NAME_TYPE)} label={"Type of business"}
                            component={Select}
                            type="text"/>

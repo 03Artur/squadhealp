@@ -1,0 +1,12 @@
+"SELECT "Tasks"."id", "Tasks"."title", CASE when count("FavoriteTasks") = 0 then false else true end AS "isFavorite", "contest"."id" AS "contest.id", "contest"."name" AS "contest.name", "contest"."nameOf" AS "contest.nameOf", "contest"."isPaid" AS "contest.isPaid", "contest"."typeOfIndustry" AS "contest.typeOfIndustry", "contest"."targetCustomers" AS "contest.targetCustomers", "contest"."description" AS "contest.description", "contest"."createdAt" AS "contest.createdAt", "contest"."updatedAt" AS "contest.updatedAt", "contest"."userId" AS "contest.userId", "likes"."id" AS "likes.id"
+FROM "Tasks" AS "Tasks"
+INNER JOIN "Contests" AS "contest" ON "Tasks"."contestId" = "contest"."id"
+INNER JOIN "FavoriteTasks" AS "likes" ON "Tasks"."id" = "likes"."taskId" AND "likes"."userId" = 1;"
+
+
+"SELECT "Tasks"."id", "Tasks"."title", CASE when count("likes") = 0 then false else true end AS "isFavorite", "contest"."id" AS "contest.id", "contest"."name" AS "contest.name", "contest"."nameOf" AS "contest.nameOf", "contest"."isPaid" AS "contest.isPaid", "contest"."typeOfIndustry" AS "contest.typeOfIndustry", "contest"."targetCustomers" AS "contest.targetCustomers", "contest"."description" AS "contest.description", "contest"."createdAt" AS "contest.createdAt", "contest"."updatedAt" AS "contest.updatedAt", "contest"."userId" AS "contest.userId", "likes"."id" AS "likes.id"
+FROM "Tasks" AS "Tasks"
+INNER JOIN "Contests" AS "contest" ON "Tasks"."contestId" = "contest"."id"
+LEFT OUTER JOIN "FavoriteTasks" AS "likes" ON "Tasks"."id" = "likes"."taskId" AND "likes"."userId" = 1;"
+
+

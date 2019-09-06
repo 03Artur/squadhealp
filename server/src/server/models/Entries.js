@@ -37,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     Entries.associate = function (models) {
-        Entries.belongsTo(models.Tasks, {foreignKey: 'taskId', targetKey: 'id'});
-        Entries.belongsTo(models.Users, {foreignKey: 'userId', targetKey: 'id'});
+        Entries.belongsTo(models.Tasks, {foreignKey: 'taskId', targetKey: 'id',as: 'task'});
+        Entries.belongsTo(models.Users, {foreignKey: 'userId', targetKey: 'id', as: 'user'});
     };
     return Entries;
 };

@@ -6,7 +6,7 @@ module.exports = {
             {
                 userId: 1,
                 name: "Test contest name",
-                type: "Project",
+                nameOf: "Project",
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
@@ -15,7 +15,7 @@ module.exports = {
             {
                 userId: 1,
                 name: "Test contest name",
-                type: "Tagline",
+                nameOf: "Product",
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
@@ -23,7 +23,7 @@ module.exports = {
             },{
                 userId: 1,
                 name: "Test contest name",
-                type: "Project",
+                nameOf: "Project",
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",
@@ -37,7 +37,7 @@ module.exports = {
             },{
                 userId: 2,
                 name: "Contest of the dream",
-                type: "Logo",
+                nameOf: "Company",
                 typeOfIndustry: "test type of industry",
                 targetCustomers: "test target customers",
                 description: "test description",

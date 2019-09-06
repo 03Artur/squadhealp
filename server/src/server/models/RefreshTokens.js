@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
     RefreshTokens.associate = function (models) {
-        RefreshTokens.belongsTo(models.Users, {foreignKey: 'userId', sourceKey: 'id'});
+        RefreshTokens.belongsTo(models.Users, {foreignKey: 'userId', sourceKey: 'id',as: 'user'});
     };
     return RefreshTokens;
 };

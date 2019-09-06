@@ -1,5 +1,5 @@
 import {BadRequestError} from '../../../errors';
-import {createTaskSchema, updateTaskSchema} from '../../../utils/yupSchemas/contestSchemas';
+import {createTaskSchema, updateTaskSchema} from '../../../utils/yupSchemas/taskSchemas';
 
 export async function validateTaskOnCreate(req, res, next) {
     try {

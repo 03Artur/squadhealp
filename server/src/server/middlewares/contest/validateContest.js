@@ -3,7 +3,7 @@ import {
     nameNotExistCreateContestSchema,
     nameExistCreateContestSchema,
     updateNameExistContestSchema
-} from '../../utils/yupSchemas/businessInfoSchema';
+} from '../../utils/yupSchemas/contestSchema';
 
 export async function validateContestOnCreate(req, res, next) {
     try {

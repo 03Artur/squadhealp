@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import {CONTEST_FILTER_PROPS, TASK_FILTER_PROPS,ORDER_PROPS} from '../../constants';
+import {CONTEST_FILTER_PROPS, TASK_FILTER_PROPS, ORDER_PROPS} from '../../constants';
 import {Contests, Tasks} from "../../models";
 
 export function pickContestFilter(req, res, next) {
     try {
         const {query} = req;
-        if(_.isEmpty(query)){
+        if (_.isEmpty(query)) {
             return next()
         }
 
@@ -20,7 +20,7 @@ export function pickTaskFilter(req, res, next) {
     try {
 
         const {query} = req;
-        if(_.isEmpty(query)){
+        if (_.isEmpty(query)) {
             return next()
         }
 
@@ -32,27 +32,29 @@ export function pickTaskFilter(req, res, next) {
 }
 
 export function pickOrder(req, res, next) {
-        try{
+    try {
 
-            const {query} = req;
-            if(_.isEmpty(query)){
-                return next()
-            }
-            req.orderProps = _.pick(query,ORDER_PROPS);
-            return next();
-        }catch (e) {
-            next(e)
+        const {query} = req;
+        if (_.isEmpty(query)) {
+            return next()
         }
+        req.orderProps = _.pick(query, ORDER_PROPS);
+        return next();
+    } catch (e) {
+        next(e)
+    }
 }
 
 export function getContestTaskOrder(req, res, next) {
     try {
         const {orderProps} = req;
 
-        if(orderProps){
+        if (orderProps && _.has(orderProps, ORDER_PROPS[1], ORDER_PROPS[0])) {
+
             req.order = [CONTEST_FILTER_PROPS.includes(orderProps.orderBy) ?
                 [Contests, orderProps.orderBy, orderProps.order] :
-                [orderProps.orderBy, orderProps.order]];        }
+                [orderProps.orderBy, orderProps.order]];
+        }
 
         return next();
     } catch (e) {

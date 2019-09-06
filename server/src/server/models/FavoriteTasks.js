@@ -28,7 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         timestamps:true
     });
 
-
+    FavoriteTasks.associate = function (models) {
+        FavoriteTasks.belongsTo(models.Tasks, {foreignKey: 'taskId', targetKey: 'id',as: 'task'});
+        FavoriteTasks.belongsTo(models.Users, {foreignKey: 'userId', targetKey: 'id', as: 'user'});
+    };
 
     return FavoriteTasks;
 };

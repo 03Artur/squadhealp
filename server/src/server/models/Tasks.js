@@ -54,10 +54,11 @@ module.exports = (sequelize, DataTypes) => {
 
     });
     Tasks.associate = function (models) {
-        Tasks.hasMany(models.Entries, {foreignKey: 'taskId', targetKey: 'id',});
-        Tasks.belongsToMany(models.Users,  {through: models.FavoriteTasks, foreignKey: 'taskId', as: 'fans'});
-        Tasks.belongsTo(models.Contests, {foreignKey: 'contestId', targetKey: 'id',});
-        Tasks.belongsTo(models.Entries, {foreignKey: 'winnerId', targetKey: 'id',});
+        Tasks.hasMany(models.Entries, {foreignKey: 'taskId', targetKey: 'id', as: 'entries'});
+        Tasks.hasMany(models.FavoriteTasks, {foreignKey: 'taskId', targetKey: 'id', as: 'likes'});
+        Tasks.belongsToMany(models.Users, {through: models.FavoriteTasks, foreignKey: 'taskId', as: 'fans'});
+        Tasks.belongsTo(models.Contests, {foreignKey: 'contestId', targetKey: 'id', as: 'contest'});
+        Tasks.belongsTo(models.Entries, {foreignKey: 'winnerId', targetKey: 'id',as: 'winningEntry'});
 
     };
 

@@ -11,6 +11,7 @@ export async function getEntries(req, res, next) {
             where: query,
             include: [{
                 model: Users,
+                as: 'user',
                 attributes: {
                     include: ['firstName', 'lastName', 'profilePicture', 'role', 'isBanned', 'id']
                 }

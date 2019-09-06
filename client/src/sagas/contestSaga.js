@@ -58,7 +58,7 @@ export function* createContestSaga({isNameExist, contest: values}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
     try {
 
-        const {data: {Tasks: tasks, ...contest}} = yield contestController.createContest(isNameExist, values);
+        const {data: {tasks, ...contest}} = yield contestController.createContest(isNameExist, values);
 
         yield all([
             put({
@@ -100,7 +100,7 @@ export function* getContestInDrawSaga() {
             stepIndex++;
             if (query.contestId) {
                 yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
-                const {data: {Tasks: tasks, ...contest}} = yield contestController.getContestById(query.contestId);
+                const {data: {tasks, ...contest}} = yield contestController.getContestById(query.contestId);
                 stepIndex += (tasks.length + 1);
                 yield  put({
                     type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
@@ -136,7 +136,7 @@ export function* getContestInDrawSaga() {
 export function* createTaskSaga({contestId, taskFormData}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_CREATE_TASK_REQUEST});
     try {
-        const {data: {Tasks: tasks, ...contest}} = yield contestController.createTask(contestId, taskFormData);
+        const {data: {tasks, ...contest}} = yield contestController.createTask(contestId, taskFormData);
         yield all([
             put({
                 type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
@@ -200,7 +200,7 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
     try {
 
-        const {data: {Tasks: tasks, ...contest}} = yield contestController.contestPaymentById(contestId, creditCard);
+        const {data: {tasks, ...contest}} = yield contestController.contestPaymentById(contestId, creditCard);
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
             contest,

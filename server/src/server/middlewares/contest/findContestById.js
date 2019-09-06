@@ -8,7 +8,7 @@ export default async function findContestById(req, res, next) {
             },
             include: [{
                 model: Tasks,
-
+                as: 'tasks',
             }]
         });
 
