@@ -1,20 +1,19 @@
 import {sequelize, Sequelize, Users, Contests, Tasks, FavoriteTasks,Banks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
-
+import {ROLES} from '../constants';
 export const getContests = async (req, res, next) => {
     try {
-        const {query: { isFavorite,limit,offset}, accessTokenPayload: {id: userId}, contestFilter, taskFilter, order} = req;
+        const {query: { isFavorite,limit,offset}, accessTokenPayload: {id: userId,role}, contestFilter, taskFilter, order} = req;
 
-
-        const result = await Tasks.findAndCountAll({
-
-            include: [{
-                model: Contests,
-                as: 'contest',
-                attributes: ['isPaid'],
-                where: contestFilter,
-            }, {
+        const attributes = ["id","title"];
+        const include = [{
+            model: Contests,
+            as: 'contest',
+            where: contestFilter,
+        }];
+        if(role===ROLES.CREATIVE){
+            include.push({
                 model: FavoriteTasks,
                 as: 'likes',
                 attributes: [],
@@ -22,12 +21,26 @@ export const getContests = async (req, res, next) => {
                     userId,
                 },
                 required: isFavorite === 'true',
-            }],
-            attributes: {include: ["id","title",[sequelize.literal(`CASE WHEN "likes"."id" IS NULL THEN false ELSE true END` ),"isFavorite"]]},
+            });
+            attributes.push([sequelize.literal(`CASE WHEN "likes"."id" IS NULL THEN false ELSE true END` ),"isFavorite"])
+        }
+        else if(role === ROLES.BUYER){
+            include.push({
+                model: Users,
+                as: 'fans',
+                attributes: ['id','firstName','lastName','profilePicture','role'],
+                through: { attributes: [] },
+                required: isFavorite === 'true',
+            })
+        }
 
+        const result = await Tasks.findAndCountAll({
+
+            include,
+            attributes,
             order: sequelize.literal(`"Tasks"."id" DESC`),
-            limit: 7,
-            offset:1,
+            limit,
+            offset,
             subQuery: false,
 
         });
