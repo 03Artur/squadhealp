@@ -10,3 +10,16 @@ INNER JOIN "Contests" AS "contest" ON "Tasks"."contestId" = "contest"."id"
 LEFT OUTER JOIN "FavoriteTasks" AS "likes" ON "Tasks"."id" = "likes"."taskId" AND "likes"."userId" = 1;"
 
 
+SELECT "Tasks".*
+FROM (
+    SELECT "Tasks"."id", "Tasks"."title",
+            CASE when "likes"."id" IS NULL then false else true end AS "isFavorite",
+             "contest"."id" AS "contest.id", "contest"."name" AS "contest.name",
+              "contest"."nameOf" AS "contest.nameOf", "contest"."isPaid" AS "contest.isPaid",
+               "contest"."typeOfIndustry" AS "contest.typeOfIndustry", "contest"."targetCustomers" AS "contest.targetCustomers",
+                "contest"."description" AS "contest.description", "contest"."createdAt" AS "contest.createdAt",
+                 "contest"."updatedAt" AS "contest.updatedAt", "contest"."userId" AS "contest.userId" FROM "Tasks" AS "Tasks"
+    INNER JOIN "Contests" AS "contest" ON "Tasks"."contestId" = "contest"."id"
+    ORDER BY "Tasks"."id" ASC LIMIT '7' OFFSET '2'
+    ) AS "Tasks"
+    LEFT OUTER JOIN "FavoriteTasks" AS "likes" ON "Tasks"."id" = "likes"."taskId" AND "likes"."userId" = 1 ORDER BY "Tasks"."id" ASC;"

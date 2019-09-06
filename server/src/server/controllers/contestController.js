@@ -4,23 +4,15 @@ import _ from 'lodash';
 
 export const getContests = async (req, res, next) => {
     try {
-        const {query: {limit, offset, isFavorite}, accessTokenPayload: {id: userId}, contestFilter, taskFilter, order} = req;
+        const {query: { isFavorite,limit,offset}, accessTokenPayload: {id: userId}, contestFilter, taskFilter, order} = req;
 
 
-        // const test= await sequelize.query('SELECT COUNT(*) FROM "FavoriteTasks" JOIN "Tasks" "T" on "FavoriteTasks"."taskId" = "T"."id" JOIN "Users" "U" on "FavoriteTasks"."userId" = "U"."id"',{ type: Sequelize.QueryTypes.SELECT });
-    //     const test= await sequelize.query(`SELECT "T".*, "C".* , (select count(*) from "FavoriteTasks" as FT join "Users" as U on U.id=FT."userId" and U.id=${userId} where FT."taskId"="T".id) as "isFavorite" from "Tasks" as "T"
-    // join "Contests" as "C" on "T"."contestId" = "C".id`,{ type: Sequelize.QueryTypes.SELECT });
-    //         res.send(test);
+        const result = await Tasks.findAndCountAll({
 
-        const result = await Tasks.findAll({
-
-/*
-            attributes: ["id","title",[sequelize.literal(`CASE WHEN (select count(*) FROM "FavoriteTasks" as FT JOIN "Users" as U on U.id = FT."userId" and U.id = ${userId} where FT."taskId" = "Tasks".id) = 0 THEN false ELSE true END`),"isFavorite"]],
-*/
-            attributes: ["id","title",[sequelize.literal(`CASE when count("likes") = 0 then false else true end`),"isFavorite"]],
             include: [{
                 model: Contests,
                 as: 'contest',
+                attributes: ['isPaid'],
                 where: contestFilter,
             }, {
                 model: FavoriteTasks,
@@ -31,8 +23,12 @@ export const getContests = async (req, res, next) => {
                 },
                 required: isFavorite === 'true',
             }],
+            attributes: {include: ["id","title",[sequelize.literal(`CASE WHEN "likes"."id" IS NULL THEN false ELSE true END` ),"isFavorite"]]},
 
-            group: ['"Tasks"."id"','"contest"."id"']
+            order: sequelize.literal(`"Tasks"."id" DESC`),
+            limit: 7,
+            offset:1,
+            subQuery: false,
 
         });
         if (result) {
