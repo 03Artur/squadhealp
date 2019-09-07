@@ -10,32 +10,29 @@ import styles from './FilterItem.module.scss';
 import classNames from 'classnames';
 
 
-
-
-
 const FilterItem = (props) => {
 
-    const {title, filter, value, addFilterPropAction, removeFilterPropAction,} = props;
+    const {title, selectedProps, value, addFilterPropAction, removeFilterPropAction,} = props;
     const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
-        setIsChecked(_.keys(value).every(key => _.isEqual(filter[key], value[key])));
-    },[filter]);
+        setIsChecked(selectedProps.has(title));
+    }, [selectedProps]);
 
     const onClick = () => {
         if (isChecked) {
-            removeFilterPropAction(_.keys(value));
+            removeFilterPropAction(title);
         } else {
-            addFilterPropAction(value);
+            addFilterPropAction(title, value);
         }
     };
 
     return (
-        <li className={classNames(styles.container,{[styles.checked]:isChecked})} onClick={onClick}>
-                <div className={styles.checkbox}>
-                    <span className={styles.checkMark}/>
-                </div>
-                <span className={styles.title}>
+        <li className={classNames(styles.container, {[styles.checked]: isChecked})} onClick={onClick}>
+            <div className={styles.checkbox}>
+                <span className={styles.checkMark}/>
+            </div>
+            <span className={styles.title}>
                     {title}
                 </span>
         </li>
@@ -51,9 +48,9 @@ FilterItem.defaultProps = {};
 
 const mapStateToProps = state => {
 
-    const {filter} = state.contestFilterReducer;
+    const {selectedProps} = state.contestFilterReducer;
     return {
-        filter,
+        selectedProps,
     }
 };
 

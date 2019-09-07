@@ -6,7 +6,7 @@ import ContestFilter from "../../components/contest/Filter/Filter";
 import queryString from 'query-string';
 
 const ContestsPage = (props) => {
-    const {filter,history} = props;
+    const {selectedProps,history} = props;
 
 
 
@@ -15,7 +15,7 @@ const ContestsPage = (props) => {
 
        history.push({search: queryString.stringify(filter)})
 
-    },[filter]);
+    },[selectedProps]);
 
     return (
         <Fragment>
@@ -41,10 +41,10 @@ ContestsPage.defaultProps = {};
 
 
 const mapStateToProps = state => {
-    const {filter} = state.contestFilterReducer;
+    const {selectedProps} = state.contestFilterReducer;
 
     return {
-        filter,
+        selectedProps,
     }
 
 };

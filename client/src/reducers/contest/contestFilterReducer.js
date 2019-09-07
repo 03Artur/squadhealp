@@ -6,6 +6,13 @@ import {ROLE} from "./.././../constants";
 import history from "../../history";
 import queryString from 'query-string';
 
+
+const parseSelectedProps = (value) => {
+    const selected
+
+};
+
+
 const initialState = {
     filterProps: [
         {
@@ -54,7 +61,7 @@ const initialState = {
             ]
         },
     ],
-
+    selectedProps: new Map(),
     filter: queryString.parse(history.location.search),
 };
 
@@ -64,18 +71,15 @@ export default function contestFilterReducer(state = initialState, action) {
     switch (action.type) {
 
         case CONTEST_ACTION_TYPES.ADD_FILTER_PROPS: {
-            return _.cloneDeep({
-                ...state,
-                filter: {
-                    ...state.filter,
-                    ...action.value,
-                }
-            });
+            const clonedState = _.cloneDeep(state);
+            const {key, value} = state;
+            clonedState.selectedProps = clonedState.set(key, value);
+            return clonedState;
         }
         case CONTEST_ACTION_TYPES.REMOVE_FILTER_PROPS: {
             return _.cloneDeep({
                 ...state,
-                filter: _.omit(state.filter, action.keys)
+
             })
         }
         /*case CONTEST_ACTION_TYPES.SET_FILTER: {
