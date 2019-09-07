@@ -1,10 +1,10 @@
 import CONTEST_ACTION_TYPES from "../../actionTypes/contestActionTypes";
 
 
-export function addPropsToFilterActionCreator(props) {
+export function addPropsToFilterActionCreator(value) {
     return {
         type: CONTEST_ACTION_TYPES.ADD_FILTER_PROPS,
-        props,
+        value,
     }
 }
 

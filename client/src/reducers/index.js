@@ -3,15 +3,13 @@ import {reducer as formReducer} from 'redux-form';
 import authorizationReducer from './authorization/authorizationReducer';
 import authorizationMode from './authorization/authorizationModeReducer';
 import adminUsers from './adminUsersReducer';
-import contestCreation from "./contest/contestCreation";
 import getContests from './contest/contestsReducer';
 import affiliateDashboardNav from './navigation/affiliateDashboardNavReducer';
 import homeUserNavReducer from './navigation/homeUserNavReducer';
 import homeNavReducer from './navigation/homeNavReducer';
 import affiliateDashboardUserNav from './navigation/affiliateDashboardUserNavReduce';
 import affiliateDashboardMenu from './menu/affiliateDashboardMenuReducer'
-import contestCreationSteps from "./contest/contestCreationSteps";
-import contestCreationQuery from "./contest/contestCreationQuery";
+
 import chatMenu from "./menu/chatMenuReducer";
 
 //CHAT
@@ -20,7 +18,13 @@ import chatReducer from "./chat/chatReducer";
 import chatsParticipantsReducer from "./chat/chatsParticipantsReducer";
 import chatsMessagesReducer from "./chat/chatsMessagesReducer";
 import chatsReducer from "./chat/chatsReducer";
-
+//CONTESTS
+import contestPaginationReducer from "./contest/contestsPaginationReducer";
+import contestFilterReducer from "./contest/contestFilterReducer";
+import contestsReducer from "./contest/contestsReducer";
+import contestCreationSteps from "./contest/contestCreationSteps";
+import contestCreationQuery from "./contest/contestCreationQuery";
+import contestCreation from "./contest/contestCreation";
 
 const appReducer = combineReducers({
     authorizationReducer,
@@ -37,7 +41,9 @@ const appReducer = combineReducers({
     contestCreation,
     contestCreationSteps,
     contestCreationQuery,
-
+    contestPaginationReducer,
+    contestFilterReducer,
+    contestsReducer,
 
     chatMenu,
     chatReducer,

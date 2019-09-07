@@ -1,0 +1,20 @@
+@import "./../styles";
+
+.propContainer{
+  width: 100%;
+}
+
+.propTitle{
+  @extend .titleStyles;
+  font-size: 16px;
+
+}
+
+
+.propItemContainer{
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: left;
+}
+
+

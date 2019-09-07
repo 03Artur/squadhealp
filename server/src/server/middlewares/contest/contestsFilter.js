@@ -5,9 +5,11 @@ import {Contests, Tasks} from "../../models";
 export function pickContestFilter(req, res, next) {
     try {
         const {query} = req;
+
         if (_.isEmpty(query)) {
             return next()
         }
+
         req.contestFilter = _.pick(query, CONTEST_FILTER_PROPS);
         return next();
     } catch (e) {

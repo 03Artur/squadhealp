@@ -1,0 +1,42 @@
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgb(238, 238, 238);
+  background-color: #f9f9f9;
+}
+
+.titleContainer {
+  max-width: 1170px;
+  width: 100%;
+  text-align: left;
+  padding: 45px 15px;
+  box-sizing: border-box;
+
+}
+
+.title {
+  text-transform: uppercase;
+
+  color: rgb(51, 51, 51);
+  font-size: 25px;
+  font-weight: 600;
+  font-family: Gotham SSm A, Gotham SSm B, Halvetica, sans-serif;
+}
+.contentContainer{
+
+  padding: 0 15px ;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1170px;
+  margin: 30px 0;
+}
+
+.contentRow{
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+
+}

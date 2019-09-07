@@ -157,6 +157,7 @@ export const USERS_ACTION_RULES = new Map([
 
 export const MULTER_TIME_FORMAT = 'YYMMDDHHmmss';
 export const CONTEST_FILTER_PROPS = ['isPaid', 'createdAt', 'name', 'userId', 'typeOfIndustry', 'nameOf'];
+export const TASK_RANGE_PROPS = ['cost']
 export const TASK_FILTER_PROPS = ['isActive', 'cost', 'style', 'type', 'winnerId'];
 export const ORDER_PROPS = ['orderBy', 'order'];
 export const DEVICES_COUNT = 3;
