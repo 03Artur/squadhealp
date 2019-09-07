@@ -1,38 +1,12 @@
-import {sequelize, Sequelize, Users, Contests, Tasks, FavoriteTasks,Banks} from '../models';
+import {sequelize, Sequelize, Users, Contests, Tasks, FavoriteTasks, Banks} from '../models';
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
 import {ROLES} from '../constants';
+
 export const getContests = async (req, res, next) => {
     try {
-        const {query: { isFavorite,limit,offset}, accessTokenPayload: {id: userId,role}, contestFilter, taskFilter, order} = req;
+        const {query: {limit, offset}, include, attributes, accessTokenPayload: {id: userId, role}, contestFilter, taskFilter, order} = req;
 
-        const attributes = ["id","title"];
-        const include = [{
-            model: Contests,
-            as: 'contest',
-            where: contestFilter,
-        }];
-        if(role===ROLES.CREATIVE){
-            include.push({
-                model: FavoriteTasks,
-                as: 'likes',
-                attributes: [],
-                where: {
-                    userId,
-                },
-                required: isFavorite === 'true',
-            });
-            attributes.push([sequelize.literal(`CASE WHEN "likes"."id" IS NULL THEN false ELSE true END` ),"isFavorite"])
-        }
-        else if(role === ROLES.BUYER){
-            include.push({
-                model: Users,
-                as: 'fans',
-                attributes: ['id','firstName','lastName','profilePicture','role'],
-                through: { attributes: [] },
-                required: isFavorite === 'true',
-            })
-        }
 
         const result = await Tasks.findAndCountAll({
 

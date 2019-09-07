@@ -7,6 +7,7 @@ import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
 import {namingFile} from "../middlewares/multer";
 import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
+import {addContestExtraContent} from "../middlewares/contest/includeContestExtraContent";
 
 
 const storage = multer.diskStorage({
@@ -26,7 +27,6 @@ router.post('/contest',
 );
 
 
-
 router.put('/contest/:id',
     contestMW.checkUserCrudContestPermissions,
     contestMW.validateContestOnUpdate,
@@ -39,7 +39,7 @@ router.post('/contest/:id/task',
         try {
 
             req.body = JSON.parse(req.body.task);
-            req.body.files = req.files.map(item=>item.filename);
+            req.body.files = req.files.map(item => item.filename);
             next();
 
         } catch (e) {
@@ -61,13 +61,20 @@ router.put('/contest/task',
 );
 
 router.get('/contest/:id',
-/*
-    contestMW.checkUserCrudContestPermissions,
-*/
+    /*
+        contestMW.checkUserCrudContestPermissions,
+    */
     contestController.getContestById
 );
 
-router.get('/contests',pickContestFilter,pickTaskFilter,pickOrder,getContestTaskOrder, contestController.getContests);
+router.get('/contests',
+    // contestMW.checkUserCrudContestPermissions,
+    pickContestFilter,
+    pickTaskFilter,
+    pickOrder,
+    getContestTaskOrder,
+    addContestExtraContent,
+    contestController.getContests);
 
 export default router;
 

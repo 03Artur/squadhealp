@@ -8,7 +8,6 @@ export function pickContestFilter(req, res, next) {
         if (_.isEmpty(query)) {
             return next()
         }
-
         req.contestFilter = _.pick(query, CONTEST_FILTER_PROPS);
         return next();
     } catch (e) {
