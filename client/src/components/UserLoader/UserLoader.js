@@ -29,7 +29,7 @@ const UserLoader = (props) => {
 
     useEffect(() => {
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
-            props.getAuthorizedUser();
+            props.getAuthorizedUserAction();
         }
     }, []);
 
@@ -57,7 +57,7 @@ const mapStateToProps = store => {
 
 };
 const mapDispatchToProps = dispatch => ({
-        getAuthorizedUser: () => dispatch(getAuthorizedUserActionCreator())
+        getAuthorizedUserAction: () => dispatch(getAuthorizedUserActionCreator())
     })
 ;
 

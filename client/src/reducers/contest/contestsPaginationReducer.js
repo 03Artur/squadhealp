@@ -3,7 +3,7 @@ import CONTEST_ACTION_TYPES from "../../actions/actionTypes/contestActionTypes";
 import _ from 'lodash';
 
 const initialState = {
-    limit: 20,
+    limit: 2,
     offset: 0,
 };
 
@@ -36,9 +36,7 @@ export default function contestPaginationReducer(state = initialState, action) {
             }
         }
         case CONTEST_ACTION_TYPES.PAGINATION_RESET:{
-            return {
-                ...initialState,
-            };
+            return _.clone(initialState)
         }
 
         default:

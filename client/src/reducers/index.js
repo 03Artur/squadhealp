@@ -20,7 +20,7 @@ import chatsMessagesReducer from "./chat/chatsMessagesReducer";
 import chatsReducer from "./chat/chatsReducer";
 //CONTESTS
 import contestPaginationReducer from "./contest/contestsPaginationReducer";
-import contestFilterReducer from "./contest/contestFilterReducer";
+import contestFilterReducer from "./contest/filter/contestFilterReducer";
 import contestsReducer from "./contest/contestsReducer";
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";

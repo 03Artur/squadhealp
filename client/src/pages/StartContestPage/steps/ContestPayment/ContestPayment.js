@@ -33,7 +33,6 @@ const ContestPayment = (props) => {
         const creditCard = _.clone(values);
         creditCard.number = creditCard.number.replace(/ /g,'');
         creditCard.expiry = creditCard.expiry.replace(/ /g,'');
-        console.log(creditCard);
         props.contestPaymentAction(props.contestId, creditCard);
 
     };

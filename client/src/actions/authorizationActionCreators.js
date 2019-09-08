@@ -23,10 +23,9 @@ export const logoutActionCreator = () => {
 };
 
 export const getAuthorizedUserActionCreator = () => {
-    const action = {
+    return {
         type: ACTION_TYPES.GET_AUTHORIZED_USER,
     };
-    return action;
 };
 
 export const changeModeToLoginActionCreator = () => {

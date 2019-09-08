@@ -1,18 +1,18 @@
 import CONTEST_ACTION_TYPES from "../../actionTypes/contestActionTypes";
 
 
-export function addPropsToFilterActionCreator(key,value) {
+export function addPropsToFilterActionCreator(key, param) {
     return {
         type: CONTEST_ACTION_TYPES.ADD_FILTER_PROPS,
         key,
-        value,
+        param,
     }
 }
 
 export function removeFilterPropsActionCreator(key) {
     return {
         type: CONTEST_ACTION_TYPES.REMOVE_FILTER_PROPS,
-        key
+        key,
     }
 }
 
@@ -23,4 +23,8 @@ export function setFilterActionCreator(filter) {
     }
 }
 
-
+export function resetFilterActionCreator() {
+    return {
+        type: CONTEST_ACTION_TYPES.RESET_FILTER_ACTION,
+    }
+}

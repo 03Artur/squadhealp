@@ -9,7 +9,7 @@ export const getContests = async (req, res, next) => {
 
 
         const result = await Tasks.findAndCountAll({
-
+            where: taskFilter,
             include,
             attributes,
             order: sequelize.literal(`"Tasks"."id" DESC`),

@@ -5,27 +5,30 @@ import {
     addPropsToFilterActionCreator,
     removeFilterPropsActionCreator
 } from "../../../../../actions/actionCreators/contestActionCreators/contestFilterActionCreator";
-import _ from 'lodash';
 import styles from './FilterItem.module.scss';
 import classNames from 'classnames';
-
+import _ from 'lodash';
 
 const FilterItem = (props) => {
 
-    const {title, selectedProps, value, addFilterPropAction, removeFilterPropAction,} = props;
-    const [isChecked, setIsChecked] = useState(false);
-
-    useEffect(() => {
-        setIsChecked(selectedProps.has(title));
-    }, [selectedProps]);
+    const {title, isChecked, valueKey, value, addFilterPropAction, removeFilterPropAction, selectedValues,} = props;
 
     const onClick = () => {
         if (isChecked) {
-            removeFilterPropAction(title);
+            removeFilterPropAction(valueKey);
         } else {
-            addFilterPropAction(title, value);
+            addFilterPropAction(valueKey, {value, title});
         }
     };
+
+    useEffect(() => {
+        if (isChecked && selectedValues.has(valueKey)) {
+            if (!_.isEqual(selectedValues.get(valueKey).value, value)) {
+                addFilterPropAction(valueKey, {value, title});
+            }
+
+        }
+    }, []);
 
     return (
         <li className={classNames(styles.container, {[styles.checked]: isChecked})} onClick={onClick}>
@@ -33,30 +36,32 @@ const FilterItem = (props) => {
                 <span className={styles.checkMark}/>
             </div>
             <span className={styles.title}>
-                    {title}
-                </span>
+                {title}
+            </span>
         </li>
     )
 };
 
 FilterItem.propTypes = {
     title: PropTypes.string.isRequired,
-    value: PropTypes.object,
+    value: PropTypes.object.isRequired,
+    valueKey: PropTypes.string.isRequired,
+    isChecked: PropTypes.bool.isRequired,
 };
 
 FilterItem.defaultProps = {};
 
 const mapStateToProps = state => {
 
-    const {selectedProps} = state.contestFilterReducer;
+    const {selectedValues} = state.contestFilterReducer;
     return {
-        selectedProps,
+        selectedValues,
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-    addFilterPropAction: (value) => dispatch(addPropsToFilterActionCreator(value)),
-    removeFilterPropAction: keys => dispatch(removeFilterPropsActionCreator(keys)),
+    addFilterPropAction: (key, value) => dispatch(addPropsToFilterActionCreator(key, value)),
+    removeFilterPropAction: (key) => dispatch(removeFilterPropsActionCreator(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterItem);

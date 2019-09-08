@@ -21,10 +21,7 @@ let count = 0;
 * */
 instance.interceptors.request.use(config => {
     config.headers.authorization = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY);
-
-
-
-
+    console.log(config);
     return config;
 }, err => {
     return Promise.reject(err);

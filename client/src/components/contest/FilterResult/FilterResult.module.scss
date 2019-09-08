@@ -1,0 +1,28 @@
+
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+
+.resetButton {
+  cursor: pointer;
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-left: auto;
+  margin-top: 10px;
+  box-sizing: border-box;
+  color: rgb(70, 86, 138);
+
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+  .icon {
+    fill: rgb(70, 86, 138);
+  }
+}

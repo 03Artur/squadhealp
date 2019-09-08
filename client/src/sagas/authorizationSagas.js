@@ -31,7 +31,7 @@ export function* logoutUserSaga() {
 
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE,
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR,
             user: null,
         })
 
@@ -57,10 +57,11 @@ export function* getAuthorizedUserSaga() {
     yield put({type: ACTION_TYPE.USER_AUTHORIZATION_REQUEST});
     try {
         const {data} = yield getAuthorizedUser();
+        console.log('SAGA DATA: ', data);
         yield put({type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, user: data});
     } catch (e) {
         yield put({
-            type: ACTION_TYPE.USER_AUTHORIZATION_RESPONSE, error: {
+            type: ACTION_TYPE.USER_AUTHORIZATION_ERROR, error: {
                 status: e.response.status,
                 message: e.response.data,
             },

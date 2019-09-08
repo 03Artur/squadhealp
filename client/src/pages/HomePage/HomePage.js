@@ -12,6 +12,7 @@ import HomeNav from "./Header/nav/HomeNav/HomeNav";
 import HomeHeader from "./Header/Header";
 import AuthorizedRoute from "../../components/routes/AuthorizedRoute/AuthorizedRoute";
 import ContestsPage from "../ContestsPage/ContestsPage";
+import SingleContestPage from "../SingleContestPage/SingleContestPage";
 const StartContestPage = lazy(() => import('../StartContestPage/StartContestPage'));
 const AdminPage = lazy(() => import('../AdminPage/AdminPage'));
 
@@ -24,6 +25,7 @@ function HomePage(props) {
             <DocumentTitle title="Home"/>
             <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATHS.CONTEST} render = {props => <StartContestPage {...props}/>}/>
             <AuthorizedRoute path={PATHS.CONTESTS} render = {props => <ContestsPage {...props}/>}/>
+            <AuthorizedRoute path={`${PATHS.CONTEST}/:id`} render = {props => <SingleContestPage {...props}/>}/>
             <HomeFooter/>
         </div>
     );

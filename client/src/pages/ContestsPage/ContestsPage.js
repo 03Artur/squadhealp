@@ -4,18 +4,40 @@ import {connect} from 'react-redux';
 import styles from './ContestsPage.module.scss';
 import ContestFilter from "../../components/contest/Filter/Filter";
 import queryString from 'query-string';
-
+import FilterResult from "../../components/contest/FilterResult/FilterResult";
+import classNames from 'classnames';
+import ContestList from "../../components/contest/List/ContestList";
+import {getContestsActionCreator} from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
+import _ from 'lodash';
+let count = 0;
 const ContestsPage = (props) => {
-    const {selectedProps,history} = props;
+
+    const {filter, history, limit, offset, getContestsAction} = props;
 
 
+    useEffect(() => {
+        getContestsAction(history.location.search);
+
+    },[history.location.search]);
 
 
     useEffect(() => {
 
-       history.push({search: queryString.stringify(filter)})
+        const {location: {search}} = history;
 
-    },[selectedProps]);
+        if (!_.isEqual(filter, queryString.parse(search))) {
+            console.log(++count);
+
+            const newSearch = queryString.stringify({
+                ...filter,
+                limit,
+                offset,
+            });
+            history.push({
+                search: newSearch
+            });
+        }
+    }, [filter]);
 
     return (
         <Fragment>
@@ -26,8 +48,17 @@ const ContestsPage = (props) => {
             </div>
             <div className={styles.contentContainer}>
                 <div className={styles.contentRow}>
-                    <ContestFilter/>
+                    <div className={classNames(styles.filterContainer, styles.col)}>
+                        <ContestFilter/>
+                    </div>
+                    <div className={classNames(styles.filterResultContainer, styles.col)}>
+                        <FilterResult/>
+                        <ContestList/>
+                    </div>
+
                 </div>
+
+
             </div>
         </Fragment>
     )
@@ -39,15 +70,17 @@ ContestsPage.propTypes = {
 
 ContestsPage.defaultProps = {};
 
-
 const mapStateToProps = state => {
-    const {selectedProps} = state.contestFilterReducer;
-
+    const {filter} = state.contestFilterReducer;
+    const {limit, offset} = state.contestPaginationReducer;
     return {
-        selectedProps,
+        filter,
+        limit,
+        offset,
     }
-
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    getContestsAction: (search) => dispatch(getContestsActionCreator(search))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestsPage)

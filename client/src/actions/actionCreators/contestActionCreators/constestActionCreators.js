@@ -1,9 +1,10 @@
 import ACTION_TYPES from '../../actiontsTypes';
 import {CREATE_CONTEST_STEPS, TASK_TYPE,CONTEST_CREATION_ALL_STEPS} from "../../../constants";
 
-export const getAllContestsActionCreator = () => {
+export const getContestsActionCreator = (queryString) => {
     return {
         type: ACTION_TYPES.GET_ALL_CONTESTS_ACTION,
+        queryString,
     }
 };
 

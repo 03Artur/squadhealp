@@ -1,3 +1,4 @@
+@import "../../commonStyles";
 
 .header {
   width: 100%;
@@ -26,9 +27,6 @@
   font-family: Gotham SSm A, Gotham SSm B, Halvetica, sans-serif;
 }
 .contentContainer{
-
-  padding: 0 15px ;
-  box-sizing: border-box;
   width: 100%;
   max-width: 1170px;
   margin: 30px 0;
@@ -38,5 +36,34 @@
   margin-top: 30px;
   display: flex;
   width: 100%;
+  flex-direction: column;
+
+
+  @include mediaBreakpointUp($lg){
+    flex-direction: row;
+  }
+
+
+
+  .col{
+    margin: 0 15px;
+    box-shadow: 0 5px 10px 3px rgba(0,0,0,0.1);
+
+  }
+
+  .filterContainer{
+    flex: 1;
+    @include mediaBreakpointUp($lg){
+      min-width: 262.5px;
+      flex: 0;
+    }
+
+
+
+  }
+  .filterResultContainer{
+    flex: 1;
+  }
 
 }
+

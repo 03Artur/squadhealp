@@ -1,0 +1,33 @@
+
+.container {
+  margin-right: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 7px 20px;
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  background-color: rgb(70, 86, 138);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+
+  & > * {
+    vertical-align: middle;
+  }
+
+  .icon {
+    fill: white;
+    margin-left: 4px;
+  }
+
+}
+
+.contentContainer {
+
+
+}
+
+
+
+

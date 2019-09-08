@@ -2,7 +2,6 @@ import {ApplicationError} from '../errors'
 const Sequelize = require('sequelize');
 
 export default (err, req, res, next) => {
-    res.send(err)
     if( err instanceof ApplicationError){
         res.status(err.status).send(err.message);
     }

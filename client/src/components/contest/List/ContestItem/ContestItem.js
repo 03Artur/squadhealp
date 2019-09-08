@@ -29,9 +29,15 @@ ContestItem.defaultProps = {
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
+const mapStateToProps = state => {
 
-});
+    const {user} = state.authorizationReducer;
+
+    return {
+        user,
+    }
+
+};
 const mapDispatchToProps = dispatch => ({
 
 });

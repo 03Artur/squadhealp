@@ -1,0 +1,30 @@
+@mixin borderBox($padding: 0) {
+  padding: $padding;
+  box-sizing: border-box;
+}
+
+$colsCount: 12;
+$gutterWidth: 30px;
+
+
+@mixin page() {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+@mixin container($maxWidth: 1200px) {
+  max-width: 1200px;
+}
+
+@mixin row($gutter) {
+
+}
+
+
+
+
+@mixin colWidth($count: 12) {
+  width: calc(100% / 12 * #{$count} - 30px);
+  margin: 0 calc(#{$gutterWidth}/2);
+}
+

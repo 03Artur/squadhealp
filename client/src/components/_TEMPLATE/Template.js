@@ -26,7 +26,7 @@ Template.defaultProps = {
 /*
 * React redux
 * */
-const mapStateToProps = store => ({
+const mapStateToProps = state => ({
 
 });
 const mapDispatchToProps = dispatch => ({

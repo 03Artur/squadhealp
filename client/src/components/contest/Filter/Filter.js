@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment,} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './Filter.module.scss';
@@ -7,20 +7,21 @@ import FilterProp from "./FilterProp/FilterProp";
 
 const Filter = (props) => {
 
-    const {filterProps} = props;
+    const {filterValues} = props;
 
     const renderProp = () => {
-        return filterProps.map(prop => <FilterProp key={prop.title} {...prop}/>);
-    };
 
+        return filterValues.map( filterValue => (
+            <FilterProp key={filterValue.title} {...filterValue}/>
+            ));
+
+    };
 
     return (
         <div className={styles.filterContainer}>
             <h4 className={styles.filterTitle}>Filter</h4>
             <ul className={styles.propList}>
-                {
-                    renderProp()
-                }
+                {renderProp()}
             </ul>
         </div>
     )
@@ -37,10 +38,10 @@ Filter.defaultProps = {
 
 
 const mapStateToProps = state => {
-    const {filterProps} = state.contestFilterReducer;
+    const {filterValues} = state.contestFilterReducer;
 
     return {
-        filterProps,
+        filterValues,
     }
 
 };
