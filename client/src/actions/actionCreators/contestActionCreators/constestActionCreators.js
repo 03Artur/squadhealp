@@ -1,5 +1,6 @@
 import ACTION_TYPES from '../../actiontsTypes';
-import {CREATE_CONTEST_STEPS, TASK_TYPE,CONTEST_CREATION_ALL_STEPS} from "../../../constants";
+import {CREATE_CONTEST_STEPS, TASK_TYPE, CONTEST_CREATION_ALL_STEPS} from "../../../constants";
+import CONTEST_ACTION_TYPES from "../../actionTypes/contestActionTypes";
 
 export const getContestsActionCreator = (queryString) => {
     return {
@@ -49,6 +50,16 @@ export const createTaskActionCreator = (contestId, taskFormData) => ({
     type: ACTION_TYPES.CREATE_TASK_ACTION,
     taskFormData,
     contestId,
+});
+
+export const likeContestActionCreator = (taskId) => ({
+    type: CONTEST_ACTION_TYPES.LIKE_CONTEST_ACTION,
+    taskId,
+});
+
+export const dislikeContestActionCreator = (taskId) => ({
+    type: CONTEST_ACTION_TYPES.DISLIKE_CONTEST_ACTION,
+    taskId,
 });
 
 

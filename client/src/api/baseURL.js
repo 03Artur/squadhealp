@@ -18,8 +18,10 @@ export const refreshTokensUrl = `/refresh`;
 * */
 export const contestUrl = `/contest`;
 export const contestsUrl = `/contests`;
-export const taskUrl = `/contest/task`;
+export const taskUrl = `/task`;
 export const contestPaymentUrl = '/payment/contest';
+
+export const favoriteUrl = '/favorite';
 /*
 * ENTRY
 * */

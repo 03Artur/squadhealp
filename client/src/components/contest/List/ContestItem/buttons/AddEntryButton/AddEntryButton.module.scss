@@ -1,0 +1,13 @@
+@import "../../../../../../templates";
+
+.container {
+  @include borderBox(15px 20px);
+  color: white;
+  background-color: #28d2d0;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.link{
+  width: 100%;
+}

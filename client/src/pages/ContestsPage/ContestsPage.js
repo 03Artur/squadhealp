@@ -24,11 +24,12 @@ const ContestsPage = (props) => {
     useEffect(() => {
 
         const {location: {search}} = history;
-
-        if (!_.isEqual(filter, queryString.parse(search))) {
+        const searchObj = queryString.parse(search);
+        if (!_.isEqual(filter, searchObj)) {
             console.log(++count);
 
             const newSearch = queryString.stringify({
+                ...searchObj,
                 ...filter,
                 limit,
                 offset,

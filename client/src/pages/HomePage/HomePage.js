@@ -24,6 +24,7 @@ function HomePage(props) {
             <HomeHeader/>
             <DocumentTitle title="Home"/>
             <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATHS.CONTEST} render = {props => <StartContestPage {...props}/>}/>
+            <AccessRoute roles={[ROLE.CREATIVE]} path={`${PATHS.ENTRIES}/:taskId${PATHS.ENTRY}`} render = {props => <StartEntryPage {...props}/>}/>
             <AuthorizedRoute path={PATHS.CONTESTS} render = {props => <ContestsPage {...props}/>}/>
             <AuthorizedRoute path={`${PATHS.CONTEST}/:id`} render = {props => <SingleContestPage {...props}/>}/>
             <HomeFooter/>

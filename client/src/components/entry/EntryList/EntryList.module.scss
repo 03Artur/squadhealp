@@ -1,0 +1,11 @@
+@import "../../../templates";
+
+.list{
+  @include borderBox();
+}
+
+.spinnerContainer{
+  width: 100%;
+  @include borderBox(20px)
+
+}

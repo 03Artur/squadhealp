@@ -1,3 +1,5 @@
+import {ROLES} from "../constants";
+
 const {ENTRY_ACTION_RULES} = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
@@ -27,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     },{
         timestamps:true
     });
+
+    FavoriteTasks.checkPermission = function (actor){
+        return actor.role === ROLES.CREATIVE;
+    };
 
     FavoriteTasks.associate = function (models) {
         FavoriteTasks.belongsTo(models.Tasks, {foreignKey: 'taskId', targetKey: 'id',as: 'task'});

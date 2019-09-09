@@ -9,10 +9,10 @@ import { mdiClose } from '@mdi/js';
 
 const FilterResultItem = (props) => {
 
-    const {removeFilterPropAction,title} = props;
+    const {removeFilterPropAction,title,valueKey} = props;
 
     const onClick = () => {
-        removeFilterPropAction(title)
+        removeFilterPropAction(valueKey)
     };
 
     return (
@@ -25,6 +25,7 @@ const FilterResultItem = (props) => {
 FilterResultItem.propTypes = {
     className: PropTypes.string,
     title: PropTypes.string.isRequired,
+    valueKey: PropTypes.string.isRequired,
 };
 
 FilterResultItem.defaultProps = {

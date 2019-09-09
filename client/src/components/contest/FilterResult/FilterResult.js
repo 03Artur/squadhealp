@@ -18,7 +18,7 @@ const FilterResult = (props) => {
         selectedValues.forEach((value, key) => {
 
             items.push(
-                <FilterResultItem key={key} title={value.title}/>
+                <FilterResultItem key={key} valueKey={key} title={value.title}/>
             );
         });
         return items;

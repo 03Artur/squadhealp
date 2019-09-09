@@ -7,6 +7,7 @@ import * as contestSaga from './contestSaga';
 import * as chatSaga from './chatSagas'
 import * as entrySaga from './entrySaga';
 import ENTRY_ACTION_TYPES from "../actions/actionTypes/entryActionTypes";
+import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 
 function* rootSaga() {
     /*
@@ -49,7 +50,8 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.SELECT_TASK_TYPES_ACTION, contestSaga.addTaskStepsToContestCreationSteps);
 
     yield takeLatest(ACTION_TYPES.GET_ALL_CONTESTS_ACTION, contestSaga.getAllContestSaga);
-
+    yield takeLatest(CONTEST_ACTION_TYPES.LIKE_CONTEST_ACTION, contestSaga.likeContestSaga);
+    yield takeLatest(CONTEST_ACTION_TYPES.DISLIKE_CONTEST_ACTION, contestSaga.dislikeContestSaga);
     //========================================================================================
     //CHAT
     // yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE, chatSaga.getUserChatsSaga);

@@ -5,6 +5,7 @@ import {CONTEST_CREATION_ALL_STEPS, CREATE_CONTEST_STEPS, PATHS, TASK_TYPE} from
 import {addParamToQueryActionCreator} from "../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import history from "../history";
 import queryString from 'query-string';
+import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 
 const mapSteps = new Map([
     [TASK_TYPE.NAME, CREATE_CONTEST_STEPS.CREATE_NAME_TASK],
@@ -37,7 +38,7 @@ export function* getAllContestSaga({queryString}) {
             type: ACTION_TYPES.GET_ALL_CONTESTS_REQUEST,
         });
 
-        const {data: {count,rows: contests}} = yield contestController.getAllContests(queryString);
+        const {data: {count, rows: contests}} = yield contestController.getAllContests(queryString);
 
         yield put({
             type: ACTION_TYPES.GET_ALL_CONTESTS_RESPONSE,
@@ -217,3 +218,39 @@ export function* contestPaymentSaga({contestId, creditCard}) {
     }
 }
 
+export function* likeContestSaga({taskId}) {
+    yield put({
+        type: CONTEST_ACTION_TYPES.LIKE_CONTEST_REQUEST,
+    });
+    try {
+        const {data} = yield contestController.likeTask(taskId);
+        console.log(data);
+        yield put({
+            type: CONTEST_ACTION_TYPES.LIKE_CONTEST_RESPONSE,
+            data,
+        })
+    } catch (e) {
+        yield put({
+            type: CONTEST_ACTION_TYPES.LIKE_CONTEST_ERROR,
+            error: e,
+        })
+    }
+}
+
+export function* dislikeContestSaga({taskId}) {
+    yield put({
+        type: CONTEST_ACTION_TYPES.DISLIKE_CONTEST_REQUEST,
+    });
+    try {
+        const {data: {number}} = yield contestController.dislikeTask(taskId);
+        yield put({
+            type: CONTEST_ACTION_TYPES.DISLIKE_CONTEST_RESPONSE,
+            data: {taskId},
+        })
+    } catch (e) {
+        yield put({
+            type: CONTEST_ACTION_TYPES.DISLIKE_CONTEST_ERROR,
+            error: e,
+        })
+    }
+}

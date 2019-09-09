@@ -224,72 +224,63 @@ export default function (state = initialState, action) {
 
                     [
                     new Menu('Active contests',
-                        [
+                        [[
 
                         new MenuItem('Assigned To Me', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            pathname: PATHS.CONTESTS,
                             search: queryString.stringify({
-                                isActive: true,
                                 winnerId: action.user.id,
                             }),
                         }),
-                        new MenuItem('all', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                            search: queryString.stringify({
-                                isActive: true,
-                            }),
-                        }),
+                        new MenuItem('all',{pathname: PATHS.CONTESTS,search: ''}),
                         new MenuItem('naming', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            pathname: PATHS.CONTESTS,
                             search: queryString.stringify({
-                                isActive: true,
                                 type: TASK_TYPE.NAME
                             }),
                         }),
                         new MenuItem('logos', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            pathname: PATHS.CONTESTS,
                             search: queryString.stringify({
-                                isActive: true,
                                 type: TASK_TYPE.LOGO,
                             }),
                         }),
                         new MenuItem('tagline', {
-                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            pathname: PATHS.CONTESTS,
                             search: queryString.stringify({
-                                isActive: true,
                                 type: TASK_TYPE.TAGLINE,
                             }),
-                        }),
+                        }),]
                     ]),
-                    new Menu('explore', [
+                    new Menu('explore', [[
                         new MenuItem('names'),
                         new MenuItem('taglines'),
-                        new MenuItem('logos'),
+                        new MenuItem('logos'),]
                     ]),
-                    new Menu('Marketplace', [
+                    new Menu('Marketplace', [[
 
                         new MenuItem('Marketplace Dashboard'),
                         new MenuItem('My Listings'),
                         new MenuItem('Explore Marketplace'),
                         new MenuItem('Learn More'),
-                        new MenuItem('Help Articles'),
+                        new MenuItem('Help Articles'),]
 
                     ]),
                     new Menu('winners', [
-
+[
                         new MenuItem('Recent Winners'),
                         new MenuItem('Selected by SH'),
                         new MenuItem('Leaderboard (Contests Won)'),
                         new MenuItem('Leaderboard (High Ratings)'),
                         new MenuItem('Leaderboard (Rising Stars)'),
-                        new MenuItem('Leaderboard (Split Awards)'),
+                        new MenuItem('Leaderboard (Split Awards)'),]
 
                     ]),
-                    new Menu('help', [
+                    new Menu('help', [[
                         new MenuItem('FAQs'),
                         new MenuItem('Pricing'),
                         new MenuItem('Testimonials'),
-                        new MenuItem('Contact Us'),
+                        new MenuItem('Contact Us'),]
                     ]),
                 ],
 

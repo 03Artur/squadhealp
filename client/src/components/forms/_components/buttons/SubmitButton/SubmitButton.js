@@ -1,32 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './SubmitButton.module.scss';
+import classNames from 'class-names';
 
 const SubmitButton = props => {
+    const {isEnable} =props;
+    const classNamesJoinedString = classNames(styles.container, props.className,{[styles.disable]:isEnable});
 
-    const classNames = [styles.container, props.className];
-
-    if (!props.isEnable) {
-        classNames.push(styles.disable);
-    }
-    const classNamesJoinedString = classNames.join(' ');
-    const getOnClick = (e) => {
-
-        if (props.isEnable) {
-            return props.onClick;
+    const onClick = (e) => {
+        if (isEnable) {
+            props.onClick();
         }
     };
+
     return (
-        <div onClick={getOnClick()} className={classNamesJoinedString}>{
+        <div onClick={onClick} className={classNamesJoinedString}>{
             props.children
         }</div>
     );
 };
 
 SubmitButton.propTypes = {
-    /*
-        text: PropTypes.string,
-    */
+
     className: PropTypes.string,
     onClick: PropTypes.func,
     isEnable: PropTypes.bool,
@@ -34,9 +29,7 @@ SubmitButton.propTypes = {
 };
 
 SubmitButton.defaultProps = {
-    /*
-        text: 'Button',
-    */
+
     className: '',
     onClick: function () {
     },

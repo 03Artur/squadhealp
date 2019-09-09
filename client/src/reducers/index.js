@@ -25,6 +25,9 @@ import contestsReducer from "./contest/contestsReducer";
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
 import contestCreation from "./contest/contestCreation";
+//ENTRY
+import entryCreationReducer from "./entry/entryCreationReducer";
+import entriesReducer from "./entry/entriesReducer";
 
 const appReducer = combineReducers({
     authorizationReducer,
@@ -44,6 +47,9 @@ const appReducer = combineReducers({
     contestPaginationReducer,
     contestFilterReducer,
     contestsReducer,
+
+    entryCreationReducer,
+    entriesReducer,
 
     chatMenu,
     chatReducer,

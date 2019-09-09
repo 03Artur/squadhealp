@@ -1,5 +1,5 @@
 import axios from './';
-import {contestUrl, taskUrl, contestPaymentUrl, contestsUrl} from "../baseURL";
+import {contestUrl, taskUrl, contestPaymentUrl, contestsUrl, favoriteUrl} from "../baseURL";
 
 export const getContestById = contestId => axios.get(`${contestUrl}/${contestId}`);
 export const createContest = (isNameExist, contest) => axios.post(`${contestUrl}?isNameExist=${isNameExist}`, contest);
@@ -13,3 +13,5 @@ export const contestPaymentById = (contestId, creditCard) => axios.post(`${conte
 
 export const getAllContests = queryString => axios.get(`${contestsUrl}${queryString}`);
 
+export const likeTask = taskId => axios.post(`${favoriteUrl}${taskUrl}/${taskId}`);
+export const dislikeTask = taskId => axios.delete(`${favoriteUrl}${taskUrl}/${taskId}`);

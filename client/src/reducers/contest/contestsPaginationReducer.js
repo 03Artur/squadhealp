@@ -3,7 +3,7 @@ import CONTEST_ACTION_TYPES from "../../actions/actionTypes/contestActionTypes";
 import _ from 'lodash';
 
 const initialState = {
-    limit: 2,
+    limit: 20,
     offset: 0,
 };
 

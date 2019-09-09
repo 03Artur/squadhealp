@@ -1,0 +1,25 @@
+@import "../../../../../../commonStyles";
+
+.container {
+  cursor: pointer;
+
+}
+
+.hoverColor {
+  @include mediaBreakpointUp($md) {
+    &:hover {
+      fill: #666666;
+    }
+
+  }
+}
+
+
+.icon {
+  fill: #4F5B67;
+
+}
+
+.liked {
+  fill: gold;
+}

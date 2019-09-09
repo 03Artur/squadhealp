@@ -1,3 +1,18 @@
+
+
+.w100{
+  width: 100%;
+}
+
+
+
+@mixin flexContainer($justifyContent: flex-start, $alignItems: flex-start,$flexDirection: row) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-direction: $flexDirection;
+}
+
 @mixin borderBox($padding: 0) {
   padding: $padding;
   box-sizing: border-box;
@@ -21,10 +36,8 @@ $gutterWidth: 30px;
 }
 
 
-
-
 @mixin colWidth($count: 12) {
   width: calc(100% / 12 * #{$count} - 30px);
-  margin: 0 calc(#{$gutterWidth}/2);
+  margin: 0 calc(#{$gutterWidth} / 2);
 }
 

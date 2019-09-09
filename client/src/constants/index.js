@@ -50,6 +50,7 @@ const _PATHS = {
     CONTEST: '/contest',
     CONTESTS: '/contests',
     ENTRIES: '/entries',
+    ENTRY: '/entry',
     BUSINESS: '/business',
     AFFILIATE_DASHBOARD: '/affiliate-dashboard',
     DASHBOARD: '/dashboard',
@@ -186,6 +187,7 @@ export const FORM_NAMES = {
     TEST_FORM: 'testForm',
     MESSAGE_FORM: 'messageForm',
     CHAT_SEARCH_FORM: 'chatSearchForm',
+    ENTRY_FORM: 'entryForm',
 };
 
 export const TASK_TYPE_IMAGES = new Map([

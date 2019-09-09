@@ -7,11 +7,11 @@ import ContestItem from "./ContestItem/ContestItem";
 
 const ContestList = (props) => {
 
-    const {contests} = props;
+    const {contests,count, isFetching} = props;
 
     const renderContests = () => {
         return contests.map(contest => {
-            return <ContestItem key={contest.id} contest={contest}/>
+            return <ContestItem key={contest.id} task={contest}/>
         })
     };
 
@@ -21,11 +21,16 @@ const ContestList = (props) => {
     }, []);
 
     return (
-        <ul className={styles.container}>
-            {
-                renderContests()
-            }
-        </ul>
+        <div className={styles.listContainer}>
+            <div className={styles.listHeader}>
+                <h4 className={styles.count}>{`${count} Contests`}</h4>
+            </div>
+            <ul className={styles.list}>
+                {
+                    renderContests()
+                }
+            </ul>
+        </div>
     )
 };
 
@@ -39,9 +44,11 @@ ContestList.defaultProps = {};
 * React redux
 * */
 const mapStateToProps = store => {
-    const {contests} = store.contestsReducer;
+    const {contests, count, isFetching} = store.contestsReducer;
     return {
         contests,
+        count,
+        isFetching,
     }
 };
 const mapDispatchToProps = dispatch => ({});
