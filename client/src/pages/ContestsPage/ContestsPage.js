@@ -9,17 +9,31 @@ import classNames from 'classnames';
 import ContestList from "../../components/contest/List/ContestList";
 import {getContestsActionCreator} from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import _ from 'lodash';
+import {PATHS} from "../../constants";
+
 let count = 0;
 const ContestsPage = (props) => {
 
-    const {filter, history, limit, offset, getContestsAction} = props;
+    const {
+        filter,
+        history,
+        limit,
+        offset,
+        getContestsAction,
+        selectedContest,
+    } = props;
 
 
     useEffect(() => {
         getContestsAction(history.location.search);
 
-    },[history.location.search]);
+    }, [history.location.search]);
 
+    useEffect(() => {
+        if(selectedContest){
+            history.push(`${PATHS.CONTEST}/${selectedContest.id}`)
+        }
+    }, [selectedContest]);
 
     useEffect(() => {
 
@@ -56,10 +70,7 @@ const ContestsPage = (props) => {
                         <FilterResult/>
                         <ContestList/>
                     </div>
-
                 </div>
-
-
             </div>
         </Fragment>
     )
@@ -74,10 +85,12 @@ ContestsPage.defaultProps = {};
 const mapStateToProps = state => {
     const {filter} = state.contestFilterReducer;
     const {limit, offset} = state.contestPaginationReducer;
+    const {contest} = state.selectedContest;
     return {
         filter,
         limit,
         offset,
+        selectedContest: contest,
     }
 };
 const mapDispatchToProps = dispatch => ({

@@ -25,6 +25,7 @@ import contestsReducer from "./contest/contestsReducer";
 import contestCreationSteps from "./contest/contestCreationSteps";
 import contestCreationQuery from "./contest/contestCreationQuery";
 import contestCreation from "./contest/contestCreation";
+import selectedContest from "./contest/selectedContestReducer";
 //ENTRY
 import entryCreationReducer from "./entry/entryCreationReducer";
 import entriesReducer from "./entry/entriesReducer";
@@ -57,6 +58,7 @@ const appReducer = combineReducers({
     chatsMessagesReducer,
     chatsReducer,
     chatsParticipantsReducer,
+    selectedContest,
 });
 
 const rootReducer = (state, action) => appReducer(state, action);

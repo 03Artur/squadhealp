@@ -10,7 +10,7 @@ export const postEntry = (taskId,entry) => axios.post(`${taskUrl}/${taskId}${ent
 
 export const getEntry = id => axios.get(`${entryUrl}/${id}`);
 
-export const getEntries = queryString => axios.get(`${entriesUrl}${queryString()}`);
+export const getEntries = queryString => axios.get(`${entriesUrl}${queryString}`);
 
 export const rejectEntry = id => axios.put(`${entryUrl}/${id}`);
 

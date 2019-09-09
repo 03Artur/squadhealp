@@ -6,10 +6,16 @@ import styles from './UniversalButton.module.scss';
 
 const UniversalButton = (props) => {
 
-    const {onClick, children, className} = props;
+    const {onClick, children, isEnable, className} = props;
+
+    const clickHandler = () => {
+        if (isEnable) {
+            onClick();
+        }
+    };
 
     return (
-        <div className={className} onClick={onClick}>
+        <div className={clickHandler} onClick={onClick}>
             {
                 children
             }
@@ -21,11 +27,13 @@ UniversalButton.propTypes = {
 
     className: PropTypes.string,
     onClick: PropTypes.func,
+    isEnable: PropTypes.bool,
 
 };
 
 UniversalButton.defaultProps = {
-    children: 'Button'
+    children: 'Button',
+    isEnable: true,
 };
 
 const mapStateToProps = state => ({});

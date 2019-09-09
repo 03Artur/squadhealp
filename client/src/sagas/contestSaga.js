@@ -6,6 +6,8 @@ import {addParamToQueryActionCreator} from "../actions/actionCreators/contestAct
 import history from "../history";
 import queryString from 'query-string';
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
+import {getEntriesSaga} from "./entrySaga";
+
 
 const mapSteps = new Map([
     [TASK_TYPE.NAME, CREATE_CONTEST_STEPS.CREATE_NAME_TASK],
@@ -31,6 +33,18 @@ const getSteps = (types) => {
         }
     });
 };
+
+export function* selectContestSaga({contest}) {
+    if(contest){
+        yield call(getEntriesSaga, {
+            queryString: queryString.stringify({
+                taskId: contest.id,
+            })
+        });
+    }
+
+}
+
 
 export function* getAllContestSaga({queryString}) {
     try {

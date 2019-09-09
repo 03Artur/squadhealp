@@ -3,19 +3,24 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './ContestList.module.scss';
 import ContestItem from "./ContestItem/ContestItem";
+import {selectContestAction} from "../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 
 
 const ContestList = (props) => {
 
-    const {contests,count, isFetching} = props;
+    const {contests, count, isFetching, selectContestAction} = props;
 
     const renderContests = () => {
         return contests.map(contest => {
-            return <ContestItem key={contest.id} task={contest}/>
+            const onSelect = () => {
+                selectContestAction(contest)
+            };
+            return <ContestItem key={contest.id} onSelect={onSelect} task={contest}/>
         })
     };
 
     useEffect(() => {
+
 
 
     }, []);
@@ -51,6 +56,8 @@ const mapStateToProps = store => {
         isFetching,
     }
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    selectContestAction: contest => dispatch(selectContestAction(contest)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestList)

@@ -27,6 +27,7 @@ import styles from './UserLoader.module.scss';
 const UserLoader = (props) => {
 
 
+
     useEffect(() => {
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             props.getAuthorizedUserAction();

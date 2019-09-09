@@ -52,6 +52,7 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.GET_ALL_CONTESTS_ACTION, contestSaga.getAllContestSaga);
     yield takeLatest(CONTEST_ACTION_TYPES.LIKE_CONTEST_ACTION, contestSaga.likeContestSaga);
     yield takeLatest(CONTEST_ACTION_TYPES.DISLIKE_CONTEST_ACTION, contestSaga.dislikeContestSaga);
+    yield takeLatest(CONTEST_ACTION_TYPES.SELECT_CONTEST_ACTION, contestSaga.selectContestSaga);
     //========================================================================================
     //CHAT
     // yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE, chatSaga.getUserChatsSaga);

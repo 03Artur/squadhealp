@@ -1,4 +1,4 @@
-import {Entries, Users} from '../models';
+import {Entries, Users, sequelize} from '../models';
 import * as appError from "../errors";
 import _ from 'lodash'
 
@@ -9,17 +9,17 @@ export async function getEntries(req, res, next) {
         const {query} = req;
         const entries = await Entries.findAll({
             where: query,
-            include: [{
-                model: Users,
-                as: 'user',
-                attributes: {
-                    include: ['firstName', 'lastName', 'profilePicture', 'role', 'isBanned', 'id']
-                }
-            }]
+            include: [
+                {
+                    model: Users,
+                    as: 'user',
+                    attributes: {
+                        include: ['firstName', 'lastName', 'profilePicture', 'role', 'isBanned', 'id']
+                    }
+                },
+            ]
         });
-
         res.send(entries | [])
-
 
     } catch (e) {
         next(e);

@@ -76,7 +76,6 @@ export const PATHS = _PATHS;
 
 export const testMenuItemStyle = {
     border: '2px solid #ff6542',
-    borderCollapse: 'collapse',
     margin: '-1px 0'
 
 };

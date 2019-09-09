@@ -1,6 +1,5 @@
 import ENTRY_ACTION_TYPES from "../../actions/actionTypes/entryActionTypes";
 import _ from 'lodash';
-import error from "../../../../server/src/server/middlewares/error";
 
 const initialState = {
     entries: [],
@@ -17,7 +16,7 @@ export default function entriesReducer(state = initialState, action) {
                 isFetching: true,
             }
         }
-        case ENTRY_ACTION_TYPES.GET_ENTRY_RESPONSE: {
+        case ENTRY_ACTION_TYPES.GET_ENTRIES_RESPONSE: {
             const oldState = _.omit(state, ['entries']);
             return {
                 ..._.cloneDeep(oldState),

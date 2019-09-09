@@ -1,0 +1,67 @@
+@import "../../../../templates";
+
+$rejectColor: #b72522;
+$winnerColor: #28d2d0;
+
+.container {
+  @include borderBox(20px 15px);
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.title{
+
+}
+
+.rejectContainer {
+  border-color: $rejectColor;
+
+
+  .rejectButton {
+    background-color: $rejectColor;
+    color: white;
+  }
+}
+
+.winnerContainer {
+  border-color: $winnerColor;
+
+  .winnerButton {
+    background-color: $winnerColor;
+    color: white;
+  }
+}
+
+.button {
+  @include borderBox(20px 30px);
+  cursor: pointer;
+  border: 2px solid black;
+  border-right: 4px;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+  text-transform: capitalize;
+}
+
+.rejectButton {
+  border-color: $rejectColor;
+  color: $rejectColor;
+}
+
+.winnerButton {
+  border-color: $winnerColor;
+  color: $winnerColor;
+}
+
+
+.disable {
+
+
+}
+
+
+.actionContainer {
+  width: 100%;
+
+}

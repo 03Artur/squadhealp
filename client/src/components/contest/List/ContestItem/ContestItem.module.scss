@@ -1,4 +1,5 @@
 @import "../../../../templates";
+@import "../../../../commonStyles";
 
 $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
 
@@ -8,7 +9,7 @@ $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
   width: 100%;
   background-color: rgb(249, 250, 251);
   color: rgb(51, 51, 51);
-  @include flexContainer(flex-start,flex-start,column)
+  @include flexContainer(flex-start, flex-start, column)
 }
 
 .taskTitle {
@@ -16,23 +17,29 @@ $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
   font-family: $fontFamily;
+  cursor: pointer;
 
+  @include mediaBreakpointUp($md) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
 }
 
-.infoContainer{
+.infoContainer {
   @include borderBox(10px 0);
   width: 100%;
   text-align: left;
 }
 
-.typeInfo{
+.typeInfo {
   color: #4e618d;
   font-size: 12px;
-
+  cursor: pointer;
 }
 
-.description{
+.description {
   @include borderBox(18px 0 0 0);
   margin-bottom: 10px;
   height: 36px;
@@ -47,8 +54,8 @@ $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
   font-family: $fontFamily;
 }
 
-.buttonContainer{
+.buttonContainer {
   @include borderBox();
-  @include flexContainer(space-between,flex-end,column);
+  @include flexContainer(space-between, flex-end, column);
   width: 100%;
 }

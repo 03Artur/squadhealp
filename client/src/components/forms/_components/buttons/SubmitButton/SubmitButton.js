@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './SubmitButton.module.scss';
-import classNames from 'class-names';
+import classNames from 'classnames';
 
 const SubmitButton = props => {
     const {isEnable} =props;

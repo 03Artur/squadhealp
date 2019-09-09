@@ -5,12 +5,23 @@ import styles from './ContestItem.module.scss';
 import {ROLE} from "../../../../constants";
 import LikeButton from "./buttons/LikeButton/LikeButton";
 import AddEntryButton from "./buttons/AddEntryButton/AddEntryButton";
+import {selectContestAction} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 
 
 const ContestItem = (props) => {
 
-    const {task: {id: taskId, title, type, style, contest, isFavorite}, user} = props;
-    console.log(contest);
+    const {
+        task: {
+            id: taskId,
+            title,
+            type,
+            style,
+            contest,
+            isFavorite,
+        },
+        user,
+        onSelect,
+    } = props;
 
     const renderManipulativeOpportunities = () => {
         if (contest.userId === user.id) {
@@ -19,18 +30,17 @@ const ContestItem = (props) => {
 
         } else if (user.role === ROLE.CREATIVE) {
             return (
-                 <div className={styles.buttonContainer}>
-                    <LikeButton taskId={taskId} isLiked={isFavorite} />
+                <div className={styles.buttonContainer}>
+                    <LikeButton taskId={taskId} isLiked={isFavorite}/>
                     <AddEntryButton taskId={taskId}/>
-                 </div>
+                </div>
             );
         }
     };
 
-
     return (
         <li className={styles.container}>
-            <h5 className={styles.taskTitle}>
+            <h5 onClick={onSelect} className={styles.taskTitle}>
                 {title}
             </h5>
             <div className={styles.infoContainer}>
@@ -39,11 +49,7 @@ const ContestItem = (props) => {
                     {contest.description}
                 </p>
             </div>
-
-                {
-                    renderManipulativeOpportunities()
-                }
-
+            {renderManipulativeOpportunities()}
         </li>
     )
 };
@@ -51,6 +57,7 @@ const ContestItem = (props) => {
 ContestItem.propTypes = {
     task: PropTypes.object,
     className: PropTypes.string,
+    onSelect: PropTypes.func,
 };
 
 ContestItem.defaultProps = {};
@@ -67,6 +74,7 @@ const mapStateToProps = state => {
     }
 
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestItem)
