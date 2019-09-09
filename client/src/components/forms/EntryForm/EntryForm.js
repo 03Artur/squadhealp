@@ -15,9 +15,13 @@ const EntryForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Field name={'title'} label={"Title"} component={LabelInput}/>
-            <Field name={'files'} component={InputFile}/>
-            <SubmitButton onClick={handleSubmit} isEnable={!isFetching}>{isFetching?<Spinner/>:'Create Entry'}</SubmitButton>
+            <div className={styles.fieldsContainer}>
+                <Field name={'title'} label={"Title"} component={LabelInput}/>
+                <Field name={'files'} component={InputFile}/>
+
+                <SubmitButton onClick={handleSubmit} isEnable={!isFetching}>{isFetching ?
+                    <Spinner/> : 'Create Entry'}</SubmitButton>
+            </div>
         </form>
     )
 };

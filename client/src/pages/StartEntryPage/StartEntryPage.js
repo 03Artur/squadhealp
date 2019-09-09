@@ -36,9 +36,18 @@ const StartEntryPage = (props) => {
     };
 
     return (
-        <Fragment>
+        <div className={styles.container}>
+            <div className={styles.infoContainer}>
+                <h2>
+                    Start Entry
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque earum est, minima natus nihil non obcaecati praesentium provident reiciendis rem repellendus saepe sed suscipit tempora ut, velit voluptate voluptates.
+                </p>
+            </div>
+
             <EntryForm onSubmit={submit}/>
-        </Fragment>
+        </div>
     )
 };
 

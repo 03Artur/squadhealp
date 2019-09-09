@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 const SubmitButton = props => {
     const {isEnable} =props;
-    const classNamesJoinedString = classNames(styles.container, props.className,{[styles.disable]:isEnable});
+    const classNamesJoinedString = classNames(styles.container, props.className,{[styles.disable]:!isEnable});
 
     const onClick = (e) => {
         if (isEnable) {
