@@ -32,7 +32,8 @@ export default function (state = initialState, action) {
                 [
                     ROLE.ADMIN, [
                     new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
-                ],],
+                ],
+                ],
                 [
                     ROLE.BUYER, [
                     new Menu('Dashboards', [
@@ -41,8 +42,8 @@ export default function (state = initialState, action) {
                     ], mdiSpeedometer),
                     new Menu('Contests', [
                         new MenuItem('Active contests', {
-                            pathname: PATHS.CONTESTS,
-                            search: queryString.stringify({userId: action.user.id, isActive: true})
+                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            search: queryString.stringify({userId: action.user.id, isPaid: true,})
                         }),
                         new MenuItem('Ending Soon',),
                         new MenuItem('Not Yet Participated',),
@@ -57,17 +58,40 @@ export default function (state = initialState, action) {
                 ],],
                 [
                     ROLE.CREATIVE, [
-                    new MenuItem('Contests', {
-                        pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                        search: queryString.stringify({
-                            isActive: true,
-                            winnerId: action.user.id,
-                        }),
-                    },),
-                    new MenuItem('My Entries', {
-                        pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
-                        search: queryString.stringify({userId: action.user.id}),
-                    },)],
+                    new Menu('Dashboards', [
+                        new MenuItem('Account'),
+                        new MenuItem('Marketplace'),
+                    ], mdiSpeedometer),
+                    new Menu('Contests', [
+                        new MenuItem('Active', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            search: queryString.stringify({
+                                isPaid: true,
+                            }),
+                        },), new MenuItem('Win', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
+                            search: queryString.stringify({
+                                winnerId: action.user.id,
+                                isPaid: true,
+                            }),
+                        },),
+
+                    ], mdiFormatListBulleted),
+                    new Menu('My Entries', [
+                        new MenuItem('All', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({userId: action.user.id,}),
+                        },),
+                        new MenuItem('Rejected', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({userId: action.user.id, isRejected: true}),
+                        },),
+                        new MenuItem('Winning', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({userId: action.user.id, isWinning: true}),
+                        },),
+
+                    ], mdiContentCopy),],
                 ],
             ]);
             const navItems = navMap.get(action.user.role);

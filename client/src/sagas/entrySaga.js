@@ -48,11 +48,12 @@ export function* getEntriesSaga({queryString}) {
         type: ENTRY_ACTION_TYPES.GET_ENTRIES_REQUEST,
     });
     try {
-        const {data} = yield entryController.getEntries(queryString);
+        const {data: {count, rows: entries}} = yield entryController.getEntries(queryString);
 
         yield put({
             type: ENTRY_ACTION_TYPES.GET_ENTRIES_RESPONSE,
-            entry: data,
+            entries,
+            count,
         })
     } catch (e) {
         yield put({

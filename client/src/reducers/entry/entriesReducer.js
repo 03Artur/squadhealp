@@ -21,6 +21,7 @@ export default function entriesReducer(state = initialState, action) {
             return {
                 ..._.cloneDeep(oldState),
                 entries: action.entries,
+                count: action.count,
                 isFetching: false,
             }
         }

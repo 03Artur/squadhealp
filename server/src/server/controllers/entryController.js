@@ -7,19 +7,21 @@ export async function getEntries(req, res, next) {
     try {
 
         const {query} = req;
-        const entries = await Entries.findAll({
+
+        const entries = await Entries.findAndCountAll({
             where: query,
-            include: [
-                {
-                    model: Users,
-                    as: 'user',
-                    attributes: {
-                        include: ['firstName', 'lastName', 'profilePicture', 'role', 'isBanned', 'id']
-                    }
-                },
-            ]
+            // include: [
+            //     {
+            //         model: Users,
+            //         as: 'user',
+            //         attributes: {
+            //             include: ['firstName', 'lastName', 'profilePicture', 'role', 'isBanned', 'id']
+            //         }
+            //     },
+            // ]
         });
-        res.send(entries | [])
+
+        res.send(entries)
 
     } catch (e) {
         next(e);

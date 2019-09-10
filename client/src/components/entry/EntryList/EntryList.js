@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './EntryList.module.scss';
@@ -14,19 +14,23 @@ const EntryList = (props) => {
     const renderEntries = () => {
         return entries.map(entry => (<EntryItem key={entry.id} {...entry}/>))
     };
-    const renderLoading = () => {
+
+    const renderContent = () => {
         if (isFetching) {
             return (
                 <li className={styles.spinnerContainer}>
                     <Spinner/>
                 </li>
             )
+        } else {
+            return renderEntries();
         }
-    }
+    };
+
     return (
         <ul className={styles.list}>
             {
-                renderEntries()
+                renderContent()
             }
 
         </ul>
@@ -39,9 +43,7 @@ EntryList.propTypes = {
 
 EntryList.defaultProps = {};
 
-/*
-* React redux
-* */
+
 const mapStateToProps = state => {
     const {entries, isFetching} = state.entriesReducer;
 
