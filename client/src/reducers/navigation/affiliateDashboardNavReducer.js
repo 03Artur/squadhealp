@@ -28,6 +28,7 @@ export default function (state = initialState, action) {
             if (!action.user) {
                 return _.cloneDeep(initialState)
             }
+            const {user} = action;
             const navMap = new Map([
                 [
                     ROLE.ADMIN, [
@@ -49,10 +50,28 @@ export default function (state = initialState, action) {
                         new MenuItem('Not Yet Participated',),
                         new MenuItem('My Participated Contests',),
                     ], mdiApps),
-                    new Menu('My Entries', [
-                        new MenuItem('my contest submissions'),
-                        new MenuItem('my marketplace listings'),
-                    ], mdiContentCopy),
+                   /* new Menu('Entries', [
+                        new MenuItem('All', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({
+                                userId: user.id,
+                            })
+                        }),
+                        new MenuItem('Winning', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({
+                                userId: user.id,
+                                winning: true,
+                            })
+                        }),
+                        new MenuItem('Rejected', {
+                            pathname: PATHS.AFFILIATE_DASHBOARD_ENTRIES,
+                            search: queryString.stringify({
+                                userId: user.id,
+                                isRejected: true,
+                            })
+                        }),
+                    ], mdiContentCopy),*/
 
 
                 ],],

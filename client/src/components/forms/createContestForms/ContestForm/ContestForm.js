@@ -1,39 +1,26 @@
-import React, {Component, Fragment} from 'react';
-
-
+import React, { Fragment} from 'react';
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
-import LabelInput from '../../_components/inputs/LabelInput/LabelInput'
-
+import LabelInput from '../../_components/inputs/LabelInput/LabelInput';
 import styles from './ContestForm.module.scss';
 import Select from "./Select/Select";
 import {NAME_TYPE, TASK_TYPE} from "../../../../constants";
-
 import {FORM_NAMES} from "../../../../constants";
 import {
     isRequired,
-    maxLength,
-    notEmpty, notEmptySpaceOnly,
-    notEmptyStringValidation,
-    oneOf
+    notEmpty,
 } from "../../../../utils/reduxForm/validateValue";
 
 let ContestForm = ({handleSubmit, ...props}) => {
-
-
 
     const renderNamesFields = () => {
         if (props.types && !props.types.includes(TASK_TYPE.NAME)) {
             return (
                 <Fragment>
-                    <Field validate={[isRequired,notEmpty,]} name="name"
+                    <Field validate={[isRequired, notEmpty,]} name="name"
                            placeholder={"e.g. Marketing Platform for Small Businesses"}
                            label='Name of the company / business?'
                            component={LabelInput} type="text"/>
-                    <Field validate={[isRequired,notEmpty, ]} name="nameOf"
-                           options={Object.values(NAME_TYPE)} label={"Type of business"}
-                           component={Select}
-                           type="text"/>
                 </Fragment>
             )
         }
@@ -42,15 +29,19 @@ let ContestForm = ({handleSubmit, ...props}) => {
     const renderFields = () => {
         return (
             <Fragment>
-                <Field validate={[isRequired,notEmpty, ]} name="typeOfIndustry"
+                <Field validate={[isRequired, notEmpty,]} name="nameOf"
+                       options={Object.values(NAME_TYPE)} label={"Type of business"}
+                       component={Select}
+                       type="text"/>
+                <Field validate={[isRequired, notEmpty,]} name="typeOfIndustry"
                        placeholder={"Input Your Industry"}
                        label='Type of Industry'
                        component={LabelInput} type="text"/>
-                <Field validate={[isRequired,notEmpty,]} name="targetCustomers"
+                <Field validate={[isRequired, notEmpty,]} name="targetCustomers"
                        placeholder={"i.e. designers, developers"}
                        label='Who are your target customers?'
                        component={LabelInput} type="text"/>
-                <Field validate={[isRequired,notEmpty,]} name="description"
+                <Field validate={[isRequired, notEmpty,]} name="description"
                        placeholder={"e.g. Smith & Forest"}
                        label='What does your company or business do?'
                        component={LabelInput} type="textarea"/>

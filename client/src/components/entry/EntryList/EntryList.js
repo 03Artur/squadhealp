@@ -8,7 +8,7 @@ import Spinner from "../../Spinner/Spinner";
 
 const EntryList = (props) => {
 
-    const {entries, isFetching} = props;
+    const {entries, isFetching, count} = props;
 
 
     const renderEntries = () => {
@@ -28,12 +28,17 @@ const EntryList = (props) => {
     };
 
     return (
-        <ul className={styles.list}>
-            {
-                renderContent()
-            }
+        <div className={styles.listContainer}>
+            <div className={styles.listHeader}>
+                <h4 className={styles.count}>{`${count} Entries`}</h4>
+            </div>
+            <ul className={styles.list}>
+                {
+                    renderContent()
+                }
 
-        </ul>
+            </ul>
+        </div>
     )
 };
 
@@ -45,11 +50,12 @@ EntryList.defaultProps = {};
 
 
 const mapStateToProps = state => {
-    const {entries, isFetching} = state.entriesReducer;
+    const {entries, isFetching, count} = state.entriesReducer;
 
     return {
         entries,
         isFetching,
+        count,
     }
 
 };

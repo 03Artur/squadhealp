@@ -48,8 +48,9 @@ export function* getEntriesSaga({queryString}) {
         type: ENTRY_ACTION_TYPES.GET_ENTRIES_REQUEST,
     });
     try {
+        console.log(queryString);
         const {data: {count, rows: entries}} = yield entryController.getEntries(queryString);
-
+            console.log(entries);
         yield put({
             type: ENTRY_ACTION_TYPES.GET_ENTRIES_RESPONSE,
             entries,
@@ -89,11 +90,13 @@ export function* rejectEntrySaga({entryId}) {
     });
     try {
         const {data} = yield entryController.rejectEntry(entryId);
+        console.log(data);
         yield put({
             type: ENTRY_ACTION_TYPES.REJECT_ENTRY_RESPONSE,
-            entry: data,
+            data,
         })
     } catch (e) {
+        console.log(e);
         yield put({
             type: ENTRY_ACTION_TYPES.REJECT_ENTRY_ERROR,
             error: e.response.data,

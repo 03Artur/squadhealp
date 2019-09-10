@@ -2,11 +2,10 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './ContestItem.module.scss';
-import {ROLE} from "../../../../constants";
+import {PATHS, ROLE} from "../../../../constants";
 import LikeButton from "./buttons/LikeButton/LikeButton";
 import AddEntryButton from "./buttons/AddEntryButton/AddEntryButton";
-import {selectContestAction} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
-
+import {Link} from 'react-router-dom';
 
 const ContestItem = (props) => {
 
@@ -40,9 +39,11 @@ const ContestItem = (props) => {
 
     return (
         <li className={styles.container}>
-            <h5 onClick={onSelect} className={styles.taskTitle}>
-                {title}
-            </h5>
+            <Link to={`${PATHS.AFFILIATE_DASHBOARD_ENTRIES}?taskId=${taskId}`}>
+                <h5 className={styles.taskTitle}>
+                    {title}
+                </h5>
+            </Link>
             <div className={styles.infoContainer}>
                 <h6 className={styles.typeInfo}>{`${type} / ${style}`}</h6>
                 <p className={styles.description}>
@@ -74,7 +75,6 @@ const mapStateToProps = state => {
     }
 
 };
-const mapDispatchToProps = dispatch => ({
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestItem)

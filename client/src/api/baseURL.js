@@ -27,6 +27,7 @@ export const favoriteUrl = '/favorite';
 * */
 export const entryUrl = '/entry';
 export const entriesUrl = '/entries';
+export const rejectUrl = '/reject';
 /*
 * ADMIN
 * */

@@ -25,6 +25,7 @@ const EntryItem = (props) => {
         user,
         rejectEntryAction,
         makeWinnerEntryAction,
+        isWinner,
         task,
     } = props;
 
@@ -34,6 +35,7 @@ const EntryItem = (props) => {
         makeWinnerEntryAction(entryId);
     };
     const rejectEntry = () => {
+
         if (!isRejected) {
             rejectEntryAction(entryId)
         }
@@ -44,12 +46,16 @@ const EntryItem = (props) => {
             return
         }
         if (user.role === ROLE.BUYER) {
+
+            const rejectButtonClassName = classNames(styles.button, styles.rejectButton, {[styles.rejectedButtonStyle]: isRejected});
+            const winnerButtonClassName = classNames(styles.button, styles.winnerButton, {[styles.isWinnerButtonStyle]: isWinner});
+
             return (
                 <div className={styles.actionContainer}>
-                    <div>
-                        <UniversalButton className={classNames(styles.button, styles.winnerButton)}
+                    <div className={styles.buttonContainer}>
+                        <UniversalButton className={winnerButtonClassName}
                                          onClick={makeWinnerEntry}>Make winner</UniversalButton>
-                        <UniversalButton className={classNames(styles.button, styles.rejectButton)}
+                        <UniversalButton isEnable={!isRejected} className={rejectButtonClassName}
                                          onClick={rejectEntry}>Reject</UniversalButton>
                     </div>
                 </div>

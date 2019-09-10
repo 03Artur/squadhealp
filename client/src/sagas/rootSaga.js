@@ -52,7 +52,6 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.GET_ALL_CONTESTS_ACTION, contestSaga.getAllContestSaga);
     yield takeLatest(CONTEST_ACTION_TYPES.LIKE_CONTEST_ACTION, contestSaga.likeContestSaga);
     yield takeLatest(CONTEST_ACTION_TYPES.DISLIKE_CONTEST_ACTION, contestSaga.dislikeContestSaga);
-    yield takeLatest(CONTEST_ACTION_TYPES.SELECT_CONTEST_ACTION, contestSaga.selectContestSaga);
     //========================================================================================
     //CHAT
     // yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE, chatSaga.getUserChatsSaga);
@@ -71,7 +70,7 @@ function* rootSaga() {
     yield takeLatest(ENTRY_ACTION_TYPES.GET_ENTRY_ACTION, entrySaga.getEntrySaga);
     yield takeLatest(ENTRY_ACTION_TYPES.GET_ENTRIES_ACTION, entrySaga.getEntriesSaga);
     yield takeLatest(ENTRY_ACTION_TYPES.SET_WINNING_ENTRY_ACTION, entrySaga.setWinningEntrySaga);
-    yield takeEvery(ENTRY_ACTION_TYPES.REJECT_ENTRY_ACTION, entrySaga.rejectEntrySaga);
+    yield takeLatest(ENTRY_ACTION_TYPES.REJECT_ENTRY_ACTION, entrySaga.rejectEntrySaga);
     //========================================================================================
 }
 

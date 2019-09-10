@@ -15,7 +15,7 @@ const UniversalButton = (props) => {
     };
 
     return (
-        <div className={clickHandler} onClick={onClick}>
+        <div className={className} onClick={clickHandler}>
             {
                 children
             }

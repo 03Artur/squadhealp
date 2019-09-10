@@ -31,6 +31,16 @@ export default function entriesReducer(state = initialState, action) {
                 error: action.error,
             }
         }
+
+        case ENTRY_ACTION_TYPES.REJECT_ENTRY_RESPONSE: {
+
+            const {data: {id}} = action;
+            const clonedState = _.cloneDeep(state);
+            const entry = clonedState.entries.find((item => item.id === id));
+            entry.isRejected = true;
+            return clonedState;
+        }
+
         default: {
             return state;
         }

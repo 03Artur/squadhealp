@@ -1,4 +1,4 @@
-import  {Tasks, Entries, Contests} from '../../models';
+import {Tasks, Entries, Contests} from '../../models';
 import * as appError from "../../errors";
 import {ROLES} from '../../constants';
 
@@ -17,13 +17,33 @@ export function checkCRUDPermission(req, res, next) {
     }
 }
 
-export async function checkRejectPermission(req, res, next) {
+export async function checkGrandOrRejectPermission(req, res, next) {
     try {
-        const {accessTokenPayload: user,params: {contestId}} = req;
-        if(user.role === ROLES.BUYER){
+        const {accessTokenPayload: user, params: {id}} = req;
+        if (user.role === ROLES.BUYER) {
+            const [task] = await Tasks.findAll({
+                include: [
+                    {
+                        model: Contests,
+                        attributes: [],
+                        as: 'contest',
+                        where: {
+                            userId: user.id,
+                        }
+                    },
+                    {
+                        model: Entries,
 
-            const contest = await Contests.findByPk(contestId);
-            if(contest && contest.userId === user.id){
+                        as: 'entries',
+                        where: {
+                            id: id,
+                        }
+                    }
+                ]
+            });
+            if (task) {
+                req.task = task;
+
                 return next();
             }
         }

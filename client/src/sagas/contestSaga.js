@@ -34,17 +34,6 @@ const getSteps = (types) => {
     });
 };
 
-export function* selectContestSaga({contest}) {
-    if(contest){
-        yield call(getEntriesSaga, {
-            queryString: queryString.stringify({
-                taskId: contest.id,
-            })
-        });
-    }
-
-}
-
 
 export function* getAllContestSaga({queryString}) {
     try {

@@ -4,8 +4,9 @@ import multer from 'multer';
 import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
 import * as entryMW from '../middlewares/entry'
-import {getEntries, postEntry, rejectEntry, updateEntry} from "../controllers/entryController";
+import {getEntries, postEntry, rejectEntry, setWinner, updateEntry} from "../controllers/entryController";
 import {namingFile} from "../middlewares/multer";
+import {getSelectProps} from "../middlewares/entry/filterEntry";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -14,7 +15,6 @@ const storage = multer.diskStorage({
     filename: namingFile
 });
 const upload = multer({storage: storage});
-
 const router = express.Router();
 
 router.post('/task/:taskId/entry', upload.array('files', 8), (req, res, next) => {
@@ -25,17 +25,16 @@ router.post('/task/:taskId/entry', upload.array('files', 8), (req, res, next) =>
         } catch (e) {
             next(e);
         }
-
     },
     entryMW.checkCRUDPermission, postEntry);
 
 
 
-router.get('/entries', entryMW.checkCRUDPermission, getEntries);
+router.get('/entries', entryMW.checkCRUDPermission,getSelectProps, getEntries);
 router.put('/entry/:id', entryMW.findEntryByPk, entryMW.checkCRUDPermission, updateEntry);
-router.put('/contest/:contestId/task/:taskId/reject/:id', entryMW.checkRejectPermission, rejectEntry);
+router.put('/entry/:id/reject', entryMW.checkGrandOrRejectPermission, rejectEntry);
 
-router.post('/entry/:id/win',);
+router.post('/entry/:id/win',entryMW.checkGrandOrRejectPermission, setWinner);
 
 
 export default router;

@@ -5,7 +5,6 @@ import styles from './ContestList.module.scss';
 import ContestItem from "./ContestItem/ContestItem";
 import {selectContestAction} from "../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 
-
 const ContestList = (props) => {
 
     const {contests, count, isFetching, selectContestAction} = props;
@@ -13,15 +12,12 @@ const ContestList = (props) => {
     const renderContests = () => {
         return contests.map(contest => {
             const onSelect = () => {
-                selectContestAction(contest)
             };
             return <ContestItem key={contest.id} onSelect={onSelect} task={contest}/>
         })
     };
 
     useEffect(() => {
-
-
 
     }, []);
 
@@ -45,9 +41,6 @@ ContestList.propTypes = {
 
 ContestList.defaultProps = {};
 
-/*
-* React redux
-* */
 const mapStateToProps = store => {
     const {contests, count, isFetching} = store.contestsReducer;
     return {
@@ -57,7 +50,7 @@ const mapStateToProps = store => {
     }
 };
 const mapDispatchToProps = dispatch => ({
-    selectContestAction: contest => dispatch(selectContestAction(contest)),
+    selectContestAction: contestId => dispatch(selectContestAction(contestId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestList)

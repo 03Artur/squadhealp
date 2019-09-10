@@ -1,11 +1,37 @@
 @import "../../../templates";
 
 .list{
-  @include borderBox();
+  @include borderBox(30px 0 0 0);
+  width: 100%;
+  background-color: white;
 }
 
 .spinnerContainer{
   width: 100%;
   @include borderBox(20px)
+
+}
+
+.listHeader{
+  @include borderBox(20px 10px);
+  @include flexContainer(space-between,center);
+  margin-top: 15px;
+  width: 100%;
+  border-bottom: 1px solid rgb(238, 238, 238);
+
+  .count{
+    font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+
+    color: black;
+  }
+}
+
+.listContainer{
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 0 20px;
 
 }

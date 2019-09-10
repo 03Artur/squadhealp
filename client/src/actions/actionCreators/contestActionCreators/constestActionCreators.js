@@ -62,10 +62,10 @@ export const dislikeContestActionCreator = (taskId) => ({
     taskId,
 });
 
-export function selectContestAction(contest) {
+export function selectContestAction(contestId) {
     return {
         type: CONTEST_ACTION_TYPES.SELECT_CONTEST_ACTION,
-        contest,
+        contestId,
     }
 }
 

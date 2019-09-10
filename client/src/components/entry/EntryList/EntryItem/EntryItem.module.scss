@@ -9,7 +9,7 @@ $winnerColor: #28d2d0;
   margin-bottom: 10px;
 }
 
-.title{
+.title {
 
 }
 
@@ -27,8 +27,8 @@ $winnerColor: #28d2d0;
   border-color: $winnerColor;
 
   .winnerButton {
-    background-color: $winnerColor;
-    color: white;
+    border-color: $winnerColor;
+    color: $winnerColor;
   }
 }
 
@@ -36,8 +36,8 @@ $winnerColor: #28d2d0;
   @include borderBox(20px 30px);
   cursor: pointer;
   border: 2px solid black;
-  border-right: 4px;
-
+  border-radius: 4px;
+  margin: 10px;
   font-size: 16px;
   font-weight: 600;
   font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
@@ -49,6 +49,14 @@ $winnerColor: #28d2d0;
   color: $rejectColor;
 }
 
+.rejectedButtonStyle {
+  color: white;
+  background-color: $rejectColor;
+}
+.isWinnerButtonStyle{
+  color: white;
+  background-color: $winnerColor;
+}
 .winnerButton {
   border-color: $winnerColor;
   color: $winnerColor;
@@ -61,7 +69,13 @@ $winnerColor: #28d2d0;
 }
 
 
+.buttonContainer {
+  display: flex;
+}
+
 .actionContainer {
   width: 100%;
 
 }
+
+
