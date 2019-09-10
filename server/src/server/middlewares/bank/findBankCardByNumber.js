@@ -15,7 +15,6 @@ export default async (req, res, next) => {
         }
 
         req.creditCard = card;
-
         return next()
 
     } catch (e) {

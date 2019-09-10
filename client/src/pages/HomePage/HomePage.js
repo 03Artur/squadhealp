@@ -1,7 +1,7 @@
 import React, {lazy, Suspense} from 'react';
 import DocumentTitle from 'react-document-title';
 import styles from './HomePage.module.scss';
-
+import {Switch} from 'react-router-dom';
 /*
 * COMPONENTS
 * */
@@ -14,6 +14,7 @@ import AuthorizedRoute from "../../components/routes/AuthorizedRoute/AuthorizedR
 import ContestsPage from "../ContestsPage/ContestsPage";
 import SingleContestPage from "../SingleContestPage/SingleContestPage";
 import StartEntryPage from "../StartEntryPage/StartEntryPage";
+
 const StartContestPage = lazy(() => import('../StartContestPage/StartContestPage'));
 const AdminPage = lazy(() => import('../AdminPage/AdminPage'));
 
@@ -24,10 +25,14 @@ function HomePage(props) {
         <div className={styles.pageContainer}>
             <HomeHeader/>
             <DocumentTitle title="Home"/>
-            <AccessRoute roles={[ROLE.ADMIN,ROLE.BUYER]} path={PATHS.CONTEST} render = {props => <StartContestPage {...props}/>}/>
-            <AccessRoute roles={[ROLE.CREATIVE]} path={`${PATHS.ENTRIES}/:taskId${PATHS.ENTRY}`} render = {props => <StartEntryPage {...props}/>}/>
-            <AuthorizedRoute path={PATHS.CONTESTS} render = {props => <ContestsPage {...props}/>}/>
-            <AuthorizedRoute path={`${PATHS.CONTEST}/:taskId`} render = {props => <SingleContestPage {...props}/>}/>
+            <Switch>
+                <AccessRoute roles={[ROLE.ADMIN, ROLE.BUYER]} path={PATHS.CONTEST}
+                             render={props => <StartContestPage {...props}/>}/>
+                <AccessRoute roles={[ROLE.CREATIVE]} path={`${PATHS.ENTRIES}/:taskId${PATHS.ENTRY}`}
+                             render={props => <StartEntryPage {...props}/>}/>
+                <AuthorizedRoute path={PATHS.CONTESTS} render={props => <ContestsPage {...props}/>}/>
+                <AuthorizedRoute path={`${PATHS.CONTEST}/:taskId`} render={props => <SingleContestPage {...props}/>}/>
+            </Switch>
             <HomeFooter/>
         </div>
     );

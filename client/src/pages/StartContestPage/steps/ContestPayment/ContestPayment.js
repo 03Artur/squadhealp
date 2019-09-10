@@ -1,4 +1,3 @@
-
 import React, {Component, Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
@@ -26,15 +25,13 @@ import {FORM_NAMES} from "../../../../constants";
 const ContestPayment = (props) => {
 
     const [flipCard, setFlipCard] = useState(false);
-
     const {tasks} = props;
 
     const submit = (values) => {
         const creditCard = _.clone(values);
-        creditCard.number = creditCard.number.replace(/ /g,'');
-        creditCard.expiry = creditCard.expiry.replace(/ /g,'');
+        creditCard.number = creditCard.number.replace(/ /g, '');
+        creditCard.expiry = creditCard.expiry.replace(/ /g, '');
         props.contestPaymentAction(props.contestId, creditCard);
-
     };
 
     const renderOrderSummaryItem = () => {
@@ -53,9 +50,7 @@ const ContestPayment = (props) => {
             <div className={styles.billContainer}>
                 <h2>Order summary</h2>
                 <ul className={styles.billList}>
-                    {
-                        renderOrderSummaryItem()
-                    }
+                    {renderOrderSummaryItem()}
                 </ul>
                 <div className={styles.totalContainer}>
                     <h3>Total: </h3>
@@ -72,19 +67,17 @@ const ContestPayment = (props) => {
                     <div className={styles.col}>
                         <CreditCard flip={flipCard} {...props.cardValues}/>
                         <div className={styles.formContainer}>
-                        <ContestPaymentForm onCvcBlur={() => setFlipCard(false)} onCvcFocus={() => setFlipCard(true)}
-                                            onSubmitSuccess={() => {
-                                            }} onSubmit={submit}/>
+                            <ContestPaymentForm onCvcBlur={() => setFlipCard(false)}
+                                                onCvcFocus={() => setFlipCard(true)}
+                                                onSubmit={submit}/>
                         </div>
                     </div>
-                    {
-                        renderOrderSummary()
-                    }
+                    {renderOrderSummary()}
                 </div>
-
             </div>
-            <StartContestNav nextButtonText={"Pay Now"} onPrevClick={props.prevStepAction}
-                             onNextClick={props.submitContestPaymentFormAction}/>
+            <StartContestNav onPrevClick={props.prevStepAction}
+                             onNextClick={props.submitContestPaymentFormAction}
+                             nextButtonText={"Pay Now"}/>
         </div>
     )
 };
@@ -98,9 +91,7 @@ const mapStateToProps = store => {
     const {contestId} = store.contestCreationQuery;
     const {tasks} = store.contestCreation;
     const selector = formValueSelector(FORM_NAMES.PAYMENT_FORM);
-
     const cardValues = selector(store, 'number', 'cvc', 'expiry');
-
     return {
         tasks,
         contestId,

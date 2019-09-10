@@ -9,7 +9,7 @@ export function* postEntrySaga({entry, taskId}) {
     });
     try {
 
-        const {data} = yield entryController.postEntry(taskId, entry)
+        const {data} = yield entryController.postEntry(taskId, entry);
         yield put({
             type: ENTRY_ACTION_TYPES.POST_ENTRY_RESPONSE,
             entry: data,

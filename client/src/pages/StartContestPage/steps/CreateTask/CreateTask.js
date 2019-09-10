@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {submit, reset} from 'redux-form';
-import TasksForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
+import TaskForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {FORM_NAMES, TASK_TYPE,} from "../../../../constants";
@@ -53,7 +53,7 @@ function CreateTask(props) {
 
     return (
         <React.Fragment>
-            <TasksForm initialValues={getInitialValues()} onSubmitSuccess={submitSuccess} onSubmit={submit}/>
+            <TaskForm initialValues={getInitialValues()} onSubmitSuccess={submitSuccess} onSubmit={submit}/>
             <StartContestNav onPrevClick={props.prevStepAction} onNextClick={props.submitFormAction}/>
         </React.Fragment>
     )

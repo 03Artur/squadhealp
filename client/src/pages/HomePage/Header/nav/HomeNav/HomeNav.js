@@ -5,8 +5,12 @@ import Logo from "../../../../../components/Logo/Logo";
 import LinkButton from "../../../../../components/headers/LinkButtun/LinkButton";
 import {PATHS} from "../../../../../constants";
 import HomeNavMenu from "./HomeNavMenu/HomeNavMenu";
+import {connect} from 'react-redux';
+
 
 function HomeNav(props) {
+
+    const {navigation: {menu, link}} = props;
 
     return (
         <nav className={styles.nav}>
@@ -15,10 +19,10 @@ function HomeNav(props) {
                     <Logo className={styles.logo}/>
                 </div>
                 <div className={styles.menuContainer}>
-                    <HomeNavMenu/>
+                    <HomeNavMenu menu={menu}/>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <LinkButton className={styles.linkButton} to={PATHS.SELECT_TASK_TYPE}>Start Contest</LinkButton>
+                    <LinkButton className={styles.linkButton} to={link.to}>{link.content}</LinkButton>
                 </div>
             </div>
         </nav>
@@ -33,5 +37,13 @@ HomeNav.defaultProps = {
     className: ''
 };
 
+function mapStateToProps(state) {
 
-export default HomeNav
+
+    return {
+        navigation: state.homeNav,
+    }
+}
+
+
+export default connect(mapStateToProps)(HomeNav)

@@ -214,8 +214,11 @@ export function* addTaskStepsToContestCreationSteps({types}) {
 export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
     try {
-
+        console.log("Contest id: ", contestId);
         const {data: {tasks, ...contest}} = yield contestController.contestPaymentById(contestId, creditCard);
+
+
+
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
             contest,

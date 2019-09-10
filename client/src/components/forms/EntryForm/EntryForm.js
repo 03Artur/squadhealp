@@ -8,6 +8,7 @@ import LabelInput from "../_components/inputs/LabelInput/LabelInput";
 import {FORM_NAMES} from "../../../constants";
 import SubmitButton from "../_components/buttons/SubmitButton/SubmitButton";
 import Spinner from "../../Spinner/Spinner";
+import {isRequired, notEmpty} from "../../../utils/reduxForm/validateValue";
 
 const EntryForm = (props) => {
 
@@ -16,9 +17,8 @@ const EntryForm = (props) => {
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.fieldsContainer}>
-                <Field name={'title'} label={"Title"} component={LabelInput}/>
+                <Field validate={[isRequired,notEmpty,]} placeholder={'Title of Your Entry'} name={'title'} label={"Title"} component={LabelInput}/>
                 <Field name={'files'} component={InputFile}/>
-
                 <SubmitButton onClick={handleSubmit} isEnable={!isFetching}>{isFetching ?
                     <Spinner/> : 'Create Entry'}</SubmitButton>
             </div>

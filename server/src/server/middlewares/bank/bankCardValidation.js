@@ -3,7 +3,8 @@ import  creditCardSchema from '../../utils/yupSchemas/creditCardSchema';
 
 export default async function validationCreateUser(req, res, next) {
     try {
-        if (await creditCardSchema.isValid(req.body)) {
+
+        if (await creditCardSchema.validate(req.body)) {
 
             return next();
         } else {

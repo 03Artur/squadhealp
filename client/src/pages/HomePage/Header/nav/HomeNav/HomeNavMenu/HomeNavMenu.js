@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
@@ -8,12 +7,11 @@ import styles from "./HomeNavMenu.module.scss";
 import {testMenuItemStyle} from "../../../../../../constants";
 
 
-
 function testStyle(to) {
     return (to !== "#" ? testMenuItemStyle : null);
 }
 
-const renderMenuItem = (item,index) => {
+const renderMenuItem = (item, index) => {
     if (Array.isArray(item)) {
         return (
             item.map(elem => renderMenuItem(elem))
@@ -69,32 +67,28 @@ const renderMenu = (menu) => {
 };
 
 function HomeNavMenu(props) {
-    const {navigation} = props;
+
+    const {menu} = props;
 
     return (
-            <ul className={[styles.navMenu, props.className].join(' ')}>
-                {
-                    navigation.map(menu => renderMenu(menu))
-                }
-            </ul>
+        <ul className={[styles.navMenu, props.className].join(' ')}>
+            {
+                menu.map(item => renderMenu(item))
+            }
+        </ul>
     )
 }
 
 HomeNavMenu.propTypes = {
     className: PropTypes.string,
+    menu: PropTypes.array,
 };
 
-HomeNavMenu.defaultProps ={
+HomeNavMenu.defaultProps = {
     className: styles.menuContainer,
+    menu: [],
 };
 
-function mapStateToProps(state) {
 
 
-
-    return {
-        navigation:  state.homeNav,
-    };
-}
-
-export default connect(mapStateToProps)(HomeNavMenu);
+export default HomeNavMenu;

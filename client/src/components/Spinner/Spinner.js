@@ -16,6 +16,6 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-    color: 'black',
+    color: 'white',
 };
 

@@ -4,7 +4,7 @@ export default async (req, res, next) => {
     try {
 
 
-        req.bill = req.contest.Tasks.reduce((sum, task) => sum + task.cost, 0);
+        req.bill = req.contest.tasks.reduce((sum, task) => sum + task.cost, 0);
 /*
         res.send({value: req.bill});
 */

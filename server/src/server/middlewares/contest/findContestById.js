@@ -1,28 +1,28 @@
 import {Contests, Tasks} from '../../models';
 import * as appError from "../../errors";
+
 export default async function findContestById(req, res, next) {
-    try{
+    try {
         const [contest] = await Contests.findAll({
             where: {
-                id: req.params.id
+                id: parseInt(req.params.id),
             },
-            include: [{
+            include: {
                 model: Tasks,
                 as: 'tasks',
-            }]
+            }
         });
 
-        if(contest){
-            if(contest.isPaid){
+        if (contest) {
+            if (contest.isPaid) {
                 return next(new appError.BadRequestError("contest has already been paid"))
             }
-            req.contest = contest;
 
+            req.contest = contest;
             return next();
         }
         return next(new appError.NotFoundError())
-    }
-    catch (e) {
+    } catch (e) {
 
     }
 

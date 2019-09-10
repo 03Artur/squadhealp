@@ -17,7 +17,7 @@ const upload = multer({storage: storage});
 
 const router = express.Router();
 
-router.post('task/:taskId/entry', upload.array('files', 8), (req, res, next) => {
+router.post('/task/:taskId/entry', upload.array('files', 8), (req, res, next) => {
         try {
             req.body = JSON.parse(req.body.entry);
             req.body.files = req.files.map(item => item.filename);
