@@ -33,10 +33,10 @@ export async function checkGrandOrRejectPermission(req, res, next) {
                     },
                     {
                         model: Entries,
-
                         as: 'entries',
                         where: {
                             id: id,
+                            isRejected: false,
                         }
                     }
                 ]
