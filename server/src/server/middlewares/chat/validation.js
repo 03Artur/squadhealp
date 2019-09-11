@@ -17,7 +17,6 @@ export async function validateChat(req, res, next) {
     try {
 
         await chatYupSchema.validate(req.body);
-
         return next();
 
     } catch (e) {

@@ -153,9 +153,12 @@ export async function createChat(req, res, next) {
         data.ownerId = ownerId;
         data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
-        res.send(await Chat.find({}));
-        return;
+
+        //res.send(data);
+
         const chat = await Chat.create(data);
+
+        res.send({chat,});
         if (chat) {
             res.send(chat);
         }
