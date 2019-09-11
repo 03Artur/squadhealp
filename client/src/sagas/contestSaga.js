@@ -7,6 +7,7 @@ import history from "../history";
 import queryString from 'query-string';
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 import {getEntriesSaga} from "./entrySaga";
+import {createChatSaga} from "./chatSagas";
 
 
 const mapSteps = new Map([
@@ -206,13 +207,15 @@ export function* contestPaymentSaga({contestId, creditCard}) {
         console.log("Contest id: ", contestId);
         const {data: {tasks, ...contest}} = yield contestController.contestPaymentById(contestId, creditCard);
 
+        yield all([
+            put({
+                type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
+                contest,
+                tasks,
+            }),
+            ...tasks.map(task => call(createChatSaga, {taskId: task.id, participants: [contest.userId,]})),
+        ])
 
-
-        yield put({
-            type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
-            contest,
-            tasks,
-        });
     } catch (e) {
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_ERROR,

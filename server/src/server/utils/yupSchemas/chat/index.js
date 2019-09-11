@@ -10,6 +10,6 @@ export const messageYupSchema = yup.object({
 export const chatYupSchema =yup.object({
 
     participants: yup.array().of( yup.number().positive().integer()).required(),
-
+    taskId: yup.number().required(),
 
 });

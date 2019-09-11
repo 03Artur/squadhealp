@@ -42,6 +42,7 @@ instance.interceptors.response.use(
                 return instance(err.config);
             }
             case 401: {
+
                 removeTokens();
                 history.push(PATHS.LOGIN);
                 return Promise.reject(err)

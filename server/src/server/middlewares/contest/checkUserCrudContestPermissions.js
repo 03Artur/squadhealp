@@ -14,7 +14,6 @@ export default async (req, res, next) => {
             }]
         }) : req.body;
 
-
         if (!contest) {
             return next(appError.NotFoundError())
         }

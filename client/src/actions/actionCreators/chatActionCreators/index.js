@@ -17,10 +17,14 @@ export function selectChatActionCreator(chatId) {
     }
 }
 
+export function findChatByUniqAndJoinActionCreator(query) {
+    return {
+        type: CHAT_ACTION_TYPES.FIND_BY_UNIQ_CHAT_ADN_JOIN_ACTION,
+        query,
+    }
+}
+
 export function getChatActionCreator(chatId) {
-    console.group();
-    console.log('getChatActionCreator');
-    console.groupEnd();
     return {
         type: CHAT_ACTION_TYPES.GET_CHAT_ACTION,
         chatId,
@@ -48,7 +52,7 @@ export function unselectChatActionCreator() {
 * MESSAGE
 * */
 
-export function postMessageActionCreator(chatId,message) {
+export function postMessageActionCreator(chatId, message) {
     return {
         type: CHAT_ACTION_TYPES.POST_MESSAGE_ACTION,
         message,
@@ -74,8 +78,6 @@ export function getMessageActionCreator(messageId) {
 
 
 //================================================
-
-
 
 
 export function searchChatRoomActionCreator(searchValue) {

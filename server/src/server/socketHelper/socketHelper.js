@@ -1,5 +1,4 @@
 import {SOCKET_EVENTS} from "../constants";
-import {UserToSocket} from '../mongoModels'
 
 
 /*io.on("connection", socket => {
@@ -35,67 +34,53 @@ import {UserToSocket} from '../mongoModels'
     });
 });*/
 
+/* socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
+            if (this.userToSockets.has(userId)) {
+                this.userToSockets.get(userId).add(socket);
+            } else {
+                this.userToSockets.set(userId, new Set([socket]));
+            }
+        });*/
 
 class SocketHelper {
 
     constructor() {
         this._io = null;
+        this.userToSockets = new Map();
     }
 
-    get io() {
-        return this._io;
+    async joinUserToRooms(userId, rooms) {
+        const userSocketsSet = this.userToSockets.get(userId);
+        if (userSocketsSet) {
+            userSocketsSet.forEach(socket => {
+                socket.join(rooms);
+            })
+        }
     }
-    set io(ioInstance) {
-        this._io = ioInstance;
-        this._io.on('connection', socket => {
-            socket.on("disconnect", async function () {
-                await UserToSocket.deleteOne({
-                    socketId: socket.id,
-                })
-            });
-            this.addChatEvents(socket);
+
+    async joinUsersToRooms(usersIds, rooms) {
+        usersIds.forEach((userId) => {
+            this.joinUserToRooms(userId, rooms);
         })
+    };
+
+    addSocket(userId, socket) {
+        if (this.userToSockets.has(userId)) {
+            this.userToSockets.get(userId).add(socket);
+        } else {
+            this.userToSockets.set(userId, new Set([socket]));
+        }
     }
 
-    static async addUserSocket(userId, socketId) {
-        await UserToSocket.create({
-            userId,
-            socketId,
-        })
+    deleteSocket(userId, socket) {
+        if (this.userToSockets.has(userId)) {
+            this.userToSockets.get(userId).delete(socket);
+        }
     }
-
-    async joinUserToRooms(userId, chats) {
-        const userSockets = await UserToSocket.find({
-            userId,
-        });
-        userSockets.forEach(userSocket => {
-            const socket = this._io.sockets.connected[userSocket.socketId];
-            chats.forEach(chat => {
-                    socket.join(chat._id)
-                }
-            );
-        });
-    }
-
-    async addParticipantsToChat(chat, participants) {
-        const usersToSockets = await UserToSocket.find({
-            userId: participants,
-        });
-
-        usersToSockets.forEach(participantSocket => {
-            const socket = this._io.sockets.connected[participantSocket.socketId];
-            socket.join(chat._id);
-        });
-    }
-
 
     addChatEvents(socket) {
-        socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
-            await SocketHelper.addUserSocket(userId, socket.id);
-        });
 
         socket.on(SOCKET_EVENTS.POST_CHAT, chatId => {
-            console.log('chat id', chatId);
             socket.to(chatId).emit(SOCKET_EVENTS.GET_CHAT, chatId);
 
         });
@@ -103,7 +88,6 @@ class SocketHelper {
             socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
         })
 
-
     }
 
     get io() {
@@ -112,18 +96,12 @@ class SocketHelper {
 
     set io(ioInstance) {
         this._io = ioInstance;
-        this._io.on('connection',async socket => {
-
-            await UserToSocket.deleteOne({
-                socketId: socket.id,
+        this._io.on('connection', async socket => {
+            let userId = socket.handshake.query.userId;
+            this.addSocket(userId, socket);
+            this.socket.on("disconnect", async () => {
+                this.deleteSocket(userId, socket);
             });
-
-            socket.on("disconnect", async function () {
-                await UserToSocket.deleteOne({
-                    socketId: socket.id,
-                })
-            });
-
             this.addChatEvents(socket);
         })
     }

@@ -1,12 +1,27 @@
 import {sequelize, Sequelize, Users, Contests, Tasks, FavoriteTasks, Banks} from '../models';
+import {Chat, Message} from '../mongoModels';
+
 import appError, {NotFoundError} from '../errors';
 import _ from 'lodash';
 import {ROLES} from '../constants';
 
 export const getContests = async (req, res, next) => {
     try {
-        const {query: {limit, offset}, include, attributes, accessTokenPayload: {id: userId, role}, contestFilter, taskFilter, order} = req;
-
+        const {
+            query: {
+                limit,
+                offset
+            },
+            include,
+            attributes,
+            accessTokenPayload: {
+                id: userId,
+                role
+            },
+            contestFilter,
+            taskFilter,
+            order
+        } = req;
 
         const result = await Tasks.findAndCountAll({
             where: taskFilter,
@@ -16,9 +31,11 @@ export const getContests = async (req, res, next) => {
             limit,
             offset,
             subQuery: false,
-
         });
+
         if (result) {
+
+
             res.send(result)
         }
         return next(new appError.NotFoundError());
@@ -67,8 +84,7 @@ export const createTask = async (req, res, next) => {
     try {
         const {contest} = req;
         req.body.contestId = contest.id;
-        const newTask = await Tasks.upsert(req.body);
-
+        const newTask = await Tasks.create(req.body);
         if (!newTask) {
             return next(new appError.BadRequestError());
         }

@@ -5,7 +5,7 @@ import {
     getAllUserChats, getParticipants,
     getParticipantById,
     getMessageById,
-    sendMessage, updateMessage, sendChat, getChatOwnerByChatId, getChatMessages,
+    sendMessage, updateMessage, sendChat, getChatOwnerByChatId, getChatMessages, getChatByQuery,
 } from "../controllers/chatController";
 import {validateChat, validateMessage} from "../middlewares/chat/validation";
 import {findChatById, findMessageById} from "../middlewares/chat/findChatById";
@@ -19,7 +19,8 @@ const router = express.Router();
 * */
 router.get('/chats', getAllUserChats);
 router.post('/chat', checkPermission, validateChat, createChat);
-router.get('/chat/:chatId', findChatById, checkPermission, sendChat);
+router.get('/chats/:chatId', findChatById, checkPermission, sendChat);
+router.get('/chat',getChatByQuery);
 
 /*
 * PARTICIPANT

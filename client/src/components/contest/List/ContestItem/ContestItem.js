@@ -6,6 +6,10 @@ import {PATHS, ROLE} from "../../../../constants";
 import LikeButton from "./buttons/LikeButton/LikeButton";
 import AddEntryButton from "./buttons/AddEntryButton/AddEntryButton";
 import {Link} from 'react-router-dom';
+import UniversalButton from "../../../UniversalButton/UniversalButton";
+import classNames from 'classnames';
+import {findChatByUniqAndJoinActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
+
 
 const ContestItem = (props) => {
 
@@ -20,7 +24,12 @@ const ContestItem = (props) => {
         },
         user,
         onSelect,
+        findChatByTaskIdAndJoinAction,
     } = props;
+
+    const joinToChat = () => {
+        findChatByTaskIdAndJoinAction(taskId)
+    };
 
     const renderManipulativeOpportunities = () => {
         if (contest.userId === user.id) {
@@ -31,7 +40,13 @@ const ContestItem = (props) => {
             return (
                 <div className={styles.buttonContainer}>
                     <LikeButton taskId={taskId} isLiked={isFavorite}/>
-                    <AddEntryButton taskId={taskId}/>
+                    <div className={styles.buttonRow}>
+
+                        <UniversalButton isEnable={true} onClick={joinToChat}
+                                         className={classNames(styles.buttonCol, styles.joinToChatButton)}>Join to
+                            chat</UniversalButton>
+                        <AddEntryButton className={styles.buttonCol} taskId={taskId}/>
+                    </div>
                 </div>
             );
         }
@@ -75,6 +90,8 @@ const mapStateToProps = state => {
     }
 
 };
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+    findChatByTaskIdAndJoinAction: (taskId) => dispatch(findChatByUniqAndJoinActionCreator({taskId})),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContestItem)

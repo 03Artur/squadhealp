@@ -8,8 +8,8 @@ import queryString from 'query-string';
 * */
 export const getUserChats = () => axios.get(chatsUrl);
 export const postChat = chat => axios.post(chatUrl, chat);
-export const getChat = chatId => axios.get(`${chatsUrl}${chatId}`);
-
+export const getChat = chatId => axios.get(`${chatsUrl}/${chatId}`);
+export const getChatByQuery = queryString => axios.get(`${chatUrl}${queryString}`);
 /*
 * PARTICIPANTS
 * */
@@ -20,7 +20,6 @@ export const getParticipant = id => axios.get(`${participantUrl}/${id}`);
 * MESSAGES
 * */
 export const postMessage = (chatId, message) => axios.post(`${chatUrl}/${chatId}${messageUrl}`, message);
-
 export const getMessages = (chatId, queryString) => axios.get(`${chatUrl}/${chatId}/${messagesUrl}/${queryString}`);
 export const getMessage = (messageId) => axios.get(`${messageUrl}/${messageId}`);
 

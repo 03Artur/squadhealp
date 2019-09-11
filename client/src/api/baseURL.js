@@ -55,3 +55,5 @@ export const ICON_IMAGES_URL = `${imagesURL}/icons`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
 export const defaultUserIcon = `${imagesURL}/icons/user.svg`;
 export const defaultUserIconMin = `${imagesURL}/icons/anonumous-min.png`;
+export const entryFilesUrl = `${imagesURL}/entryFiles`;
+export const taskFilesUrl = `${imagesURL}/taskFiles`;

@@ -2,12 +2,11 @@ import {Users} from './../models';
 import {Chat, Message} from '../mongoModels';
 import * as appError from "../errors";
 import array from 'lodash/array';
+import socketHelper from "../socketHelper/socketHelper";
 
 /*
 * PARTICIPANT
 * */
-
-
 export async function getParticipants(req, res, next) {
     try {
         let {query: {id}} = req;
@@ -141,7 +140,6 @@ export async function getChatMessages(req, res, next) {
 * */
 export async function sendChat(req, res, next) {
     try {
-
         res.send(req.chat);
     } catch (e) {
         next(e);
@@ -155,24 +153,58 @@ export async function createChat(req, res, next) {
         data.ownerId = ownerId;
         data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
-
-
+        res.send(await Chat.find({}));
+        return;
         const chat = await Chat.create(data);
         if (chat) {
             res.send(chat);
         }
 
-        return next(new appError.BadRequestError())
+        return next(new appError.BadRequestError());
 
     } catch (e) {
         next(e);
     }
 }
 
+export async function getChatByQuery(req, res, next) {
+    try {
+        const {query} = req;
+        res.send({query,});
+        const chat = await Chat.findOne(query).populate({
+            path: 'messages',
+            options: {
+                limit: 20,
+                sort: {
+                    updatedAt: -1,
+                },
+                retainNullValues: false,
+            }
+        });
+        if (chat) {
+            const participants = await getMessagesAuthors(chat.messages);
+            res.send({
+                chat,
+                participants,
+            });
+            let i = 0;
+            while (i++ < 20) {
+                console.log('=================getChatByQuery===================');
+            }
+        }
+        return next(new appError.NotFoundError('chat not found'));
+
+    } catch (e) {
+        next(e)
+    }
+}
+
+
 export async function getAllUserChats(req, res, next) {
     try {
 
         const {id: userId} = req.accessTokenPayload;
+
         const chats = await Chat.find({
             participants: userId,
         }).populate({
@@ -183,16 +215,13 @@ export async function getAllUserChats(req, res, next) {
                     updatedAt: -1,
                 },
                 retainNullValues: false,
-
             }
         });
 
         const result = chats.reduce(reducer, {
             participantsId: [],
-
             rooms: [],
         });
-
         const participants = await Users.findAll({
             where: {
                 id: result.participantsId,
@@ -207,6 +236,7 @@ export async function getAllUserChats(req, res, next) {
                 chats,
                 participants,
             });
+            await socketHelper.joinUserToRooms(userId, result.rooms);
         }
         return next(new appError.BadRequestError());
 
@@ -218,15 +248,36 @@ export async function getAllUserChats(req, res, next) {
 /*
 * UTILS
 * */
+const getMessagesAuthors = async (messages) => {
+    try {
+        if (messages) {
+            let usersIds = messages.reduce((usersIds, message) => {
+                usersIds.push(message.authorId);
+                return usersIds;
+            }, []);
+            usersIds = _.uniq(usersIds);
 
-const reducer =  (accumulator, chat) => {
+            return await Users.findAll({
+                where: {
+                    id: usersIds
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'password', 'email', 'balance', 'isBanned',],
+                }
+            });
+        }
+
+    } catch (e) {
+        throw e;
+    }
+};
+
+const reducer = (accumulator, chat) => {
 
     if (chat.messages.length) {
         accumulator.participantsId.push(chat.messages[0].authorId);
     }
     accumulator.participantsId.push(chat.ownerId);
-
-
     accumulator.rooms.push(chat._id);
     return accumulator;
 };

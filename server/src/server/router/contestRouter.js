@@ -12,7 +12,7 @@ import {addContestExtraContent} from "../middlewares/contest/includeContestExtra
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../../public/taskFiles/'))
+        cb(null, path.join(__dirname, '../../../public/images/taskFiles/'))
     },
     filename: namingFile
 });
@@ -39,7 +39,9 @@ router.post('/contest/:id/task',
         try {
 
             req.body = JSON.parse(req.body.task);
+
             req.body.files = req.files.map(item => item.filename);
+
             next();
 
         } catch (e) {

@@ -4,7 +4,9 @@ import * as chatController from '../api/rest/chatController';
 import queryString from 'query-string';
 import _ from 'lodash';
 import * as socketController from "../api/socket/chatController";
-
+import io from 'socket.io-client';
+import {chatSocketHelper} from "../api/socket";
+import {baseURL} from "../api/baseURL";
 /*
 * CHAT
 * */
@@ -13,14 +15,14 @@ import * as socketController from "../api/socket/chatController";
 //GET USER CHATS
 export function* getUserChatsSaga({user}) {
     try {
-        yield socketController.openSocket();
-        yield socketController.authorizeUser(user.id);
+
+        chatSocketHelper.socket = io(`${baseURL}?userId=${user.id}`);
+
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
         });
         const {data: {chats, participants}} = yield chatController.getUserChats();
         yield all([
-
             put({
                 type: CHAT_ACTION_TYPES.GET_CHATS_RESPONSE,
                 chats,
@@ -29,9 +31,7 @@ export function* getUserChatsSaga({user}) {
                 type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
                 participants,
             })
-
         ])
-
     } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHATS_ERROR,
@@ -40,15 +40,30 @@ export function* getUserChatsSaga({user}) {
     }
 }
 
+//FIND AND JOIN
+export function* findChatByUniqChatAndJoin({query}) {
+    yield put({
+        type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
+    });
+    try {
+        const {data} = yield chatController.getChatByQuery(queryString.stringify(query));
+        console.log(data);
+    }catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_CHAT_ERROR,
+            error: e.response.data,
+        })
+    }
+}
+
 //CREATE CHAT
 export function* createChatSaga({chat}) {
+    yield put({
+        type: CHAT_ACTION_TYPES.CREATE_CHAT_REQUEST,
+    });
     try {
-        yield put({
-            type: CHAT_ACTION_TYPES.CREATE_CHAT_REQUEST,
-        });
-
         const {data} = yield chatController.postChat(chat);
-        yield socketController.postChat(data._id);
+
         yield put({
             type: CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE,
             chat: data,
@@ -68,10 +83,6 @@ export function* createChatSaga({chat}) {
 //GET CHAT
 export function* getChatSaga({chatId}) {
     try {
-
-        console.group('getChatSaga');
-        console.log(chatId);
-        console.groupEnd();
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
@@ -151,7 +162,7 @@ export function* postMessageSaga({chatId, message}) {
         });
 
         const {data} = yield chatController.postMessage(chatId, message);
-        yield socketController.postMessage(chatId, data._id);
+        yield chatSocketHelper.postMessage(data._id);
         yield put({
             type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
             message: data,

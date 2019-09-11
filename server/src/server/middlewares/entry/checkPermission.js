@@ -13,7 +13,7 @@ export function checkCRUDPermission(req, res, next) {
         return next(new appError.ForbiddenError());
 
     } catch (e) {
-
+        next(e);
     }
 }
 

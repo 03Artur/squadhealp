@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const chatSchema = new Schema(
     {
+        taskId: {
+            type: Schema.Types.Number,
+            required: true,
+        },
         ownerId: {
             type: Schema.Types.Number,
             required: true,
@@ -31,6 +35,8 @@ const chatSchema = new Schema(
         timestamps: true
     },
 );
+
+chatSchema.index({taskId: 1, ownerId: 1}, {unique: true});
 
 chatSchema.static('checkPermission', (action, chat, actor) => {
 

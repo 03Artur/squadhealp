@@ -10,7 +10,7 @@ import {getSelectProps} from "../middlewares/entry/filterEntry";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../../../public/entryFiles/'))
+        cb(null, path.join(__dirname, '../../../public/images/entryFiles/'))
     },
     filename: namingFile
 });

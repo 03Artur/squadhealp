@@ -3,7 +3,7 @@ import {createTaskSchema, updateTaskSchema} from '../../../utils/yupSchemas/task
 
 export async function validateTaskOnCreate(req, res, next) {
     try {
-        if (await createTaskSchema.isValid(req.body)) {
+        if (await createTaskSchema.validate(req.body)) {
 
             return next();
         } else {

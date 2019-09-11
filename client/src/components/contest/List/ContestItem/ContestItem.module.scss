@@ -24,7 +24,6 @@ $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
       text-decoration: underline;
     }
   }
-
 }
 
 .infoContainer {
@@ -58,4 +57,20 @@ $fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
   @include borderBox();
   @include flexContainer(space-between, flex-end, column);
   width: 100%;
+
+  .buttonRow {
+    width: 100%;
+    @include flexContainer(flex-start, center);
+
+    .buttonCol {
+      flex: 1;
+    }
+
+    .joinToChatButton {
+      border: 1px solid #8aca6b;
+      text-align: center;
+      @include borderBox(15px);
+      font-family: $fontFamily;
+    }
+  }
 }

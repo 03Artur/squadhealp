@@ -7,11 +7,14 @@ export default function addCostToTask(req, res, next) {
         const {type} = req.body;
 
         const cost = TASK_COST.get(type);
-        if (!cost) {
-            return next(new appError.BadRequestError());
+        if (cost) {
+            req.body.cost = cost;
+
+            return next();
         }
-        req.body.cost = cost;
-        return next();
+
+        return next(new appError.BadRequestError());
+
     } catch (e) {
         return next(e)
     }

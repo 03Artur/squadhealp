@@ -1,20 +1,18 @@
-import React, {Component, Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './EntryItem.module.scss';
 import {ROLE} from "../../../../constants";
-import FileList from "../../../FileList/FileList";
 import {
     rejectEntryActionCreator,
     setWinningEntryActionCreator
 } from "../../../../actions/actionCreators/entryActionCreators/entryActionCreators";
-import RejectButton from "./buttons/RejectButton/RejectButton";
-import MakeWinnerButton from "./buttons/MakeWinnerButton/MakeWinnerButton";
 import UniversalButton from "../../../UniversalButton/UniversalButton";
 import classNames from 'classnames';
+import LazyImage from "../../../Image/LazyImage";
+import {entryFilesUrl} from "../../../../api/baseURL";
 
 const EntryItem = (props) => {
-
     const {
         id: entryId,
         taskId,
@@ -29,16 +27,32 @@ const EntryItem = (props) => {
         task,
     } = props;
 
-
     const makeWinnerEntry = () => {
-
+        if (isWinner) {
+            return;
+        }
         makeWinnerEntryAction(entryId);
     };
-    const rejectEntry = () => {
 
-        if (!isRejected) {
-            rejectEntryAction(entryId)
+    const rejectEntry = () => {
+        if (isRejected) {
+            return;
         }
+        rejectEntryAction(entryId);
+    };
+
+    const renderImage = (file) => {
+        return (
+            <LazyImage key={file} src={`${entryFilesUrl}/${file}`} className={styles.image} alt={file}/>
+        );
+    };
+
+    const renderImages = () => {
+        return (
+            <div className={styles.imageContainer}>
+                {files.map(renderImage)}
+            </div>
+        )
     };
 
     const renderActionButtons = () => {
@@ -46,10 +60,8 @@ const EntryItem = (props) => {
             return
         }
         if (user.role === ROLE.BUYER) {
-
             const rejectButtonClassName = classNames(styles.button, styles.rejectButton, {[styles.rejectedButtonStyle]: isRejected});
             const winnerButtonClassName = classNames(styles.button, styles.winnerButton, {[styles.isWinnerButtonStyle]: isWinner});
-
             return (
                 <div className={styles.actionContainer}>
                     <div className={styles.buttonContainer}>
@@ -63,18 +75,20 @@ const EntryItem = (props) => {
         }
     };
 
-    return (
-        <li className={classNames(styles.container, {
+    const getItemClassName = () => {
+        return classNames(styles.container, {
             [styles.rejectContainer]: isRejected,
             [styles.winnerContainer]: !isRejected
-        })}>
+        });
+    };
+
+    return (
+        <li className={getItemClassName()}>
             <h3 className={styles.title}>
                 {title}
             </h3>
-            <FileList files={files}/>
-            {
-                renderActionButtons()
-            }
+            {renderImages()}
+            {renderActionButtons()}
         </li>
     )
 };
