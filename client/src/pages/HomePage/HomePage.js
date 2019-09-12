@@ -6,7 +6,7 @@ import {Switch} from 'react-router-dom';
 * COMPONENTS
 * */
 import AccessRoute from "../../components/routes/AccessRoute/AccessRoute";
-import {PATHS, ROLE} from "../../constants";
+import {PATHS, ROLES} from "../../constants";
 import HomeFooter from "../../components/footers/HomeFooter/HomeFooter";
 import HomeNav from "./Header/nav/HomeNav/HomeNav";
 import HomeHeader from "./Header/Header";
@@ -26,9 +26,9 @@ function HomePage(props) {
             <HomeHeader/>
             <DocumentTitle title="Home"/>
             <Switch>
-                <AccessRoute roles={[ROLE.ADMIN, ROLE.BUYER]} path={PATHS.CONTEST}
+                <AccessRoute roles={[ROLES.ADMIN, ROLES.BUYER]} path={PATHS.CONTEST}
                              render={props => <StartContestPage {...props}/>}/>
-                <AccessRoute roles={[ROLE.CREATIVE]} path={`${PATHS.ENTRIES}/:taskId${PATHS.ENTRY}`}
+                <AccessRoute roles={[ROLES.CREATIVE]} path={`${PATHS.ENTRIES}/:taskId${PATHS.ENTRY}`}
                              render={props => <StartEntryPage {...props}/>}/>
                 <AuthorizedRoute path={PATHS.CONTESTS} render={props => <ContestsPage {...props}/>}/>
                 <AuthorizedRoute path={`${PATHS.CONTEST}/:taskId`} render={props => <SingleContestPage {...props}/>}/>

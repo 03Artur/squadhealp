@@ -57,7 +57,8 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE, chatSaga.getUserChatsSaga);
     yield takeLatest(CHAT_ACTION_TYPES.GET_CHAT_ACTION, chatSaga.getChatSaga);
     yield takeLatest(CHAT_ACTION_TYPES.CREATE_CHAT_ACTION, chatSaga.createChatSaga);
-    yield takeLatest(CHAT_ACTION_TYPES.FIND_BY_UNIQ_CHAT_ADN_JOIN_ACTION, chatSaga.findChatByUniqChatAndJoin);
+    yield takeLatest(CHAT_ACTION_TYPES.JOIN_TO_CHAT_ACTION, chatSaga.joinToChatSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.CREATE_TASK_CHAT_ACTION, chatSaga.createTaskChatSaga);
     //PARTICIPANT
     // yield takeLatest(CHAT_ACTION_TYPES.GET_PARTICIPANTS_ACTION, chatSaga.getParticipantsSaga);
     // //MESSAGE

@@ -11,7 +11,7 @@ import {Field, reduxForm} from 'redux-form';
 import {loginActionCreator, signUpActionCreator} from "../../../actions/authorizationActionCreators";
 
 //UTILS
-import {AUTHORIZATION_MODE, ROLE} from '../../../constants';
+import {AUTHORIZATION_MODES, ROLES} from '../../../constants';
 import * as VALIDATION from '../../../utils/reduxForm/validateValue'
 //STYLES
 import styles from './AuthorizationForm.module.scss';
@@ -31,9 +31,9 @@ function AuthorizationForm(props) {
 
     const onSubmit = () => {
         switch (props.mode) {
-            case AUTHORIZATION_MODE.LOGIN_MODE:
+            case AUTHORIZATION_MODES.LOGIN_MODE:
                 return props.loginAction;
-            case AUTHORIZATION_MODE.SIGN_UP_MODE:
+            case AUTHORIZATION_MODES.SIGN_UP_MODE:
                 return props.signUpAction;
             default:
                 break;
@@ -62,11 +62,11 @@ function AuthorizationForm(props) {
                 }</div>
             </div>
             <div className={styles.fieldRow}>
-                <Field id='radioBuyer' name='role' component={InputRadio} type='radio' value={ROLE.BUYER}
+                <Field id='radioBuyer' name='role' component={InputRadio} type='radio' value={ROLES.BUYER}
                        title="Join As a Buyer"/>
             </div>
             <div className={styles.fieldRow}>
-                <Field id='radioCreative' name='role' component={InputRadio} type='radio' value={ROLE.CREATIVE}
+                <Field id='radioCreative' name='role' component={InputRadio} type='radio' value={ROLES.CREATIVE}
                        title="Join As a Creative"/>
             </div>
         </React.Fragment>
@@ -87,9 +87,9 @@ function AuthorizationForm(props) {
 
     const renderFields = () => {
         switch (props.mode) {
-            case AUTHORIZATION_MODE.LOGIN_MODE:
+            case AUTHORIZATION_MODES.LOGIN_MODE:
                 return renderLogin();
-            case AUTHORIZATION_MODE.SIGN_UP_MODE:
+            case AUTHORIZATION_MODES.SIGN_UP_MODE:
                 return renderSignUp();
             default:
                 break;

@@ -3,6 +3,7 @@ import appError from '../../errors'
 
 export default async function (req, res, next) {
     try {
+
         req.user = await Users.findOne({
             where: {
                 email: req.body.email

@@ -34,7 +34,7 @@ const ChatItem = (props) => {
                 <div className={styles.infoRow}>
                     <span>
                          {
-                             `${author.firstName} ${author.lastName}`
+                             props.name?props.name:`${author.firstName} ${author.lastName}`
                          }
                     </span>
                     <span>

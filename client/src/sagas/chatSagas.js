@@ -7,6 +7,7 @@ import * as socketController from "../api/socket/chatController";
 import io from 'socket.io-client';
 import {chatSocketHelper} from "../api/socket";
 import {baseURL} from "../api/baseURL";
+import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 /*
 * CHAT
 * */
@@ -41,14 +42,19 @@ export function* getUserChatsSaga({user}) {
 }
 
 //FIND AND JOIN
-export function* findChatByUniqChatAndJoin({query}) {
+export function* joinToChatSaga({chatId}) {
     yield put({
         type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
     });
     try {
-        const {data} = yield chatController.getChatByQuery(queryString.stringify(query));
-        console.log(data);
-    }catch (e) {
+        const {data} = yield chatController.joinToChat(chatId);
+
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
+            chat: data,
+        })
+
+    } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_ERROR,
             error: e.response.data,
@@ -58,6 +64,7 @@ export function* findChatByUniqChatAndJoin({query}) {
 
 //CREATE CHAT
 export function* createChatSaga({chat}) {
+    alert('createChatSaga');
     yield put({
         type: CHAT_ACTION_TYPES.CREATE_CHAT_REQUEST,
     });
@@ -76,6 +83,35 @@ export function* createChatSaga({chat}) {
             error: e.response.data,
         })
     }
+}
+
+//CREATE TASK CHAT SAGA
+export function* createTaskChatSaga({taskId}) {
+    yield put({
+        type: CHAT_ACTION_TYPES.CREATE_CHAT_REQUEST,
+    });
+    try {
+        const {data} = yield chatController.createTaskChat(taskId);
+        console.log(data);
+        yield all([
+            put({
+                type: CONTEST_ACTION_TYPES.CREATE_TASK_CHAT_RESPONSE,
+                chat: data.chat,
+                contest: data.task,
+            }),
+            put({
+                type: CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE,
+                chat: data.chat,
+            }),
+        ]);
+
+    } catch (e) {
+        yield put({
+            type: CHAT_ACTION_TYPES.CREATE_CHAT_ERROR,
+            error: e.response.data,
+        })
+    }
+
 }
 
 //SELECT CHAT

@@ -11,14 +11,16 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-
+        chatId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
-
         },
         style: {
             type: DataTypes.STRING,

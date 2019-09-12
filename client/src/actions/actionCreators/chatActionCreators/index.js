@@ -10,6 +10,13 @@ export function createChatActionCreator(chat) {
     }
 }
 
+export function createTaskChatActionCreator(taskId) {
+    return {
+        type: CHAT_ACTION_TYPES.CREATE_TASK_CHAT_ACTION,
+        taskId,
+    }
+}
+
 export function selectChatActionCreator(chatId) {
     return {
         type: CHAT_ACTION_TYPES.SELECT_CHAT_ACTION,
@@ -17,10 +24,10 @@ export function selectChatActionCreator(chatId) {
     }
 }
 
-export function findChatByUniqAndJoinActionCreator(query) {
+export function joinToChatActionCreator(chatId) {
     return {
-        type: CHAT_ACTION_TYPES.FIND_BY_UNIQ_CHAT_ADN_JOIN_ACTION,
-        query,
+        type: CHAT_ACTION_TYPES.JOIN_TO_CHAT_ACTION,
+        chatId,
     }
 }
 

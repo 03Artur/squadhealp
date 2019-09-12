@@ -1,8 +1,8 @@
 import ACTION_TYPES from "../../../actions/actiontsTypes";
 import CONTEST_ACTION_TYPES from "../../../actions/actionTypes/contestActionTypes";
 import _ from 'lodash';
-import {NAME_TYPE, TASK_TYPE} from '../../../constants'
-import {ROLE} from "../../../constants";
+import {NAME_TYPES, TASK_TYPES} from '../../../constants'
+import {ROLES} from "../../../constants";
 
 import queryString from 'query-string';
 import history from "../../../history";
@@ -24,7 +24,7 @@ const initialState = {
             },
             {
                 title: 'Contest type',
-                values: _.values(TASK_TYPE).map(type => (
+                values: _.values(TASK_TYPES).map(type => (
                     {
                         title: type,
                         value: {

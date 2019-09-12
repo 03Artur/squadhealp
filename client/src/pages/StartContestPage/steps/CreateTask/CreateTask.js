@@ -4,7 +4,7 @@ import {submit, reset} from 'redux-form';
 import TaskForm from "../../../../components/forms/createContestForms/TaskForm/TaskForm";
 import {createTaskActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
-import {FORM_NAMES, TASK_TYPE,} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPES,} from "../../../../constants";
 import {
     nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate

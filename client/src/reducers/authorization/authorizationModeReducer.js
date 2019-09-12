@@ -1,9 +1,9 @@
 import ACTION_TYPES from '../../actions/actiontsTypes';
-import {AUTHORIZATION_MODE, PATHS, ROLE} from '../../constants'
+import {AUTHORIZATION_MODES, PATHS, ROLES} from '../../constants'
 
 const initialState = {
 
-    mode: AUTHORIZATION_MODE.LOGIN_MODE,
+    mode: AUTHORIZATION_MODES.LOGIN_MODE,
     page: {
         pageTitle: 'Login to your account',
         documentTitle: 'Login',
@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
         case ACTION_TYPES.AUTHORIZATION_LOGIN_MODE_ACTION:
             return {
                 ...state,
-                mode: AUTHORIZATION_MODE.LOGIN_MODE,
+                mode: AUTHORIZATION_MODES.LOGIN_MODE,
                 page: {
                     pageTitle: 'Login to your account',
                     documentTitle: 'Login',
@@ -44,7 +44,7 @@ export default function (state = initialState, action) {
         case ACTION_TYPES.AUTHORIZATION_SIGN_UP_MODE_ACTION:
             return {
                 ...state,
-                mode: AUTHORIZATION_MODE.SIGN_UP_MODE,
+                mode: AUTHORIZATION_MODES.SIGN_UP_MODE,
                 page: {
                     pageTitle: 'Create an account',
                     documentTitle: 'Sign Up',
@@ -52,7 +52,7 @@ export default function (state = initialState, action) {
                 form: {
                     submitButtonText: "create account",
                     initialValues: {
-                        role: ROLE.BUYER,
+                        role: ROLES.BUYER,
                     },
                 },
                 linkButton: {

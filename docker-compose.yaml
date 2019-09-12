@@ -51,6 +51,5 @@ services:
       - "27018:27018"
     volumes:
       - ./mongodb:/data/db
-
 volumes:
   server-dev:

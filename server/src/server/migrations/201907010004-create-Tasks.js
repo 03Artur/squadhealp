@@ -10,7 +10,11 @@ module.exports = {
                     primaryKey: true,
                     type: Sequelize.INTEGER
                 },
+                chatId: {
+                    type: Sequelize.STRING,
+                    allowNull: true,
 
+                },
                 contestId: {
                     type: Sequelize.INTEGER,
                     onDelete: 'CASCADE',

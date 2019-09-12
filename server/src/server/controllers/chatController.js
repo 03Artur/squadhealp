@@ -134,10 +134,24 @@ export async function getChatMessages(req, res, next) {
     }
 }
 
-
 /*
 * CHAT
 * */
+export async function joinToChat(req, res, next) {
+    try {
+        const {accessTokenPayload: {id: userId}, params: {chatId}} = req;
+        let chat = await Chat.findById(chatId);
+        if (chat) {
+            chat.participants.addToSet(userId);
+            chat = await chat.save();
+            res.send(chat);
+        }
+        return next(new appError.NotFoundError());
+    } catch (e) {
+        next(e);
+    }
+}
+
 export async function sendChat(req, res, next) {
     try {
         res.send(req.chat);
@@ -153,8 +167,6 @@ export async function createChat(req, res, next) {
         data.ownerId = ownerId;
         data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
-
-        //res.send(data);
 
         const chat = await Chat.create(data);
 
@@ -173,7 +185,7 @@ export async function createChat(req, res, next) {
 export async function getChatByQuery(req, res, next) {
     try {
         const {query} = req;
-        res.send({query,});
+
         const chat = await Chat.findOne(query).populate({
             path: 'messages',
             options: {
@@ -184,12 +196,14 @@ export async function getChatByQuery(req, res, next) {
                 retainNullValues: false,
             }
         });
+
         if (chat) {
             const participants = await getMessagesAuthors(chat.messages);
             res.send({
                 chat,
                 participants,
             });
+            return;
             let i = 0;
             while (i++ < 20) {
                 console.log('=================getChatByQuery===================');
@@ -251,9 +265,11 @@ export async function getAllUserChats(req, res, next) {
 /*
 * UTILS
 * */
-const getMessagesAuthors = async (messages) => {
+const getMessagesAuthors = async messages => {
     try {
-        if (messages) {
+
+        if (messages && messages.length) {
+
             let usersIds = messages.reduce((usersIds, message) => {
                 usersIds.push(message.authorId);
                 return usersIds;
@@ -269,7 +285,7 @@ const getMessagesAuthors = async (messages) => {
                 }
             });
         }
-
+        return;
     } catch (e) {
         throw e;
     }

@@ -4,7 +4,7 @@ import {submit} from 'redux-form';
 import StartContestNav from "../../../../components/nav/StartContestNav/StartContestNav";
 import {connect} from 'react-redux';
 import {createContestActionCreator,} from "../../../../actions/actionCreators/contestActionCreators/constestActionCreators";
-import {FORM_NAMES, NAME_TYPE, TASK_TYPE} from "../../../../constants";
+import {FORM_NAMES, NAME_TYPES, TASK_TYPES} from "../../../../constants";
 import {
     addParamToQueryActionCreator, nextContestCreationStepActionCreator,
     prevCreateContestStepActionCreate
@@ -20,7 +20,7 @@ function CreateContest(props) {
         if (contestId && _.isEqual(values, _.pick(contest, Object.keys(values)))) {
             return;
         } else {
-            props.createContestAction(!types.includes(TASK_TYPE.NAME), values);
+            props.createContestAction(!types.includes(TASK_TYPES.NAME), values);
         }
     };
 
@@ -28,7 +28,7 @@ function CreateContest(props) {
         <React.Fragment>
             <div className={styles.formOuter}>
                 <div className={styles.formContainer}>
-                    <ContestForm initialValues={contest ? contest : {nameOf: NAME_TYPE.COMPANY}}
+                    <ContestForm initialValues={contest ? contest : {nameOf: NAME_TYPES.COMPANY}}
                                  onSubmitSuccess={props.nextStepAction} onSubmit={submit}/>
                 </div>
             </div>

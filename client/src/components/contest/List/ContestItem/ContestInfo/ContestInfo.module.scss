@@ -1,0 +1,44 @@
+@import '../../../../../templates';
+@import '../../../../../commonStyles';
+$fontFamily: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+
+.infoContainer {
+  @include borderBox(10px 0);
+  width: 100%;
+  text-align: left;
+}
+
+.typeInfo {
+  color: #4e618d;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.description {
+  @include borderBox(18px 0 0 0);
+  margin-bottom: 10px;
+  height: 36px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #666;
+  word-break: break-all;
+  line-height: 18px;
+  font-size: 13px;
+  font-family: $fontFamily;
+}
+
+.taskTitle {
+  color: rgb(85, 109, 165);
+  font-weight: 500;
+  font-size: 18px;
+  font-family: $fontFamily;
+  cursor: pointer;
+
+  @include mediaBreakpointUp($md) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

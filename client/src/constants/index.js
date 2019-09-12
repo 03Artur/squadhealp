@@ -25,7 +25,7 @@ export const SOCKET_EVENTS = {
 
 export const PHONE_NUMBER = '(877)\u00A0355-3585';
 
-export const AUTHORIZATION_MODE = {
+export const AUTHORIZATION_MODES = {
     LOGIN_MODE: 'LOGIN_MODE',
     SIGN_UP_MODE: 'SIGN_UP_MODE',
 };
@@ -81,26 +81,26 @@ export const testMenuItemStyle = {
     margin: '-1px 0'
 
 };
-export const TASK_TYPE = {
+export const TASK_TYPES = {
     NAME: 'Name',
     LOGO: "Logo",
     TAGLINE: "Tagline",
 };
 
-export const NAME_TYPE = {
+export const NAME_TYPES = {
     COMPANY: 'Company',
     PRODUCT: 'Product',
     PROJECT: 'Project',
 };
 
-export const TASK_TYPES_COMBINATION = [
-    [TASK_TYPE.NAME],
-    [TASK_TYPE.LOGO],
-    [TASK_TYPE.TAGLINE],
-    [TASK_TYPE.NAME, TASK_TYPE.LOGO],
-    [TASK_TYPE.NAME, TASK_TYPE.TAGLINE],
-    [TASK_TYPE.LOGO, TASK_TYPE.TAGLINE],
-    [TASK_TYPE.NAME, TASK_TYPE.LOGO, TASK_TYPE.TAGLINE],
+export const TASK_TYPES_COMBINATIONS = [
+    [TASK_TYPES.NAME],
+    [TASK_TYPES.LOGO],
+    [TASK_TYPES.TAGLINE],
+    [TASK_TYPES.NAME, TASK_TYPES.LOGO],
+    [TASK_TYPES.NAME, TASK_TYPES.TAGLINE],
+    [TASK_TYPES.LOGO, TASK_TYPES.TAGLINE],
+    [TASK_TYPES.NAME, TASK_TYPES.LOGO, TASK_TYPES.TAGLINE],
 ];
 
 export const CONTEST_CREATION_ALL_STEPS = new Map([
@@ -129,7 +129,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         order: 2,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
-            type: TASK_TYPE.NAME,
+            type: TASK_TYPES.NAME,
         },
         title: 'Name',
         progressTip: 'Name',
@@ -140,7 +140,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         order: 3,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
-            type: TASK_TYPE.LOGO,
+            type: TASK_TYPES.LOGO,
         },
         title: 'Logo',
         progressTip: 'Logo',
@@ -151,7 +151,7 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
         order: 4,
         path: `${PATHS.CREATE_TASK}`,
         initialValues: {
-            type: TASK_TYPE.TAGLINE,
+            type: TASK_TYPES.TAGLINE,
         },
         title: 'Tagline',
         progressTip: 'Tagline',
@@ -169,14 +169,14 @@ export const CONTEST_CREATION_ALL_STEPS = new Map([
     }],
 ]);
 
-export const TASK_TYPE_DESCRIPTION = new Map([
-    [TASK_TYPE.NAME, "Get up and running with the perfect name"],
-    [TASK_TYPE.LOGO, "Kickstart your venture with a unique, memorable logo"],
-    [TASK_TYPE.TAGLINE, "Connect deeply with your target audience with an on-target tagline"],
-    [`${TASK_TYPE.NAME} + ${TASK_TYPE.LOGO}`, "Get the essentials needed to establish your brand together and save"],
-    [`${TASK_TYPE.NAME} + ${TASK_TYPE.TAGLINE}`, "Communicate your vision with the perfect Name/Tagline combo"],
-    [`${TASK_TYPE.LOGO} + ${TASK_TYPE.TAGLINE}`, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam commodi'],
-    [`${TASK_TYPE.NAME} + ${TASK_TYPE.LOGO} + ${TASK_TYPE.TAGLINE}`, "Establish your entire brand identity and save with this bundle"],
+export const TASK_TYPES_DESCRIPTIONS = new Map([
+    [TASK_TYPES.NAME, "Get up and running with the perfect name"],
+    [TASK_TYPES.LOGO, "Kickstart your venture with a unique, memorable logo"],
+    [TASK_TYPES.TAGLINE, "Connect deeply with your target audience with an on-target tagline"],
+    [`${TASK_TYPES.NAME} + ${TASK_TYPES.LOGO}`, "Get the essentials needed to establish your brand together and save"],
+    [`${TASK_TYPES.NAME} + ${TASK_TYPES.TAGLINE}`, "Communicate your vision with the perfect Name/Tagline combo"],
+    [`${TASK_TYPES.LOGO} + ${TASK_TYPES.TAGLINE}`, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam commodi'],
+    [`${TASK_TYPES.NAME} + ${TASK_TYPES.LOGO} + ${TASK_TYPES.TAGLINE}`, "Establish your entire brand identity and save with this bundle"],
 ]);
 
 export const FORM_NAMES = {
@@ -193,21 +193,21 @@ export const FORM_NAMES = {
 
 export const TASK_TYPE_IMAGES = new Map([
     [
-        TASK_TYPE.NAME,
+        TASK_TYPES.NAME,
         {
             defaultImg: 'nameGrey.png',
             hoverImg: 'nameGreen.png',
         },
     ],
     [
-        TASK_TYPE.TAGLINE, {
+        TASK_TYPES.TAGLINE, {
 
         defaultImg: 'taglineGrey.png',
         hoverImg: 'taglineGreen.png',
     }
     ],
     [
-        TASK_TYPE.LOGO,
+        TASK_TYPES.LOGO,
         {
 
             defaultImg: 'logoGrey.png',
@@ -217,7 +217,7 @@ export const TASK_TYPE_IMAGES = new Map([
     ],
 ]);
 
-export const ROLE = {
+export const ROLES = {
     BUYER: "BUYER",
     CREATIVE: "CREATIVE",
     ADMIN: "ADMIN",

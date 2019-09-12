@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './EntryItem.module.scss';
-import {ROLE} from "../../../../constants";
+import {ROLES} from "../../../../constants";
 import {
     rejectEntryActionCreator,
     setWinningEntryActionCreator
 } from "../../../../actions/actionCreators/entryActionCreators/entryActionCreators";
-import UniversalButton from "../../../UniversalButton/UniversalButton";
+import Button from "../../../Button/Button";
 import classNames from 'classnames';
 import LazyImage from "../../../Image/LazyImage";
 import {entryFilesUrl} from "../../../../api/baseURL";
@@ -59,16 +59,16 @@ const EntryItem = (props) => {
         if (userId === user.id) {
             return
         }
-        if (user.role === ROLE.BUYER) {
+        if (user.role === ROLES.BUYER) {
             const rejectButtonClassName = classNames(styles.button, styles.rejectButton, {[styles.rejectedButtonStyle]: isRejected});
             const winnerButtonClassName = classNames(styles.button, styles.winnerButton, {[styles.isWinnerButtonStyle]: isWinner});
             return (
                 <div className={styles.actionContainer}>
                     <div className={styles.buttonContainer}>
-                        <UniversalButton className={winnerButtonClassName}
-                                         onClick={makeWinnerEntry}>Make winner</UniversalButton>
-                        <UniversalButton isEnable={!isRejected} className={rejectButtonClassName}
-                                         onClick={rejectEntry}>Reject</UniversalButton>
+                        <Button className={winnerButtonClassName}
+                                         onClick={makeWinnerEntry}>Make winner</Button>
+                        <Button isEnable={!isRejected} className={rejectButtonClassName}
+                                         onClick={rejectEntry}>Reject</Button>
                     </div>
                 </div>
             )

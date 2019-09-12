@@ -4,7 +4,7 @@ import {Field, reduxForm} from 'redux-form';
 import LabelInput from '../../_components/inputs/LabelInput/LabelInput';
 import styles from './ContestForm.module.scss';
 import Select from "./Select/Select";
-import {NAME_TYPE, TASK_TYPE} from "../../../../constants";
+import {NAME_TYPES, TASK_TYPES} from "../../../../constants";
 import {FORM_NAMES} from "../../../../constants";
 import {
     isRequired,
@@ -14,7 +14,7 @@ import {
 let ContestForm = ({handleSubmit, ...props}) => {
 
     const renderNamesFields = () => {
-        if (props.types && !props.types.includes(TASK_TYPE.NAME)) {
+        if (props.types && !props.types.includes(TASK_TYPES.NAME)) {
             return (
                 <Fragment>
                     <Field validate={[isRequired, notEmpty,]} name="name"
@@ -30,7 +30,7 @@ let ContestForm = ({handleSubmit, ...props}) => {
         return (
             <Fragment>
                 <Field validate={[isRequired, notEmpty,]} name="nameOf"
-                       options={Object.values(NAME_TYPE)} label={"Type of business"}
+                       options={Object.values(NAME_TYPES)} label={"Type of business"}
                        component={Select}
                        type="text"/>
                 <Field validate={[isRequired, notEmpty,]} name="typeOfIndustry"

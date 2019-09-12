@@ -1,7 +1,7 @@
 import {put, all, call} from 'redux-saga/effects';
 import ACTION_TYPES from '../actions/actiontsTypes';
 import * as contestController from '../api/rest/contestController'
-import {CONTEST_CREATION_ALL_STEPS, CREATE_CONTEST_STEPS, PATHS, TASK_TYPE} from "../constants";
+import {CONTEST_CREATION_ALL_STEPS, CREATE_CONTEST_STEPS, PATHS, TASK_TYPES} from "../constants";
 import {addParamToQueryActionCreator} from "../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import history from "../history";
 import queryString from 'query-string';
@@ -11,9 +11,9 @@ import {createChatSaga} from "./chatSagas";
 
 
 const mapSteps = new Map([
-    [TASK_TYPE.NAME, CREATE_CONTEST_STEPS.CREATE_NAME_TASK],
-    [TASK_TYPE.LOGO, CREATE_CONTEST_STEPS.CREATE_LOGO_TASK],
-    [TASK_TYPE.TAGLINE, CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK],
+    [TASK_TYPES.NAME, CREATE_CONTEST_STEPS.CREATE_NAME_TASK],
+    [TASK_TYPES.LOGO, CREATE_CONTEST_STEPS.CREATE_LOGO_TASK],
+    [TASK_TYPES.TAGLINE, CREATE_CONTEST_STEPS.CREATE_TAGLINE_TASK],
 ]);
 
 const getSteps = (types) => {
@@ -204,18 +204,12 @@ export function* addTaskStepsToContestCreationSteps({types}) {
 export function* contestPaymentSaga({contestId, creditCard}) {
     yield put({type: ACTION_TYPES.CONTEST_CREATION_REQUEST});
     try {
-        console.log("Contest id: ", contestId);
         const {data: {tasks, ...contest}} = yield contestController.contestPaymentById(contestId, creditCard);
-
-        yield all([
-            put({
-                type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
-                contest,
-                tasks,
-            }),
-            ...tasks.map(task => call(createChatSaga, {taskId: task.id, participants: [contest.userId,]})),
-        ])
-
+        yield  put({
+            type: ACTION_TYPES.CONTEST_CREATION_RESPONSE,
+            contest,
+            tasks,
+        });
     } catch (e) {
         yield put({
             type: ACTION_TYPES.CONTEST_CREATION_ERROR,

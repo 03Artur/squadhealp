@@ -46,6 +46,19 @@ export default function contestsReducer(state = getInitialState(), action) {
             likedContest.isFavorite = true;
             return clonedState;
         }
+
+        case CONTEST_ACTION_TYPES.CREATE_TASK_CHAT_RESPONSE: {
+
+            const {chat, contest} = action;
+            const clonedState = _.cloneDeep(state);
+            const index = clonedState.contests.findIndex(item => item.id === contest.id);
+            if (index >= 0) {
+                clonedState.contests[index].chatId = chat._id;
+            }
+            return clonedState;
+
+        }
+
         case CONTEST_ACTION_TYPES.DISLIKE_CONTEST_RESPONSE: {
             const {data: {taskId}} = action;
             const clonedState = _.cloneDeep(state);

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 
 const initialState = {
-    chats: [],
+    chats: new Map(),
     isFetching: false,
     error: null,
 
@@ -23,27 +23,31 @@ function chatsReducer(state = initialState, action) {
 
         case CHAT_ACTION_TYPES.GET_CHATS_RESPONSE: {
 
-            const chats = [];
-            action.chats.forEach(({messages, ...chat}) => chats.push(chat));
+            const chats = new Map();
+            action.chats.forEach(({messages, ...chat}) => chats.set(chat._id, chat));
             return ({
                 ...state,
                 chats,
                 isFetching: true,
             });
         }
+
+        case CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE:
         case CHAT_ACTION_TYPES.GET_CHAT_RESPONSE : {
             const {messages, ...chat} = action.chat;
+
             return ({
                 ...state,
-                chats: state.chats.concat(chat),
-                isFetching: true,
+                chats: state.chats.set(chat._id, chat),
+                isFetching: false,
             });
         }
+
         case CHAT_ACTION_TYPES.GET_CHATS_ERROR:
         case CHAT_ACTION_TYPES.GET_CHAT_ERROR: {
             return _.cloneDeep({
                 ...state,
-                error: action.error
+                error: action.error,
             })
         }
 

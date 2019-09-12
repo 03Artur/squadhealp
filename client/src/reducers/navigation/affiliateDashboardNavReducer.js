@@ -1,5 +1,5 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
-import {PATHS, ROLE, TASK_TYPE} from "../../constants";
+import {PATHS, ROLES, TASK_TYPES} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 import queryString from 'query-string';
 import _ from 'lodash';
@@ -31,12 +31,12 @@ export default function (state = initialState, action) {
             const {user} = action;
             const navMap = new Map([
                 [
-                    ROLE.ADMIN, [
+                    ROLES.ADMIN, [
                     new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
                 ],
                 ],
                 [
-                    ROLE.BUYER, [
+                    ROLES.BUYER, [
                     new Menu('Dashboards', [
                         new MenuItem('Account'),
                         new MenuItem('Marketplace'),
@@ -76,7 +76,7 @@ export default function (state = initialState, action) {
 
                 ],],
                 [
-                    ROLE.CREATIVE, [
+                    ROLES.CREATIVE, [
                     new Menu('Dashboards', [
                         new MenuItem('Account'),
                         new MenuItem('Marketplace'),

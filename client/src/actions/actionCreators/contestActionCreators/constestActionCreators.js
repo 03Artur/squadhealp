@@ -1,5 +1,5 @@
 import ACTION_TYPES from '../../actiontsTypes';
-import {CREATE_CONTEST_STEPS, TASK_TYPE, CONTEST_CREATION_ALL_STEPS} from "../../../constants";
+import {CREATE_CONTEST_STEPS, TASK_TYPES, CONTEST_CREATION_ALL_STEPS} from "../../../constants";
 import CONTEST_ACTION_TYPES from "../../actionTypes/contestActionTypes";
 
 export const getContestsActionCreator = (queryString) => {

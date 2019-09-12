@@ -1,5 +1,5 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
-import {PATHS, ROLE, TASK_TYPE} from "../../constants";
+import {PATHS, ROLES, TASK_TYPES} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 import queryString from 'query-string';
 import _ from 'lodash'
@@ -86,7 +86,7 @@ export default function (state = initialState, action) {
                 return _.cloneDeep(initialState)
             }
             const navMap = new Map([
-                [ROLE.ADMIN, {
+                [ROLES.ADMIN, {
                     menu: [
                         new Menu('Name Ideas', [
                             [
@@ -163,7 +163,7 @@ export default function (state = initialState, action) {
                         content: 'Admin'
                     }
                 },],
-                [ROLE.BUYER, {
+                [ROLES.BUYER, {
                     menu: [
                         new Menu('Name Ideas', [
                             [
@@ -240,7 +240,7 @@ export default function (state = initialState, action) {
                         content: 'Start Contest'
                     }
                 }],
-                [ROLE.CREATIVE, {
+                [ROLES.CREATIVE, {
 
                     menu: [
                         new Menu('Active contests',
@@ -256,19 +256,19 @@ export default function (state = initialState, action) {
                                 new MenuItem('naming', {
                                     pathname: PATHS.CONTESTS,
                                     search: queryString.stringify({
-                                        type: TASK_TYPE.NAME
+                                        type: TASK_TYPES.NAME
                                     }),
                                 }),
                                 new MenuItem('logos', {
                                     pathname: PATHS.CONTESTS,
                                     search: queryString.stringify({
-                                        type: TASK_TYPE.LOGO,
+                                        type: TASK_TYPES.LOGO,
                                     }),
                                 }),
                                 new MenuItem('tagline', {
                                     pathname: PATHS.CONTESTS,
                                     search: queryString.stringify({
-                                        type: TASK_TYPE.TAGLINE,
+                                        type: TASK_TYPES.TAGLINE,
                                     }),
                                 }),]
                             ]),

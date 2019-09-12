@@ -37,6 +37,7 @@ const ChatList = (props) => {
 
         return (
             <ChatItem key={chat._id}
+                      name={chat.name}
                       isSelected={selectedChat === chat._id}
                       lastMessage={lastMessage}
                       onClick={() => {
@@ -49,7 +50,9 @@ const ChatList = (props) => {
 
     const renderChatItems = () => {
         if (chats) {
-            return chats.map(renderChat);
+            const chatsArray = [];
+            chats.forEach((value, key) => chatsArray.push(renderChat(value)));
+            return chatsArray;
         }
     };
 

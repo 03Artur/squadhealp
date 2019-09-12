@@ -4,7 +4,7 @@ import styles from './AffiliateDashboard.module.scss';
 import Menu from "./Menu/Menu";
 import {Switch} from 'react-router-dom';
 import AccessRoute from "../../components/routes/AccessRoute/AccessRoute";
-import {PATHS, ROLE} from "../../constants";
+import {PATHS, ROLES} from "../../constants";
 import AdminPage from "../AdminPage/AdminPage";
 import AuthorizedRoute from "../../components/routes/AuthorizedRoute/AuthorizedRoute";
 import SingleContestPage from "../SingleContestPage/SingleContestPage";
@@ -19,7 +19,7 @@ function AffiliateDashboard(props) {
             <div className={styles.contentContainer}>
                 <Header/>
                 <Switch>
-                    <AccessRoute path={PATHS.AFFILIATE_DASHBOARD_USERS} roles={[ROLE.ADMIN]}
+                    <AccessRoute path={PATHS.AFFILIATE_DASHBOARD_USERS} roles={[ROLES.ADMIN]}
                                  render={props => <AdminPage {...props}/>}/>
                     <AuthorizedRoute path={PATHS.AFFILIATE_DASHBOARD_CONTESTS}
                                      render={props => <Contests {...props}/>}/>

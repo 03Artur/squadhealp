@@ -1,0 +1,27 @@
+@import '../../ContestItemStylesTemplate.module';
+
+
+.container {
+  @include borderBox();
+
+  width: 100%;
+  display: flex;
+}
+
+.createChatButton {
+  @include borderBox(15px 20px);
+  border: 2px solid $successColor;
+  font-family: $fontFamily;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: $successColor;
+  cursor: pointer;
+
+  @include mediaBreakpointUp($md){
+      &:hover{
+        color: white;
+        background-color: $successColor;
+
+      }
+  }
+}

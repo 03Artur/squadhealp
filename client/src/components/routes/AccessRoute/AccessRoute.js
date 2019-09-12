@@ -13,7 +13,7 @@ import {connect} from 'react-redux';
 /*
 * UTILS
 * */
-import {PATHS,  ROLE} from '../../../constants'
+import {PATHS,  ROLES} from '../../../constants'
 
 
 const AccessRoute = ({roles, redirectTo, user, ...props}) => {
@@ -33,7 +33,7 @@ const AccessRoute = ({roles, redirectTo, user, ...props}) => {
 };
 
 AccessRoute.propTypes = {
-    roles: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ROLE))).isRequired,
+    roles: PropTypes.arrayOf(PropTypes.oneOf(Object.values(ROLES))).isRequired,
     path: PropTypes.string.isRequired,
     component: PropTypes.node,
     redirectTo: PropTypes.string,

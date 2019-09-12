@@ -8,6 +8,7 @@ import {MULTER_TIME_FORMAT} from '../constants';
 import {namingFile} from "../middlewares/multer";
 import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
 import {addContestExtraContent} from "../middlewares/contest/includeContestExtraContent";
+import createTaskChat from "../middlewares/contest/createTaskChat";
 
 
 const storage = multer.diskStorage({
@@ -37,13 +38,9 @@ router.post('/contest/:id/task',
     upload.array('files', 8),
     (req, res, next) => {
         try {
-
             req.body = JSON.parse(req.body.task);
-
             req.body.files = req.files.map(item => item.filename);
-
             next();
-
         } catch (e) {
             next(e);
         }
@@ -51,7 +48,8 @@ router.post('/contest/:id/task',
     contestMW.validateTaskOnCreate,
     contestMW.addCostToTask,
     contestMW.addPriorityToTask,
-    contestController.createTask);
+    contestController.createTask
+);
 
 
 router.put('/contest/task',

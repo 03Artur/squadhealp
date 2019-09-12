@@ -10,29 +10,33 @@ import queryString from 'query-string';
 import {
     getContestInDrawActionCreator,
 } from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
-import {nextContestCreationStepActionCreator} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
+import {
+    nextContestCreationStepActionCreator
+} from "../../actions/actionCreators/contestActionCreators/contestCreationActionCreators";
 import ContestPayment from "./steps/ContestPayment/ContestPayment";
-
+import {useAlert} from 'react-alert';
 
 let StartContestPage = (props) => {
 
-    const {query, steps, currentStepIndex, contest, tasks, history,} = props;
+    const {query, steps, currentStepIndex, contest, tasks, history, error} = props;
+    const alert = useAlert();
 
     useEffect(() => {
-
         if (contest && contest.isPaid) {
-            history.push(PATHS.AFFILIATE_DASHBOARD)
+            history.push(PATHS.AFFILIATE_DASHBOARD);
         }
-
     }, [contest]);
 
+    useEffect(() => {
+        if (error) {
+
+        }
+    }, [error]);
 
     useEffect(() => {
-
         if (query) {
             props.loadContestInDrawAction();
         }
-
     }, []);
 
     useEffect(() => {

@@ -1,4 +1,4 @@
-import {TASK_TYPE} from "../../../constants";
+import {TASK_TYPES} from "../../../constants";
 import _ from 'lodash';
 
 const filter = [
@@ -17,7 +17,7 @@ const filter = [
     },
     {
         title: 'Contest type',
-        values: _.keys(TASK_TYPE).map(type => (
+        values: _.keys(TASK_TYPES).map(type => (
             {
                 title: type,
                 value: {

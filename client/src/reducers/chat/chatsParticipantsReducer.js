@@ -26,7 +26,6 @@ export default function (state = initialState, action) {
             const participants = _.cloneDeep(state.participants);
             action.participants.forEach(item => {
                 participants.set(item.id, item);
-
             });
             return _.cloneDeep({
                 ...state,

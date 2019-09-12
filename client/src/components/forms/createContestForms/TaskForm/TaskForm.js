@@ -3,12 +3,12 @@ import {Field, reduxForm} from 'redux-form';
 import styles from './TaskForm.module.scss';
 import LabelInput from "../../_components/inputs/LabelInput/LabelInput";
 import InputFile from "../../_components/inputs/InputFile/InputFile";
-import {FORM_NAMES, TASK_TYPE} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPES} from "../../../../constants";
 import Select from "../ContestForm/Select/Select";
 import {isRequired, maxLength, notEmpty} from "../../../../utils/reduxForm/validateValue";
 
 const stylesMap = new Map([
-    [TASK_TYPE.NAME, [
+    [TASK_TYPES.NAME, [
         'Classic',
         'Fun',
         'Professional',
@@ -16,7 +16,7 @@ const stylesMap = new Map([
         'Youthful',
         'Any',
     ]],
-    [TASK_TYPE.LOGO, [
+    [TASK_TYPES.LOGO, [
         'Techy',
         'Fun',
         'Fancy',
@@ -24,7 +24,7 @@ const stylesMap = new Map([
         'Brick & Mortar',
         'Photo-based',
     ]],
-    [TASK_TYPE.TAGLINE, [
+    [TASK_TYPES.TAGLINE, [
         'Classic',
         'Fun',
         'Powerful',

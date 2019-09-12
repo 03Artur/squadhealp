@@ -49,6 +49,7 @@ export const upsertContest = async (req, res, next) => {
     try {
 
         req.body.userId = req.body.userId ? req.body.userId : req.accessTokenPayload.id;
+
         const [contest] = (await Contests.upsert(req.body, {
             returning: true,
             include: [{
@@ -84,14 +85,19 @@ export const createTask = async (req, res, next) => {
     try {
         const {contest} = req;
         req.body.contestId = contest.id;
+
         const newTask = await Tasks.create(req.body);
-        if (!newTask) {
-            return next(new appError.BadRequestError());
+
+        res.send(newTask);
+
+        if (newTask) {
+            await contest.reload();
+            res.send(contest);
         }
-        await contest.reload();
-        res.send(contest);
+
+        return next(new appError.BadRequestError());
     } catch (e) {
-        next(e);
+        res.send(e);
     }
 };
 

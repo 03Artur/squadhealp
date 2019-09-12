@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, change, submit} from 'redux-form';
 import styles from './TaskTypeForm.module.scss';
-import {FORM_NAMES, TASK_TYPE_DESCRIPTION, TASK_TYPE_IMAGES,TASK_TYPES_COMBINATION} from "../../../../constants";
+import {FORM_NAMES, TASK_TYPES_DESCRIPTIONS, TASK_TYPE_IMAGES,TASK_TYPES_COMBINATIONS} from "../../../../constants";
 
 import TaskTypeCard from "./RadioTaskTypeCard/TaskTypeCard";
 
@@ -18,7 +18,7 @@ let TaskTypeForm = ({handleSubmit, dispatch, ...props}) => {
         combinations.map((item) => {
             const title = item.join(' + ');
             const icons = item.map(type => TASK_TYPE_IMAGES.get(type));
-            const description = TASK_TYPE_DESCRIPTION.get(title);
+            const description = TASK_TYPES_DESCRIPTIONS.get(title);
             return (
                 <TaskTypeCard key={title} onClick={() => onCardClick(item)} icons={icons} title={title}
                               className={className} description={description}/>
@@ -26,12 +26,12 @@ let TaskTypeForm = ({handleSubmit, dispatch, ...props}) => {
         }));
 
     const renderSingleTypes = () => {
-        const combinations = TASK_TYPES_COMBINATION.filter(item => item.length === 1);
+        const combinations = TASK_TYPES_COMBINATIONS.filter(item => item.length === 1);
         return renderTypeCards(combinations, styles.singleCard);
     };
 
     const renderGroupTypes = () => {
-        const combinations = TASK_TYPES_COMBINATION.filter(item => item.length > 1);
+        const combinations = TASK_TYPES_COMBINATIONS.filter(item => item.length > 1);
         return renderTypeCards(combinations);
     };
 

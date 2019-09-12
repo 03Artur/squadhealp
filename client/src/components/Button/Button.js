@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import styles from './UniversalButton.module.scss';
+import styles from './Button.module.scss';
+import classNames from 'classnames';
 
+const Button = (props) => {
 
-const UniversalButton = (props) => {
-
-    const {onClick, children, isEnable, className} = props;
+    const {onClick, children, isEnable, className, disableClassName} = props;
 
     const clickHandler = () => {
         if (isEnable) {
@@ -15,7 +15,7 @@ const UniversalButton = (props) => {
     };
 
     return (
-        <div className={className} onClick={clickHandler}>
+        <div className={classNames(className, {[disableClassName]: !isEnable})} onClick={clickHandler}>
             {
                 children
             }
@@ -23,20 +23,24 @@ const UniversalButton = (props) => {
     )
 };
 
-UniversalButton.propTypes = {
+Button.propTypes = {
 
     className: PropTypes.string,
+    disableClassName: PropTypes.string,
     onClick: PropTypes.func,
     isEnable: PropTypes.bool,
 
 };
 
-UniversalButton.defaultProps = {
+Button.defaultProps = {
     children: 'Button',
     isEnable: true,
+    className: '',
+    disableClassName: '',
+
 };
 
 const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UniversalButton)
+export default connect(mapStateToProps, mapDispatchToProps)(Button)

@@ -1,5 +1,5 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
-import {PATHS, ROLE, TASK_TYPE} from "../../constants";
+import {PATHS, ROLES, TASK_TYPES} from "../../constants";
 import { MenuItem} from "../../utils/classes/Link";
 import _ from 'lodash';
 import {mdiAccountCircle,mdiDatabaseCheck,mdiAccountEdit,mdiFormatListBulleted,mdiEmail,mdiLogout} from '@mdi/js';
@@ -17,10 +17,10 @@ export default function (state = initialState, action) {
             }
             const {user} = action;
             const navMap = new Map([
-                [ROLE.ADMIN, [
+                [ROLES.ADMIN, [
                     new MenuItem('users', PATHS.AFFILIATE_DASHBOARD_USERS, 'users.svg'),
                 ],],
-                [ROLE.BUYER, [
+                [ROLES.BUYER, [
                     new MenuItem('My Dashboard', PATHS.DASHBOARD, mdiAccountCircle),
                     new MenuItem('My Contests', {
                         pathname: PATHS.CONTESTS,
@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
                     new MenuItem('logout',PATHS.LOGOUT,mdiLogout),
 
                 ],],
-                [ROLE.CREATIVE, [],],
+                [ROLES.CREATIVE, [],],
             ]);
             const nav = navMap.get(action.user.role);
             return nav ? nav : [];

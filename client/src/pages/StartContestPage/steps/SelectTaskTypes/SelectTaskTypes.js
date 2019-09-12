@@ -8,6 +8,9 @@ import ACTION_TYPES from "../../../../actions/actiontsTypes";
 
 const SelectTaskTypes = (props) => {
 
+
+
+
     const submit = (values) => {
         props.selectTaskTypesAction(values.types);
     };

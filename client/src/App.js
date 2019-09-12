@@ -1,7 +1,7 @@
 import React, {Suspense, lazy} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import history from './history';
-import {PATHS, ROLE} from "./constants"
+import {PATHS, ROLES} from "./constants"
 import AccessRoute from './components/routes/AccessRoute/AccessRoute';
 import UserLoader from "./components/UserLoader/UserLoader";
 import AuthorizedRoute from "./components/routes/AuthorizedRoute/AuthorizedRoute";
@@ -22,7 +22,7 @@ const App = (props) => {
                     <Switch>
                         <AuthorizedRoute path={PATHS.MESSAGES}
                                          render={props => <ChatPage {...props}/>}/>
-                        <AccessRoute exact roles={[ROLE.ADMIN]} path={PATHS.ADMIN}
+                        <AccessRoute exact roles={[ROLES.ADMIN]} path={PATHS.ADMIN}
                                      render={(props) => <AdminPage {...props}/>}/>
                         <Route path={[PATHS.LOGIN, PATHS.SIGN_UP]}
                                render={(props) => <AuthorizationPage {...props}/>}/>

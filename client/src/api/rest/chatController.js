@@ -1,15 +1,18 @@
 import axios from './';
-import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messagesUrl} from "../baseURL";
+import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messagesUrl, taskUrl} from "../baseURL";
 import queryString from 'query-string';
 
 
 /*
 * CHAT
 * */
+export const createTaskChat = taskId => axios.post(`${taskUrl}/${taskId}${chatUrl}`);
 export const getUserChats = () => axios.get(chatsUrl);
 export const postChat = chat => axios.post(chatUrl, chat);
 export const getChat = chatId => axios.get(`${chatsUrl}/${chatId}`);
-export const getChatByQuery = queryString => axios.get(`${chatUrl}${queryString}`);
+export const getChatByQuery = queryString => axios.get(`${chatUrl}?${queryString}`);
+export const joinToChat = (chatId) => axios.post(`${chatsUrl}/${chatId}/join`);
+
 /*
 * PARTICIPANTS
 * */

@@ -13,7 +13,7 @@ const ContestList = (props) => {
         return contests.map(contest => {
             const onSelect = () => {
             };
-            return <ContestItem key={contest.id} onSelect={onSelect} task={contest}/>
+            return <ContestItem key={contest.id} onSelect={onSelect} contest={contest}/>
         })
     };
 

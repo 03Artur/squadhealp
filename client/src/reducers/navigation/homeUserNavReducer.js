@@ -1,5 +1,5 @@
 import ACTION_TYPES from "../../actions/actiontsTypes";
-import {PATHS, ROLE, TASK_TYPE} from "../../constants";
+import {PATHS, ROLES, TASK_TYPES} from "../../constants";
 import {Menu, MenuItem} from "../../utils/classes/Link";
 import queryString from 'query-string';
 import _ from 'lodash';
@@ -13,19 +13,19 @@ export default function (state = initialState, action) {
                 return _.cloneDeep(initialState)
             }
             const navMap = new Map([
-                [ROLE.ADMIN, [
+                [ROLES.ADMIN, [
                     new MenuItem("View Dashboard",),
                     new MenuItem("My Account",),
                     new MenuItem("Messages",PATHS.MESSAGES),
                     new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 ],],
-                [ROLE.BUYER, [
+                [ROLES.BUYER, [
                     new MenuItem("View Dashboard",),
                     new MenuItem("My Account",),
                     new MenuItem("Messages",PATHS.MESSAGES),
                     new MenuItem("Affiliate Dashboard", PATHS.AFFILIATE_DASHBOARD,),
                 ],],
-                [ROLE.CREATIVE, [
+                [ROLES.CREATIVE, [
                     new MenuItem("View Dashboard",),
                     new MenuItem("My Contests", {
                         pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
