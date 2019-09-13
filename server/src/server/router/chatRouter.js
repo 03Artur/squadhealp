@@ -24,7 +24,7 @@ router.post('/chat', checkPermission, validateChat, createChat);
 router.get('/chats/:chatId', findChatById, checkPermission, sendChat);
 router.get('/chat',getChatByQuery);
 router.post('/chats/:chatId/join',joinToChat);
-router.post('/task/:id/chat',findTaskById, createTaskChat);
+router.post('/chat/task/:id',findTaskById, createTaskChat);
 
 
 /*
