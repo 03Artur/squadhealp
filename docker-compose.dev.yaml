@@ -1,26 +1,27 @@
 version: '2'
 services:
 
-  nginx-server-prod:
+  front-react:
     build:
       context: ./client
-      dockerfile: Dockerfile
-    restart: always
-    environment:
-      NODE_ENV: production
-    ports:
-      - "80:80"
-    depends_on:
-      - server-prod
-    volumes:
-      - ./data/prod/images:/var/www/html/images:ro
 
-  server-prod:
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - server-dev
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+    ports:
+      - "5000:5000"
+      - "9009:9009"
+
+  server-dev:
     build:
       context: ./server
 
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
     ports:
       - "3000:3000"
     depends_on:
@@ -31,24 +32,25 @@ services:
       - ./server:/server
       - /server/node_modules
 
-  db-prod:
+  db-dev:
     image: postgres:10
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=todo-dev
-
+    ports:
+      - "5432:5432"
 
   mongodb:
     image: mongo:latest
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=chat-prod
-
+      - MONGO_INITDB_DATABASE=chat-dev
+    ports:
+      - "27018:27018"
     volumes:
-      - ./data/prod/db:/data/db
-      - ./data/prod/configdb:/data/configdb
+      - ./data/dev:/data/db
+      - ./data/dev/configdb:/data/configdb
 volumes:
   server-dev:
