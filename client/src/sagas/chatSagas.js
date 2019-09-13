@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 import {chatSocketHelper} from "../api/socket";
 import {baseURL} from "../api/baseURL";
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
+import chatsParticipantsReducer from "../reducers/chat/chatsParticipantsReducer";
 
 /*
 * CHAT
@@ -277,9 +278,7 @@ export function* getMessageSaga({chatId, messageId}) {
 
         const {data: message} = yield chatController.getMessage(chatId, messageId);
 
-
         yield call(getParticipantsSaga, {participantsIds: message.authorId});
-
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE,
@@ -295,6 +294,6 @@ export function* getMessageSaga({chatId, messageId}) {
 
 
 //UTILS
-const getParticipants = state => state.chatsParticipants;
+const getParticipants = state => state.chatsParticipantsReducer;
 
 

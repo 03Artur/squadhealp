@@ -50,17 +50,18 @@ export const upsertContest = async (req, res, next) => {
 
         req.body.userId = req.body.userId ? req.body.userId : req.accessTokenPayload.id;
 
-        const [contest] = (await Contests.upsert(req.body, {
+        const [contest] = await Contests.upsert(req.body, {
             returning: true,
             include: [{
                 model: Tasks,
                 as: 'tasks'
             }]
-        }));
-        if (!contest) {
-            return next(new appError.BadRequestError())
+        });
+        if (contest) {
+            res.send(contest);
+            return;
         }
-        res.send(contest);
+        return next(new appError.BadRequestError())
     } catch (e) {
         next(e);
     }
@@ -88,13 +89,10 @@ export const createTask = async (req, res, next) => {
 
         const newTask = await Tasks.create(req.body);
 
-        res.send(newTask);
-
         if (newTask) {
             await contest.reload();
             res.send(contest);
         }
-
         return next(new appError.BadRequestError());
     } catch (e) {
         res.send(e);
