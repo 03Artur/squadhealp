@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ChatItem.module.scss';
 import AuthorIcon from "../../../Chat/MessageList/MessageItem/AuthorIcon/AuthorIcon";
@@ -13,49 +13,42 @@ const ChatItem = (props) => {
             return (
                 <div className={styles.newMessagesCount}>
                     <span>
-                    {
-                        newMessagesCount
-                    }
+                        {newMessagesCount}
                     </span>
                 </div>
             )
         }
     };
 
-    return (
-
-        <li onClick={onClick} className={styles.chatItem}>
-            <div>
-                <AuthorIcon size={48} firstName={author.firstName} lastName={author.lastName}
-                            src={author.profilePicture}/>
-            </div>
-
-            <div className={styles.info}>
-                <div className={styles.infoRow}>
-                    <span>
-                         {
-                             props.name?props.name:`${author.firstName} ${author.lastName}`
-                         }
-                    </span>
-                    <span>
-                        {
-                            lastMessage.createdAt
-                        }
-                    </span>
+    if (author) {
+        return (
+            <li onClick={onClick} className={styles.chatItem}>
+                <div>
+                    <AuthorIcon size={48} firstName={author.firstName} lastName={author.lastName}
+                                src={author.profilePicture}/>
                 </div>
-                <div className={styles.messagesInfo}>
-                    <div className={styles.message}>
-                        {
-                            lastMessage.value
-                        }
+                <div className={styles.info}>
+                    <div className={styles.infoRow}>
+                        <span>
+                             {props.name ? props.name : `${author.firstName} ${author.lastName}`}
+                        </span>
+                        <span>
+                            {lastMessage.createdAt}
+                        </span>
                     </div>
-                    {/*{
+                    <div className={styles.messagesInfo}>
+                        <div className={styles.message}>
+                            {lastMessage.value}
+                        </div>
+                        {/*{
                         renderNewMessagesCount()
                     }*/}
+                    </div>
                 </div>
-            </div>
-        </li>
-    )
+            </li>
+        )
+    }
+
 };
 
 ChatItem.propTypes = {

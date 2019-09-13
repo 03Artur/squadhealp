@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useEffect} from 'react';
 import Header from "./Header/Header";
 import styles from './AffiliateDashboard.module.scss';
 import Menu from "./Menu/Menu";

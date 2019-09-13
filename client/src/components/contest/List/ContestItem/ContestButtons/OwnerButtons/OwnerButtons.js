@@ -1,24 +1,32 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './OwnerButtons.module.scss';
 import Button from "../../../../../Button/Button";
-import {createTaskChatActionCreator} from "../../../../../../actions/actionCreators/chatActionCreators";
-
+import {
+    createTaskChatActionCreator,
+    selectChatActionCreator
+} from "../../../../../../actions/actionCreators/chatActionCreators";
+import history from "../../../../../../history";
+import {PATHS} from "../../../../../../constants";
 
 const OwnerButtons = (props) => {
 
-    const {createTaskChatAction, contest} = props;
-    console.log(contest);
-    const onChatCreat = () => {
-      createTaskChatAction(contest.id);
+    const {createTaskChatAction, selectChatAction, contest: {id, chatId}} = props;
+
+    const onChatButtonClick = () => {
+        if (chatId) {
+            history.push(`${PATHS.MESSAGES_CHAT}/${chatId}`)
+        } else {
+            createTaskChatAction(id);
+        }
     };
+
 
     return (
         <div className={styles.container}>
-            <Button isEnable={!contest.chatId} onClick={onChatCreat} className={styles.createChatButton}>
-                {'Open chat'}
+            <Button onClick={onChatButtonClick} className={styles.createChatButton}>
+                {chatId ? 'Open chat' : 'Start chat'}
             </Button>
         </div>
     )
@@ -27,19 +35,15 @@ const OwnerButtons = (props) => {
 OwnerButtons.propTypes = {
     className: PropTypes.string,
     contest: PropTypes.object.isRequired,
-
 };
 
 OwnerButtons.defaultProps = {
-
+    contest: {},
 };
 
-
-const mapStateToProps = state => ({
-
-});
 const mapDispatchToProps = dispatch => ({
     createTaskChatAction: (taskId) => dispatch(createTaskChatActionCreator(taskId)),
+    selectChatAction: (chatId) => dispatch(selectChatActionCreator(chatId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OwnerButtons)
+export default connect(null, mapDispatchToProps)(OwnerButtons)

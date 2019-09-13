@@ -16,7 +16,7 @@ export const joinToChat = (chatId) => axios.post(`${chatsUrl}/${chatId}/join`);
 /*
 * PARTICIPANTS
 * */
-export const getParticipants = (queryString) => axios.get(`${participantsUrl}${queryString}`);
+export const getParticipants = (queryString) => axios.get(`${participantsUrl}?${queryString}`);
 export const getParticipant = id => axios.get(`${participantUrl}/${id}`);
 
 /*

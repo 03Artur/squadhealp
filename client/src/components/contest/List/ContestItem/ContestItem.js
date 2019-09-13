@@ -4,6 +4,7 @@ import styles from './ContestItem.module.scss';
 import ContestInfo from "./ContestInfo/ContestInfo";
 import ContestButtons from "./ContestButtons/ContestButtons";
 
+
 const ContestItem = (props) => {
 
     const {contest} = props;

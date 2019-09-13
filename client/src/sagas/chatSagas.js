@@ -3,41 +3,42 @@ import CHAT_ACTION_TYPES from "../actions/actionTypes/chatActionTypes";
 import * as chatController from '../api/rest/chatController';
 import queryString from 'query-string';
 import _ from 'lodash';
-import * as socketController from "../api/socket/chatController";
 import io from 'socket.io-client';
 import {chatSocketHelper} from "../api/socket";
 import {baseURL} from "../api/baseURL";
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
+
 /*
 * CHAT
 * */
 
-
-//GET USER CHATS
+//GET USER CHATS WITH LAST MESSAGE AND MESSAGES AUTHORS
 export function* getUserChatsSaga({user}) {
-    try {
-
+    if (user) {
+        //open socket connection
         chatSocketHelper.socket = io(`${baseURL}?userId=${user.id}`);
+        try {
+            yield put({
+                type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
+            });
+            const {data: {chats, participants}} = yield chatController.getUserChats();
 
-        yield put({
-            type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
-        });
-        const {data: {chats, participants}} = yield chatController.getUserChats();
-        yield all([
-            put({
-                type: CHAT_ACTION_TYPES.GET_CHATS_RESPONSE,
-                chats,
-            }),
-            put({
-                type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
-                participants,
+            yield all([
+                put({
+                    type: CHAT_ACTION_TYPES.GET_CHATS_RESPONSE,
+                    chats,
+                }),
+                put({
+                    type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
+                    participants,
+                })
+            ]);
+        } catch (e) {
+            yield put({
+                type: CHAT_ACTION_TYPES.GET_CHATS_ERROR,
+                error: e.response.data,
             })
-        ])
-    } catch (e) {
-        yield put({
-            type: CHAT_ACTION_TYPES.GET_CHATS_ERROR,
-            error: e.response.data,
-        })
+        }
     }
 }
 
@@ -213,6 +214,7 @@ export function* postMessageSaga({chatId, message}) {
 
     }
 }
+
 
 /*
 *

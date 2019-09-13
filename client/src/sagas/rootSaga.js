@@ -16,10 +16,8 @@ function* rootSaga() {
     yield takeLatest(ACTION_TYPES.AUTHORIZATION_LOGOUT_ACTION, authorizationSagas.logoutUserSaga);
     yield takeLatest(ACTION_TYPES.USER_LOGIN_ACTION, authorizationSagas.loginUserSaga);
     yield takeLatest(ACTION_TYPES.USER_SIGN_UP_ACTION, authorizationSagas.signUpUserSaga);
-    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, authorizationSagas.getAuthorizedUserSaga,);
-    /*
-    yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE,authorizationSagas.)
-*/
+    yield takeLatest(ACTION_TYPES.GET_AUTHORIZED_USER, authorizationSagas.getAuthorizedUserSaga);
+    //yield takeLatest(ACTION_TYPES.USER_AUTHORIZATION_RESPONSE,authorizationSagas.)
 //========================================================================================
 
     /*
@@ -60,11 +58,11 @@ function* rootSaga() {
     yield takeLatest(CHAT_ACTION_TYPES.JOIN_TO_CHAT_ACTION, chatSaga.joinToChatSaga);
     yield takeLatest(CHAT_ACTION_TYPES.CREATE_TASK_CHAT_ACTION, chatSaga.createTaskChatSaga);
     //PARTICIPANT
-    // yield takeLatest(CHAT_ACTION_TYPES.GET_PARTICIPANTS_ACTION, chatSaga.getParticipantsSaga);
-    // //MESSAGE
-    // yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGES_ACTION, chatSaga.getMessagesSaga);
-    // yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGE_ACTION, chatSaga.getMessageSaga);
-    // yield takeLatest(CHAT_ACTION_TYPES.POST_MESSAGE_ACTION, chatSaga.postMessageSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.GET_PARTICIPANTS_ACTION, chatSaga.getParticipantsSaga);
+    //MESSAGE
+    yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGES_ACTION, chatSaga.getMessagesSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.GET_MESSAGE_ACTION, chatSaga.getMessageSaga);
+    yield takeLatest(CHAT_ACTION_TYPES.POST_MESSAGE_ACTION, chatSaga.postMessageSaga);
     // //========================================================================================
 
     //ENTRY

@@ -1,35 +1,16 @@
-/*
-* React
-* */
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom'
-
-/*
-* Redux & friends
-* */
 import {connect} from 'react-redux';
-
-/*
-* UTILS
-* */
-import {PATHS, ROLES} from '../../../constants'
-
+import {PATHS} from '../../../constants'
 
 const AuthorizedRoute = ({redirectTo, user, ...props}) => {
 
-    const render = () => {
-        if (user) {
-            return (<Route   {...props}/>)
-
-        } else {
-            return <Redirect to={redirectTo}/>
-        }
-    };
-
-    return render();
-
-
+    if (user) {
+        return (<Route   {...props}/>)
+    } else {
+        return <Redirect to={redirectTo}/>
+    }
 };
 
 AuthorizedRoute.propTypes = {
@@ -43,14 +24,9 @@ AuthorizedRoute.defaultProps = {
     redirectTo: PATHS.HOME,
 };
 
-
-/*
-* React redux
-* */
 const mapStateToProps = store => {
     const {user} = store.authorizationReducer;
     return {user}
 };
-
 
 export default connect(mapStateToProps)(AuthorizedRoute)

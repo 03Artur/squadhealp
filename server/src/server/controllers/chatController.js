@@ -145,7 +145,10 @@ export async function joinToChat(req, res, next) {
             chat.participants.addToSet(userId);
             chat = await chat.save();
             res.send(chat);
+            await socketHelper.joinUserToRooms(userId, chat._id);
+            return;
         }
+
         return next(new appError.NotFoundError());
     } catch (e) {
         next(e);
@@ -154,7 +157,9 @@ export async function joinToChat(req, res, next) {
 
 export async function sendChat(req, res, next) {
     try {
-        res.send(req.chat);
+        const {accessTokenPayload: {id: userId}, chat} = req;
+        res.send(chat);
+        await socketHelper.joinUserToRooms(userId, chat._id)
     } catch (e) {
         next(e);
     }
@@ -184,7 +189,7 @@ export async function createChat(req, res, next) {
 
 export async function getChatByQuery(req, res, next) {
     try {
-        const {query} = req;
+        const {query, accessTokenPayload: {id: userId}} = req;
 
         const chat = await Chat.findOne(query).populate({
             path: 'messages',
@@ -203,11 +208,8 @@ export async function getChatByQuery(req, res, next) {
                 chat,
                 participants,
             });
+            await socketHelper.joinUserToRooms(userId, chat._id);
             return;
-            let i = 0;
-            while (i++ < 20) {
-                console.log('=================getChatByQuery===================');
-            }
         }
         return next(new appError.NotFoundError('chat not found'));
 
@@ -285,7 +287,6 @@ const getMessagesAuthors = async messages => {
                 }
             });
         }
-        return;
     } catch (e) {
         throw e;
     }

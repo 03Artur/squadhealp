@@ -1,47 +1,5 @@
 import {SOCKET_EVENTS} from "../constants";
 
-
-/*io.on("connection", socket => {
-    socket.join('test');
-    socket.join('alone');
-
-    socket.on("disconnect", function () {
-        socket.leave('test');
-        socket.leave('alone');
-    });
-
-    //Someone is typing
-    socket.on(SOCKET_EVENTS.TYPING, (room, data) => {
-        socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_TYPING, {
-            user: data.user,
-            message: data.message
-        });
-    });
-
-    socket.on(SOCKET_EVENTS.STOP_TYPING, (room, data) => {
-        socket.broadcast.to(room).emit(SOCKET_EVENTS.NOTIFY_STOP_TYPING,data);
-    });
-
-    socket.on(SOCKET_EVENTS.CHAT_MESSAGE, function (room, data) {
-
-        console.log("ROOM: ",room);
-        console.log("DATA: ",data);
-
-        io.in(room).emit(SOCKET_EVENTS.RECEIVED_MESSAGE, {
-            room,
-            message: data,
-        });
-    });
-});*/
-
-/* socket.on(SOCKET_EVENTS.AUTHORIZE_USER, async userId => {
-            if (this.userToSockets.has(userId)) {
-                this.userToSockets.get(userId).add(socket);
-            } else {
-                this.userToSockets.set(userId, new Set([socket]));
-            }
-        });*/
-
 class SocketHelper {
 
     constructor() {
@@ -54,12 +12,14 @@ class SocketHelper {
         if (userSocketsSet) {
             userSocketsSet.forEach(socket => {
                 socket.join(rooms);
+
             })
         }
     }
 
     async joinUsersToRooms(usersIds, rooms) {
         usersIds.forEach((userId) => {
+
             this.joinUserToRooms(userId, rooms);
         })
     };
@@ -97,9 +57,11 @@ class SocketHelper {
     set io(ioInstance) {
         this._io = ioInstance;
         this._io.on('connection', async socket => {
-            let userId = socket.handshake.query.userId;
+
+            let userId =  parseInt(socket.handshake.query.userId);
             this.addSocket(userId, socket);
-            this.socket.on("disconnect", async () => {
+
+            socket.on("disconnect", async () => {
                 this.deleteSocket(userId, socket);
             });
             this.addChatEvents(socket);

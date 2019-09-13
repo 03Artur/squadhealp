@@ -3,10 +3,9 @@ import _ from 'lodash';
 
 
 const initialState = {
-    chats: new Map(),
+    chats: null,
     isFetching: false,
     error: null,
-
 };
 
 function chatsReducer(state = initialState, action) {

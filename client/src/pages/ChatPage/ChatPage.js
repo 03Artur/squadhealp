@@ -7,25 +7,20 @@ import styles from './ChatPage.module.scss';
 import {Route} from 'react-router-dom';
 import {PATHS} from "../../constants";
 
-
 const EmptyContent = (props) => {
 
     return (
-
         <div className={styles.emptyContentContainer}>
             <span className={styles.contentMessage}>Please select a chat to start messaging</span>
         </div>
-
     )
 };
 
 function ChatPage(props) {
 
     useEffect(() => {
-
-        const path = props.chatId ? `${PATHS.MESSAGES_CHAT}/${props.chatId}`:PATHS.MESSAGES;
+        const path = props.chatId ? `${PATHS.MESSAGES_CHAT}/${props.chatId}` : PATHS.MESSAGES;
         props.history.push(path);
-
     }, [props.chatId]);
 
     return (
@@ -47,8 +42,4 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatPage);
+export default connect(mapStateToProps)(ChatPage);

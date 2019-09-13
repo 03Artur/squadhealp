@@ -1,7 +1,7 @@
 /*
 * React
 * */
-import React, { useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 /*
@@ -27,7 +27,6 @@ import styles from './UserLoader.module.scss';
 const UserLoader = (props) => {
 
 
-
     useEffect(() => {
         if (!props.user && localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN_KEY)) {
             props.getAuthorizedUserAction();
@@ -48,18 +47,14 @@ const UserLoader = (props) => {
         }
     };
 
-
     return render();
 };
 
-
 const mapStateToProps = store => {
     return store.authorizationReducer;
-
 };
 const mapDispatchToProps = dispatch => ({
-        getAuthorizedUserAction: () => dispatch(getAuthorizedUserActionCreator())
-    })
-;
+    getAuthorizedUserAction: () => dispatch(getAuthorizedUserActionCreator())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserLoader)

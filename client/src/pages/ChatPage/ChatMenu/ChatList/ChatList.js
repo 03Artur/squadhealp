@@ -1,16 +1,12 @@
-import React, {Component, Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import {connect} from 'react-redux';
-
 import styles from './ChatList.module.scss';
 import ChatItem from "./ChatItem/ChatItem";
 import {selectChatActionCreator} from "../../../../actions/actionCreators/chatActionCreators";
-import chatReducer from "../../../../reducers/chat/chatReducer";
+import classNames from 'classnames';
 
-/*
-* UTILS
-* */
 
 const ChatList = (props) => {
 
@@ -33,8 +29,6 @@ const ChatList = (props) => {
             };
             author = chatOwner;
         }
-
-
         return (
             <ChatItem key={chat._id}
                       name={chat.name}
@@ -58,7 +52,7 @@ const ChatList = (props) => {
 
 
     return (
-        <ul className={[styles.list, props.className].join(' ')}>
+        <ul className={classNames(styles.list, props.className)}>
             {
                 renderChatItems()
             }
@@ -71,7 +65,9 @@ ChatList.propTypes = {
     className: PropTypes.string
 };
 
-ChatList.defaultProps = {};
+ChatList.defaultProps = {
+
+};
 
 
 const mapStateToProps = store => {
