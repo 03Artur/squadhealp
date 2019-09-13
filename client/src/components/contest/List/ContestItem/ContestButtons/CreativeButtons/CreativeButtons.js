@@ -1,17 +1,20 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './CreativeButtons.module.scss';
 import LikeButton from "../../buttons/LikeButton/LikeButton";
 import Button from "../../../../../Button/Button";
-import AddEntryButton from "../../buttons/AddEntryButton/AddEntryButton";
 import classNames from 'classnames';
 import {joinToChatActionCreator} from "../../../../../../actions/actionCreators/chatActionCreators";
 import {Link} from 'react-router-dom';
 import {PATHS} from "../../../../../../constants";
+import history from "../../../../../../history";
 
 
 const CreativeButtons = (props) => {
+
+
+    //const [a,b] = useState(false);
 
     const {
         contest: {
@@ -22,9 +25,9 @@ const CreativeButtons = (props) => {
         chats,
         joinToChatAction
     } = props;
-
     const onJoinToChat = () => {
         joinToChatAction(chatId);
+        history.push()
     };
 
     const getJoinButtonEnable = () => {
