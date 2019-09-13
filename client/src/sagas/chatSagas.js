@@ -25,13 +25,14 @@ export function* getUserChatsSaga({user}) {
 
             yield all([
                 put({
+                    type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
+                    participants,
+                }),
+                put({
                     type: CHAT_ACTION_TYPES.GET_CHATS_RESPONSE,
                     chats,
                 }),
-                put({
-                    type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
-                    participants,
-                })
+
             ]);
         } catch (e) {
             yield put({
@@ -50,10 +51,18 @@ export function* joinToChatSaga({chatId}) {
     try {
         const {data} = yield chatController.joinToChat(chatId);
 
-        yield put({
-            type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
-            chat: data,
-        })
+        yield all([
+                put({
+                    type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
+                    chat: data,
+                }),
+                put({
+                    type: CHAT_ACTION_TYPES.SELECT_CHAT_ACTION,
+                    chatId: data._id,
+                })
+            ]
+        )
+
 
     } catch (e) {
         yield put({
@@ -125,6 +134,12 @@ export function* getChatSaga({chatId}) {
             type: CHAT_ACTION_TYPES.GET_CHAT_REQUEST,
         });
         const {data: chat} = yield chatController.getChat(chatId);
+        if (chat) {
+            const {messages} = chat;
+            if (messages) {
+                yield call(getParticipantsSaga, {participantsIds: messages.map(message => message.authorId)})
+            }
+        }
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
@@ -145,19 +160,24 @@ export function* getChatSaga({chatId}) {
 * */
 
 //GET PARTICIPANTS
-export function* getParticipantsSaga({query}) {
+export function* getParticipantsSaga({participantsIds}) {
     try {
         yield put({
             type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_REQUEST,
         });
+        const {participants} = yield select(getParticipants);
 
-        const {data} = yield chatController.getParticipants(queryString.stringify(query));
+        const participantsKeys = [...participants.keys()];
+        const missingParticipantsIds = _.difference(participantsIds, participantsKeys);
 
-        yield put({
-            type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
-            participants: data,
-        })
+        if (missingParticipantsIds.length) {
+            const {data} = yield chatController.getParticipants(queryString.stringify({id: missingParticipantsIds}));
 
+            yield put({
+                type: CHAT_ACTION_TYPES.GET_PARTICIPANTS_RESPONSE,
+                participants: data,
+            })
+        }
 
     } catch (e) {
         yield put({
@@ -230,26 +250,15 @@ export function* getMessagesSaga({chatId, query}) {
 
     try {
         const {data: messages} = yield chatController.getMessages(chatId, queryString.stringify(query));
-        const effects = [
-            put({
-                type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
-                messages,
-                chatId,
-            }),
-        ];
 
-        const {participants} = yield select(getParticipants);
-        const missingParticipantsIds = _.difference(messages.map(message => message.authorId), [...participants.keys()]);
 
-        if (missingParticipantsIds.length) {
-            effects.push(call(getParticipantsSaga, {
-                query: {
-                    id: missingParticipantsIds,
-                }
-            }))
-        }
+        yield call(getParticipantsSaga({participantsIds: messages.map(message => message.authorId)}));
 
-        yield all(effects);
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
+            messages,
+            chatId,
+        });
 
     } catch (e) {
         yield put({
@@ -268,22 +277,14 @@ export function* getMessageSaga({chatId, messageId}) {
 
         const {data: message} = yield chatController.getMessage(chatId, messageId);
 
-        const effects = [
-            put({
-                type: CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE,
-                message: message,
-            })
-        ];
-        const {participants} = yield select(getParticipants);
-        const author = participants.get(message.authorId);
-        if (!author) {
-            effects.push(
-                call(getParticipantSaga, {id: message.authorId})
-            )
-        }
 
-        yield all(effects);
+        yield call(getParticipantsSaga, {participantsIds: message.authorId});
 
+
+        yield put({
+            type: CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE,
+            message: message,
+        })
     } catch (e) {
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGE_ERROR,

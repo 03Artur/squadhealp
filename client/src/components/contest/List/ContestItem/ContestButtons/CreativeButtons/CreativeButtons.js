@@ -24,6 +24,7 @@ const CreativeButtons = (props) => {
 
     const onJoinToChat = () => {
         joinToChatAction(chatId);
+
     };
 
     const getJoinButtonEnable = () => {
