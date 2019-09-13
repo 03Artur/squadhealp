@@ -1,5 +1,5 @@
 import axios from './index';
-import {contestsUrl, entriesUrl, entryUrl, rejectUrl, taskUrl} from "../baseURL";
+import { entriesUrl, entryUrl, rejectUrl, taskUrl} from "../apiPaths";
 
 
 export const postEntry = (taskId,entry) => axios.post(`${taskUrl}/${taskId}${entryUrl}`,entry,{

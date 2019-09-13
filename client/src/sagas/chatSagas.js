@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import _ from 'lodash';
 import io from 'socket.io-client';
 import {chatSocketHelper} from "../api/socket";
-import {baseURL} from "../api/baseURL";
+import {apiPaths} from "../api/apiPaths";
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 
 /*
@@ -16,7 +16,7 @@ import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
 export function* getUserChatsSaga({user}) {
     if (user) {
         //open socket connection
-        chatSocketHelper.socket = io(`${baseURL}?userId=${user.id}`);
+        chatSocketHelper.socket = io(`${apiPaths}?userId=${user.id}`);
         try {
             yield put({
                 type: CHAT_ACTION_TYPES.GET_CHATS_REQUEST,
@@ -106,7 +106,7 @@ export function* createTaskChatSaga({taskId}) {
     });
     try {
         const {data} = yield chatController.createTaskChat(taskId);
-        console.log(data);
+
         yield all([
             put({
                 type: CONTEST_ACTION_TYPES.CREATE_TASK_CHAT_RESPONSE,
@@ -223,7 +223,7 @@ export function* postMessageSaga({chatId, message}) {
     try {
 
         const {data} = yield chatController.postMessage(chatId, message);
-        console.log(data);
+
 
         yield call(getParticipantsSaga, {participantsIds: [data.authorId]});
         yield chatSocketHelper.postMessage(chatId, data._id);

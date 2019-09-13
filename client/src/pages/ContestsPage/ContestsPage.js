@@ -40,7 +40,7 @@ const ContestsPage = (props) => {
         const {location: {search}} = history;
         const searchObj = queryString.parse(search);
         if (!_.isEqual(filter, searchObj)) {
-            console.log(++count);
+
 
             const newSearch = queryString.stringify({
                 ...searchObj,

@@ -1,5 +1,5 @@
 import axios from './';
-import {loginURL, signUpURL, refreshTokensUrl, authorizeUrl, logoutURL} from "../baseURL";
+import {loginURL, signUpURL, refreshTokensUrl, authorizeUrl, logoutURL} from "../apiPaths";
 import {ACCESS_TOKEN_BEARER, LOCAL_STORAGE_KEYS} from "../../constants";
 import {removeTokens} from "../../utils/localStorage";
 

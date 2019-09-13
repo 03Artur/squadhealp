@@ -227,7 +227,7 @@ export function* likeContestSaga({taskId}) {
     });
     try {
         const {data} = yield contestController.likeTask(taskId);
-        console.log(data);
+
         yield put({
             type: CONTEST_ACTION_TYPES.LIKE_CONTEST_RESPONSE,
             data,

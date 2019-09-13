@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 
 import styles from './AuthorIcon.module.scss';
-import {userPicturesURL} from "../../../../../../api/baseURL";
+import {userPicturesURL} from "../../../../../../api/apiPaths";
 import {stringToHslColor} from "../../../../../../utils/color";
 import {loadImage} from "../../../../../../utils/image";
 

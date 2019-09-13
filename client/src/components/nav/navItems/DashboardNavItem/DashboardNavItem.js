@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link, NavLink} from 'react-router-dom';
 import Icon from './Icon/Icon';
-import {ICON_IMAGES_URL} from "../../../../api/baseURL";
+import {ICON_IMAGES_URL} from "../../../../api/apiPaths";
 import styles from './DashboardNavItem.module.scss';
 
 

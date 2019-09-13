@@ -3,10 +3,10 @@ import axios from 'axios';
 import {refreshTokens} from './authorizationController'
 import {removeTokens} from '../../utils/localStorage'
 import {LOCAL_STORAGE_KEYS, PATHS} from "../../constants";
-import {baseURL} from "../baseURL";
+import {apiPaths} from "../apiPaths";
 
 const instance = axios.create({
-    baseURL: baseURL,
+    baseURL: apiPaths,
 });
 
 //INTERCEPTORS:

@@ -1,7 +1,7 @@
 /*
 * BASE URL
 * */
-export const baseURL = 'http://localhost:3000';
+export const apiPaths = 'http://localhost:3000';
 
 /*
 * AUTHORIZATION
@@ -49,7 +49,7 @@ export const participantsUrl ='/participants';
 /*
 * Static paths
 * */
-export const imagesURL = `${baseURL}/images`;
+export const imagesURL = `${apiPaths}/images`;
 export const ICON_IMAGES_URL = `${imagesURL}/icons`;
 export const userPicturesURL = `${imagesURL}/user/userPicture`;
 export const defaultUserIcon = `${imagesURL}/icons/user.svg`;

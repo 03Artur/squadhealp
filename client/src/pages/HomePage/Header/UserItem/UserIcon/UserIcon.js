@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 * Styles
 * */
 import styles from './UserIcon.module.scss';
-import {defaultUserIcon, imagesURL, userPicturesURL, defaultUserIconMin} from "../../../../../api/baseURL";
+import {defaultUserIcon, imagesURL, userPicturesURL, defaultUserIconMin} from "../../../../../api/apiPaths";
 
 const UserIcon = (props) => {
 

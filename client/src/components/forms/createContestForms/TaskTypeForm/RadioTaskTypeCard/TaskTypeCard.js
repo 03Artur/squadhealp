@@ -22,7 +22,7 @@ import styles from './RadioTaskTypeCard.module.scss';
 /*
 * UTILS
 * */
-import {ICON_IMAGES_URL} from "../../../../../api/baseURL";
+import {ICON_IMAGES_URL} from "../../../../../api/apiPaths";
 
 
 const Icons = ({icons,...props}) => {

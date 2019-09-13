@@ -10,7 +10,7 @@ import {
 import Button from "../../../Button/Button";
 import classNames from 'classnames';
 import LazyImage from "../../../Image/LazyImage";
-import {entryFilesUrl} from "../../../../api/baseURL";
+import {entryFilesUrl} from "../../../../api/apiPaths";
 
 const EntryItem = (props) => {
     const {

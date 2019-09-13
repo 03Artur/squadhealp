@@ -1,5 +1,5 @@
 import axios from './';
-import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messagesUrl, taskUrl} from "../baseURL";
+import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messagesUrl, taskUrl} from "../apiPaths";
 
 /*
 * CHAT

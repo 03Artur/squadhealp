@@ -1,5 +1,5 @@
 import axios from './';
-import {contestUrl, taskUrl, contestPaymentUrl, contestsUrl, favoriteUrl} from "../baseURL";
+import {contestUrl, taskUrl, contestPaymentUrl, contestsUrl, favoriteUrl} from "../apiPaths";
 
 export const getContestById = contestId => axios.get(`${contestUrl}/${contestId}`);
 export const createContest = (isNameExist, contest) => axios.post(`${contestUrl}?isNameExist=${isNameExist}`, contest);
@@ -9,7 +9,7 @@ export const createTask = (contestId, taskFormData) => axios.post(`/contest/${co
         'Content-Type': 'multipart/form-data',
     }
 });
-export const contestPaymentById = (contestId, creditCard) => {console.log('req');  return axios.post(`${contestPaymentUrl}/${contestId}`, creditCard)};
+export const contestPaymentById = (contestId, creditCard) => {  return axios.post(`${contestPaymentUrl}/${contestId}`, creditCard)};
 
 export const getAllContests = queryString => axios.get(`${contestsUrl}${queryString}`);
 

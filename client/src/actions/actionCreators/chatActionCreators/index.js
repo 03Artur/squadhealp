@@ -89,9 +89,6 @@ export function getMessageActionCreator(chatId,messageId) {
 
 
 export function searchChatRoomActionCreator(searchValue) {
-    console.group("searchChatRoomActionCreator");
-    console.log(searchValue);
-    console.groupEnd();
     return {
         type: CHAT_ACTION_TYPES.SEARCH_CHAT_ROOM_ACTION,
         searchValue,

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import styles from './UserItem.module.scss'
 import UserIcon from "../../../HomePage/Header/UserItem/UserIcon/UserIcon";
-import {userPicturesURL} from "../../../../api/baseURL";
+import {userPicturesURL} from "../../../../api/apiPaths";
 
 
 function UserItem(props) {

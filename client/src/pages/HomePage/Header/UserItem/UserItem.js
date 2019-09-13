@@ -19,7 +19,7 @@ import UserIcon from "./UserIcon/UserIcon";
 * Styles
 * */
 import styles from './UserItem.module.scss';
-import {userPicturesURL} from "../../../../api/baseURL";
+import {userPicturesURL} from "../../../../api/apiPaths";
 
 function UserItem(props) {
 

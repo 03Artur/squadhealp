@@ -1,5 +1,5 @@
 import {TASK_TYPES} from '../../constants'
-import {ICON_IMAGES_URL} from '../../api/baseURL'
+import {ICON_IMAGES_URL} from '../../api/apiPaths'
 
 export const taskTypeIconsSrc = new Map([
     [TASK_TYPES.NAME, {

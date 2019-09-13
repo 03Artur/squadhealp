@@ -1,5 +1,4 @@
-import io from 'socket.io-client';
-import {LOCAL_STORAGE_KEYS, SOCKET_EVENTS} from "../../constants";
+
 import store from "../../store";
 import {getChatActionCreator, getMessageActionCreator} from "../../actions/actionCreators/chatActionCreators";
 

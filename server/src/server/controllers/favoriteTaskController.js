@@ -12,13 +12,13 @@ export async function addFavoriteTask(req, res, next) {
                 taskId,
             }
         } = req;
-        console.log(userId, taskId);
+
         const favoriteTask = await FavoriteTasks.create({
             userId,
             taskId,
         });
 
-        console.log("FAVORITE TASK: ", favoriteTask);
+
 
         if (favoriteTask) {
             res.send(favoriteTask);
