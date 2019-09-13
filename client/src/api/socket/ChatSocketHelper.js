@@ -16,11 +16,13 @@ export default class ChatSocketHelper {
     }
     get socket() {
         return this._socket;
-        ChatSocketHelper.addEventHandler(this.socket);
+
     }
     set socket(socket) {
         this._socket = socket;
-        ChatSocketHelper.addEventHandler(socket);
+        //ChatSocketHelper.addEventHandler(socket);
+        socket.on(SOCKET_EVENTS.GET_CHAT, onGetChat);
+        socket.on(SOCKET_EVENTS.GET_MESSAGE, onGetMessage);
     }
     postChat(chatId) {
         this.socket.emit(SOCKET_EVENTS.POST_CHAT, chatId);

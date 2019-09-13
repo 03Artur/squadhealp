@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const messageSchema = new Schema(
     {
-        message: {
+        value: {
             type: Schema.Types.String,
             required: true,
             minLength: 1,

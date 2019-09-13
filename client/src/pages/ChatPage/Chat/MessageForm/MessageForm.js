@@ -49,14 +49,14 @@ const MessageForm = (props) => {
     const onSubmit = (values) => {
         if (chatId) {
             sendMessageAction(chatId, {
-                value: values.message,
+                value: values.value,
             })
         }
     };
     const submit = handleSubmit(onSubmit);
     return (
         <form onSubmit={submit} className={styles.container}>
-            <Field name={'message'} validate={[notEmpty, isRequired]} component={MessageInput}/>
+            <Field name={'value'} validate={[notEmpty, isRequired]} component={MessageInput}/>
             <MessageButton onClick={submit}/>
         </form>
     )

@@ -54,7 +54,7 @@ export function* joinToChatSaga({chatId}) {
 
         const {messages} = data;
 
-        yield call(getParticipantsSaga({participantsIds: messages.map(message => message.authorId)}));
+        yield call(getParticipantsSaga,{participantsIds: messages.map(message => message.authorId)});
 
         yield all([
                 put({
@@ -224,7 +224,10 @@ export function* postMessageSaga({chatId, message}) {
     try {
 
         const {data} = yield chatController.postMessage(chatId, message);
-        yield chatSocketHelper.postMessage(chatId, data._id);
+        console.log(data);
+
+        yield call(getParticipantsSaga,{participantsIds: [data.authorId]});
+         yield chatSocketHelper.postMessage(chatId, data._id);
         yield put({
             type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
             message: data,
@@ -236,14 +239,13 @@ export function* postMessageSaga({chatId, message}) {
             type: CHAT_ACTION_TYPES.POST_MESSAGE_ERROR,
             error: e.response.data,
         });
-
     }
 }
 
 
 /*
 *
-* MESSAGE
+* GET MESSAGES
 * */
 
 export function* getMessagesSaga({chatId, query}) {
@@ -256,8 +258,7 @@ export function* getMessagesSaga({chatId, query}) {
     try {
         const {data: messages} = yield chatController.getMessages(chatId, queryString.stringify(query));
 
-
-        yield call(getParticipantsSaga({participantsIds: messages.map(message => message.authorId)}));
+        yield call(getParticipantsSaga,{participantsIds: messages.map(message => message.authorId)});
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
@@ -279,8 +280,7 @@ export function* getMessageSaga({chatId, messageId}) {
             type: CHAT_ACTION_TYPES.GET_MESSAGE_REQUEST,
             chatId,
         });
-
-        const {data: message} = yield chatController.getMessage(chatId, messageId);
+        const {data: message} = yield chatController.getMessage(messageId);
 
         yield call(getParticipantsSaga, {participantsIds: [message.authorId]});
 

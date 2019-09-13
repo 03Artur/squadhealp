@@ -3,7 +3,7 @@ const yup = require('yup');
 
 
 export const messageYupSchema = yup.object({
-    message: yup.string().min(1).max(512).required(),
+    value: yup.string().min(1).max(512).required(),
 
 });
 
