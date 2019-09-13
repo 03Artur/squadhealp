@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 import {chatSocketHelper} from "../api/socket";
 import {baseURL} from "../api/baseURL";
 import CONTEST_ACTION_TYPES from "../actions/actionTypes/contestActionTypes";
-import chatsParticipantsReducer from "../reducers/chat/chatsParticipantsReducer";
 
 /*
 * CHAT
@@ -54,7 +53,7 @@ export function* joinToChatSaga({chatId}) {
 
         const {messages} = data;
 
-        yield call(getParticipantsSaga,{participantsIds: messages.map(message => message.authorId)});
+        yield call(getParticipantsSaga, {participantsIds: messages.map(message => message.authorId)});
 
         yield all([
                 put({
@@ -226,8 +225,8 @@ export function* postMessageSaga({chatId, message}) {
         const {data} = yield chatController.postMessage(chatId, message);
         console.log(data);
 
-        yield call(getParticipantsSaga,{participantsIds: [data.authorId]});
-         yield chatSocketHelper.postMessage(chatId, data._id);
+        yield call(getParticipantsSaga, {participantsIds: [data.authorId]});
+        yield chatSocketHelper.postMessage(chatId, data._id);
         yield put({
             type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
             message: data,
@@ -241,7 +240,6 @@ export function* postMessageSaga({chatId, message}) {
         });
     }
 }
-
 
 /*
 *
@@ -258,7 +256,7 @@ export function* getMessagesSaga({chatId, query}) {
     try {
         const {data: messages} = yield chatController.getMessages(chatId, queryString.stringify(query));
 
-        yield call(getParticipantsSaga,{participantsIds: messages.map(message => message.authorId)});
+        yield call(getParticipantsSaga, {participantsIds: messages.map(message => message.authorId)});
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGES_RESPONSE,
@@ -296,8 +294,5 @@ export function* getMessageSaga({chatId, messageId}) {
     }
 }
 
-
 //UTILS
 const getParticipants = state => state.chatsParticipantsReducer;
-
-

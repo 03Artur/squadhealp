@@ -5,7 +5,7 @@ import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
 import * as entryMW from '../middlewares/entry'
 import {getEntries, postEntry, rejectEntry, setWinner, updateEntry} from "../controllers/entryController";
-import {namingFile} from "../middlewares/multer";
+import {filterOnlyImages, namingFile} from "../middlewares/multer";
 import {getSelectProps} from "../middlewares/entry/filterEntry";
 
 const storage = multer.diskStorage({
@@ -14,7 +14,10 @@ const storage = multer.diskStorage({
     },
     filename: namingFile
 });
-const upload = multer({storage: storage});
+const upload = multer({
+    storage: storage,
+    fileFilter: filterOnlyImages,
+});
 const router = express.Router();
 
 router.post('/task/:taskId/entry', upload.array('files', 8), (req, res, next) => {

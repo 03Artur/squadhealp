@@ -5,7 +5,7 @@ import path from 'path'
 import multer from 'multer';
 import moment from 'moment';
 import {MULTER_TIME_FORMAT} from '../constants';
-import {namingFile} from "../middlewares/multer";
+import {filterOnlyImages, namingFile} from "../middlewares/multer";
 import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
 import {addContestExtraContent} from "../middlewares/contest/includeContestExtraContent";
 import createTaskChat from "../middlewares/contest/createTaskChat";
@@ -18,7 +18,10 @@ const storage = multer.diskStorage({
     filename: namingFile
 });
 
-const upload = multer({storage: storage});
+const upload = multer({
+    storage: storage,
+    fileFilter: filterOnlyImages
+});
 const router = express.Router();
 
 router.post('/contest',

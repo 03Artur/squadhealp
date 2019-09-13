@@ -1,4 +1,4 @@
-import React, {Component, Fragment, useState} from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './CreativeButtons.module.scss';
@@ -14,7 +14,6 @@ import history from "../../../../../../history";
 const CreativeButtons = (props) => {
 
 
-    //const [a,b] = useState(false);
 
     const {
         contest: {
@@ -25,9 +24,12 @@ const CreativeButtons = (props) => {
         chats,
         joinToChatAction
     } = props;
+
+
+
     const onJoinToChat = () => {
         joinToChatAction(chatId);
-        history.push()
+        history.push(`${PATHS.MESSAGES_CHAT}/${chatId}`)
     };
 
     const getJoinButtonEnable = () => {

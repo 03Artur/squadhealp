@@ -26,6 +26,8 @@ export const SOCKET_EVENTS = {
     JOIN_TO_CHAT: 'JOIN_TO_CHAT',
 };
 
+export const IMAGES_EXTENSIONS = ['.png', '.jpg', '.jfif', '.jpe', '.jpeg', '.gif', '.svg','.bmp', '.dib','.rle'];
+
 export const ACTION = {
     POST: "POST",
     GET: "GET",
@@ -118,42 +120,6 @@ export const USERS_ACTION_RULES = new Map([
     ],
 ]);
 
-// module.exports = {
-//     USERS_ACTION_RULES,
-//     CONTEST_ACTION_RULES,
-//     ENTRY_ACTION_RULES,
-//     CHAT_ACTION_RULES,
-//     MESSAGE_ACTION_RULES,
-//     ROLES: ROLES,
-//     SOCKET_EVENTS,
-//     SQUAD_HELP_BANK_CARD: {
-//         number: '0000111122223333',
-//         expiry: "12/99",
-//         cvc: "123",
-//     },
-//     ACTION,
-//     TASK_TYPE,
-//     TASK_PRIORITY: new Map([
-//         [TASK_TYPE.TAGLINE, 8],
-//         [TASK_TYPE.LOGO, 9],
-//         [TASK_TYPE.NAME, 10],
-//     ]),
-//     TASK_COST: new Map([
-//         [TASK_TYPE.TAGLINE, 72.15],
-//         [TASK_TYPE.LOGO, 91.43],
-//         [TASK_TYPE.NAME, 100.0],
-//     ]),
-//     MULTER_TIME_FORMAT: 'YYMMDDHHmmss',
-//     CONTEST_FILTER_PROPS: ['isPaid', 'createdAt', 'name', 'userId', 'typeOfIndustry', 'nameOf'],
-//     TASK_FILTER_PROPS: ['isActive', 'cost', 'style', 'type', 'winnerId'],
-//     ORDER_PROPS: ['orderBy', 'order'],
-//     DEVICES_COUNT: 3,
-//     SALT_ROUND: 10,
-//     AUTHORIZATION_BEARER: 'Bearer ',
-//     TOKEN_PRIVATE_KEY: 'Welcome to the jungle',
-//     ACCESS_TOKEN_EXPIRES_IN: 60 * 60 * 24,
-//     REFRESH_TOKEN_EXPIRES_IN: (60 * 60 * 24 * 30),
-// };
 
 export const MULTER_TIME_FORMAT = 'YYMMDDHHmmss';
 export const CONTEST_FILTER_PROPS = ['isPaid', 'createdAt', 'name', 'userId', 'typeOfIndustry', 'nameOf'];

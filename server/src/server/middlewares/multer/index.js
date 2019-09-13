@@ -1,7 +1,7 @@
 import multer from 'multer';
 import path from 'path';
 import moment from 'moment';
-import {MULTER_TIME_FORMAT} from "../../constants";
+import {IMAGES_EXTENSIONS, MULTER_TIME_FORMAT} from "../../constants";
 
 const upload = multer({});
 
@@ -14,6 +14,11 @@ export function saveTaskFile(req, res, next) {
     } catch (e) {
         next(e);
     }
+}
+
+export function filterOnlyImages(req, file, cb) {
+    const ext = path.extname(file.originalname);
+    cb(null, IMAGES_EXTENSIONS.includes(ext));
 }
 
 export function namingFile(req, file, cb) {
