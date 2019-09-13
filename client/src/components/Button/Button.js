@@ -9,7 +9,8 @@ const Button = (props) => {
     const {onClick, children, isEnable, className, disableClassName} = props;
 
     const clickHandler = () => {
-        if (isEnable) {
+        if (isEnable && onClick) {
+
             onClick();
         }
     };

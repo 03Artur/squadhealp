@@ -25,8 +25,8 @@ export default class ChatSocketHelper {
     postChat(chatId) {
         this.socket.emit(SOCKET_EVENTS.POST_CHAT, chatId);
     }
-    postMessage(messageId){
-        this.socket.emit(SOCKET_EVENTS.POST_MESSAGE,messageId);
+    postMessage(chatId, messageId){
+        this.socket.emit(SOCKET_EVENTS.POST_MESSAGE, {chatId, messageId});
     }
     postJoinToChat(chatId){
         this.socket.emit(SOCKET_EVENTS.JOIN_TO_CHAT,chatId);

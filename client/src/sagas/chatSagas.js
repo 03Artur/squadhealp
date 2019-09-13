@@ -52,6 +52,10 @@ export function* joinToChatSaga({chatId}) {
     try {
         const {data} = yield chatController.joinToChat(chatId);
 
+        const {messages} = data;
+
+        yield call(getParticipantsSaga({participantsIds: messages.map(message => message.authorId)}));
+
         yield all([
                 put({
                     type: CHAT_ACTION_TYPES.GET_CHAT_RESPONSE,
@@ -214,13 +218,13 @@ export function* getParticipantSaga({id}) {
 
 //POST MESSAGE
 export function* postMessageSaga({chatId, message}) {
+    yield put({
+        type: CHAT_ACTION_TYPES.POST_MESSAGE_REQUEST,
+    });
     try {
-        yield put({
-            type: CHAT_ACTION_TYPES.POST_MESSAGE_REQUEST,
-        });
 
         const {data} = yield chatController.postMessage(chatId, message);
-        yield chatSocketHelper.postMessage(data._id);
+        yield chatSocketHelper.postMessage(chatId, data._id);
         yield put({
             type: CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE,
             message: data,
@@ -278,7 +282,7 @@ export function* getMessageSaga({chatId, messageId}) {
 
         const {data: message} = yield chatController.getMessage(chatId, messageId);
 
-        yield call(getParticipantsSaga, {participantsIds: message.authorId});
+        yield call(getParticipantsSaga, {participantsIds: [message.authorId]});
 
         yield put({
             type: CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE,

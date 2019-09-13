@@ -16,7 +16,6 @@ const chatSchema = new Schema(
         ],
         name: {
             type: Schema.Types.String,
-            required: true,
             minlength: 1,
             maxlength: 512,
         },

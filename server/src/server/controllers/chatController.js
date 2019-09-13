@@ -97,6 +97,7 @@ export async function postMessage(req, res, next) {
 
         if (message && chat) {
             res.send(message);
+
         }
 
         return next(new appError.BadRequestError());
@@ -140,7 +141,16 @@ export async function getChatMessages(req, res, next) {
 export async function joinToChat(req, res, next) {
     try {
         const {accessTokenPayload: {id: userId}, params: {chatId}} = req;
-        let chat = await Chat.findById(chatId);
+        let chat = await Chat.findById(chatId).populate({
+            path: 'messages',
+            options: {
+                limit: 20,
+                sort: {
+                    updatedAt: -1,
+                },
+                retainNullValues: false,
+            }
+        });
         if (chat) {
             chat.participants.addToSet(userId);
             chat = await chat.save();
@@ -172,9 +182,7 @@ export async function createChat(req, res, next) {
         data.ownerId = ownerId;
         data.participants.push(ownerId);
         data.participants = array.uniq(data.participants);
-
         const chat = await Chat.create(data);
-
         res.send({chat,});
         if (chat) {
             res.send(chat);

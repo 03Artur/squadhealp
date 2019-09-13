@@ -39,7 +39,7 @@ const ContestPayment = (props) => {
             tasks.map(item => (
                 <li key={item.id} className={styles.billItem}>
                     <span>{`${item.type} contest: `}</span>
-                    <span className={styles.price}>{`${item.cost}\$`}</span>
+                    <span className={styles.price}>{`${item.cost} \$`}</span>
                 </li>
             ))
         )
@@ -54,7 +54,7 @@ const ContestPayment = (props) => {
                 </ul>
                 <div className={styles.totalContainer}>
                     <h3>Total: </h3>
-                    <span className={styles.price}>{`${tasks.reduce((total, item) => (total + item.cost), 0)}\$`}</span>
+                    <span className={styles.price}>{`${tasks.reduce((total, item) => (total + item.cost), 0)} \$`}</span>
                 </div>
             </div>
         );

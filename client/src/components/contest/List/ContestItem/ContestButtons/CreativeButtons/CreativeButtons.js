@@ -8,12 +8,13 @@ import AddEntryButton from "../../buttons/AddEntryButton/AddEntryButton";
 import classNames from 'classnames';
 import {joinToChatActionCreator} from "../../../../../../actions/actionCreators/chatActionCreators";
 import {Link} from 'react-router-dom';
+import {PATHS} from "../../../../../../constants";
 
 
 const CreativeButtons = (props) => {
 
     const {
-        task: {
+        contest: {
             id: taskId,
             isFavorite,
             chatId,
@@ -24,7 +25,6 @@ const CreativeButtons = (props) => {
 
     const onJoinToChat = () => {
         joinToChatAction(chatId);
-
     };
 
     const getJoinButtonEnable = () => {
@@ -44,7 +44,7 @@ const CreativeButtons = (props) => {
                         className={className.joinToChatButton}>
                     {"Join to chat"}
                 </Button>
-                <Link className={styles.link}>
+                <Link className={styles.link} to={`${PATHS.ENTRIES}/${taskId}${PATHS.ENTRY}`}>
                     <Button className={className.startEntryButton} taskId={taskId}>
                         {"Add Entry"}
                     </Button>
@@ -56,6 +56,7 @@ const CreativeButtons = (props) => {
 
 CreativeButtons.propTypes = {
     className: PropTypes.string,
+    contest: PropTypes.object.isRequired,
 };
 
 CreativeButtons.defaultProps = {};

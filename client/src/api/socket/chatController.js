@@ -3,7 +3,7 @@ import {LOCAL_STORAGE_KEYS, SOCKET_EVENTS} from "../../constants";
 import store from "../../store";
 import {getChatActionCreator, getMessageActionCreator} from "../../actions/actionCreators/chatActionCreators";
 
-export const onGetMessage = messageId => store.dispatch(getMessageActionCreator(messageId));
+export const onGetMessage = ({chatId,messageId}) => store.dispatch(getMessageActionCreator(chatId,messageId));
 export const onGetChat = chatId => store.dispatch(getChatActionCreator(chatId));
 
 

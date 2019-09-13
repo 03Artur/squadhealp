@@ -44,13 +44,14 @@ MessageButton.defaultProps = {
 
 const MessageForm = (props) => {
 
-    const {handleSubmit} = props;
+    const {handleSubmit, chatId, sendMessageAction} = props;
 
     const onSubmit = (values) => {
-
-        props.sendMessageAction(props.chatId, {
-            value: values.message,
-        })
+        if (chatId) {
+            sendMessageAction(chatId, {
+                value: values.message,
+            })
+        }
     };
     const submit = handleSubmit(onSubmit);
     return (
@@ -73,7 +74,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        sendMessageAction: (chatId, message) => dispatch(postMessageActionCreator(chatId,message))
+        sendMessageAction: (chatId, message) => dispatch(postMessageActionCreator(chatId, message))
     }
 }
 

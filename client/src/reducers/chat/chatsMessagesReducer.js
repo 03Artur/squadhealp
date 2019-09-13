@@ -19,13 +19,13 @@ export default function (state = initialState, action) {
                 messages: messages,
             }
         }
-
+        case CHAT_ACTION_TYPES.CREATE_CHAT_RESPONSE:
         case CHAT_ACTION_TYPES.GET_CHAT_RESPONSE: {
             const clonedState = _.cloneDeep(state);
             clonedState.messages.set(action.chat._id, action.chat.messages);
             return clonedState;
         }
-
+        case CHAT_ACTION_TYPES.POST_MESSAGE_RESPONSE:
         case CHAT_ACTION_TYPES.GET_MESSAGE_RESPONSE: {
 
             const clonedState = _.cloneDeep(state);

@@ -45,7 +45,7 @@ class SocketHelper {
 
         });
         socket.on(SOCKET_EVENTS.POST_MESSAGE, ({chatId, messageId}) => {
-            socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, messageId)
+            socket.to(chatId).emit(SOCKET_EVENTS.GET_MESSAGE, {chatId,messageId})
         })
 
     }
