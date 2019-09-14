@@ -1,10 +1,6 @@
-FROM node:10.15.0-alpine
+FROM node:10.15.0-alpine as build-stage
 
-ARG NODE_ENV="development"
-
-RUN mkdir -p ./client
-
-WORKDIR /client
+WORKDIR ./
 
 COPY package*.json ./
 
@@ -12,6 +8,18 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5000 9009
+RUN npm run build
 
-CMD npm start
+COPY . .
+
+FROM nginx:1.13.12-alpine as production-stage
+
+COPY --from=build-stage ./build /var/www/html/
+
+EXPOSE 80
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]

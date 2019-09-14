@@ -32,7 +32,7 @@ const chatSchema = new Schema(
     },
 );
 
-
+chatSchema.index({ ownerId: 1, name: 1 }, { unique: true });
 
 chatSchema.static('checkPermission', (action, chat, actor) => {
 

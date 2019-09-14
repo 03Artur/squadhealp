@@ -4,7 +4,7 @@ services:
   nginx-server-prod:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: client/Dockerfile
     restart: always
     environment:
       NODE_ENV: production
@@ -18,18 +18,16 @@ services:
   server-prod:
     build:
       context: ./server
-
+      dockerfile: server/Dockerfile
     environment:
       NODE_ENV: production
-    ports:
-      - "3000:3000"
+      PORT: 8081
+    restart: always
     depends_on:
-      - db-dev
-      - mongodb
+      - db-prod
+      - mongodb-prod
     volumes:
-      - ./var/www/html/images:/var/www/html/images
-      - ./server:/server
-      - /server/node_modules
+      - ./data/prod/images:/var/www/html/images
 
   db-prod:
     image: postgres:10
@@ -37,18 +35,13 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=todo-dev
+    volumes:
+      - ./data/prod:/var/lib/postgresql/data
 
-
-  mongodb:
+  mongodb-prod:
     image: mongo:latest
     restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=chat-prod
-
     volumes:
       - ./data/prod/db:/data/db
       - ./data/prod/configdb:/data/configdb
-volumes:
-  server-dev:
+

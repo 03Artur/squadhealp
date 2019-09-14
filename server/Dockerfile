@@ -1,22 +1,16 @@
 FROM node:10.13.0
 
-ARG NODE_ENV="development"
-
-RUN mkdir /server
-
-RUN mkdir -p /var/www/html/images
+RUN mkdir -p ./server
 
 WORKDIR /server
 
-COPY package*.json ./
-
-RUN npm install -g nodemon
-RUN npm install -g sequelize-cli
-
-RUN npm install
-
 COPY . .
 
-EXPOSE 3000 3010
+RUN apt-get install libjpeg-dev libfontconfig1 && \
+		npm install cluster-service && \
+		npm install && \
+		mkdir -p /var/www/html/images
 
-CMD npm start
+EXPOSE 8081
+
+CMD npm run serve
