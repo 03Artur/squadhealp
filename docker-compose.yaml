@@ -34,13 +34,17 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=todo-dev
+      - POSTGRES_DB=todo-prod
     volumes:
       - ./data/prod:/var/lib/postgresql/data
 
   mongodb-prod:
     image: mongo:latest
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=chat-prod
     volumes:
       - ./data/prod/db:/data/db
       - ./data/prod/configdb:/data/configdb

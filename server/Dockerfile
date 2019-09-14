@@ -1,15 +1,21 @@
 FROM node:10.13.0
 
-RUN mkdir -p ./server
+ARG NODE_ENV="production"
+
+RUN mkdir /server
+
+RUN mkdir -p /var/www/html/images
 
 WORKDIR /server
 
-COPY . .
+COPY package*.json ./
 
-RUN apt-get install libjpeg-dev libfontconfig1 && \
-		npm install cluster-service && \
-		npm install && \
-		mkdir -p /var/www/html/images
+RUN npm install -g sequelize-cli
+
+RUN npm install
+RUN npm run build
+
+COPY . .
 
 EXPOSE 8081
 

@@ -36,6 +36,11 @@ services:
 
   db-dev:
     image: postgres:10
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=todo-dev
     ports:
       - "5432:5432"
     volumes:
@@ -44,7 +49,10 @@ services:
   mongodb-dev:
     image: mongo:latest
     restart: always
-
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=chat-dev
     ports:
       - "27018:27018"
     volumes:
