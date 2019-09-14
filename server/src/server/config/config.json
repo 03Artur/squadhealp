@@ -15,10 +15,10 @@
     "username": "postgres",
     "password": "password",
     "database": "todo-test",
-    "host": "db-dev",
-    "mongoDbUrl": "mongodb://mongodb:27017",
+    "host": "db-test",
+    "mongoDbUrl": "mongodb://mongodb-test:27017",
     "mongoUsername": "admin",
-    "mongoDBName": "chat-dev",
+    "mongoDBName": "chat-test",
     "mongoPassword": "password",
 
     "dialect": "postgres",

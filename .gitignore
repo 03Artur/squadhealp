@@ -2,6 +2,7 @@
 ./client/node_modules
 ./server/node_modules
 ./server/public/taskFiles/**
+./server/dist/
 data/
 mongodb/
 

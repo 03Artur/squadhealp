@@ -4,7 +4,7 @@ services:
   nginx-server-prod:
     build:
       context: ./client
-      dockerfile: client/Dockerfile
+      dockerfile: Dockerfile
     restart: always
     environment:
       NODE_ENV: production
@@ -18,7 +18,7 @@ services:
   server-prod:
     build:
       context: ./server
-      dockerfile: server/Dockerfile
+      dockerfile: Dockerfile
     environment:
       NODE_ENV: production
       PORT: 8081
