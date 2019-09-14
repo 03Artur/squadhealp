@@ -4,7 +4,7 @@ import {participantsUrl, chatsUrl, chatUrl, messageUrl, participantUrl, messages
 /*
 * CHAT
 * */
-export const createTaskChat = taskId => axios.post(`${taskUrl}/${taskId}${chatUrl}`);
+export const createTaskChat = taskId => axios.post(`${chatUrl}${taskUrl}/${taskId}`);
 export const getUserChats = () => axios.get(chatsUrl);
 export const postChat = chat => axios.post(chatUrl, chat);
 export const getChat = chatId => axios.get(`${chatsUrl}/${chatId}`);

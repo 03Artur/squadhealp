@@ -22,12 +22,11 @@ services:
     environment:
       NODE_ENV: production
       PORT: 8081
-    restart: always
     depends_on:
       - db-prod
       - mongodb-prod
     volumes:
-      - ./data/prod/images:/var/www/html/images
+      - ./data/prod/images:/public/images
 
   db-prod:
     image: postgres:10
@@ -48,4 +47,5 @@ services:
     volumes:
       - ./data/prod/db:/data/db
       - ./data/prod/configdb:/data/configdb
-
+volumes:
+  server-prod:

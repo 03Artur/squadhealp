@@ -1,19 +1,13 @@
-//REACT
-import React from 'react';
-//COMPONENTS
+import React, {useEffect} from 'react';
 import ErrorInput from '../_components/inputs/ErrorInput/ErrorInput';
 import InputRadio from '../_components/inputs/InputRadio/InputRadio';
 import SubmitButton from '../_components/buttons/SubmitButton/SubmitButton';
 import Spinner from '../../Spinner/Spinner';
-//REDUX & FRIENDS
 import {connect} from 'react-redux'
 import {Field, reduxForm} from 'redux-form';
 import {loginActionCreator, signUpActionCreator} from "../../../actions/authorizationActionCreators";
-
-//UTILS
 import {AUTHORIZATION_MODES, ROLES} from '../../../constants';
 import * as VALIDATION from '../../../utils/reduxForm/validateValue'
-//STYLES
 import styles from './AuthorizationForm.module.scss';
 import {FORM_NAMES} from "../../../constants";
 
@@ -40,7 +34,7 @@ function AuthorizationForm(props) {
         }
     };
 
-    const renderSignUp = () => {
+    const renderSignUpFields = () => {
         return <React.Fragment>
             <div className={styles.fieldRow}>
                 <div className={styles.fieldCol}>{
@@ -72,7 +66,7 @@ function AuthorizationForm(props) {
         </React.Fragment>
     };
 
-    const renderLogin = () => {
+    const renderLoginFields = () => {
         return (
             <div className={styles.fieldRow}>
                 <div className={styles.col}>{
@@ -88,9 +82,9 @@ function AuthorizationForm(props) {
     const renderFields = () => {
         switch (props.mode) {
             case AUTHORIZATION_MODES.LOGIN_MODE:
-                return renderLogin();
+                return renderLoginFields();
             case AUTHORIZATION_MODES.SIGN_UP_MODE:
-                return renderSignUp();
+                return renderSignUpFields();
             default:
                 break;
         }
@@ -108,6 +102,7 @@ function AuthorizationForm(props) {
             return props.submitButtonText
         }
     };
+
 
     return (
         <div className={styles.formContainer}>

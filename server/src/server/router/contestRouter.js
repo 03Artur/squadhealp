@@ -7,7 +7,6 @@ import {filterOnlyImages, namingFile} from "../middlewares/multer";
 import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
 import {addContestExtraContent} from "../middlewares/contest/includeContestExtraContent";
 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../../../public/images/taskFiles/'))
@@ -22,8 +21,8 @@ const upload = multer({
 const router = express.Router();
 
 router.post('/contest',
-    /*  contestMW.checkUserCrudContestPermissions,
-      contestMW.validateContestOnCreate,*/
+    contestMW.checkUserCrudContestPermissions,
+    contestMW.validateContestOnCreate,
     contestController.upsertContest
 );
 
@@ -61,14 +60,12 @@ router.put('/contest/task',
 );
 
 router.get('/contest/:id',
-    /*
-        contestMW.checkUserCrudContestPermissions,
-    */
+    contestMW.checkUserCrudContestPermissions,
     contestController.getContestById
 );
 
 router.get('/contests',
-    // contestMW.checkUserCrudContestPermissions,
+    contestMW.checkUserCrudContestPermissions,
     pickContestFilter,
     pickTaskFilter,
     pickOrder,

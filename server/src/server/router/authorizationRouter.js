@@ -13,7 +13,6 @@ import {
     deleteRefreshToken
 } from './../controllers/authorizationController';
 import checkRefreshTokensLimit from '../middlewares/token/checkRefreshTokensLimit'
-import setUserActive from './../middlewares/user/setUserActive';
 import checkUserBan from './../middlewares/permission/checkUserBan';
 import checkAccessToken from "../middlewares/token/checkAccessToken";
 

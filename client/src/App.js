@@ -5,7 +5,6 @@ import {PATHS, ROLES} from "./constants"
 import AccessRoute from './components/routes/AccessRoute/AccessRoute';
 import UserLoader from "./components/UserLoader/UserLoader";
 import AuthorizedRoute from "./components/routes/AuthorizedRoute/AuthorizedRoute";
-
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const AuthorizationPage = lazy(() => import("./pages/AuthorizationPage/AuthorizationPage"));
 const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));

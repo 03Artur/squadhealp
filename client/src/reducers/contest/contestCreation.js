@@ -26,6 +26,8 @@ export default function contestCreation(state = initialState, action) {
             });
 
         case ACTION_TYPES.CONTEST_CREATION_ERROR :
+        case ACTION_TYPES.CREATE_TASK_ERROR :
+        case ACTION_TYPES.CONTEST_PAYMENT_ERROR :
             return _.cloneDeep({
                 ...state,
                 isFetching: false,

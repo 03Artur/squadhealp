@@ -1,76 +1,54 @@
-/*
-* REACT
-* */
-import React, {useEffect, useState} from 'react';
-
-/*
-* REACT, REACT-REDUX
-* */
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {
     changeModeToLoginActionCreator,
-    changeModeToSignUpActionCreator, closeErrorActionCreator,
-
+    changeModeToSignUpActionCreator,
 } from "../../actions/authorizationActionCreators";
-
-/*
-* COMPONENTS
-* */
 import DocumentTitle from 'react-document-title';
 import AuthorizationHeader from '../../components/headers/AuthorizationHeader/AuthorizationHeader'
 import AuthorizationForm from '../../components/forms/AuthorizationForm/AuthorizationForm';
-import Error from "../../components/notifications/Error/Error";
-
-/*
-* STYLES
-* */
 import styles from './AuthorizationPage.module.scss';
-
-/*
-* UTILS
-* */
-import {AUTHORIZATION_MODES, PATHS, ROLES} from '../../constants';
+import {AUTHORIZATION_MODES, PATHS} from '../../constants';
+import classNames from 'classnames';
+import {useAlert} from 'react-alert';
 
 const AuthorizationPage = (props) => {
 
+    const {error, user, history} = props;
+    const alert = useAlert();
 
     useEffect(() => {
-        if (props.user) {
 
-            props.history.push(PATHS.HOME);
+        if (error) {
+            alert.error(`${error.status} ${error.message}`)
+        }
+
+    }, [error]);
+
+
+    useEffect(() => {
+        if (user) {
+            history.push(PATHS.HOME);
         }
     }, [props.user]);
 
     useEffect(() => {
         changeAuthorizationModeByLocation()
-    }, [props.location.pathname]);
+    }, [history.location.pathname]);
 
     const changeAuthorizationModeByLocation = () => {
-        if (props.location.pathname === PATHS.SIGN_UP && props.mode !== AUTHORIZATION_MODES.SIGN_UP_MODE) {
+        if (history.location.pathname === PATHS.SIGN_UP && props.mode !== AUTHORIZATION_MODES.SIGN_UP_MODE) {
             props.changeModeToSignUpAction();
-        } else if (props.location.pathname === PATHS.LOGIN && props.mode !== AUTHORIZATION_MODES.LOGIN_MODE) {
+        } else if (history.location.pathname === PATHS.LOGIN && props.mode !== AUTHORIZATION_MODES.LOGIN_MODE) {
             props.changeModeToLoginAction();
         }
     };
 
-
-    const renderError = () => {
-        if (props.error) {
-
-            return (
-                <Error onClick={props.closeErrorAction} message={`${props.error.status} ${props.error.message}`}/>
-            )
-        }
-    };
-
-    const titleClasses = [styles.title, styles.titleField].join(' ');
+    const titleClasses = classNames(styles.title, styles.titleField);
 
     return (
         <div className={styles.page}>
             <DocumentTitle title={props.documentTitle}/>
-            {
-                renderError()
-            }
             <div className={styles.myContainer}>
                 <AuthorizationHeader/>
                 <h1 className={titleClasses}>{props.pageTitle}</h1>
@@ -83,17 +61,15 @@ const AuthorizationPage = (props) => {
 
 };
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
 
-    const {page, mode} = store.authorizationMode;
-    return {...store.authorizationReducer, mode, ...page};
+    const {page, mode} = state.authorizationMode;
+    return {...state.authorizationReducer, mode, ...page};
 };
 
 const mapDispatchToProps = (dispatch) => ({
     changeModeToLoginAction: () => dispatch(changeModeToLoginActionCreator()),
     changeModeToSignUpAction: () => dispatch(changeModeToSignUpActionCreator()),
-    closeErrorAction: () => dispatch(closeErrorActionCreator()),
-    getUserNavigationAction: () => dispatch(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationPage);

@@ -29,7 +29,7 @@ let StartContestPage = (props) => {
 
     useEffect(() => {
         if (error) {
-
+            alert.error(`${error.status} ${error.message}`)
         }
     }, [error]);
 

@@ -21,6 +21,7 @@ export default async (req, res, next) => {
         if (Contests.checkPermission(req.method, req.accessTokenPayload, contest)) {
 
             req.contest = contest;
+
             return next();
         } else {
             return next(new appError.ForbiddenError("here"));
