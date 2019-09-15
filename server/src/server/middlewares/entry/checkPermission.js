@@ -41,7 +41,7 @@ export async function checkGrandOrRejectPermission(req, res, next) {
                     }
                 ]
             });
-            if (task) {
+            if (task&& task.contest.userId === user.id) {
                 req.task = task;
 
                 return next();

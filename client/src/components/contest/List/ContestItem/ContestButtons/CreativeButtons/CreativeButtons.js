@@ -13,47 +13,59 @@ import history from "../../../../../../history";
 
 const CreativeButtons = (props) => {
 
-
-
     const {
         contest: {
             id: taskId,
             isFavorite,
             chatId,
+            winnerId,
         },
         chats,
         joinToChatAction
     } = props;
-
-
 
     const onJoinToChat = () => {
         joinToChatAction(chatId);
         history.push(`${PATHS.MESSAGES_CHAT}/${chatId}`)
     };
 
-    const getJoinButtonEnable = () => {
+    const renderJoinToChatButton = () => {
+        if (chats.has(chatId)) {
+            history.push(`${PATHS.MESSAGES_CHAT}/${chatId}`)
+        } else if (chatId) {
+            const classname = classNames(styles.buttonCol, styles.joinToChatButton);
+            return (
+                <Button isEnable={true} onClick={onJoinToChat}
+                        className={classname}>
+                    {"Join to chat"}
+                </Button>
+            )
+        }
+    };
+    const renderAddEntryButton = () => {
+        if (!winnerId) {
+            return (
+                <Link className={styles.link} to={`${PATHS.ENTRIES}/${taskId}${PATHS.ENTRY}`}>
+                    <Button className={classNames(styles.buttonCol, styles.startEntryButton)} taskId={taskId}>
+                        {"Add Entry"}
+                    </Button>
+                </Link>
+            )
+        }
+    };
 
-    };
-    const className = {
-        startEntryButton: classNames(styles.buttonCol, styles.startEntryButton),
-        joinToChatButton: classNames(styles.buttonCol, styles.joinToChatButton),
-    };
     return (
         <div className={styles.container}>
             <div className={styles.row}>
                 <LikeButton taskId={taskId} isLiked={isFavorite}/>
             </div>
             <div className={styles.row}>
-                <Button isEnable={true} onClick={onJoinToChat}
-                        className={className.joinToChatButton}>
-                    {"Join to chat"}
-                </Button>
-                <Link className={styles.link} to={`${PATHS.ENTRIES}/${taskId}${PATHS.ENTRY}`}>
-                    <Button className={className.startEntryButton} taskId={taskId}>
-                        {"Add Entry"}
-                    </Button>
-                </Link>
+                {
+                    renderJoinToChatButton()
+                }
+                {
+                    renderAddEntryButton()
+                }
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, {Component, Fragment, useEffect} from 'react';
+import React, { Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './ContestsPage.module.scss';
@@ -9,9 +9,7 @@ import classNames from 'classnames';
 import ContestList from "../../components/contest/List/ContestList";
 import {getContestsActionCreator} from "../../actions/actionCreators/contestActionCreators/constestActionCreators";
 import _ from 'lodash';
-import {PATHS} from "../../constants";
 
-let count = 0;
 const ContestsPage = (props) => {
 
     const {
@@ -20,9 +18,7 @@ const ContestsPage = (props) => {
         limit,
         offset,
         getContestsAction,
-        selectedContest,
     } = props;
-
 
     useEffect(() => {
         getContestsAction(history.location.search);
@@ -30,18 +26,9 @@ const ContestsPage = (props) => {
     }, [history.location.search]);
 
     useEffect(() => {
-        if(selectedContest){
-            history.push(`${PATHS.CONTEST}/${selectedContest.id}`)
-        }
-    }, [selectedContest]);
-
-    useEffect(() => {
-
         const {location: {search}} = history;
         const searchObj = queryString.parse(search);
         if (!_.isEqual(filter, searchObj)) {
-
-
             const newSearch = queryString.stringify({
                 ...searchObj,
                 ...filter,
@@ -85,14 +72,13 @@ ContestsPage.defaultProps = {};
 const mapStateToProps = state => {
     const {filter} = state.contestFilterReducer;
     const {limit, offset} = state.contestPaginationReducer;
-    const {contest} = state.selectedContest;
     return {
         filter,
         limit,
         offset,
-        selectedContest: contest,
     }
 };
+
 const mapDispatchToProps = dispatch => ({
     getContestsAction: (search) => dispatch(getContestsActionCreator(search))
 });

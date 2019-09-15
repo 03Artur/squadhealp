@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
                     new MenuItem("My Contests", {
                         pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
                         search: queryString.stringify({
-                            isActive: true,
+                            isPaid: true,
                             winnerId: action.user.id,
                         }),
                     }),

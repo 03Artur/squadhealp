@@ -11,6 +11,8 @@ import Button from "../../../Button/Button";
 import classNames from 'classnames';
 import LazyImage from "../../../Image/LazyImage";
 import {entryFilesUrl} from "../../../../api/apiPaths";
+import {useAlert} from 'react-alert';
+
 
 const EntryItem = (props) => {
     const {
@@ -26,16 +28,18 @@ const EntryItem = (props) => {
         isWinner,
         task,
     } = props;
+    const alert = useAlert();
 
     const makeWinnerEntry = () => {
-        if (isWinner) {
+        if (isWinner || isRejected) {
             return;
         }
         makeWinnerEntryAction(entryId);
     };
 
     const rejectEntry = () => {
-        if (isRejected) {
+        if (isRejected || isWinner) {
+
             return;
         }
         rejectEntryAction(entryId);
@@ -66,9 +70,9 @@ const EntryItem = (props) => {
                 <div className={styles.actionContainer}>
                     <div className={styles.buttonContainer}>
                         <Button className={winnerButtonClassName}
-                                         onClick={makeWinnerEntry}>Make winner</Button>
+                                onClick={makeWinnerEntry}>Make winner</Button>
                         <Button isEnable={!isRejected} className={rejectButtonClassName}
-                                         onClick={rejectEntry}>Reject</Button>
+                                onClick={rejectEntry}>Reject</Button>
                     </div>
                 </div>
             )

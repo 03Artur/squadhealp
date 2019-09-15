@@ -70,9 +70,22 @@ export async function updateEntry(req, res, next) {
 
 export async function setWinner(req, res, next) {
     try {
-        const {task: {cost, entries: [entry]}, params: {id}} = req;
+        const {task: {id: taskId,cost, entries: [entry]}, params: {id}} = req;
 
         let transaction = await sequelize.transaction();
+        const Op = Sequelize.Op;
+        await Entries.update({
+            isRejected: true,
+
+        },{
+            fields: ['isRejected'],
+            where: {
+                taskId,
+                id: {
+                    [Op.ne]: id,
+                }
+            }
+        });
         const updatedTask = await req.task.update({
             winnerId: id,
         }, {
@@ -80,6 +93,8 @@ export async function setWinner(req, res, next) {
             returning: true,
             fields: ['winnerId'],
         });
+
+
         const sqlQuery = `UPDATE "Users" SET balance=balance+${cost} WHERE "Users".id=${entry.userId}`;
         const result = (await sequelize.query(sqlQuery, {type: Sequelize.QueryTypes.UPDATE, transaction}));
         await transaction.commit();

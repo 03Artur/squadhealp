@@ -114,7 +114,7 @@ export default function (state = initialState, action) {
                                         pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
                                         search: queryString.stringify(
                                             {
-                                                isActive: true,
+                                                isPaid: true,
                                             }
                                         )
                                     }
@@ -191,7 +191,7 @@ export default function (state = initialState, action) {
                                         pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
                                         search: queryString.stringify(
                                             {
-                                                isActive: true,
+                                                isPaid: true,
                                             }
                                         )
                                     }

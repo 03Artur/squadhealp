@@ -10,7 +10,6 @@ export function getSelectProps(req, res, next) {
             attributes = {include: ['"Entries".id', [sequelize.literal(`CASE WHEN "Entries".id = "task"."winnerId" THEN true ELSE false END`), "isWinner"]]},
             {accessTokenPayload: {role, id}} = req;
 
-
         switch (role) {
             case ROLES.BUYER: {
                 include.push({

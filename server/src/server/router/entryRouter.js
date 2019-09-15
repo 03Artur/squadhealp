@@ -1,8 +1,6 @@
 import express from 'express';
 import path from 'path'
 import multer from 'multer';
-import moment from 'moment';
-import {MULTER_TIME_FORMAT} from '../constants';
 import * as entryMW from '../middlewares/entry'
 import {getEntries, postEntry, rejectEntry, setWinner, updateEntry} from "../controllers/entryController";
 import {filterOnlyImages, namingFile} from "../middlewares/multer";
@@ -31,13 +29,9 @@ router.post('/task/:taskId/entry', upload.array('files', 8), (req, res, next) =>
     },
     entryMW.checkCRUDPermission, postEntry);
 
-
-
-router.get('/entries', entryMW.checkCRUDPermission,getSelectProps, getEntries);
+router.get('/entries', entryMW.checkCRUDPermission, getSelectProps, getEntries);
 router.put('/entry/:id', entryMW.findEntryByPk, entryMW.checkCRUDPermission, updateEntry);
 router.put('/entry/:id/reject', entryMW.checkGrandOrRejectPermission, rejectEntry);
-
-router.post('/entry/:id/win',entryMW.checkGrandOrRejectPermission, setWinner);
-
+router.post('/entry/:id/win', entryMW.checkGrandOrRejectPermission, setWinner);
 
 export default router;
