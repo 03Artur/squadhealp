@@ -110,15 +110,7 @@ export default function (state = initialState, action) {
                                 new MenuItem('Agency Services'),
                             ],
                             [
-                                new MenuItem('Active Contests', {
-                                        pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                                        search: queryString.stringify(
-                                            {
-                                                isPaid: true,
-                                            }
-                                        )
-                                    }
-                                ),
+                                new MenuItem('Active Contests'),
                                 new MenuItem('Winners'),
                                 new MenuItem('Leaderboard'),
                             ],
@@ -187,15 +179,7 @@ export default function (state = initialState, action) {
                                 new MenuItem('Agency Services'),
                             ],
                             [
-                                new MenuItem('Active Contests', {
-                                        pathname: PATHS.AFFILIATE_DASHBOARD_CONTESTS,
-                                        search: queryString.stringify(
-                                            {
-                                                isPaid: true,
-                                            }
-                                        )
-                                    }
-                                ),
+                                new MenuItem('Active Contests'),
                                 new MenuItem('Winners'),
                                 new MenuItem('Leaderboard'),
                             ],
@@ -246,31 +230,11 @@ export default function (state = initialState, action) {
                         new Menu('Active contests',
                             [[
 
-                                new MenuItem('Assigned To Me', {
-                                    pathname: PATHS.CONTESTS,
-                                    search: queryString.stringify({
-                                        winnerId: action.user.id,
-                                    }),
-                                }),
-                                new MenuItem('all', {pathname: PATHS.CONTESTS, search: ''}),
-                                new MenuItem('naming', {
-                                    pathname: PATHS.CONTESTS,
-                                    search: queryString.stringify({
-                                        type: TASK_TYPES.NAME
-                                    }),
-                                }),
-                                new MenuItem('logos', {
-                                    pathname: PATHS.CONTESTS,
-                                    search: queryString.stringify({
-                                        type: TASK_TYPES.LOGO,
-                                    }),
-                                }),
-                                new MenuItem('tagline', {
-                                    pathname: PATHS.CONTESTS,
-                                    search: queryString.stringify({
-                                        type: TASK_TYPES.TAGLINE,
-                                    }),
-                                }),]
+                                new MenuItem('Assigned To Me'),
+                                new MenuItem('all'),
+                                new MenuItem('naming'),
+                                new MenuItem('logos', ),
+                                new MenuItem('tagline',),]
                             ]),
                         new Menu('explore', [[
                             new MenuItem('names'),

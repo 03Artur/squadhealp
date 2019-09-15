@@ -1,0 +1,84 @@
+@import "../../../../../commonStyles";
+
+
+
+
+
+.container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 4px 0;
+
+  &:hover {
+    .checkMark {
+      opacity: 0.5;
+    }
+
+    .title {
+      color: #ff743f;
+    }
+
+  }
+}
+
+.checked {
+
+
+  .checkbox {
+    border-color: #ff743f;
+  }
+
+  &:hover .checkMark {
+    opacity: 1;
+  }
+
+  & .checkMark {
+    opacity: 1;
+  }
+}
+
+
+.title {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Gotham SSm A", "Gotham SSm B", Halvetica, sans-serif;
+  margin-left: 10px;
+  color: rgb(51, 51, 51);
+}
+
+.checkMark {
+  opacity: 0;
+}
+
+.checkbox {
+  background-color: white;
+  display: inline-block;
+  content: '';
+  width: 17px;
+  height: 17px;
+  border-radius: 2px;
+  border: 2px solid #46568b;
+  position: relative;
+
+
+}
+
+
+.checkMark {
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 5px;
+  left: 4px;
+  border: 2px solid #ff743f;
+  border-top: 0;
+  border-right: 0;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+}

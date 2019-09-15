@@ -4,6 +4,7 @@ import checkUserCrudTaskPermissions from './task/checkUserCrudTaskPermissions';
 import {validateTaskOnCreate, validateTaskOnUpdate} from './task/validateTask';
 import {validateContestOnCreate, validateContestOnUpdate} from './validateContest';
 import checkUserCrudContestPermissions from './checkUserCrudContestPermissions';
+import {createTaskChat} from './createTaskChat';
 
 export default {
     addPriorityToTask,
@@ -14,4 +15,5 @@ export default {
     validateContestOnUpdate,
     checkUserCrudContestPermissions,
     checkUserCrudTaskPermissions,
+    createTaskChat,
 }

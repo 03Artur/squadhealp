@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import {CONTEST_FILTER_PROPS, TASK_FILTER_PROPS, ORDER_PROPS} from '../../constants';
-import {Contests, Tasks} from "../../models";
+import {CONTEST_FILTER_PROPS, TASK_FILTER_PROPS, ORDER_PROPS, TASK_RANGE_PROPS} from '../../constants';
+import {Contests, Tasks, Sequelize, sequelize} from "../../models";
 
 export function pickContestFilter(req, res, next) {
     try {
@@ -32,6 +32,31 @@ export function pickTaskFilter(req, res, next) {
     }
 }
 
+export function pickTaskRangeFilter(req, res, next) {
+    try {
+        const {query} = req;
+        if (_.isEmpty(query)) {
+            return next()
+        }
+        let taskRangeFilter = _.pick(query, TASK_RANGE_PROPS);
+
+        if (_.isEmpty(taskRangeFilter)) {
+            return next();
+        }
+        const Op = Sequelize.Op;
+        taskRangeFilter = _.transform(taskRangeFilter, (object, value, key) => {
+            object[key] = {[Op.between]: value,}
+        });
+        req.taskFilter = _.assign(req.taskFilter,taskRangeFilter);
+
+
+        return next();
+
+    } catch (e) {
+        next(e)
+    }
+}
+
 export function pickOrder(req, res, next) {
     try {
 
@@ -39,27 +64,16 @@ export function pickOrder(req, res, next) {
         if (_.isEmpty(query)) {
             return next()
         }
-        req.orderProps = _.pick(query, ORDER_PROPS);
-        return next();
-    } catch (e) {
-        next(e)
-    }
-}
-
-export function getContestTaskOrder(req, res, next) {
-    try {
-        const {orderProps} = req;
-
-        if (orderProps && _.has(orderProps, ORDER_PROPS[1], ORDER_PROPS[0])) {
-
-            req.order = [CONTEST_FILTER_PROPS.includes(orderProps.orderBy) ?
-                [Contests, orderProps.orderBy, orderProps.order] :
-                [orderProps.orderBy, orderProps.order]];
+        const order = _.pick(query, ORDER_PROPS);
+        if (order && _.has(order, ORDER_PROPS[1], ORDER_PROPS[0])) {
+            req.order = [CONTEST_FILTER_PROPS.includes(order.orderBy) ?
+                [Contests, order.orderBy, order.direction] :
+                [order.orderBy, order.direction]];
         }
 
         return next();
     } catch (e) {
-
+        next(e)
     }
 }
 

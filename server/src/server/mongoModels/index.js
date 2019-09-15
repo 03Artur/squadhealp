@@ -35,6 +35,7 @@ fs.readdirSync(__dirname)
 mongoose.set('debug', true);
 
 db.mongoose = mongoose;
+db.connection = connection;
 
 module.exports = db;
 

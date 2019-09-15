@@ -10,8 +10,8 @@ import {
 } from "../../../../actions/actionCreators/contestActionCreators/contestFilterActionCreator";
 
 const FilterProp = (props) => {
-    const {title, values, filter} = props;
-
+    const {title,type, values, filter} = props;
+    console.log(type);
     const renderItems = () => {
 
         return values.map(filterItemValue => {

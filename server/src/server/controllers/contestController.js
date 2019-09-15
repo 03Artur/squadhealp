@@ -14,11 +14,6 @@ export const getContests = async (req, res, next) => {
             },
             include,
             attributes,
-            accessTokenPayload: {
-                id: userId,
-                role
-            },
-            contestFilter,
             taskFilter,
             order
         } = req;
@@ -27,9 +22,10 @@ export const getContests = async (req, res, next) => {
             where: taskFilter,
             include,
             attributes,
-            order: sequelize.literal(`"Tasks"."id" DESC`),
+            order: order || sequelize.literal(`"Tasks"."id" DESC`),
             limit,
             offset,
+
             subQuery: false,
         });
 

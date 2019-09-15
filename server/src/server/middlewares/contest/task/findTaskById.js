@@ -8,6 +8,8 @@ export default async (req, res, next) => {
 
             return next();
         }
+
+
         return next(new appError.NotFoundError());
 
     } catch (e) {

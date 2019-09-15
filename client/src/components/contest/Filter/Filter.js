@@ -1,4 +1,4 @@
-import React, {Component, Fragment,} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styles from './Filter.module.scss';
@@ -11,10 +11,9 @@ const Filter = (props) => {
 
     const renderProp = () => {
 
-        return filterValues.map( filterValue => (
+        return filterValues.map(filterValue => (
             <FilterProp key={filterValue.title} {...filterValue}/>
-            ));
-
+        ));
     };
 
     return (

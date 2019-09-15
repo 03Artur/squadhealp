@@ -3,8 +3,8 @@ import * as chatController from "../controllers/chatController";
 import {validateChat, validateMessage} from "../middlewares/chat/validation";
 import {findChatById, findMessageById} from "../middlewares/chat/findChatById";
 import {checkPermission, checkMessagePermission} from "../middlewares/chat/checkPermission";
-import createTaskChat from "../middlewares/contest/createTaskChat";
 import findTaskById from "../middlewares/contest/task/findTaskById";
+import contestMW from '../middlewares/contest'
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ router.post('/chat', checkPermission, validateChat, chatController.createChat);
 router.get('/chats/:chatId', findChatById, checkPermission, chatController.sendChat);
 router.get('/chat', chatController.getChatByQuery);
 router.post('/chats/:chatId/join', chatController.joinToChat);
-router.post('/chat/task/:id', findTaskById, createTaskChat);
+router.post('/chat/task/:id', findTaskById, contestMW.createTaskChat);
 
 /*
 * PARTICIPANT

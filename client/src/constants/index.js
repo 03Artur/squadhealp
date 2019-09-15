@@ -81,6 +81,15 @@ export const testMenuItemStyle = {
     margin: '-1px 0'
 
 };
+
+/**
+ * @enum {FILTER_TYPE}
+ */
+export const FILTER_TYPE = {
+    RADIO: 'radio',
+    CHECKBOX: 'checkbox',
+};
+
 export const TASK_TYPES = {
     NAME: 'Name',
     LOGO: "Logo",

@@ -1,0 +1,19 @@
+@import "./../styles";
+
+.form{
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: left;
+}
+
+
+
+.propContainer{
+  width: 100%;
+}
+
+.propTitle{
+  @extend .titleStyles;
+  font-size: 16px;
+
+}

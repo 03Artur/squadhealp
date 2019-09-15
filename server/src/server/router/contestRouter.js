@@ -4,7 +4,13 @@ import * as contestController from '../controllers/contestController'
 import path from 'path'
 import multer from 'multer';
 import {filterOnlyImages, namingFile} from "../middlewares/multer";
-import {getContestTaskOrder, pickContestFilter, pickOrder, pickTaskFilter} from "../middlewares/contest/contestsFilter";
+import {
+    getContestTaskOrder,
+    pickContestFilter,
+    pickOrder,
+    pickTaskFilter,
+    pickTaskRangeFilter
+} from "../middlewares/contest/contestsFilter";
 import {addContestExtraContent} from "../middlewares/contest/includeContestExtraContent";
 
 const storage = multer.diskStorage({
@@ -68,8 +74,8 @@ router.get('/contests',
     contestMW.checkUserCrudContestPermissions,
     pickContestFilter,
     pickTaskFilter,
+    pickTaskRangeFilter,
     pickOrder,
-    getContestTaskOrder,
     addContestExtraContent,
     contestController.getContests);
 

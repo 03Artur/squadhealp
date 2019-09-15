@@ -28,37 +28,26 @@ const style = {
     margin: "20px",
 };
 
+const Input = ({input,meta, ...props}) => {
+
+    return <input type={'checkbox'} {...input} />
+}
+
 let TestForm = ({handleSubmit, dispatch, ...props}) => {
 
 
     return (
         <form onSubmit={handleSubmit}>
-            <div style={
-                style
-            }
-                 onClick={
-                     async () => {
-                         await dispatch(change(FORM_NAMES.TEST_FORM, 'test', ['Hello', 'From', 'Div']));
-                         await dispatch(submit(FORM_NAMES.TEST_FORM));
-                     }
-                 }>{"hello"}</div>
-            <div style={
-                style
-            }
-                 onClick={
-                     async () => {
-                         await dispatch(change(FORM_NAMES.TEST_FORM, 'test', ['YUPI KAY EAY']));
-                         await dispatch(submit(FORM_NAMES.TEST_FORM));
-                     }
-                 }>{"hello"}
-            </div>
+            <Field type="select-multi" name="test" component={Input} value={{test:'test'}}/>
+            <Field type="select-multi" name="test" component={Input} value={"asdasd"}/>
+            <button type={'submit'}>test</button>
         </form>
     );
 };
 
 
-export default connect()(reduxForm({
-    form: FORM_NAMES.TEST_FORM,
-
+export default connect()(
+    reduxForm({
+        form: FORM_NAMES.TEST_FORM,
 })(TestForm))
 
